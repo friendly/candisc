@@ -21,6 +21,8 @@
 # last revised: 10/8/2008 9:31PM by MF
 # -- added var.lwd to heplot3d.candisc
 # -- changed rgl.* to *3d functions
+# last revised: 11/5/2008 by MF
+# -- added sufix= to heplot.candisc and heplot3d.candisc
 
 ## TODO:
 
@@ -32,6 +34,7 @@ heplot.candisc <- function (
 	var.col="blue",  # color for variable vectors and labels
 	var.lwd=par("lwd"),
 	prefix = "Can",  # prefix for labels of canonical dimensions
+	suffix = TRUE,   # add label suffix with can % ?
 	terms=mod$term,  # terms to be plotted in canonical space / TRUE=all
 	...              # extra args passed to heplot
 	) {
@@ -47,7 +50,9 @@ heplot.candisc <- function (
 	term <- mod$term                        # term for which candisc was done
 	lm.terms <- mod$terms                   # terms in original lm
 	canvar <- paste('Can', which, sep="")   # names of canonical variables to plot
-	canlab <- paste(prefix, which, " (", round(mod$pct[which],1), "%)", sep="")
+	if (is.logical(suffix) & suffix)
+		suffix <- paste( " (", round(mod$pct[which],1), "%)", sep="" ) else suffix <- NULL
+	canlab <- paste(prefix, which, suffix, sep="")
 	scores <- mod$scores
 
 ##   Construct the model formula to fit mod$scores ~ terms in original lm()
@@ -104,6 +109,7 @@ heplot3d.candisc <- function (
 	var.col="blue",
 	var.lwd=par("lwd"),
 	prefix = "Can",  # prefix for labels of canonical dimensions
+	suffix = FALSE,   # add label suffix with can % ?
 	terms=mod$term,  # terms to be plotted in canonical space / TRUE=all
 	...         # extra args passed to heplot3d
 	) {
@@ -113,7 +119,8 @@ heplot3d.candisc <- function (
 	lm.terms <- mod$terms                   # terms in original lm
 #	canvar <- paste('Can', which, sep="")   # names of canonical variables to plot
 	# maybe the canlab labels are too long for the plot?
-	suffix <- paste( " (", round(mod$pct[which],1), "%)", sep="" )
+	if (is.logical(suffix) & suffix)
+		suffix <- paste( " (", round(mod$pct[which],1), "%)", sep="" ) else suffix <- NULL
 	canlab <- paste(prefix, which, suffix, sep="")
 	scores <- mod$scores
 	# fit can.mod for the canonical scores

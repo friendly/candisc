@@ -12,10 +12,10 @@ in the space of maximum discrimination.
 }
 \usage{
 \method{heplot}{candisc}(mod, which = 1:2, scale, asp = 1, var.col = "blue", 
-    var.lwd = par("lwd"), prefix = "Can", terms = mod$term, ...)
+    var.lwd = par("lwd"), prefix = "Can", suffix = TRUE, terms = mod$term, ...)
 
 \method{heplot3d}{candisc}(mod, which = 1:3, scale, var.col = "blue", var.lwd=par("lwd"),
-    prefix = "Can", terms = mod$term, 
+    prefix = "Can", suffix = FALSE, terms = mod$term, 
     ...) 
 }
     
@@ -34,6 +34,8 @@ in the space of maximum discrimination.
   \item{var.col}{ Color for variable vectors and labels }
   \item{var.lwd}{ Line width for variable vectors }
   \item{prefix}{ Prefix for labels of canonical dimensions.}
+  \item{suffix}{ Suffix for labels of canonical dimensions. If \code{suffix=TRUE}
+  the percent of hypothesis (H) variance accounted for by each canonical dimension is added to the axis label.}
   \item{terms}{ Terms  from the original \code{mlm} whose H ellipses
   are to be plotted in canonical space.  The default is the one term for
   which the canonical scores were computed.  If \code{terms=TRUE},
