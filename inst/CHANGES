@@ -1,0 +1,14 @@
+Version 0.5-7 (2007-10-29)
+
+Initial version released to CRAN.
+
+Version 0.5-8 (2008-04-11)
+
+Version 0.5-9 (2008-04-24)
+
+Version 0.5-10 (2008-11-5)
+
+o  improved documentation
+o  added var.lwd to heplot3d.candisc
+o  changed rgl.* to *3d functions
+

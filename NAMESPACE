@@ -1,0 +1,24 @@
+# last modified 6 October 2007 by J. Fox
+
+import(heplots)
+export(candisc, candiscList)
+S3method(candisc, mlm)
+S3method(candiscList, mlm)
+S3method(coef, candisc)
+S3method(plot, candisc)
+S3method(plot, candiscList)
+S3method(print, candisc)
+S3method(print, candiscList)
+S3method(summary, candisc)
+S3method(summary, candiscList)
+
+# the following may be moved to the heplots package
+S3method(heplot, candisc)
+S3method(heplot3d, candisc)
+S3method(heplot, candiscList)
+S3method(heplot3d, candiscList)
+
+
+
+
+
