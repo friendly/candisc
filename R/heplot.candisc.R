@@ -164,7 +164,7 @@ heplot3d.candisc <- function (
 
 }
 
-heplot.candiscList <- function(mod, term, ask=interactive(), ...) {
+heplot.candiscList <- function(mod, term, ask=interactive(), graphics = TRUE, ...) {
     if (!missing(term)){
         if (is.character(term)) term <- gsub(" ", "", term)
         heplot(mod[[term]], ...)
@@ -173,7 +173,7 @@ heplot.candiscList <- function(mod, term, ask=interactive(), ...) {
     terms <- names(mod)
     if (ask){
         repeat {
-            selection <- menu(terms)
+            selection <- menu(terms, graphics = graphics, title = "Select term to plot")
             if (selection == 0) break
             else {
               if (mod[[selection]]$ndim >1) heplot(mod[[selection]], ...)
@@ -189,7 +189,7 @@ heplot.candiscList <- function(mod, term, ask=interactive(), ...) {
         }
 }
 
-heplot3d.candiscList <- function(mod, term, ask=interactive(), ...) {
+heplot3d.candiscList <- function(mod, term, ask=interactive(), graphics = TRUE, ...) {
     if (!missing(term)){
         if (is.character(term)) term <- gsub(" ", "", term)
         heplot3d(mod[[term]], ...)
@@ -198,7 +198,7 @@ heplot3d.candiscList <- function(mod, term, ask=interactive(), ...) {
     terms <- names(mod)
     if (ask){
         repeat {
-            selection <- menu(terms)
+            selection <- menu(terms, graphics = graphics, title = "Select term to plot")
             if (selection == 0) break
             else heplot3d(mod[[selection]], ...)
             }

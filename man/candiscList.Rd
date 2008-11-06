@@ -16,7 +16,7 @@ candiscList(mod, ...)
 
 \method{candiscList}{mlm}(mod, type = "2", manova, ndim, ...)
 
-\method{plot}{candiscList}(x, term, ask = interactive(), ...)
+\method{plot}{candiscList}(x, term, ask = interactive(), graphics = TRUE, ...)
 
 \method{print}{candiscList}(x, ...)
 
@@ -36,6 +36,7 @@ candiscList(mod, ...)
   candisc plot is produced for each term in the \code{mlm} object.}
   \item{ask}{If \code{TRUE} (the default, when running interactively), a menu of  terms is presented; if ask is FALSE, 
   canonical plots for all  terms are produced.}
+  \item{graphics} {if \code{TRUE} (the default, when running interactively), then the menu of terms to plot is presented in a dialog box rather than as a text menu.} 
   \item{\dots}{arguments to be passed down.}
 }
 %\details{

@@ -13,9 +13,9 @@ in the space of maximum discrimination.
 }
 
 \usage{
-\method{heplot}{candiscList}(mod, term, ask = interactive(), ...)
+\method{heplot}{candiscList}(mod, term, ask = interactive(), graphics = TRUE, ...)
 
-\method{heplot3d}{candiscList}(mod, term, ask = interactive(), ...)
+\method{heplot3d}{candiscList}(mod, term, ask = interactive(), graphics = TRUE, ...)
 }
 
 \arguments{
@@ -25,6 +25,7 @@ in the space of maximum discrimination.
   plot is produced for each term in the \code{mlm} object.}
   \item{ask}{If \code{TRUE} (the default), a menu of  terms is presented; if ask is FALSE, 
   canonical HE plots for all  terms are produced.}
+ \item{graphics} {if \code{TRUE} (the default, when running interactively), then the menu of terms to plot is presented in a dialog box rather than as a text menu.}
   \item{\dots}{ Arguments to be passed down }
 }
 

@@ -46,7 +46,7 @@ summary.candiscList <- function(object, ...){
         }
     }
 
-plot.candiscList <- function(x, term, ask=interactive(), ...) {
+plot.candiscList <- function(x, term, ask=interactive(), graphics = TRUE, ...) {
     if (!missing(term)){
         if (is.character(term)) term <- gsub(" ", "", term)
         plot(x[[term]], ...)
@@ -55,7 +55,7 @@ plot.candiscList <- function(x, term, ask=interactive(), ...) {
     terms <- names(x)
     if (ask){
         repeat {
-            selection <- menu(terms)
+            selection <- menu(terms, graphics = graphics, title = "Select term to plot")
             if (selection == 0) break
             else plot(x[[selection]], ...)
             }
