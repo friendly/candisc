@@ -13,3 +13,4 @@ o  added var.lwd to heplot3d.candisc
 o  changed rgl.* to *3d functions to avoid rgl problems
 o  added suffix= to heplot.candisc and heplot3d.candisc
 o  added graphics=TRUE to menus in *.candiscList functions
+o  added suffix= to plot.candisc

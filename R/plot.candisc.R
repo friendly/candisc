@@ -3,6 +3,8 @@
 # last revised: 10/29/2007 10:32:52 AM by MF
 # --- Added code to draw boxplots and variable vectors when ndim==1
 # --- Fixed bug when then term is an interaction
+# last revised: 11/6/2008 by MF
+# --- added suffix argument
 
 plot.candisc <- function (
 	x,		     # output object from candisc
@@ -15,6 +17,7 @@ plot.candisc <- function (
 	var.col="blue",
 	var.lwd=par("lwd"),
 	prefix = "Can",  # prefix for labels of canonical dimensions
+	suffix = TRUE,   # add label suffix with can % ?
 	...         # extra args passed to plot
 	) {
 
@@ -41,9 +44,13 @@ plot.candisc <- function (
 	   par(op)
 	   return(invisible())
 	}
-	canvar <- paste('Can', which, sep="")   # names of canonical variables to plot
-	canlab <- paste(prefix, which, " (", round(x$pct[which],1), "%)", sep="")
 
+	canvar <- paste('Can', which, sep="")   # names of canonical variables to plot
+#	canlab <- paste(prefix, which, " (", round(x$pct[which],1), "%)", sep="")
+	if (is.logical(suffix) & suffix)
+		suffix <- paste( " (", round(x$pct[which],1), "%)", sep="" ) else suffix <- NULL
+	canlab <- paste(prefix, which, suffix, sep="")
+	
 	nlev <- nrow(x$means)                 # number of groups
 	# can we be more clever about assigning default col & pch by taking the
 	# structure of x$factors into account?
@@ -53,7 +60,7 @@ plot.candisc <- function (
 	scores <- x$scores[,canvar]
 	means <- x$means[,which]
 	labels <- rownames(x$means)
-  structure <- x$structure[,which]
+ 	structure <- x$structure[,which]
 	
 	# use asp=1 to make the plot equally scaled
 	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col, pch=pch, ...) 
@@ -71,9 +78,9 @@ plot.candisc <- function (
 	}
 	cs <- scale * structure
 	arrows(0, 0, cs[,1], cs[,2], length=.1, angle=15, col=var.col, lwd=var.lwd)
-  vars <- rownames(structure)
-  pos <- ifelse(cs[,1]>0, 4, 2)
-  text(cs[,1], cs[,2], vars, pos=pos,  col=var.col)
+ 	vars <- rownames(structure)
+ 	pos <- ifelse(cs[,1]>0, 4, 2)
+	text(cs[,1], cs[,2], vars, pos=pos,  col=var.col)
 
 	### why doesn't this work???
   circle <- function( center, radius, segments=41, ...) {
