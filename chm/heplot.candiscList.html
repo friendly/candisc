@@ -1,0 +1,107 @@
+<html><head><title>Canonical Discriminant HE plots</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="Rchm.css">
+</head>
+<body>
+
+<table width="100%"><tr><td>heplot.candiscList(candisc)</td><td align="right">R Documentation</td></tr></table><object type="application/x-oleobject" classid="clsid:1e2a7bd0-dab9-11d0-b93a-00c04fc99f9e">
+<param name="keyword" value="R:   heplot.candiscList">
+<param name="keyword" value="R:   heplot3d.candiscList">
+<param name="keyword" value=" Canonical Discriminant HE plots">
+</object>
+
+
+<h2>Canonical Discriminant HE plots</h2>
+
+
+<h3>Description</h3>
+
+<p>
+These functions plot ellipses (or ellipsoids in 3D)
+in canonical discriminant space
+representing the hypothesis and error sums-of-squares-and-products matrices for 
+terms in a multivariate linear model.
+They provide a low-rank 2D (or 3D) view of the effects for that term 
+in the space of maximum discrimination.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'candiscList':
+heplot(mod, term, ask = interactive(), graphics = TRUE, ...)
+
+## S3 method for class 'candiscList':
+heplot3d(mod, term, ask = interactive(), graphics = TRUE, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>mod</code></td>
+<td>
+A <code>candiscList</code> object for  terms in a <code>mlm</code> </td></tr>
+<tr valign="top"><td><code>term</code></td>
+<td>
+The name of one term to be plotted for the <code>heplot</code> and
+<code>heplot3d</code> methods. If not specified, one
+plot is produced for each term in the <code>mlm</code> object.</td></tr>
+<tr valign="top"><td><code>ask</code></td>
+<td>
+If <code>TRUE</code> (the default), a menu of  terms is presented; if ask is FALSE, 
+canonical HE plots for all  terms are produced.</td></tr>
+<tr valign="top"><td><code>graphics</code></td>
+<td>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+Arguments to be passed down </td></tr>
+</table>
+
+<h3>Value</h3>
+
+<p>
+No useful value; used for the side-effect of producing canonical HE plots.</p>
+
+<h3>Author(s)</h3>
+
+<p>
+Michael Friendly and John Fox
+</p>
+
+
+<h3>References</h3>
+
+<p>
+Friendly, M. (2006). Data Ellipses, HE Plots and Reduced-Rank Displays for Multivariate Linear Models: SAS Software and Examples Journal of Statistical Software, 17(6), 1-42. <a href="http://www.jstatsoft.org/v17/i06/">http://www.jstatsoft.org/v17/i06/</a> 
+</p>
+<p>
+Friendly, M. (2007).   HE plots for Multivariate General Linear Models.
+<EM>Journal of Computational and Graphical Statistics</EM>, 16(2) 421-444.
+<a href="http://www.math.yorku.ca/SCS/Papers/jcgs-heplots.pdf">http://www.math.yorku.ca/SCS/Papers/jcgs-heplots.pdf</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>
+<code><a href="candisc.html">candisc</a></code>, <code><a href="candiscList.html">candiscList</a></code>, <code><a onclick="findlink('heplots', 'heplot.html')" style="text-decoration: underline; color: blue; cursor: hand">heplot</a></code>, 
+<code><a onclick="findlink('heplots', 'heplot3d.html')" style="text-decoration: underline; color: blue; cursor: hand">heplot3d</a></code>
+</p>
+
+<script Language="JScript">
+function findlink(pkg, fn) {
+var Y, link;
+Y = location.href.lastIndexOf("\\") + 1;
+link = location.href.substring(0, Y);
+link = link + "../../" + pkg + "/chtml/" + pkg + ".chm::/" + fn;
+location.href = link;
+}
+</script>
+
+
+<hr><div align="center">[Package <em>candisc</em> version 0.5-10 <a href="00Index.html">Index]</a></div>
+
+</body></html>

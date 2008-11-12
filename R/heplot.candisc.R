@@ -23,6 +23,8 @@
 # -- changed rgl.* to *3d functions
 # last revised: 11/5/2008 by MF
 # -- added sufix= to heplot.candisc and heplot3d.candisc
+# last revised: 11/12/2008 by MF
+# -- added asp= to heplot3d.candisc
 
 ## TODO:
 
@@ -105,6 +107,7 @@ heplot3d.candisc <- function (
 	mod,		    # output object from candisc
 	which=1:3,  # canonical dimensions to plot
 	scale,       # scale factor for variable vectors in can space
+	asp="iso",           # aspect ratio, to ensure equal units
 	var.col="blue",
 	var.lwd=par("lwd"),
 	prefix = "Can",  # prefix for labels of canonical dimensions
@@ -164,6 +167,7 @@ heplot3d.candisc <- function (
 #  rgl.texts( cs, text=rownames(cs), col=var.col)
   texts3d( cs, text=rownames(cs), col=var.col)
 
+  if (!is.null(asp)) aspect3d(asp)
 }
 
 heplot.candiscList <- function(mod, term, ask=interactive(), graphics = TRUE, ...) {

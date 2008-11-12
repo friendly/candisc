@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HEAD></HEAD><HTML><BODY>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package candisc:  Contents">
+<param name="Local" value="00Index.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package candisc:  R objects">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="candisc-package">
+<param name="Local" value="candisc-package.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="candisc">
+<param name="Local" value="candisc.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="candisc.mlm">
+<param name="Local" value="candisc.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="candiscList">
+<param name="Local" value="candiscList.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="candiscList.mlm">
+<param name="Local" value="candiscList.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="coef.candisc">
+<param name="Local" value="candisc.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Grass">
+<param name="Local" value="Grass.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="heplot.candisc">
+<param name="Local" value="heplot.candisc.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="heplot.candiscList">
+<param name="Local" value="heplot.candiscList.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="heplot3d.candisc">
+<param name="Local" value="heplot.candisc.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="heplot3d.candiscList">
+<param name="Local" value="heplot.candiscList.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="HSB">
+<param name="Local" value="HSB.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plot.candisc">
+<param name="Local" value="candisc.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="plot.candiscList">
+<param name="Local" value="candiscList.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="print.candisc">
+<param name="Local" value="candisc.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="print.candiscList">
+<param name="Local" value="candiscList.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summary.candisc">
+<param name="Local" value="candisc.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="summary.candiscList">
+<param name="Local" value="candiscList.html">
+</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Package candisc:  Titles">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Canonical discriminant analyses">
+<param name="Local" value="candiscList.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Canonical discriminant analysis">
+<param name="Local" value="candisc.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Canonical Discriminant HE plots">
+<param name="Local" value="heplot.candisc.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Canonical Discriminant HE plots ">
+<param name="Local" value="heplot.candiscList.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Generalized Canonical Discriminant Analysis ">
+<param name="Local" value="candisc-package.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="High School and Beyond Data">
+<param name="Local" value="HSB.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+<param name="Name" value="Yields from Nitrogen nutrition of grass species">
+<param name="Local" value="Grass.html">
+</OBJECT>
+</UL>
+</UL>
+</BODY></HTML>

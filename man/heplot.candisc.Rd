@@ -14,7 +14,7 @@ in the space of maximum discrimination.
 \method{heplot}{candisc}(mod, which = 1:2, scale, asp = 1, var.col = "blue", 
     var.lwd = par("lwd"), prefix = "Can", suffix = TRUE, terms = mod$term, ...)
 
-\method{heplot3d}{candisc}(mod, which = 1:3, scale, var.col = "blue", var.lwd=par("lwd"),
+\method{heplot3d}{candisc}(mod, which = 1:3, scale, asp="iso", var.col = "blue", var.lwd=par("lwd"),
     prefix = "Can", suffix = FALSE, terms = mod$term, 
     ...) 
 }
@@ -27,10 +27,15 @@ in the space of maximum discrimination.
   not specified, the function calculates one to make the variable vectors 
   approximately fill the plot window. }
   \item{asp}{Aspect ratio for the horizontal and vertical
-  dimensions. The default, \code{asp=1} ensures equal units, so that angles
+  dimensions. The defaults, \code{asp=1} for \code{heplot.candisc} and
+  \code{asp="iso"} for \code{heplot3d.candisc}
+  ensure equal units on all axes, so that angles
   and lengths of variable vectors are interpretable. As well, the 
   standardized canonical scores are uncorrelated, so the Error ellipse
-  (ellipsoid) should plot as a circle (sphere) in canonical space.}
+  (ellipsoid) should plot as a circle (sphere) in canonical space.
+  For \code{heplot3d.candisc}, use \code{asp=NULL} to suppress this transformation
+  to iso-scaled axes.
+  }
   \item{var.col}{ Color for variable vectors and labels }
   \item{var.lwd}{ Line width for variable vectors }
   \item{prefix}{ Prefix for labels of canonical dimensions.}
@@ -50,6 +55,10 @@ of the H and E matrices for that term.  This produces uncorrelated
 canonical scores which give the maximum univariate F statistics.
 The canonical HE plot is then just the HE plot of the canonical scores
 for the given term.
+
+For \code{heplot3d.candisc}, the default \code{asp="iso"} now gives a geometrically
+correct plot, but the third dimension, CAN3, is often small.  Passing an expanded
+range in \code{zlim} to \code{\link[heplots]{heplot3d}} usually helps.
 }
 
 \value{
@@ -66,7 +75,7 @@ Friendly, M. (2007). HE plots for Multivariate General Linear Models. Journal of
 \author{ Michael Friendly and John Fox }
 
 \seealso{ \code{\link{candisc}}, \code{\link{candiscList}}, 
-    \code{\link[heplots]{heplot}}, \code{\link[heplots]{heplot3d}}}
+    \code{\link[heplots]{heplot}}, \code{\link[heplots]{heplot3d}}, \code{\link[rgl]{aspect3d}}}
 
 \examples{
 grass.mod <- lm(cbind(N1,N9,N27,N81,N243) ~ Block + Species, data=Grass)
@@ -78,10 +87,12 @@ heplot(grass.can1, scale=6)
 heplot(grass.can1, scale=6, terms=TRUE)
 heplot(grass.canL, terms=TRUE, ask=FALSE)
 
-# NB: aspect3d not set for equal scaling in this plot 
 heplot3d(grass.can1)
-# change to equal scaling, so E ellipsoid is spherical
-aspect3d("iso")
+# compare with non-iso scaling
+aspect3d(x=1,y=1,z=1)
+# or,
+# heplot3d(grass.can1, asp=NULL)
+
 
 ## Pottery data, from car package
 pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data=Pottery)
@@ -89,7 +100,7 @@ pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data=Pottery)
 
 heplot(pottery.can, var.lwd=3)
 heplot3d(pottery.can, var.lwd=3, scale=10, zlim=c(-3,3))
-aspect3d("iso")
+
 ## Not run: 
 play3d(spin3d(axis = c(1, 0, 0), rpm = 5), duration=12)
 ## End(Not run)
