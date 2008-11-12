@@ -40,7 +40,7 @@ in the space of maximum discrimination.
   are to be plotted in canonical space.  The default is the one term for
   which the canonical scores were computed.  If \code{terms=TRUE},
   all terms are plotted.}
-  \item{\dots}{ Arguments to be passed down}
+  \item{\dots}{ Arguments to be passed down to \code{\link[heplots]{heplot}} or \code{\link[heplots]{heplot3d}}}
 }
 
 \details{
@@ -88,9 +88,11 @@ pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data=Pottery)
 (pottery.can <-candisc(pottery.mod))
 
 heplot(pottery.can, var.lwd=3)
-heplot3d(pottery.can, scale=12)
+heplot3d(pottery.can, var.lwd=3, scale=10, zlim=c(-3,3))
 aspect3d("iso")
-
+## Not run: 
+play3d(spin3d(axis = c(1, 0, 0), rpm = 5), duration=12)
+## End(Not run)
 }
 \keyword{multivariate}
 \keyword{hplot}
