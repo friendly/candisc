@@ -96,11 +96,10 @@ heplot.candisc <- function (
 }
 
 ## heplot3d method for candisc object
-## TODO:
-#    - How to set par3d(scale) or aspect3d based on bbox of E matrix?
+## TODO: How to set par3d(scale) or aspect3d based on bbox of E matrix?
 #      (This should be an option, because sometimes the equal-scaling
 #       dimensions will be extremely thin on the 3rd dimension.)
-#    - Complete the calculation of scale when missing
+#  TODO: Complete the calculation of scale when missing
 
 heplot3d.candisc <- function (
 	mod,		    # output object from candisc
@@ -134,7 +133,7 @@ heplot3d.candisc <- function (
   	terms <- lm.terms
 	}
 
-  heplot3d(can.mod, terms=terms,
+  ellipses <-heplot3d(can.mod, terms=terms,
   		factor.means=term,
   		xlab=canlab[1], ylab=canlab[2], zlab=canlab[3], ...)
 
@@ -142,8 +141,11 @@ heplot3d.candisc <- function (
 	maxrms <- function(x) { max(sqrt(apply(x^2, 1, sum))) }
 	if (missing(scale)) {
 		vecmax <- maxrms(structure)
-    # get bbox of the 3d plot
-    bbox <- matrix(par3d("bbox"),3,2,byrow=TRUE)
+		vecrange <- range(structure)
+		ellrange <- lapply(ellipses, range)
+		vecmax <- maxrms(structure)
+		# get bbox of the 3d plot
+        bbox <- matrix(par3d("bbox"),3,2,byrow=TRUE)
 #    TODO: calculate scale so that vectors reasonably fill the plot
 		scale <- 5
 		cat("Vector scale factor set to ", scale, "\n")
