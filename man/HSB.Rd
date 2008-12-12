@@ -33,9 +33,9 @@ from Tatsuoka (1988).
     \item{\code{ss}}{Standardized social science (civics) score: a numeric vector}
   }
 }
-\details{
+%\details{
+%}
 
-}
 \source{
 Tatsuoka, M. M. (1988).  Multivariate Analysis: Techniques for Educational and Psychological Research (2nd ed.).
 New York: Macmillan, Appendix F, 430-442.

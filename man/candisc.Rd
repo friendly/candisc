@@ -143,6 +143,10 @@ plot(iris.can)
 
 heplot(iris.can)
 
+# 1-dim plot
+iris.can1 <- candisc(iris.mod, data=iris, ndim=1)
+plot(iris.can1)
+
 }
 
 \keyword{multivariate}
