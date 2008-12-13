@@ -16,7 +16,7 @@ terms in a \code{mlm} via the \code{plot} method and the \pkg{heplots} package.
 \tabular{ll}{
 Package: \tab candisc\cr
 Type: \tab Package\cr
-Version: \tab 0.5-12\cr
+Version: \tab 0.5-13\cr
 Date: \tab 2008-12-12\cr
 License: \tab GPL (>= 2)\cr
 }
