@@ -27,9 +27,11 @@ wolves (Canis Lupus L.) taken from Morrison (1990).
     \item{\code{x9}}{crown length, a numeric vector}
   }
 }
-%\details{
-%  ~~ If necessary, more details than the __description__ above ~~
-%}
+\details{
+For MANOVA or canonical discriminant analysis, either \code{group}
+or \code{location} and \code{sex} provide alternative
+parameterizations.
+}
 \source{
 Morrison, D. F.  \emph{Multivariate Statistical Methods},  (3rd ed.), 1990. 
 New York: McGraw-Hill, p. 288-289.
