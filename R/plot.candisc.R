@@ -27,20 +27,21 @@ plot.candisc <- function (
 	   ### is there a better way to show the 1D distributions of canonical scores?
 	   ### Show the canonical structure coeffs -- vectors from 0
 	   op <- par(no.readonly = TRUE) # save default, for resetting...
+	## FIXME: The relative widths of the two panels should take account of the no. of levels and variables
 	   layout(matrix(c(1,2),1,2), widths=c(2,1))
-     formule <- formula( paste("Can1 ~", term, sep="") )
-     par(mar=c(5,4,4,0)+.1)
+       formule <- formula( paste("Can1 ~", term, sep="") )
+       par(mar=c(5,4,4,0)+.1)
 	   boxplot(formule, data=x$scores, ylab=paste(prefix, "1", sep=""), xlab=term, main="Canonical scores")
 	   xx <- 1:nrow(x$structure)
-     par(mar=c(5,0,4,1)+.1)
+       par(mar=c(5,0,4,1)+.1)
 	   plot(xx, x$structure,type="n", ylab="", xlab="", xaxt="n", yaxt="n", main="Structure")
 	   arrows(xx, 0, xx, x$structure, length=.1, 	angle=15,
            col=var.col, lwd=var.lwd )
 	                                                            
-     vars <- rownames(x$structure)
-     pos <- ifelse(x$structure>0, 3, 1)
+       vars <- rownames(x$structure)
+       pos <- ifelse(x$structure>0, 3, 1)
      ## FIXME: first and last labels are clipped by the plot frame
-     text(xx, x$structure, vars, pos=pos,  col=var.col)
+       text(xx, x$structure, vars, pos=pos,  col=var.col)
 	   par(op)
 	   return(invisible())
 	}
