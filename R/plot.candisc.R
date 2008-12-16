@@ -5,6 +5,8 @@
 # --- Fixed bug when then term is an interaction
 # last revised: 11/6/2008 by MF
 # --- added suffix argument
+# last revised: 12/16/2008 by JF
+# --- fixed plotting of variable names in 1D case
 
 plot.candisc <- function (
 	x,		     # output object from candisc
@@ -19,33 +21,36 @@ plot.candisc <- function (
 	prefix = "Can",  # prefix for labels of canonical dimensions
 	suffix = TRUE,   # add label suffix with can % ?
 	...         # extra args passed to plot
-	) {
-
+) {
+	
 	term <- x$term
 	factors <- x$factors
 	if (x$ndim < 2) {
-	   ### is there a better way to show the 1D distributions of canonical scores?
-	   ### Show the canonical structure coeffs -- vectors from 0
-	   op <- par(no.readonly = TRUE) # save default, for resetting...
-	## FIXME: The relative widths of the two panels should take account of the no. of levels and variables
-	   layout(matrix(c(1,2),1,2), widths=c(2,1))
-       formule <- formula( paste("Can1 ~", term, sep="") )
-       par(mar=c(5,4,4,0)+.1)
-	   boxplot(formule, data=x$scores, ylab=paste(prefix, "1", sep=""), xlab=term, main="Canonical scores")
-	   xx <- 1:nrow(x$structure)
-       par(mar=c(5,0,4,1)+.1)
-	   plot(xx, x$structure,type="n", ylab="", xlab="", xaxt="n", yaxt="n", main="Structure")
-	   arrows(xx, 0, xx, x$structure, length=.1, 	angle=15,
-           col=var.col, lwd=var.lwd )
-	                                                            
-       vars <- rownames(x$structure)
-       pos <- ifelse(x$structure>0, 3, 1)
-     ## FIXME: first and last labels are clipped by the plot frame
-       text(xx, x$structure, vars, pos=pos,  col=var.col)
-	   par(op)
-	   return(invisible())
+		### is there a better way to show the 1D distributions of canonical scores?
+		### Show the canonical structure coeffs -- vectors from 0
+		op <- par(no.readonly = TRUE) # save default, for resetting...
+		## FIXME: The relative widths of the two panels should take account of the no. of levels and variables
+		layout(matrix(c(1,2),1,2), widths=c(2,1))
+		formule <- formula( paste("Can1 ~", term, sep="") )
+		par(mar=c(5,4,4,0)+.1)
+		boxplot(formule, data=x$scores, ylab=paste(prefix, "1", sep=""), xlab=term, main="Canonical scores")
+		structure <- as.vector(x$structure)
+		ns <- length(structure)
+		xx <- 1:ns
+		par(mar=c(5,0,4,1)+.1)
+		plot(xx, structure, type="n", ylab="", xlab="", xaxt="n", yaxt="n", main="Structure")
+		arrows(xx, 0, xx, structure, length=.1, 	angle=15,
+			col=var.col, lwd=var.lwd )		
+		vars <- rownames(x$structure)
+		adj1 <- as.vector(ifelse (structure > 0, 1, 0))
+		adj2 <- rep(-0.3, ns)
+		adj2[1] <- 1.1
+		for (i in 1:ns) text(xx[i], structure[i], paste("  ", vars[i] ,"  "), 
+				adj=c(adj1[i], adj2[i]),  col=var.col, srt=90, xpd=TRUE)
+		par(op)
+		return(invisible())
 	}
-
+	
 	canvar <- paste('Can', which, sep="")   # names of canonical variables to plot
 #	canlab <- paste(prefix, which, " (", round(x$pct[which],1), "%)", sep="")
 	if (is.logical(suffix) & suffix)
@@ -61,15 +66,15 @@ plot.candisc <- function (
 	scores <- x$scores[,canvar]
 	means <- x$means[,which]
 	labels <- rownames(x$means)
- 	structure <- x$structure[,which]
+	structure <- x$structure[,which]
 	
 	# use asp=1 to make the plot equally scaled
 	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col, pch=pch, ...) 
 	points(means[,1], means[,2], col=col, pch="+", cex=2)
 	pos <- ifelse(means[,2]>0, 3, 1)
 	text(means[,1], means[,2], labels=labels, pos=pos)
-		
-  # plot variable vectors
+	
+	# plot variable vectors
 	maxrms <- function(x) { max(sqrt(apply(x^2, 1, sum))) }
 	if (missing(scale)) {
 		vecmax <- maxrms(structure)
@@ -79,23 +84,23 @@ plot.candisc <- function (
 	}
 	cs <- scale * structure
 	arrows(0, 0, cs[,1], cs[,2], length=.1, angle=15, col=var.col, lwd=var.lwd)
- 	vars <- rownames(structure)
- 	pos <- ifelse(cs[,1]>0, 4, 2)
+	vars <- rownames(structure)
+	pos <- ifelse(cs[,1]>0, 4, 2)
 	text(cs[,1], cs[,2], vars, pos=pos,  col=var.col)
-
+	
 	### why doesn't this work???
-  circle <- function( center, radius, segments=41, ...) {
-    angles <- (0:segments) * 2 * pi/segments
-    unit.circle <- cbind(cos(angles), sin(angles))
+	circle <- function( center, radius, segments=41, ...) {
+		angles <- (0:segments) * 2 * pi/segments
+		unit.circle <- cbind(cos(angles), sin(angles))
 #    browser()
-    circle <- t(center + radius*t(unit.circle))
-    lines(circle, col = col, ...)
-    }
-
-  # plot confidence circles for canonical means
-  if ( conf>0 ) {
-	  n <- as.vector(table(factors))
-	  radii <- qchisq(conf, 2) / n
+		circle <- t(center + radius*t(unit.circle))
+		lines(circle, col = col, ...)
+	}
+	
+	# plot confidence circles for canonical means
+	if ( conf>0 ) {
+		n <- as.vector(table(factors))
+		radii <- qchisq(conf, 2) / n
 		symbols(means, circles=radii, inches=FALSE, add=TRUE, fg=col)
 #	  for (i in 1:nrow(means)) {
 #	  	circle(means[i,1:2], radii[i],  ...)

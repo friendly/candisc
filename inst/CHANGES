@@ -21,7 +21,9 @@ o  Michael Friendly now maintainer
 o  now require heplots >= 0.8-3 for use of xlim, ylim, zlim
 o  added asp="iso" to heplot3d.candisc, so default is now equal scaling
 
-Version 0.5-13 (2008-12-12)
+Version 0.5-13 (2008-12-16)
 
-o  Added Wolves data, with examples for 2-way design
+o  Added Wolves data, with examples for 2-way design.
+
+o  Improved plot for 1D case.
 

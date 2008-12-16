@@ -17,7 +17,7 @@ terms in a \code{mlm} via the \code{plot} method and the \pkg{heplots} package.
 Package: \tab candisc\cr
 Type: \tab Package\cr
 Version: \tab 0.5-13\cr
-Date: \tab 2008-12-12\cr
+Date: \tab 2008-12-16\cr
 License: \tab GPL (>= 2)\cr
 }
 The organization of functions in this package and the \pkg{heplots} package
