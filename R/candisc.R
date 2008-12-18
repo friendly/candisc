@@ -16,8 +16,7 @@
 
 ## ----------------------------------------------------------------------------
 ## canonical scores and vectors from an mlm object
-## TODO:
-#    - provide a data.frame / formula method
+## TODO: provide a data.frame / formula method
 
 candisc <-
 function(mod, ...) UseMethod("candisc")

@@ -7,6 +7,8 @@
 # --- added suffix argument
 # last revised: 12/16/2008 by JF
 # --- fixed plotting of variable names in 1D case
+# last revised: 12/18/2008 by MF
+# --- better allocation of horizontal space in 1D case
 
 plot.candisc <- function (
 	x,		     # output object from candisc
@@ -29,13 +31,15 @@ plot.candisc <- function (
 		### is there a better way to show the 1D distributions of canonical scores?
 		### Show the canonical structure coeffs -- vectors from 0
 		op <- par(no.readonly = TRUE) # save default, for resetting...
-		## FIXME: The relative widths of the two panels should take account of the no. of levels and variables
-		layout(matrix(c(1,2),1,2), widths=c(2,1))
+		ng <- length(x$means)
+		structure <- as.vector(x$structure)
+		ns <- length(structure)
+		wid <- if (ns < 2*ng) c(2,1) else c(1.2,1)
+		#cat("ng:", ng, "\tns:", ns, "\twid:", wid, "\n")
+		layout(matrix(c(1,2),1,2), widths=wid)
 		formule <- formula( paste("Can1 ~", term, sep="") )
 		par(mar=c(5,4,4,0)+.1)
 		boxplot(formule, data=x$scores, ylab=paste(prefix, "1", sep=""), xlab=term, main="Canonical scores")
-		structure <- as.vector(x$structure)
-		ns <- length(structure)
 		xx <- 1:ns
 		par(mar=c(5,0,4,1)+.1)
 		plot(xx, structure, type="n", ylab="", xlab="", xaxt="n", yaxt="n", main="Structure")
