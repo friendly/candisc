@@ -101,9 +101,9 @@ pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data=Pottery)
 heplot(pottery.can, var.lwd=3)
 heplot3d(pottery.can, var.lwd=3, scale=10, zlim=c(-3,3))
 
-## Not run: 
+\dontrun{ 
 play3d(spin3d(axis = c(1, 0, 0), rpm = 5), duration=12)
-## End(Not run)
+}
 }
 \keyword{multivariate}
 \keyword{hplot}
