@@ -95,8 +95,8 @@ term in relation to the full-model E matrix.
   An object of class \code{candisc} with the following components:
   	\item{dfh }{hypothesis degrees of freedom for \code{term}}
   	\item{dfe }{error degrees of freedom for the \code{mlm}}
-  	\item{rank }{number of non-zero eigenvalues of $HE^{-1}$}
-  	\item{eigenvalues }{eigenvalues of $HE^{-1}$}
+  	\item{rank }{number of non-zero eigenvalues of \eqn{HE^{-1}}}
+  	\item{eigenvalues }{eigenvalues of \eqn{HE^{-1}}}
   	\item{canrsq }{squared canonical correlations}
   	\item{pct }{A vector containing the percentages of the \code{canrsq} of their total.}
   	\item{ndim }{Number of canonical dimensions stored in the \code{means}, \code{structure} and \code{coeffs.*} components}
