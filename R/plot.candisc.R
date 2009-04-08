@@ -62,7 +62,7 @@ plot.candisc <- function (
 	canlab <- paste(prefix, which, suffix, sep="")
 	
 	nlev <- nrow(x$means)                 # number of groups
-	# can we be more clever about assigning default col & pch by taking the
+	# TODO: can we be more clever about assigning default col & pch by taking the
 	# structure of x$factors into account?
 	if (missing(col)) col <- rep(palette(), length.out=nlev)
 	if (missing(pch)) pch <- rep(1:18, length.out=nlev)
