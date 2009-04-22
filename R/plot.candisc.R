@@ -73,6 +73,8 @@ plot.candisc <- function (
 	structure <- x$structure[,which]
 	
 	# use asp=1 to make the plot equally scaled
+#	Ind <- dataIndex(scores,term)
+#	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col[Ind], pch=pch[Ind], ...) 
 	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col, pch=pch, ...) 
 	points(means[,1], means[,2], col=col, pch="+", cex=2)
 	pos <- ifelse(means[,2]>0, 3, 1)

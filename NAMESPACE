@@ -1,7 +1,8 @@
 # last modified 6 October 2007 by J. Fox
+# last modified 22 April 2009 by M. Friendly
 
 import(heplots)
-export(candisc, candiscList)
+export(candisc, candiscList, dataIndex)
 S3method(candisc, mlm)
 S3method(candiscList, mlm)
 S3method(coef, candisc)
