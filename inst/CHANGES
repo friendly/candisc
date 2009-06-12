@@ -26,3 +26,8 @@ Version 0.5-13 (2008-12-16)
 o  Added Wolves data, with examples for 2-way design.
 o  Improved plot for 1D case.
 
+Version 0.5-15 (2009-6-12)
+
+o  Added titles.1d argument to plot.candisc to allow customized titles for 1D plots
+   (wish of Manuel Spínola)
+ 

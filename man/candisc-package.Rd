@@ -16,8 +16,8 @@ terms in a \code{mlm} via the \code{plot} method and the \pkg{heplots} package.
 \tabular{ll}{
 Package: \tab candisc\cr
 Type: \tab Package\cr
-Version: \tab 0.5-14\cr
-Date: \tab 2009-4-8\cr
+Version: \tab 0.5-15\cr
+Date: \tab 2009-6-12\cr
 License: \tab GPL (>= 2)\cr
 }
 The organization of functions in this package and the \pkg{heplots} package
@@ -30,6 +30,11 @@ Michael Friendly and John Fox
 Maintainer: Michael Friendly <friendly@yorku.ca>
 }
 \references{
+Friendly, M. (2007). HE plots for Multivariate General Linear Models. 
+\emph{Journal of Computational and Graphical Statistics}, 16 (2), 421-444. 
+\url{http://www.math.yorku.ca/SCS/Papers/jcgs-heplots.pdf} 
+
+
 Gittins, R. (1985). Canonical Analysis: A Review with Applications in Ecology,
 Berlin: Springer.
 

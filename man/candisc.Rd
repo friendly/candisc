@@ -26,7 +26,8 @@ candisc(mod, ...)
 \method{coef}{candisc}(object, type = c("std", "raw", "structure"), ...)
 
 \method{plot}{candisc}(x, which = 1:2, conf = 0.95, col, pch, scale, asp = 1,
-    var.col = "blue", var.lwd = par("lwd"), prefix = "Can", suffix=TRUE, ...)
+    var.col = "blue", var.lwd = par("lwd"), prefix = "Can", suffix=TRUE, 
+    titles.1d = c("Canonical scores", "Structure"), ...)
     
 \method{print}{candisc}(x, digits=max(getOption("digits") - 2, 3), ...)
 
@@ -62,6 +63,8 @@ candisc(mod, ...)
   \item{prefix}{Prefix used to label the canonical dimensions plotted}
   \item{suffix}{Suffix for labels of canonical dimensions. If \code{suffix=TRUE}
   the percent of hypothesis (H) variance accounted for by each canonical dimension is added to the axis label.}
+  \item{titles.1d}{A character vector of length 2, containing titles for the panels used to plot the
+  canonical scores and structure vectors, for the case in which there is only one canonical dimension.}
   \item{means}{Logical value used to determine if canonical means are printed}
   \item{scores}{Logical value used to determine if canonical scores are printed}
   \item{coef}{Type of coefficients printed by the summary method. Any one or more of

@@ -22,6 +22,7 @@ plot.candisc <- function (
 	var.lwd=par("lwd"),
 	prefix = "Can",  # prefix for labels of canonical dimensions
 	suffix = TRUE,   # add label suffix with can % ?
+	titles.1d = c("Canonical scores", "Structure"),
 	...         # extra args passed to plot
 ) {
 	
@@ -39,10 +40,10 @@ plot.candisc <- function (
 		layout(matrix(c(1,2),1,2), widths=wid)
 		formule <- formula( paste("Can1 ~", term, sep="") )
 		par(mar=c(5,4,4,0)+.1)
-		boxplot(formule, data=x$scores, ylab=paste(prefix, "1", sep=""), xlab=term, main="Canonical scores")
+		boxplot(formule, data=x$scores, ylab=paste(prefix, "1", sep=""), xlab=term, main=titles.1d[1])
 		xx <- 1:ns
 		par(mar=c(5,0,4,1)+.1)
-		plot(xx, structure, type="n", ylab="", xlab="", xaxt="n", yaxt="n", main="Structure")
+		plot(xx, structure, type="n", ylab="", xlab="", xaxt="n", yaxt="n", main=titles.1d[2])
 		arrows(xx, 0, xx, structure, length=.1, 	angle=15,
 			col=var.col, lwd=var.lwd )		
 		vars <- rownames(x$structure)
