@@ -104,6 +104,19 @@ heplot3d(pottery.can, var.lwd=3, scale=10, zlim=c(-3,3))
 \dontrun{ 
 play3d(spin3d(axis = c(1, 0, 0), rpm = 5), duration=12)
 }
+
+## FootHead data, from heplots package
+data(FootHead)
+
+# use Helmert contrasts for group
+contrasts(FootHead$group) <- contr.helmert
+
+foot.mod <- lm(cbind(width, circum,front.back,eye.top,ear.top,jaw)~group, data=FootHead)
+foot.can <- candisc(foot.mod)
+heplot(foot.can, main="Candisc HE plot", 
+ hypotheses=list("group.1"="group1","group.2"="group2"),
+ col=c("red", "blue", "green3", "green3" ), var.col="red")
+
 }
 \keyword{multivariate}
 \keyword{hplot}
