@@ -106,6 +106,7 @@ play3d(spin3d(axis = c(1, 0, 0), rpm = 5), duration=12)
 }
 
 ## FootHead data, from heplots package
+library(heplots)
 data(FootHead)
 
 # use Helmert contrasts for group
