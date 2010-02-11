@@ -62,8 +62,10 @@ hsb.can1 <- candisc(hsb.mod1, term="race")
 heplot(hsb.can1, col=c("red", "black"))
 
 # show canonical results for all terms
+\dontrun{
 hsb.can <- candiscList(hsb.mod)
 hsb.can
+}
 
 }
 \keyword{datasets}

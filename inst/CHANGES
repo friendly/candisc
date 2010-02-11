@@ -30,4 +30,9 @@ Version 0.5-15 (2009-6-12)
 
 o  Added titles.1d argument to plot.candisc to allow customized titles for 1D plots
    (wish of Manuel Spínola)
+
+Version 0.5-17 (2010-2-11)
+
+o  Allow to select canonical dimension in plot(candisc(), which=)
+
  

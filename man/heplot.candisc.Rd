@@ -96,7 +96,7 @@ aspect3d(x=1,y=1,z=1)
 
 ## Pottery data, from car package
 pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data=Pottery)
-(pottery.can <-candisc(pottery.mod))
+pottery.can <-candisc(pottery.mod)
 
 heplot(pottery.can, var.lwd=3)
 heplot3d(pottery.can, var.lwd=3, scale=10, zlim=c(-3,3))

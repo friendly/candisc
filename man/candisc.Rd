@@ -13,7 +13,8 @@
  computing canonical scores and vectors.  It represents a transformation
  of the original variables into a canonical space of maximal differences
  for the term, controlling for other model terms.
- To be of any use,
+ 
+ In typical usage,
  the term should be a factor or interaction corresponding to a
  multivariate test with 2 or more degrees of freedom for the
  null hypothesis.
@@ -47,7 +48,9 @@ candisc(mod, ...)
     \code{coeffs.*} components.  The default is the rank of the H matrix for the hypothesis
   term.}
   \item{object, x}{A candisc object}
-  \item{which}{A vector of two integers, selecting the canonical dimensions to plot}
+  \item{which}{A vector of one or two integers, selecting the canonical dimension(s) to plot. If the canonical
+  structure for a term has \code{ndim==1}, or \code{length(which)==1}, a 1D representation of canonical scores
+  and structure coefficients is produced by the \code{plot} method.  Otherwise, a 2D plot is produced. }
   \item{conf}{Confidence coefficient for the confidence circles plotted in the \code{plot} method}
   \item{col}{A vector of colors to be used for the levels of the term in the \code{plot} method.
   In this version, you should assign colors and point symbols explicitly, rather than relying on

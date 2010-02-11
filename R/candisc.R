@@ -8,6 +8,7 @@
 # -- fixed candisc.mlm bug for 1 factor designs
 # -- moved plot.candisc to its own file
 # -- plot.candisc: added boxplot of canonical scores when ndim==1 
+# Now refer to car:::predictor.names for car_2.0
 
 ## ----------------------------------------------------------------------------
 # Provides:
@@ -46,8 +47,8 @@ candisc.mlm <- function(mod, term, type="2", manova, ndim=rank, ...) {
   eInv <- solve(Tm)
   eHe <- t(eInv) %*% H %*% eInv
   dc <- eigen(eHe, symmetric=TRUE)
-	rank <- min(dfh, sum(dc$values>0))
-	pct <- 100 * dc$values / sum(dc$values)
+  rank <- min(dfh, sum(dc$values>0))
+  pct <- 100 * dc$values / sum(dc$values)
 
   coeffs.raw <- eInv %*% dc$vectors * sqrt(dfe)
 	# should we drop the coeffs corresponding to 0 eigenvalues here or at the end?
@@ -88,7 +89,7 @@ candisc.mlm <- function(mod, term, type="2", manova, ndim=rank, ...) {
 #	scores <- cbind( model.frame(mod)[,-1], scores )
 #### FIXME: scores should also include regressors in the model
 #  scores <- cbind( all.factors, as.data.frame(scores) )
-  scores <- cbind( model.frame(mod)[predictor.names(mod)], as.data.frame(scores) )
+  scores <- cbind( model.frame(mod)[car:::predictor.names(mod)], as.data.frame(scores) )
   result <- list(
   	dfh=dfh, dfe=dfe,
   	eigenvalues=dc$values, canrsq=canrsq,
@@ -105,15 +106,15 @@ candisc.mlm <- function(mod, term, type="2", manova, ndim=rank, ...) {
 # print method for candisc objects
 
 print.candisc <- function( x, digits=max(getOption("digits") - 2, 3), ...) {
-		table <- canrsqTable(x)
+	table <- canrsqTable(x)
     cat(paste("\nCanonical Discriminant Analysis for ", x$term, ":\n\n", sep=""))
     print(table, digits=digits,na.print = "")
 
-		rank <- x$rank
+	rank <- x$rank
     eigs <- x$eigenvalues[1:rank]
     tests <- seqWilks(eigs, rank, x$dfh, x$dfe)
     tests <- structure(as.data.frame(tests), 
-        heading = paste("\nTest of H0: The canonical correlations in the",
+    heading <- paste("\nTest of H0: The canonical correlations in the",
                         "\ncurrent row and all that follow are zero\n") , 
         class = c("anova", "data.frame"))
     print(tests)
