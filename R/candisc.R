@@ -9,6 +9,7 @@
 # -- moved plot.candisc to its own file
 # -- plot.candisc: added boxplot of canonical scores when ndim==1 
 # Now refer to car:::predictor.names for car_2.0
+# Now just copy predictor.names from car to avoid namespace problem
 
 ## ----------------------------------------------------------------------------
 # Provides:
@@ -18,6 +19,15 @@
 ## ----------------------------------------------------------------------------
 ## canonical scores and vectors from an mlm object
 ## TODO: provide a data.frame / formula method
+
+predictor.names <- function(model, ...) {
+	UseMethod("predictor.names")
+}
+
+predictor.names.default <- function(model, ...){
+	predictors <- attr(terms(model), "variables")
+	as.character(predictors[3:length(predictors)])
+}
 
 candisc <-
 function(mod, ...) UseMethod("candisc")
@@ -89,7 +99,7 @@ candisc.mlm <- function(mod, term, type="2", manova, ndim=rank, ...) {
 #	scores <- cbind( model.frame(mod)[,-1], scores )
 #### FIXME: scores should also include regressors in the model
 #  scores <- cbind( all.factors, as.data.frame(scores) )
-  scores <- cbind( model.frame(mod)[car:::predictor.names(mod)], as.data.frame(scores) )
+  scores <- cbind( model.frame(mod)[predictor.names(mod)], as.data.frame(scores) )
   result <- list(
   	dfh=dfh, dfe=dfe,
   	eigenvalues=dc$values, canrsq=canrsq,
