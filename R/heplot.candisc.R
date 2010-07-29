@@ -35,6 +35,7 @@ heplot.candisc <- function (
 	asp=1,           # aspect ratio, to ensure equal units
 	var.col="blue",  # color for variable vectors and labels
 	var.lwd=par("lwd"),
+	var.cex=par("cex"),
 	prefix = "Can",  # prefix for labels of canonical dimensions
 	suffix = TRUE,   # add label suffix with can % ?
 	terms=mod$term,  # terms to be plotted in canonical space / TRUE=all
@@ -93,7 +94,7 @@ heplot.candisc <- function (
 	arrows(0, 0, cs[,1], cs[,2], length=.1, angle=15, col=var.col, lwd=var.lwd)
   vars <- rownames(structure)
   pos<-ifelse(cs[,1]>0, 4, 2)
-  text(cs[,1], cs[,2], vars, pos=pos,  col=var.col)
+  text(cs[,1], cs[,2], vars, pos=pos,  col=var.col, cex=var.cex)
 
 }
 
@@ -110,6 +111,7 @@ heplot3d.candisc <- function (
 	asp="iso",           # aspect ratio, to ensure equal units
 	var.col="blue",
 	var.lwd=par("lwd"),
+	var.cex=par3d("cex"),
 	prefix = "Can",  # prefix for labels of canonical dimensions
 	suffix = FALSE,   # add label suffix with can % ?
 	terms=mod$term,  # terms to be plotted in canonical space / TRUE=all
@@ -165,7 +167,7 @@ heplot3d.candisc <- function (
   	         c(0, cs[i,3]), col=var.col, lwd=var.lwd)
   }
 #  rgl.texts( cs, text=rownames(cs), col=var.col)
-  texts3d( cs, text=rownames(cs), col=var.col)
+  texts3d( cs, text=rownames(cs), col=var.col, cex=var.cex)
 
   if (!is.null(asp)) aspect3d(asp)
 }

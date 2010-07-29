@@ -7,17 +7,26 @@ Generalized Canonical Discriminant Analysis
 }
 \description{
 This package includes functions for computing and visualizing 
-generalized canonical
-discriminant analyses for a multivariate linear model.
-They are designed to provide low-rank visualizations of
-terms in a \code{mlm} via the \code{plot} method and the \pkg{heplots} package.
+generalized canonical discriminant analyses for a multivariate linear model.
+Traditional canonical discriminant analysis is restricted to a one-way MANOVA
+design and is equivalent to canonical correlation analysis between a set of quantitative
+response variables and a set of dummy variables coded from the factor variable.
+The \code{candisc} package generalizes this to multi-way MANOVA designs
+for all terms in a multivariate linear model (i.e., an \code{mlm} object),
+computing canonical scores and vectors for each term (giving a \code{candiscList} object).
+
+The graphic functions are designed to provide low-rank (1D, 2D, 3D) visualizations of
+terms in a \code{mlm} via the \code{plot.candisc} method and the \pkg{heplot.candisc} methods.
+For \code{mlm}s with more than a few response variables, these methods often provide a 
+much simpler interpretation of the nature of effects in canonical space than
+heplots for pairs of responses or an HE plot matrix of all responses in variable space.
 }
 \details{
 \tabular{ll}{
 Package: \tab candisc\cr
 Type: \tab Package\cr
-Version: \tab 0.5-18\cr
-Date: \tab 2010-7-27\cr
+Version: \tab 0.5-19\cr
+Date: \tab 2010-7-29\cr
 License: \tab GPL (>= 2)\cr
 }
 The organization of functions in this package and the \pkg{heplots} package

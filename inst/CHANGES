@@ -37,4 +37,4 @@ o  Allow to select canonical dimension in plot(candisc(), which=)
 
 Version 0.5-18 (2010-7-27)
 
-o  Fixed predictor.names problem with car_2.0.0
+o  Fixed predictor.names problem with car_2.0-0

@@ -56,10 +56,15 @@ candiscList(mod, ...)
 grass.mod <- lm(cbind(N1,N9,N27,N81,N243) ~ Block + Species, data=Grass)
 
 grass.canL <-candiscList(grass.mod)
+names(grass.canL)
+names(grass.canL$Species)
+
 \dontrun{
 print(grass.canL)
 }
 plot(grass.canL, type="n", ask=FALSE)
+heplot(grass.canL$Species, scale=6)
+heplot(grass.canL$Block, scale=2)
 
 }
 

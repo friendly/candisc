@@ -43,6 +43,11 @@ Gittins, R. (1985), Canonical Analysis: A Review with Applications in Ecology,
 \examples{
 str(Grass)
 grass.mod <- lm(cbind(N1,N9,N27,N81,N243) ~ Block + Species, data=Grass)
+Anova(grass.mod)
+
+grass.canL <-candiscList(grass.mod)
+names(grass.canL)
+names(grass.canL$Species)
 
 }
 \keyword{datasets}
