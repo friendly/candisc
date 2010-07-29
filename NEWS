@@ -2,6 +2,7 @@ Version 0.5-19 (2010-7-29)
  o switched inst/CHANGES to NEWS
  o Extended candiscList and Grass examples
  o Extended package description
+ o Fixed minor buglet in print.candisc
 
 Version 0.5-18 (2010-7-27)
 o  Fixed predictor.names problem with car_2.0-0
