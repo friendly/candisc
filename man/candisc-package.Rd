@@ -25,8 +25,8 @@ heplots for pairs of responses or an HE plot matrix of all responses in variable
 \tabular{ll}{
 Package: \tab candisc\cr
 Type: \tab Package\cr
-Version: \tab 0.5-19\cr
-Date: \tab 2010-7-29\cr
+Version: \tab 0.5-20\cr
+Date: \tab 2010-10-08\cr
 License: \tab GPL (>= 2)\cr
 }
 The organization of functions in this package and the \pkg{heplots} package
@@ -39,9 +39,10 @@ Michael Friendly and John Fox
 Maintainer: Michael Friendly <friendly@yorku.ca>
 }
 \references{
-Friendly, M. (2007). HE plots for Multivariate General Linear Models. 
-\emph{Journal of Computational and Graphical Statistics}, 16 (2), 421-444. 
-\url{http://www.math.yorku.ca/SCS/Papers/jcgs-heplots.pdf} 
+Friendly, M. (2007).
+  HE plots for Multivariate General Linear Models.
+  \emph{Journal of Computational and Graphical Statistics}, \bold{16}(2) 421--444.
+  \url{http://datavis.ca/papers/jcgs-heplots.pdf} 
 
 
 Gittins, R. (1985). Canonical Analysis: A Review with Applications in Ecology,
