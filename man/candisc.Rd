@@ -142,7 +142,7 @@ grass.can1 <-candisc(grass.mod, term="Species")
 plot(grass.can1, type="n")
 
 # library(heplots)
-heplot(grass.can1, scale=6)
+heplot(grass.can1, scale=6, fill=TRUE)
 
 # iris data
 iris.mod <- lm(cbind(Petal.Length, Sepal.Length, Petal.Width, Sepal.Width) ~ Species, data=iris)

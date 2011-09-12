@@ -25,8 +25,8 @@ heplots for pairs of responses or an HE plot matrix of all responses in variable
 \tabular{ll}{
 Package: \tab candisc\cr
 Type: \tab Package\cr
-Version: \tab 0.5-20\cr
-Date: \tab 2010-10-08\cr
+Version: \tab 0.5-21\cr
+Date: \tab 2011-09-12\cr
 License: \tab GPL (>= 2)\cr
 }
 The organization of functions in this package and the \pkg{heplots} package
