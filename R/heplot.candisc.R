@@ -159,9 +159,6 @@ heplot3d.candisc <- function (
   cs <- scale * mod$structure
   #  can this be simplified?
   for(i in 1:nrow(mod$structure)) {
-#  	rgl.lines( c(0, cs[i,1]),
-#  	           c(0, cs[i,2]),
-#  	           c(0, cs[i,3]), col=var.col)
   	lines3d( c(0, cs[i,1]),
   	         c(0, cs[i,2]),
   	         c(0, cs[i,3]), col=var.col, lwd=var.lwd)

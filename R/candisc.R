@@ -187,21 +187,22 @@ summary.candisc <- function( object, means=TRUE, scores=FALSE,
 	ndim,     # default is min(3, rank, #cumsum(object$pct) < 99) unless ndim<rank
   digits=max(getOption("digits") - 2, 4), ...){
 
-		table <- canrsqTable(object)
+	table <- canrsqTable(object)
     cat(paste("\nCanonical Discriminant Analysis for ", object$term, ":\n\n", sep=""))
     print(table, digits=digits,na.print = "")
 
 
-		if (missing(ndim)) {
-			if (object$ndim < object$rank) ndim <- object$ndim    # ndim was set, use that
-			else if (object$rank>3)
-				ndim <- min ( 3, object$rank, sum(cumsum(object$pct) < 99) )
-			else ndim=object$rank
-		}
+	if (missing(ndim)) {
+		if (object$ndim < object$rank) ndim <- object$ndim    # ndim was set, use that
+		else if (object$rank>3)
+			ndim <- min ( 3, object$rank, sum(cumsum(object$pct) < 99) )
+		else ndim=object$rank
+	}
 		
     if (means) {
     	cat("\nClass means:\n\n")
-    	print(as.matrix(object$means[,1:ndim]), digits=digits)
+		if (ndim<2) print(object$means, digits=digits)
+    	else print(as.matrix(object$means[,1:ndim]), digits=digits)
     }
 		# allow for printing any of raw, std, structure coeffs, or none (NULL)
 		if (!is.null(coef)) {
