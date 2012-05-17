@@ -1,5 +1,6 @@
 Version 0.5-23 (2012-2-3)
 o Fixed buglet in summary.candisc() [thx: David Carlson, dcarlson@tamu.edu]
+o heplot.candisc now uses plot.candisc in the 1 df case
 
 Version 0.5-22 (2011-12-10)
 o Extended Description:

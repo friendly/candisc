@@ -26,7 +26,8 @@
 # last revised: 11/12/2008 by MF
 # -- added asp= to heplot3d.candisc
 
-## TODO:
+# last revised: 5/17/2012 9:41AM by MF
+# -- now use plot.candisc for a 1 df term
 
 heplot.candisc <- function (
 	mod,		         # output object from candisc
@@ -43,19 +44,16 @@ heplot.candisc <- function (
 	) {
 
   if (!inherits(mod, "candisc")) stop("Not a candisc object")
-# using stop() here would terminate heplot.candiscList
-	if (mod$ndim < 2) {
-	   warning("Can't do a 1 dimensional HE plot")
+	if (mod$ndim < 2 || length(which)==1) {
+		# using stop() here would terminate heplot.candiscList
+	   message("Can't do a 1 dimensional canonical HE plot; using plot.candisc instead")
+	   plot(mod, which=which, var.col=var.col, var.lwd=var.lwd, prefix=prefix, suffix=suffix, ...) 
 	   return()
 	}
 
 	factors <- mod$factors                  # factor variable(s) from candisc
 	term <- mod$term                        # term for which candisc was done
 	lm.terms <- mod$terms                   # terms in original lm
-	canvar <- paste('Can', which, sep="")   # names of canonical variables to plot
-	if (is.logical(suffix) & suffix)
-		suffix <- paste( " (", round(mod$pct[which],1), "%)", sep="" ) else suffix <- NULL
-	canlab <- paste(prefix, which, suffix, sep="")
 	scores <- mod$scores
 
 ##   Construct the model formula to fit mod$scores ~ terms in original lm()
@@ -66,6 +64,12 @@ heplot.candisc <- function (
               ") ~ ",
               paste( lm.terms, collapse = "+"), ", data=scores)" )
   can.mod <- eval(parse(text=txt))
+
+##   Construct labels for canonical variables
+	canvar <- paste('Can', which, sep="")   # names of canonical variables to plot
+	if (is.logical(suffix) & suffix)
+		suffix <- paste( " (", round(mod$pct[which],1), "%)", sep="" ) else suffix <- NULL
+	canlab <- paste(prefix, which, suffix, sep="")
 
 	# Get H, E ellipses for the canonical scores
 	# Allow to select the H terms to be plotted.
