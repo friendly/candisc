@@ -168,7 +168,7 @@ heplot3d.candisc <- function (
   	         c(0, cs[i,3]), col=var.col, lwd=var.lwd)
   }
 #  rgl.texts( cs, text=rownames(cs), col=var.col)
-  texts3d( cs, text=rownames(cs), col=var.col, cex=var.cex)
+  texts3d( cs, texts=rownames(cs), col=var.col, cex=var.cex)
 
   if (!is.null(asp)) aspect3d(asp)
 }

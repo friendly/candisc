@@ -1,8 +1,8 @@
 Package: candisc
 Type: Package
 Title: Generalized Canonical Discriminant Analysis
-Version: 0.5-23
-Date: 2012-2-3
+Version: 0.6-0
+Date: 2013-1-20
 Depends: car, heplots (>= 0.8-6), graphics, stats 
 Suggests: rgl
 LazyLoad: yes

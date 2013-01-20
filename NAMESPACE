@@ -2,7 +2,8 @@
 # last modified 22 April 2009 by M. Friendly
 
 import(heplots)
-export(candisc, candiscList, dataIndex)
+export(candisc, candiscList, dataIndex,
+	cancor)
 S3method(candisc, mlm)
 S3method(candiscList, mlm)
 S3method(coef, candisc)
@@ -18,6 +19,14 @@ S3method(heplot, candisc)
 S3method(heplot3d, candisc)
 S3method(heplot, candiscList)
 S3method(heplot3d, candiscList)
+
+# new for cancor
+S3method(print, cancor)
+S3method(summary, cancor)
+S3method(coef, cancor)
+
+
+
 
 
 
