@@ -1,9 +1,9 @@
-Wilks <- function (x, ...) {
+Wilks <- function (object, ...) {
 	UseMethod("Wilks")
 }
 
 
-Wilks.cancor <- function(object) {
+Wilks.cancor <- function(object, ...) {
 # tests of canonical dimensions
 
 if (!inherits(object, "cancor")) stop("Not a cancor object")

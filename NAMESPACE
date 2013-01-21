@@ -3,7 +3,7 @@
 
 import(heplots)
 export(candisc, candiscList, dataIndex,
-	cancor)
+	cancor, vectors, Wilks)
 S3method(candisc, mlm)
 S3method(candiscList, mlm)
 S3method(coef, candisc)
@@ -24,6 +24,7 @@ S3method(heplot3d, candiscList)
 S3method(print, cancor)
 S3method(summary, cancor)
 S3method(coef, cancor)
+S3method(Wilks, cancor)
 
 
 

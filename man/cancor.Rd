@@ -87,15 +87,16 @@ None yet.
 }
 \value{
 An object of class \code{cancorr}, a list with the following 9 components:
-  \item{cancor}{Canonical correlations}
-  \item{names}{A list of 4 components: \code{X}, \code{Y}, \code{row.names}, \code{set.names}}
-  \item{ndim}{Number of canonical dimensions extracted}
-  \item{dim}{A list of 3 components: \code{p}, \code{q}, \code{n}}
+  \item{cancor}{Canonical correlations, i.e., the correlations between each canonical variate for
+  the Y variables with the corresponding canonical variate for the X variables.}
+  \item{names}{Names for various items, a list of 4 components: \code{X}, \code{Y}, \code{row.names}, \code{set.names}}
+  \item{ndim}{Number of canonical dimensions extracted, \code{<= min(p,q)}}
+  \item{dim}{Problem dimensions, a list of 3 components: \code{p}, \code{q}, \code{n}}
   \item{coef}{Canonical coefficients, a list of 2 components: \code{X}, \code{Y}}
   \item{scores}{Canonical variate scores, a list of 2 components: \code{X}, \code{Y}}
-  \item{X}{Description of 'X'}
-  \item{Y}{Description of 'Y'}
-  \item{structure}{A list of 4 components: \code{X.xscores}, \code{Y.xscores}, \code{X.yscores}, \code{Y.yscores}}
+  \item{X}{The matrix X}
+  \item{Y}{The matrix Y}
+  \item{structure}{Structure correlations, a list of 4 components: \code{X.xscores}, \code{Y.xscores}, \code{X.yscores}, \code{Y.yscores}}
 }
 \references{
 Gittins, R. (1985). \emph{Canonical Analysis: A Review with Applications in Ecology},
