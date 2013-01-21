@@ -2,6 +2,7 @@ Version 0.6-0 (2013-1-21)
 o Added cancor and related methods for canonical correlation analysis
 o Added Wilks() methods for Wilks' Lambda canonical tests
 o Added vectors() for drawing labeled vectors
+o Added S3 heplot.cancor() method for cancor objects.
 
 Version 0.5-23 (2012-2-3)
 o Fixed buglet in summary.candisc() [thx: David Carlson, dcarlson@tamu.edu]

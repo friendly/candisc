@@ -25,6 +25,7 @@ S3method(print, cancor)
 S3method(summary, cancor)
 S3method(coef, cancor)
 S3method(Wilks, cancor)
+S3method(heplot, cancor)
 
 
 

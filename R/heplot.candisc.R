@@ -94,8 +94,10 @@ heplot.candisc <- function (
 		scale <- floor(  0.9 * ellmax / vecmax )
 		cat("Vector scale factor set to ", scale, "\n")
 	}
-	cs <- scale * structure
-	arrows(0, 0, cs[,1], cs[,2], length=.1, angle=15, col=var.col, lwd=var.lwd)
+
+  # TODO: replace with a call to vectors()
+  cs <- scale * structure
+  arrows(0, 0, cs[,1], cs[,2], length=.1, angle=15, col=var.col, lwd=var.lwd)
   vars <- rownames(structure)
   pos<-ifelse(cs[,1]>0, 4, 2)
   text(cs[,1], cs[,2], vars, pos=pos,  col=var.col, cex=var.cex)
