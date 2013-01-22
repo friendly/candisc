@@ -20,13 +20,13 @@ The 3D version is not yet implemented.
 \usage{
 \method{heplot}{cancor}(mod, which = 1:2, scale, 
 	var.vectors = "Y", var.col = c("blue", "darkgreen"), var.lwd = par("lwd"), 
-	var.cex = par("cex"), var.xpd = par("xpd"), 
+	var.cex = par("cex"), var.xpd = TRUE, 
 	prefix = "Ycan", suffix = TRUE, terms = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{mod}{ A \code{cancor} object}
-  \item{which}{ A numeric vector containing the indices of the canonical
+  \item{which}{ A numeric vector containing the indices of the Y canonical
   dimensions to plot. }
   \item{scale}{ Scale factor for the variable vectors in canonical space.  If
   not specified, the function calculates one to make the variable vectors 
@@ -42,7 +42,7 @@ Which variable vectors to plot?  [Not yet implemented]
   \item{var.xpd}{
 Allow variable labels outside the plot box?
 }
-  \item{prefix}{ Prefix for labels of canonical dimensions.}
+  \item{prefix}{ Prefix for labels of Y canonical dimensions.}
   \item{suffix}{ Suffix for labels of canonical dimensions. If \code{suffix=TRUE}
   the percent of hypothesis (H) variance accounted for by each canonical dimension is added to the axis label.}
 
@@ -59,7 +59,7 @@ In particular, you can pass linear hypotheses among the term variables via \code
 }
 }
 \details{
-None yet
+The interpretation of variable vectors in these plots is different from that of 
 }
 \value{
 Returns invisibly an object of class \code{"heplot"}, with
@@ -115,4 +115,4 @@ heplot(cc, hypotheses=list("All X"=colnames(X)),
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{hplot}
-%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{multivariate}% __ONLY ONE__ keyword per line

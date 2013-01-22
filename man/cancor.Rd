@@ -60,7 +60,8 @@ A vector of two character strings, giving names for the collections of
 the X, Y variables.
 }
   \item{prefix}{
-A vector of two character strings, giving 
+A vector of two character strings, giving prefixes used to name the X and Y
+canonical variables, respectively.
 }
   \item{use}{
 argument passed to \code{var} and \code{cov} determining how missing data
@@ -77,9 +78,10 @@ Number of digits passed to \code{print} and \code{summary} methods
 Other arguments, passed to methods
 }
 
-
   \item{type}{
-For the \code{coef} method, the type of coefficients returned.
+For the \code{coef} method, the type of coefficients returned, 
+one of \code{"x"}, \code{"y"}, \code{"both"}, or \code{"data.frame"}.
+
 }
 }
 \details{
@@ -115,7 +117,8 @@ Michael Friendly
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link[stats]{cancor}}, ~~~
+Other implementations: \code{\link[stats]{cancor}} (very basic), 
+\code{\link[yacca]{cca}} (fairly complete, but very messy return structure)
 }
 \examples{
 data(Rohwer, package="heplots")
@@ -124,6 +127,8 @@ Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
 
 (cc <- cancor(X, Y, set.names=c("PA", "Ability")))
 
+# show correlations of the canonical scores [scores not yet exported]
+# zapsmall(cor(scores(cc, type="x"), scores(cc, type="y")))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

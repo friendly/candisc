@@ -50,7 +50,7 @@ in the space of maximum discrimination.
 }
 
 \details{
-The generalized canonical discriminant analysis for on term in a \code{mlm}
+The generalized canonical discriminant analysis for one term in a \code{mlm}
 is based on the eigenvalues, \eqn{\lambda_i}{lambda_i}, and eigenvectors, V,
 of the H and E matrices for that term.  This produces uncorrelated
 canonical scores which give the maximum univariate F statistics.
@@ -63,7 +63,12 @@ range in \code{zlim} to \code{\link[heplots]{heplot3d}} usually helps.
 }
 
 \value{
-No useful value; used for the side-effect of producing a canonical HE plot.
+\code{heplot.candisc} returns invisibly an object of class \code{"heplot"}, with
+  coordinates for the various hypothesis ellipses and the error ellipse, and
+  the limits of the horizontal and vertical axes.
+  
+  Similarly, \code{heploted.candisc} returns an object of class \code{"heplot3d"}.
+
 }
 
 \references{ 

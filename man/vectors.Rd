@@ -11,7 +11,7 @@ with labels for each (using \code{\link[graphics]{text}}).
 }
 \usage{
 vectors(x, origin = c(0, 0), labels = rownames(x), 
-	scale = 1, length = 0.1, angle = 10, 
+	scale = 1, length = 0.1, angle = 12, 
 	col = "blue", pos = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.

@@ -2,7 +2,6 @@ Wilks <- function (object, ...) {
 	UseMethod("Wilks")
 }
 
-
 Wilks.cancor <- function(object, ...) {
 # tests of canonical dimensions
 
@@ -41,21 +40,4 @@ heading = paste("\nTest of H0: The canonical correlations in the",
     class = c("anova", "data.frame"))
 tests
 }
-
-#print.candisc <- function( x, digits=max(getOption("digits") - 2, 3), ...) {
-#	table <- canrsqTable(x)
-#    cat(paste("\nCanonical Discriminant Analysis for ", x$term, ":\n\n", sep=""))
-#    print(table, digits=digits,na.print = "")
-#
-#	rank <- x$rank
-#    eigs <- x$eigenvalues[1:rank]
-#    tests <- seqWilks(eigs, rank, x$dfh, x$dfe)
-#    tests <- structure(as.data.frame(tests), 
-#    heading = paste("\nTest of H0: The canonical correlations in the",
-#                        "\ncurrent row and all that follow are zero\n") , 
-#        class = c("anova", "data.frame"))
-#    print(tests)
-#    invisible(x)      
-#}
-
 

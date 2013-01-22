@@ -3,11 +3,14 @@
 
 \docType{package}
 \title{
-Generalized Canonical Discriminant Analysis
+Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis
 }
 \description{
 This package includes functions for computing and visualizing 
-generalized canonical discriminant analyses for a multivariate linear model.
+generalized canonical discriminant analyses 
+and canonical correlation analysis
+for a multivariate linear model.
+
 Traditional canonical discriminant analysis is restricted to a one-way MANOVA
 design and is equivalent to canonical correlation analysis between a set of quantitative
 response variables and a set of dummy variables coded from the factor variable.
@@ -16,10 +19,19 @@ for all terms in a multivariate linear model (i.e., an \code{mlm} object),
 computing canonical scores and vectors for each term (giving a \code{candiscList} object).
 
 The graphic functions are designed to provide low-rank (1D, 2D, 3D) visualizations of
-terms in a \code{mlm} via the \code{plot.candisc} method and the \pkg{heplot.candisc} methods.
+terms in a \code{mlm} via the \code{\link{plot.candisc}} method, 
+and the HE plot \code{\link{heplot.candisc}} and \code{\link{heplot3d.candisc}}
+methods.
 For \code{mlm}s with more than a few response variables, these methods often provide a 
 much simpler interpretation of the nature of effects in canonical space than
 heplots for pairs of responses or an HE plot matrix of all responses in variable space.
+
+Analogously, a multivariate linear model with quantitative predictors can also be
+represented in a reduced-rank space by means of a canonical correlation
+transformation of the Y and X variables to uncorrelated canonical variates,
+Ycan and Xcan.  Computation for this analysis is provided by \code{\link{cancor}}
+and related methods.  Visualization of these results in canonical space
+are provided by the \code{\link{heplot.cancor}} method.
 }
 \details{
 \tabular{ll}{

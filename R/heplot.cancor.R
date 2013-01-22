@@ -9,7 +9,7 @@ heplot.cancor <- function (
 	var.col=c("blue", "darkgreen"),  # colors for Y and X variable vectors and labels
 	var.lwd=par("lwd"),
 	var.cex=par("cex"),
-	var.xpd=par("xpd"),
+	var.xpd=TRUE,     # was: par("xpd"),
 	prefix = "Ycan",  # prefix for labels of canonical dimensions
 	suffix = TRUE,   # add label suffix with can % ?
 	terms=TRUE,  # terms to be plotted in canonical space / TRUE=all

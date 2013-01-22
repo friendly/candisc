@@ -28,6 +28,7 @@
 
 # last revised: 5/17/2012 9:41AM by MF
 # -- now use plot.candisc for a 1 df term
+# heplot.candisc now returns ellipses
 
 heplot.candisc <- function (
 	mod,		         # output object from candisc
@@ -102,6 +103,7 @@ heplot.candisc <- function (
   pos<-ifelse(cs[,1]>0, 4, 2)
   text(cs[,1], cs[,2], vars, pos=pos,  col=var.col, cex=var.cex)
 
+  invisible(ellipses)
 }
 
 ## heplot3d method for candisc object
@@ -173,6 +175,8 @@ heplot3d.candisc <- function (
   texts3d( cs, texts=rownames(cs), col=var.col, cex=var.cex)
 
   if (!is.null(asp)) aspect3d(asp)
+  
+  invisible(ellipses)
 }
 
 heplot.candiscList <- function(mod, term, ask=interactive(), graphics = TRUE, ...) {
