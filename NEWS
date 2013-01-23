@@ -1,4 +1,7 @@
-Version 0.6-0 (2013-1-21)
+Version 0.6-1 (2013-1-23)
+o Now export scores() and scores.cancor() method
+
+Version 0.6-0 (2013-1-20)
 o Added cancor and related methods for canonical correlation analysis
 o Added Wilks() methods for Wilks' Lambda canonical tests
 o Added vectors() for drawing labeled vectors

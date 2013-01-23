@@ -65,8 +65,8 @@ can.scores <- function (X, Y, xcoef, ycoef)
 
 # canonical structure coefficients: correlations 
 can.structure <- function (X, Y, scores, use="complete.obs") {
-		xscores <- scores$xscores
-		yscores <- scores$yscores
+	xscores <- scores$xscores
+	yscores <- scores$yscores
     X.xscores = cor(X, xscores, use = use)
     Y.xscores = cor(Y, xscores, use = use)
     X.yscores = cor(X, yscores, use = use)

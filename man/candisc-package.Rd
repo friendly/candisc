@@ -37,8 +37,8 @@ are provided by the \code{\link{heplot.cancor}} method.
 \tabular{ll}{
 Package: \tab candisc\cr
 Type: \tab Package\cr
-Version: \tab 0.6-0\cr
-Date: \tab 2013-01-20\cr
+Version: \tab 0.6-1\cr
+Date: \tab 2013-01-23\cr
 License: \tab GPL (>= 2)\cr
 }
 The organization of functions in this package and the \pkg{heplots} package
