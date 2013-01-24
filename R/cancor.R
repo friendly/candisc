@@ -169,14 +169,21 @@ scores.cancor <- function(x, type=c("x", "y", "both", "list", "data.frame"), ...
 		)
 }
 
-coef.cancor <- function(object, type=c("x", "y", "both", "list"), ...) {
+coef.cancor <- function(object, type=c("x", "y", "both", "list"), standardize=FALSE, ...) {
+	coef <- object$coef
+	if (standardize) {
+		coef$X <- diag(sqrt(diag(cov(object$X)))) %*% coef$X
+		coef$Y <- diag(sqrt(diag(cov(object$Y)))) %*% coef$Y
+		rownames(coef$X) <- rownames(object$coef$X)
+		rownames(coef$Y) <- rownames(object$coef$Y)
+	}
 	type <- match.arg(type)
 	switch(type,
-		x = object$coef$X,
-		y = object$coef$Y,
-		both = object$coef,
-		list = object$coef
-		)
+			x = coef$X,
+			y = coef$Y,
+			both = list(coef$X, coef$Y),
+			list = list(coef$X, coef$Y)
+	)
 }
 
 

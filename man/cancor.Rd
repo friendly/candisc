@@ -29,7 +29,7 @@ cancor(X, Y,
 
 \method{summary}{cancor}(object, digits = max(getOption("digits") - 2, 3), ...)
 
-\method{coef}{cancor}(object, type = c("x", "y", "both", "list"), ...)
+\method{coef}{cancor}(object, type = c("x", "y", "both", "list"), standardize=FALSE, ...)
 
 scores(x, ...)
 
@@ -90,9 +90,13 @@ For the \code{coef} method, the type of coefficients returned,
 one of \code{"x"}, \code{"y"}, \code{"both"}. For the \code{scores}
 method, the same list,  or \code{"data.frame"}, which returns
 a data.frame containing the X and Y canonical scores.
+}
+  \item{standardize}{
+For the \code{coef} method, whether coefficients should be standardized
+by dividing by the standard deviations of the X and Y variables.
+}
+}
 
-}
-}
 \details{
 Canonical correlation analysis (CCA), as traditionally presented is used to identify and measure the
 associations between two sets of quantitative variables, X and Y.  
@@ -111,7 +115,7 @@ convenient fashion.
 However, for visualization using HE plots, it is most natural to consider plots representing
 the relations among the canonical variables for the Y variables in terms of a 
 multivariate linear model predicting the Y canonical scores, using either the X variables
-or the X canonical scores as predictors.  Such plots, using \code{link{heplot.cancor}}
+or the X canonical scores as predictors.  Such plots, using \code{\link{heplot.cancor}}
 provide a low-rank (1D, 2D, 3D) visualization of the relations between the two sets,
 and so are useful in cases when there are more than 2 or 3 variables in each of X and Y.
 }
@@ -152,6 +156,7 @@ Other implementations of CCA: \code{\link[stats]{cancor}} (very basic),
 
 \code{\link{candisc}}
 }
+
 \examples{
 data(Rohwer, package="heplots")
 X <- as.matrix(Rohwer[,6:10])  # the PA tests
@@ -161,6 +166,9 @@ Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
 
 # show correlations of the canonical scores 
 zapsmall(cor(scores(cc, type="x"), scores(cc, type="y")))
+
+# standardized coefficients
+coef(cc, type="both", standardize=TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
