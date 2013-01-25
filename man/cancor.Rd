@@ -120,19 +120,21 @@ provide a low-rank (1D, 2D, 3D) visualization of the relations between the two s
 and so are useful in cases when there are more than 2 or 3 variables in each of X and Y.
 
 The connection between CCA and HE plots for MMRA models can be developed as follows.
-CCA can also be viewed as a principal component analysis of the predicted values of 
+CCA can also be viewed as a principal component transformation of the predicted values of 
 one set of variables from a regression on the other set of variables, 
 in the metric of the error covariance matrix. 
+
 For example, regress the Y variables on the X variables,
 giving predicted values \eqn{\hat{Y} = X (X'X)^{-1} X' Y}
 and residuals \eqn{R = Y - \hat{Y}}.
-The error covariance matrix is \eqn{E = R'R/n}. 
+The error covariance matrix is \eqn{E = R'R/(n-1)}. 
 Choose a transformation Q
-that converts the error covariance matrix to an identity, that is,
-\eqn{(RQ)'(RQ) = Q' R' R Q = n I},
+that orthogonalizes the error covariance matrix to an identity, that is,
+\eqn{(RQ)'(RQ) = Q' R' R Q = (n-1) I},
 and apply the same transformation to the predicted values to yield, say, \eqn{Z = \hat{Y} Q}.
-Now do a principal component analysis on the covariance matrix of Z, and you get the eigenvalues of 
-\eqn{E^{-1} H}.
+Then, a principal component analysis on the covariance matrix of Z gives eigenvalues of 
+\eqn{E^{-1} H}, and so is equivalent to the MMRA analysis of \code{lm(Y ~ X)} statistically,
+but visualized here in canonical space.
 
 }
 \value{
@@ -144,10 +146,24 @@ An object of class \code{cancorr}, a list with the following 9 components:
   \item{dim}{Problem dimensions, a list of 3 components: \code{p} (number of X variables), 
        \code{q} (number of Y variables), \code{n} (sample size)}
   \item{coef}{Canonical coefficients, a list of 2 components: \code{X}, \code{Y}}
-  \item{scores}{Canonical variate scores, a list of 2 components: \code{X}, \code{Y}}
+%  \item{scores}{Canonical variate scores, a list of 2 components: \code{X}, \code{Y}}
+  \item{scores}{Canonical variate scores, a list of 2 components: 
+  	\describe{
+	  \item{\code{X}}{Canonical variate scores for the X variables}
+	  \item{\code{Y}}{Canonical variate scores for the Y variables}
+  	}
+  }
   \item{X}{The matrix X}
   \item{Y}{The matrix Y}
-  \item{structure}{Structure correlations, a list of 4 components: \code{X.xscores}, \code{Y.xscores}, \code{X.yscores}, \code{Y.yscores}}
+%  \item{structure}{Structure correlations, a list of 4 components: \code{X.xscores}, \code{Y.xscores}, \code{X.yscores}, \code{Y.yscores}}
+  \item{structure}{Structure correlations ("loadings"), a list of 4 components: 
+	  \describe{
+	  \item{X.xscores}{Structure correlations of the X variables with the Xcan canonical scores}
+	  \item{Y.xscores}{Structure correlations of the Y variables with the Xcan canonical scores}
+	  \item{X.yscores}{Structure correlations of the X variables with the Ycan canonical scores}
+	  \item{Y.yscores}{Structure correlations of the Y variables with the Ycan canonical scores}
+	  }
+  }
 }
 \references{
 Gittins, R. (1985). \emph{Canonical Analysis: A Review with Applications in Ecology},
@@ -160,7 +176,8 @@ Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979).
 Michael Friendly
 }
 \note{
-Not all features of CCA are presently implemented: standardized coefficients, redundancy analysis, ...
+Not all features of CCA are presently implemented: standardized vs. raw scores, 
+missing data, other plot methods, ...
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
@@ -170,7 +187,10 @@ Other implementations of CCA: \code{\link[stats]{cancor}} (very basic),
 \code{\link[yacca]{cca}} (fairly complete, but very messy return structure),
 \code{\link[CCA]{cc}} (fairly complete, very messy return structure, no longer maintained).
 
-\code{\link{redundancy}}
+\code{\link{redundancy}}, for redundancy analysis
+
+\code{\link{heplot.cancor}} for CCA HE plots and
+\code{\link[heplots]{heplots}} for generic heplot methods.
 
 \code{\link{candisc}}
 }
