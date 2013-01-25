@@ -118,6 +118,22 @@ multivariate linear model predicting the Y canonical scores, using either the X 
 or the X canonical scores as predictors.  Such plots, using \code{\link{heplot.cancor}}
 provide a low-rank (1D, 2D, 3D) visualization of the relations between the two sets,
 and so are useful in cases when there are more than 2 or 3 variables in each of X and Y.
+
+The connection between CCA and HE plots for MMRA models can be developed as follows.
+CCA can also be viewed as a principal component analysis of the predicted values of 
+one set of variables from a regression on the other set of variables, 
+in the metric of the error covariance matrix. 
+For example, regress the Y variables on the X variables,
+giving predicted values \eqn{\hat{Y} = X (X'X)^{-1} X' Y}
+and residuals \eqn{R = Y - \hat{Y}}.
+The error covariance matrix is \eqn{E = R'R/n}. 
+Choose a transformation Q
+that converts the error covariance matrix to an identity, that is,
+\eqn{(RQ)'(RQ) = Q' R' R Q = n I},
+and apply the same transformation to the predicted values to yield, say, \eqn{Z = \hat{Y} Q}.
+Now do a principal component analysis on the covariance matrix of Z, and you get the eigenvalues of 
+\eqn{E^{-1} H}.
+
 }
 \value{
 An object of class \code{cancorr}, a list with the following 9 components:
@@ -153,6 +169,8 @@ Not all features of CCA are presently implemented: standardized coefficients, re
 Other implementations of CCA: \code{\link[stats]{cancor}} (very basic), 
 \code{\link[yacca]{cca}} (fairly complete, but very messy return structure),
 \code{\link[CCA]{cc}} (fairly complete, very messy return structure, no longer maintained).
+
+\code{\link{redundancy}}
 
 \code{\link{candisc}}
 }
