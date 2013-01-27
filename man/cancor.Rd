@@ -177,7 +177,7 @@ Michael Friendly
 }
 \note{
 Not all features of CCA are presently implemented: standardized vs. raw scores, 
-missing data, other plot methods, ...
+more flexible handling of missing data, other plot methods, ...
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
@@ -187,12 +187,14 @@ Other implementations of CCA: \code{\link[stats]{cancor}} (very basic),
 \code{\link[yacca]{cca}} (fairly complete, but very messy return structure),
 \code{\link[CCA]{cc}} (fairly complete, very messy return structure, no longer maintained).
 
-\code{\link{redundancy}}, for redundancy analysis
+\code{\link{redundancy}}, for redundancy analysis;
+\code{\link{plot.cancor}}, for enhanced scatterplots of the canonical variates.
 
 \code{\link{heplot.cancor}} for CCA HE plots and
 \code{\link[heplots]{heplots}} for generic heplot methods.
 
-\code{\link{candisc}}
+\code{\link{candisc}} for related methods focused on multivariate linear models with
+one or more factors among the X variables.
 }
 
 \examples{
@@ -207,6 +209,8 @@ zapsmall(cor(scores(cc, type="x"), scores(cc, type="y")))
 
 # standardized coefficients
 coef(cc, type="both", standardize=TRUE)
+
+plot(cc, smooth=TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

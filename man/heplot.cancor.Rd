@@ -7,9 +7,12 @@
 These functions plot ellipses (or ellipsoids in 3D)
 in canonical space
 representing the hypothesis and error sums-of-squares-and-products matrices for 
-terms in a multivariate linear model.
+terms in a multivariate linear model representing the result of a
+canonical correlation analysis.
 They provide a low-rank 2D (or 3D) view of the effects 
-in the space of maximum canonical correlations. 
+in the space of maximum canonical correlations, together with variable
+vectors representing the correlations of Y variables with the canonical
+dimensions.
 
 For consistency with \code{\link{heplot.candisc}}, the plots show
 effects in the space of the canonical Y variables selected by \code{which}.
@@ -32,17 +35,13 @@ The 3D version is not yet implemented.
   not specified, the function calculates one to make the variable vectors 
   approximately fill the plot window. }
 
-  \item{var.vectors}{
-Which variable vectors to plot?  [Not yet implemented]
-}
+  \item{var.vectors}{Which variable vectors to plot?  [Not yet implemented]}
 
   \item{var.col}{ Color(s) for variable vectors and labels }
   \item{var.lwd}{ Line width for variable vectors }
   \item{var.cex}{ Text size for variable vector labels }
-  \item{var.xpd}{
-Allow variable labels outside the plot box?
-}
-  \item{prefix}{ Prefix for labels of Y canonical dimensions.}
+  \item{var.xpd}{Allow variable labels outside the plot box?}
+  \item{prefix}{ Prefix for labels of the Y canonical dimensions.}
   \item{suffix}{ Suffix for labels of canonical dimensions. If \code{suffix=TRUE}
   the percent of hypothesis (H) variance accounted for by each canonical dimension is added to the axis label.}
 
@@ -59,7 +58,25 @@ In particular, you can pass linear hypotheses among the term variables via \code
 }
 }
 \details{
-The interpretation of variable vectors in these plots is different from that of 
+The interpretation of variable vectors in these plots is different from that of the
+\code{terms} plotted as H "ellipses," which appear as degenerate lines in the plot because they
+correspond to 1 df tests of rank(H)=1.  
+
+In canonical space, the interpretation of the H ellipses for the \code{terms} is the same
+as in ordinary HE plots:  a term is significant \emph{iff} its H ellipse projects outside
+the (orthogonalized) E ellipsoid somewhere in the space of the Y canonical dimensions.
+The orientation of each H ellipse with respect to the Y canonical dimensions indicates
+which dimensions that X variate contributes to.
+
+On the other hand, the variable vectors shown in these plots are intended only to show
+the correlations of Y variables with the canonical dimensions.  Only their relative
+lengths and angles with respect to the Y canonical dimensions have meaning.
+Relative lengths correspond to proportions of variance accounted for in the 
+Y canonical dimensions plotted;
+angles between the variable vectors and the canonical axes correspond to the
+structure correlations. 
+The absolute lengths of these vectors are typically manipulated by the 
+\code{scale} argument to provide better visual resolution and labeling for the variables.
 }
 \value{
 Returns invisibly an object of class \code{"heplot"}, with
@@ -87,9 +104,10 @@ Michael Friendly
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{cancor}} for details on canonical correlation as implemented here
+\code{\link{cancor}} for details on canonical correlation as implemented here;
+\code{\link{plot.cancor}} for scatterplots of canonical variable scores.
 
-\code{\link{heplot.candisc}} , \code{\link[heplots]{heplot}},
+\code{\link{heplot.candisc}}, \code{\link[heplots]{heplot}},
 \code{\link[car]{linearHypothesis}} 
 }
 \examples{

@@ -28,6 +28,7 @@ S3method(Wilks, cancor)
 S3method(heplot, cancor)
 S3method(scores, cancor)
 S3method(print, cancor.redundancy)
+S3method(plot, cancor)
 
 
 

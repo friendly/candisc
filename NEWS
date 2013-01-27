@@ -1,7 +1,10 @@
 Version 0.6-1 (2013-1-23)
+o Continued development of methods and plots for canonical correlation analysis within the
+  HE plot framework:
 o Now export scores() and scores.cancor() method
 o coef.cancor gets a standardize= argument
 o Added redundancy() for redundancy analysis
+o Added a plot.cancor() method, visualizing the relations between the Ycan and Xcan variable scores
 
 Version 0.6-0 (2013-1-20)
 o Added cancor and related methods for canonical correlation analysis
