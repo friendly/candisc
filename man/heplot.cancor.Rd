@@ -1,5 +1,6 @@
 \name{heplot.cancor}
 \alias{heplot.cancor}
+\alias{heplot3d.cancor}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Canonical Correlation HE plots}
 
@@ -17,15 +18,21 @@ dimensions.
 For consistency with \code{\link{heplot.candisc}}, the plots show
 effects in the space of the canonical Y variables selected by \code{which}.
 
-The 3D version is not yet implemented.
 }
 
 \usage{
-\method{heplot}{cancor}(mod, which = 1:2, scale, 
+\method{heplot}{cancor}(mod, which = 1:2, scale, asp=NA,
 	var.vectors = "Y", var.col = c("blue", "darkgreen"), var.lwd = par("lwd"), 
 	var.cex = par("cex"), var.xpd = TRUE, 
 	prefix = "Ycan", suffix = TRUE, terms = TRUE, ...)
+
+\method{heplot3d}{cancor}(mod, which = 1:3, scale, asp="iso",
+	var.vectors = "Y", var.col = c("blue", "darkgreen"), var.lwd = par("lwd"), 
+	var.cex = par("cex"), var.xpd = NA, 
+	prefix = "Ycan", suffix = FALSE, terms = TRUE, ...)
 }
+
+
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{mod}{ A \code{cancor} object}
@@ -34,13 +41,16 @@ The 3D version is not yet implemented.
   \item{scale}{ Scale factor for the variable vectors in canonical space.  If
   not specified, the function calculates one to make the variable vectors 
   approximately fill the plot window. }
+  \item{asp}{aspect ratio setting. Use \code{asp=1} in 2D plots and \code{asp="iso"} in 3D plots
+   to ensure equal units on the axes. Use \code{asp=NA} in 2D plots and \code{asp=NULL} in 3D plots
+   to allow separate scaling for the axes.}
 
   \item{var.vectors}{Which variable vectors to plot?  [Not yet implemented]}
 
   \item{var.col}{ Color(s) for variable vectors and labels }
   \item{var.lwd}{ Line width for variable vectors }
   \item{var.cex}{ Text size for variable vector labels }
-  \item{var.xpd}{Allow variable labels outside the plot box?}
+  \item{var.xpd}{logical. Allow variable labels outside the plot box? Does not apply to 3D plots.}
   \item{prefix}{ Prefix for labels of the Y canonical dimensions.}
   \item{suffix}{ Suffix for labels of canonical dimensions. If \code{suffix=TRUE}
   the percent of hypothesis (H) variance accounted for by each canonical dimension is added to the axis label.}
@@ -59,8 +69,8 @@ In particular, you can pass linear hypotheses among the term variables via \code
 }
 \details{
 The interpretation of variable vectors in these plots is different from that of the
-\code{terms} plotted as H "ellipses," which appear as degenerate lines in the plot because they
-correspond to 1 df tests of rank(H)=1.  
+\code{terms} plotted as H "ellipses," which appear as degenerate lines in the plot (because they
+correspond to 1 df tests of rank(H)=1).  
 
 In canonical space, the interpretation of the H ellipses for the \code{terms} is the same
 as in ordinary HE plots:  a term is significant \emph{iff} its H ellipse projects outside
@@ -77,6 +87,8 @@ angles between the variable vectors and the canonical axes correspond to the
 structure correlations. 
 The absolute lengths of these vectors are typically manipulated by the 
 \code{scale} argument to provide better visual resolution and labeling for the variables.
+
+
 }
 \value{
 Returns invisibly an object of class \code{"heplot"}, with

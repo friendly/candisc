@@ -1,25 +1,25 @@
 # HE plot for a cancor object
 
-heplot.cancor <- function (
+heplot3d.cancor <- function (
 	mod,		         # output object from cancor
-	which=1:2,       # canonical dimensions to plot
+	which=1:3,       # canonical dimensions to plot
 	scale,           # scale factor(s) for variable vectors in can space
-	asp=NA,           # aspect ratio, to ensure equal units?
+	asp="iso",           # aspect ratio, to ensure equal units
 	var.vectors = "Y", # which variable vectors to show? [not yet implemented]
 	var.col=c("blue", "darkgreen"),  # colors for Y and X variable vectors and labels
 	var.lwd=par("lwd"),
 	var.cex=par("cex"),
-	var.xpd=TRUE,     # was: par("xpd"),
+	var.xpd=NA,       # not used
 	prefix = "Ycan",  # prefix for labels of canonical dimensions
-	suffix = TRUE,   # add label suffix with can % ?
+	suffix = FALSE,   # add label suffix with can % ?
 	terms=TRUE,  # terms to be plotted in canonical space / TRUE=all
 	...              # extra args passed to heplot
 	) {
 
   if (!inherits(mod, "cancor")) stop("Not a cancor object")
-	if (mod$ndim < 2 || length(which)==1) {
+	if (mod$ndim < 3 || length(which) < 3) {
 		# using stop() here would terminate heplot.candiscList
-	   message("Can't do a 1 dimensional canonical HE plot")
+	   message("Can't do a 3 dimensional canonical HE plot")
 #	   plot(mod, which=which, var.col=var.col, var.lwd=var.lwd, prefix=prefix, suffix=suffix, ...) 
 	   return()
 	}
@@ -61,27 +61,44 @@ heplot.cancor <- function (
 		suffix <- paste( " (", round(pct[which],1), "%)", sep="" ) else suffix <- NULL
 	canlab <- paste(prefix, which, suffix, sep="")
 
-  ellipses <- heplot(can.mod, terms=terms, 
-  		xlab=canlab[1], ylab=canlab[2],  ...)
+  ellipses <- heplot3d(can.mod, terms=terms, 
+  		xlab=canlab[1], ylab=canlab[2], zlab=canlab[3], ...)
   
 	struc <- mod$structure
   Xstructure <- struc$X.yscores[,which]
   Ystructure <- struc$Y.yscores[,which]
 
+
+# TODO: calculate scale factor(s)
+  structure <- Ystructure
 	maxrms <- function(x) { max(sqrt(apply(x^2, 1, sum))) }
 	if (missing(scale)) {
-		vecrange <- range(Ystructure)
+		vecmax <- maxrms(structure)
+		vecrange <- range(structure)
 		ellrange <- lapply(ellipses, range)
-		vecmax <- maxrms(Ystructure)
-		ellmax <- max( maxrms(ellipses$E), unlist(lapply(ellipses$H, maxrms)) )
-		scale <- floor(  0.9 * ellmax / vecmax )
+		vecmax <- maxrms(structure)
+		# get bbox of the 3d plot
+        bbox <- matrix(par3d("bbox"),3,2,byrow=TRUE)
+#    TODO: calculate scale so that vectors reasonably fill the plot
+		scale <- 3
 		cat("Vector scale factor set to ", scale, "\n")
+#	  browser()
 	}
-  
-#  vectors(Xstructure, scale=scale)
-  vectors(Ystructure, scale=scale, col=var.col[1], lwd=var.lwd, cex=var.cex, xpd=var.xpd)
 
-	invisible(ellipses)
-	
+# TODO: plot vectors
+
+  cs <- scale * Ystructure
+  #  can this be simplified?
+  for(i in 1:nrow(cs)) {
+  	lines3d( c(0, cs[i,1]),
+  	         c(0, cs[i,2]),
+  	         c(0, cs[i,3]), col=var.col, lwd=var.lwd)
+  }
+  texts3d( cs, texts=rownames(cs), col=var.col, cex=var.cex)
+
+
+  if (!is.null(asp)) aspect3d(asp)
+  
+  invisible(ellipses)
 
 }
