@@ -43,9 +43,10 @@ effects in the space of the canonical Y variables selected by \code{which}.
   approximately fill the plot window. }
   \item{asp}{aspect ratio setting. Use \code{asp=1} in 2D plots and \code{asp="iso"} in 3D plots
    to ensure equal units on the axes. Use \code{asp=NA} in 2D plots and \code{asp=NULL} in 3D plots
-   to allow separate scaling for the axes.}
+   to allow separate scaling for the axes. See Details below.}
 
-  \item{var.vectors}{Which variable vectors to plot?  [Not yet implemented]}
+  \item{var.vectors}{Which variable vectors to plot?  [Not yet implemented; at present only the
+  variable vectors for the Y variables with respect to the Y canonical variates are plotted.]}
 
   \item{var.col}{ Color(s) for variable vectors and labels }
   \item{var.lwd}{ Line width for variable vectors }
@@ -88,7 +89,10 @@ structure correlations.
 The absolute lengths of these vectors are typically manipulated by the 
 \code{scale} argument to provide better visual resolution and labeling for the variables.
 
-
+Setting the aspect ratio of these plots is important for the proper interpretation of
+angles between the variable vectors and the coordinate axes.  
+However, this then makes it impossible to change the aspect ratio of the plot
+by re-sizing manually.
 }
 \value{
 Returns invisibly an object of class \code{"heplot"}, with
@@ -140,7 +144,9 @@ heplot(cc, hypotheses=list("All X"=colnames(X)),
 	var.cex=1.5, var.col="red", var.lwd=3,
 	prefix="Y canonical dimension"
 	)
-	
+
+# 3D version
+heplot3d(cc, var.lwd=3, var.col="red")	
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

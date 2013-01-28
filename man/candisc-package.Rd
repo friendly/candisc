@@ -9,7 +9,10 @@ Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysi
 This package includes functions for computing and visualizing 
 generalized canonical discriminant analyses 
 and canonical correlation analysis
-for a multivariate linear model.
+for a multivariate linear model.  The goal is to provide ways of visualizing
+such models in a low-dimensional space corresponding to dimensions
+(linear combinations of the response variables) of maximal relationship
+to the predictor variables. 
 
 Traditional canonical discriminant analysis is restricted to a one-way MANOVA
 design and is equivalent to canonical correlation analysis between a set of quantitative
@@ -31,7 +34,11 @@ represented in a reduced-rank space by means of a canonical correlation
 transformation of the Y and X variables to uncorrelated canonical variates,
 Ycan and Xcan.  Computation for this analysis is provided by \code{\link{cancor}}
 and related methods.  Visualization of these results in canonical space
-are provided by the \code{\link{heplot.cancor}} method.
+are provided by the\code{\link{plot.cancor}},  \code{\link{heplot.cancor}} 
+and \code{\link{heplot3d.cancor}} methods.
+
+A few of these methods are illustrated in the vignette for the heplots package,
+\code{vignette("HE-examples", package="heplots")}.
 }
 \details{
 \tabular{ll}{
@@ -65,7 +72,11 @@ Berlin: Springer.
 
 \keyword{ package }
 \keyword{multivariate}
-\seealso{ \code{\link[heplots]{heplot}}
+\seealso{ 
+\code{\link[heplots]{heplot}} for details about HE plots.
+
+\code{\link{candisc}}, \code{\link{cancor}} for details about canonical discriminant analysis
+and canonical correlation analysis.
 
 }
 %\examples{
