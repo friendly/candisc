@@ -1,50 +1,58 @@
 \name{vectors}
 \alias{vectors}
+\alias{vectors3d}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Draw Labelled Vectors
+Draw Labeled Vectors in 2D or 3D
 }
 \description{
-A graphics utility function to draw vectors from an origin to a collection of points
-(using \code{\link[graphics]{arrows}})
+Graphics utility functions to draw vectors from an origin to a collection of points
+(using \code{\link[graphics]{arrows}} in 2D or \code{\link[rgl]{lines3d}} in 3D)
 with labels for each (using \code{\link[graphics]{text}}).
 }
 \usage{
 vectors(x, origin = c(0, 0), labels = rownames(x), 
-	scale = 1, length = 0.1, angle = 12, 
-	col = "blue", pos = NULL, ...)
+	scale = 1, 
+	col="blue",
+	lwd=1,	cex=1,
+	length=.1, angle=12, pos=NULL,	
+	 ...)
+
+vectors3d(x, origin=c(0,0,0), labels=rownames(x), 
+	scale=1, 
+	col="blue", 
+	lwd=1, cex=1,
+	 ...) 
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-A two-column matrix containing the end points of the vectors
+A two-column matrix or a three-column matrix containing the end points of the vectors
 }
   \item{origin}{
 Starting point(s) for the vectors
 }
-  \item{labels}{
-Labels for the vectors
-}
-  \item{scale}{
-A multiplier for the length of each vector
-}
+  \item{labels}{Labels for the vectors}
+  \item{scale}{A multiplier for the length of each vector}
+  \item{col}{color(s) for the vectors.}
+  \item{lwd}{line width(s) for the vectors.}
+  \item{cex}{color(s) for the vectors.}
+
   \item{length}{
-length of the edges of the arrow head (in inches).
+For \code{vectors}, length of the edges of the arrow head (in inches).
 }
   \item{angle}{
-angle from the shaft of the arrow to the edge of the arrow head.
+For \code{vectors}, angle from the shaft of the arrow to the edge of the arrow head.
 }
-  \item{col}{
-color(s) for the vectors.
-}
+
   \item{pos}{
-position of the text label relative to the vector head.
+For \code{vectors}, position of the text label relative to the vector head.
 If \code{pos==NULL}, labels are positioned labels outside, relative to arrow ends.
 }
   \item{\dots}{
-other graphical parameters, such as \code{lty}, \code{lwd}, \code{xpd}, ... 
-
+other graphical parameters, such as \code{lty},  \code{xpd}, ... 
 }
+
 }
 \details{
 The graphical parameters \code{col}, \code{lty} and \code{lwd} 
@@ -75,6 +83,9 @@ Michael Friendly
 \code{\link[graphics]{arrows}},
 \code{\link[graphics]{text}},
 \code{\link[graphics]{segments}}
+
+\code{\link[rgl]{lines3d}},
+\code{\link[rgl]{texts3d}}
 
 }
 \examples{
