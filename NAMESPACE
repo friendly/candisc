@@ -21,6 +21,8 @@ S3method(heplot, candiscList)
 S3method(heplot3d, candiscList)
 
 # new for cancor
+S3method(cancor, default)
+S3method(cancor, formula)
 S3method(print, cancor)
 S3method(summary, cancor)
 S3method(coef, cancor)

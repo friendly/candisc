@@ -5,7 +5,53 @@
 #      yacca::cca (fairly complete, but very messy return structure)
 #      CCA::cc (fairly complete, but very messy return structure, no longer maintained)
 
-cancor <- function (X, Y, 
+cancor <- function(x, ...) {
+	UseMethod("cancor", x)
+}
+
+cancor.formula <- function(formula, data, subset, weights, 
+		na.action, 
+		method = "gensvd",   # "qr" not implemented
+#		model = TRUE,        # not applicable
+#		x = TRUE, y = TRUE, 
+#		qr = TRUE, 
+#		contrasts = NULL,    # would it make any sense to allow factors? should we test for factors in X?
+		...) {
+	
+	# remove the intercept [solution by John Fox]
+	formula <- update(formula, . ~ . - 1)    
+	cl <- match.call()
+	cl$formula <- formula
+	mf <- match.call(expand.dots = FALSE)
+	mf$formula <- formula
+	m <- match(c("formula", "data", "subset", "weights", "na.action"), names(mf), 0L)
+	mf <- mf[c(1L, m)]
+	
+	
+	mf[[1L]] <- as.name("model.frame")
+	mf <- eval(mf, parent.frame())
+	mt <- attr(mf, "terms")
+	
+	y <- model.response(mf, "numeric")
+	w <- as.vector(model.weights(mf))
+	if (!is.null(w) && !is.numeric(w)) 
+		stop("'weights' must be a numeric vector")
+	
+	x <- model.matrix(mt, mf, contrasts)
+	# browser()
+	z <- if (is.null(w)) 
+				cancor.default(x, y,  ...)
+			else stop("weights are not yet implemented")  # lm.wfit(x, y, w,  ...)
+	
+	z$call <- cl
+	z$terms <- mt
+	z
+}
+
+# TODO:  should replace X, Y by x, y throughout to avoid another copy
+# TODO:  allow weights, by use of cov.wt() as in dataEllipse()
+# DONE:  add a method=argument
+cancor.default <- function (x, y, 
 		X.names = colnames(X),
 		Y.names = colnames(Y),
 		row.names = rownames(X),
@@ -14,13 +60,15 @@ cancor <- function (X, Y,
 		ndim=min(p,q),
 		set.names=c("X", "Y"), 
 		prefix=c("Xcan", "Ycan"),   # s/b: paste0(set.names, "can")
-		use = "complete.obs"
+		use = "complete.obs",
+		method = "gensvd",
+		...
 		) 
 {
-    X = as.matrix(X)
-    Y = as.matrix(Y)
-    p = ncol(X)
-    q = ncol(Y)
+    X <- as.matrix(x)
+    Y <- as.matrix(y)
+    p <- ncol(X)
+    q <- ncol(Y)
     n <- length(complete.cases(X,Y))  # TODO: honor use=
  
     Cxx <- var(X, na.rm = TRUE, use = use) 
@@ -142,12 +190,14 @@ print.cancor <- function(x, digits=max(getOption("digits") - 2, 3), ...) {
   print(x$coef$X, digits=digits)
   cat("\n  ", names$set.names[2], " variables: \n")
   print(x$coef$Y, digits=digits)
+  
+  invisible(x)
 }
 
 # for now, same as print()
 summary.cancor <- function(object, digits=max(getOption("digits") - 2, 3), ...) {
 	names <- object$names
-	print(object, ...)
+	print(object, digits=digits, ...)
 }
 
 

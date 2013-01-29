@@ -1,5 +1,7 @@
 \name{cancor}
 \alias{cancor}
+\alias{cancor.default}
+\alias{cancor.formula}
 \alias{print.cancor}
 \alias{summary.cancor}
 \alias{coef.cancor}
@@ -17,13 +19,20 @@ using methods in the \code{\link[heplots]{heplots}} package.
 }
 \usage{
 
-cancor(X, Y, 
+cancor(x, ...)
+
+\method{cancor}{formula}(formula, data, subset, weights, na.action, method = "gensvd", ...)
+
+\method{cancor}{default}(x, y, 
 	X.names = colnames(X), Y.names = colnames(Y), row.names = rownames(X), 
 	xcenter = TRUE, ycenter = TRUE, xscale = FALSE, yscale = FALSE, 
 	ndim = min(p, q), 
 	set.names = c("X", "Y"), 
 	prefix = c("Xcan", "Ycan"), 
-	use = "complete.obs")
+	use = "complete.obs",
+	method = "gensvd",
+	...
+	)
 
 \method{print}{cancor}(x, digits = max(getOption("digits") - 2, 3), ...)
 
@@ -39,11 +48,32 @@ scores(x, ...)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 
-  \item{X}{
-A matrix or data.frame whose columns contain the X variables
+  \item{formula}{
+A two-sided formula of the form \code{cbind(y1, y2, y3, \dots) ~ x1 + x2 + x3 + \dots}
 }
-  \item{Y}{
-A matrix or data.frame whose columns contain the Y variables
+  \item{data}{
+The data.frame within which the formula is evaluated
+}
+  \item{subset}{
+an optional vector specifying a subset of observations to be used in the calculations.
+}
+  \item{weights}{
+Observation weights.  [not yet implemented]
+}
+  \item{na.action}{
+a function which indicates what should happen when the data contain NAs. 
+At present, this is not implemented and has no effect.
+}
+  \item{method}{
+the method to be used for calculation; currently only \code{method = "gensvd"} is supported;
+}
+  \item{x}{
+Varies depending on method. For the \code{cancor.default} method, this should be
+a matrix or data.frame whose columns contain the X variables
+}
+  \item{y}{
+ For the \code{cancor.default} method,
+a matrix or data.frame whose columns contain the Y variables
 
 }
   \item{X.names, Y.names}{
@@ -75,7 +105,7 @@ argument passed to \code{var} and \code{cov} determining how missing data
 are handled.
 }
 
-  \item{x, object}{
+  \item{object}{
 A \code{cancor} object for related methods.
 }
   \item{digits}{
