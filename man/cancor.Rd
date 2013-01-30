@@ -24,13 +24,13 @@ cancor(x, ...)
 \method{cancor}{formula}(formula, data, subset, weights, na.action, method = "gensvd", ...)
 
 \method{cancor}{default}(x, y, 
-	X.names = colnames(X), Y.names = colnames(Y), row.names = rownames(X), 
-	xcenter = TRUE, ycenter = TRUE, xscale = FALSE, yscale = FALSE, 
-	ndim = min(p, q), 
-	set.names = c("X", "Y"), 
-	prefix = c("Xcan", "Ycan"), 
-	use = "complete.obs",
-	method = "gensvd",
+    X.names = colnames(X), Y.names = colnames(Y), row.names = rownames(X), 
+    xcenter = TRUE, ycenter = TRUE, xscale = FALSE, yscale = FALSE, 
+    ndim = min(p, q), 
+    set.names = c("X", "Y"), 
+    prefix = c("Xcan", "Ycan"), 
+    use = "complete.obs",
+     method = "gensvd",
 	...
 	)
 
@@ -193,6 +193,8 @@ An object of class \code{cancorr}, a list with the following 9 components:
 	  \item{X.yscores}{Structure correlations of the X variables with the Ycan canonical scores}
 	  \item{Y.yscores}{Structure correlations of the Y variables with the Ycan canonical scores}
 	  }
+
+The formula method also returns components \code{call} and \code{terms}
   }
 }
 \references{
@@ -233,6 +235,10 @@ X <- as.matrix(Rohwer[,6:10])  # the PA tests
 Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
 
 (cc <- cancor(X, Y, set.names=c("PA", "Ability")))
+
+# formula method
+cc <- cancor(cbind(SAT, PPVT, Raven) ~  n + s + ns + na + ss, data=Rohwer, 
+    set.names=c("PA", "Ability"))
 
 # show correlations of the canonical scores 
 zapsmall(cor(scores(cc, type="x"), scores(cc, type="y")))

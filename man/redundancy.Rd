@@ -29,7 +29,7 @@ A \code{"cancor"} object
 A \code{"cancor.redundancy"} for the \code{print} method.
 }
   \item{digits}{
-%%     ~~Describe \code{digits} here~~
+Number of digits to print
 }
   \item{\dots}{
 Other arguments 

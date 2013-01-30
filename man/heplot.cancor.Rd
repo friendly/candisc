@@ -22,14 +22,14 @@ effects in the space of the canonical Y variables selected by \code{which}.
 
 \usage{
 \method{heplot}{cancor}(mod, which = 1:2, scale, asp=NA,
-	var.vectors = "Y", var.col = c("blue", "darkgreen"), var.lwd = par("lwd"), 
-	var.cex = par("cex"), var.xpd = TRUE, 
-	prefix = "Ycan", suffix = TRUE, terms = TRUE, ...)
+    var.vectors = "Y", var.col = c("blue", "darkgreen"), var.lwd = par("lwd"), 
+    var.cex = par("cex"), var.xpd = TRUE, 
+    prefix = "Ycan", suffix = TRUE, terms = TRUE, ...)
 
 \method{heplot3d}{cancor}(mod, which = 1:3, scale, asp="iso",
-	var.vectors = "Y", var.col = c("blue", "darkgreen"), var.lwd = par("lwd"), 
-	var.cex = par("cex"), var.xpd = NA, 
-	prefix = "Ycan", suffix = FALSE, terms = TRUE, ...)
+    var.vectors = "Y", var.col = c("blue", "darkgreen"), var.lwd = par("lwd"), 
+    var.cex = par("cex"), var.xpd = NA, 
+    prefix = "Ycan", suffix = FALSE, terms = TRUE, ...)
 }
 
 

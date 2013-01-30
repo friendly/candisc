@@ -16,13 +16,13 @@ scatterplot.
 }
 \usage{
 \method{plot}{cancor}(x, which = 1, xlim, ylim, xlab, ylab, 
-	points = TRUE, add = FALSE, col = palette()[1], 
-	ellipse = TRUE, ellipse.args = list(), 
-	smooth = FALSE, smoother.args = list(), col.smooth = palette()[3], 
-	abline = TRUE, col.lines = palette()[2], lwd = 2,
-	labels = rownames(xy),
-	id.method = "mahal",  id.n = 0, id.cex = 1, id.col = palette()[1],
-	 ...)
+    points = TRUE, add = FALSE, col = palette()[1], 
+    ellipse = TRUE, ellipse.args = list(), 
+    smooth = FALSE, smoother.args = list(), col.smooth = palette()[3], 
+    abline = TRUE, col.lines = palette()[2], lwd = 2,
+    labels = rownames(xy),
+    id.method = "mahal",  id.n = 0, id.cex = 1, id.col = palette()[1],
+    ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

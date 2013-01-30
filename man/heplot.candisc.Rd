@@ -12,9 +12,11 @@ in the space of maximum discrimination.
 }
 \usage{
 \method{heplot}{candisc}(mod, which = 1:2, scale, asp = 1, var.col = "blue", 
-    var.lwd = par("lwd"), var.cex=par("cex"), prefix = "Can", suffix = TRUE, terms = mod$term, ...)
+    var.lwd = par("lwd"), var.cex=par("cex"), 
+    prefix = "Can", suffix = TRUE, terms = mod$term, ...)
 
-\method{heplot3d}{candisc}(mod, which = 1:3, scale, asp="iso", var.col = "blue", var.lwd=par("lwd"), var.cex=par3d("cex"),
+\method{heplot3d}{candisc}(mod, which = 1:3, scale, asp="iso", var.col = "blue", 
+    var.lwd=par("lwd"), var.cex=par3d("cex"),
     prefix = "Can", suffix = FALSE, terms = mod$term, 
     ...) 
 }

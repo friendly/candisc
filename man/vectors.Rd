@@ -8,30 +8,28 @@ Draw Labeled Vectors in 2D or 3D
 \description{
 Graphics utility functions to draw vectors from an origin to a collection of points
 (using \code{\link[graphics]{arrows}} in 2D or \code{\link[rgl]{lines3d}} in 3D)
-with labels for each (using \code{\link[graphics]{text}}).
+with labels for each (using \code{\link[graphics]{text}} or \code{\link[rgl]{texts3d}}).
 }
 \usage{
 vectors(x, origin = c(0, 0), labels = rownames(x), 
-	scale = 1, 
-	col="blue",
-	lwd=1,	cex=1,
-	length=.1, angle=12, pos=NULL,	
-	 ...)
+    scale = 1, 
+    col="blue",
+    lwd=1, cex=1,
+    length=.1, angle=12, pos=NULL,	
+    ...)
 
 vectors3d(x, origin=c(0,0,0), labels=rownames(x), 
-	scale=1, 
-	col="blue", 
-	lwd=1, cex=1,
-	 ...) 
+    scale=1, 
+    col="blue", 
+    lwd=1, cex=1,
+    ...) 
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
 A two-column matrix or a three-column matrix containing the end points of the vectors
 }
-  \item{origin}{
-Starting point(s) for the vectors
-}
+  \item{origin}{Starting point(s) for the vectors}
   \item{labels}{Labels for the vectors}
   \item{scale}{A multiplier for the length of each vector}
   \item{col}{color(s) for the vectors.}
