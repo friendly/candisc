@@ -168,10 +168,21 @@ gensvd <- function (Rxy, Rxx, Ryy, nu=p, nv=q)
     return(gsvdlist)
 }
 
-# TODO: move the printout of coefficients to a summary method
+
+# vector of stars, of max. width, corresponding to proportions
+stars <- function(p, width=30) {
+	p <- p/sum(p)
+	reps <- round(p * width / max(p))
+	res1 <- sapply(reps, function(x) paste(rep('*', x), sep="", collapse=""))
+	res2 <- sapply(reps, function(x) paste(rep(' ', width-x), sep="", collapse=""))
+	res <- paste0(res1, res2)
+	res
+}
+
+# DONE: move the printout of coefficients to a summary method
 print.cancor <- function(x, digits=max(getOption("digits") - 2, 3), ...) {
 	names <- x$names
-  cat("Canonical correlation analysis of:\n")
+  cat("\nCanonical correlation analysis of:\n")
   cat(      "\t", x$dim$p, " ", names$set.names[1], " variables: ", paste(names$X, collapse=', '), "\n") 
   cat("  with\t", x$dim$q, " ", names$set.names[2], " variables: ", paste(names$Y, collapse=', '), "\n") 
   cat("\n")
@@ -179,25 +190,28 @@ print.cancor <- function(x, digits=max(getOption("digits") - 2, 3), ...) {
   lambda <- canr^2 / (1-canr^2)
   pct = 100*lambda / sum(lambda)
   cum = cumsum(pct)
-  # TODO: add stars column, showing pct
-  canrdf <- data.frame("CanR"=canr, "CanRSQ"=canr^2, "Eigen"=lambda, "percent"=pct, "cum"=cum)
+  # DONE: add stars column, showing pct
+  stwidth <- getOption("width") - 40
+  scree <- stars(pct, width = min(30, stwidth))
+  canrdf <- data.frame("CanR"=canr, "CanRSQ"=canr^2, "Eigen"=lambda, "percent"=pct, "cum"=cum, "scree"=scree)
   print(canrdf, digits=4)
 
-	tests <- Wilks.cancor(x) 
-	print(tests, digits=digits) 
-  cat("\nRaw canonical coefficients\n")
-  cat("\n  ", names$set.names[1], " variables: \n")
-  print(x$coef$X, digits=digits)
-  cat("\n  ", names$set.names[2], " variables: \n")
-  print(x$coef$Y, digits=digits)
+  tests <- Wilks.cancor(x) 
+  print(tests, digits=digits) 
   
   invisible(x)
 }
 
-# for now, same as print()
+# moved printout of coefficients here
 summary.cancor <- function(object, digits=max(getOption("digits") - 2, 3), ...) {
 	names <- object$names
 	print(object, digits=digits, ...)
+
+	cat("\nRaw canonical coefficients\n")
+	cat("\n  ", names$set.names[1], " variables: \n")
+	print(object$coef$X, digits=digits)
+	cat("\n  ", names$set.names[2], " variables: \n")
+	print(object$coef$Y, digits=digits)
 }
 
 

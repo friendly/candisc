@@ -1,4 +1,6 @@
 Version 0.6-2 (2013-01-30)
+o Reorganized print() and summary() methods for cancor()
+o Smoothed out documentation
 
 Version 0.6-1 (2013-1-23)
 o Continued development of methods and plots for canonical correlation analysis within the

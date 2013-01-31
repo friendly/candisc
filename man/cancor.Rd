@@ -216,8 +216,8 @@ more flexible handling of missing data, other plot methods, ...
 
 \seealso{
 Other implementations of CCA: \code{\link[stats]{cancor}} (very basic), 
-\code{\link[yacca]{cca}} (fairly complete, but very messy return structure),
-\code{\link[CCA]{cc}} (fairly complete, very messy return structure, no longer maintained).
+\code{\link[yacca]{cca}} in the \pkg{yacca} (fairly complete, but very messy return structure),
+\code{\link[CCA]{cc}} in \pkg{CCA} (fairly complete, very messy return structure, no longer maintained).
 
 \code{\link{redundancy}}, for redundancy analysis;
 \code{\link{plot.cancor}}, for enhanced scatterplots of the canonical variates.
@@ -235,6 +235,24 @@ X <- as.matrix(Rohwer[,6:10])  # the PA tests
 Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
 
 (cc <- cancor(X, Y, set.names=c("PA", "Ability")))
+
+## Canonical correlation analysis of:
+##       5   PA  variables:  n, s, ns, na, ss 
+##   with        3   Ability  variables:  SAT, PPVT, Raven 
+## 
+##     CanR  CanRSQ   Eigen percent    cum                          scree
+## 1 0.6703 0.44934 0.81599   77.30  77.30 ******************************
+## 2 0.3837 0.14719 0.17260   16.35  93.65 ******                        
+## 3 0.2506 0.06282 0.06704    6.35 100.00 **                            
+## 
+## Test of H0: The canonical correlations in the 
+## current row and all that follow are zero
+## 
+##      CanR  WilksL      F df1   df2  p.value
+## 1 0.67033 0.44011 3.8961  15 168.8 0.000006
+## 2 0.38366 0.79923 1.8379   8 124.0 0.076076
+## 3 0.25065 0.93718 1.4078   3  63.0 0.248814
+
 
 # formula method
 cc <- cancor(cbind(SAT, PPVT, Raven) ~  n + s + ns + na + ss, data=Rohwer, 
