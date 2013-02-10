@@ -171,7 +171,7 @@ but visualized here in canonical space.
 
 }
 \value{
-An object of class \code{cancorr}, a list with the following 9 components:
+An object of class \code{cancorr}, a list with the following components:
   \item{cancor}{Canonical correlations, i.e., the correlations between each canonical variate for
   the Y variables with the corresponding canonical variate for the X variables.}
   \item{names}{Names for various items, a list of 4 components: \code{X}, \code{Y}, \code{row.names}, \code{set.names}}
@@ -188,6 +188,7 @@ An object of class \code{cancorr}, a list with the following 9 components:
   }
   \item{X}{The matrix X}
   \item{Y}{The matrix Y}
+  \item{weights}{Observation weights, if supplied, else \code{NULL}}
 %  \item{structure}{Structure correlations, a list of 4 components: \code{X.xscores}, \code{Y.xscores}, \code{X.yscores}, \code{Y.yscores}}
   \item{structure}{Structure correlations ("loadings"), a list of 4 components: 
 	  \describe{
@@ -261,7 +262,7 @@ Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
 cc <- cancor(cbind(SAT, PPVT, Raven) ~  n + s + ns + na + ss, data=Rohwer, 
     set.names=c("PA", "Ability"))
 
-# using observatioon weights
+# using observation weights
 set.seed(12345)
 wts <- sample(0:1, size=nrow(Rohwer), replace=TRUE, prob=c(.05, .95))
 (ccw <- cancor(X, Y, set.names=c("PA", "Ability"), weights=wts) )

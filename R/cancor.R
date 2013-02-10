@@ -62,7 +62,7 @@ Var <- function(x, na.rm = TRUE, use, weights) {
 	res
 }
 
-# TODO: add weights component to result if weights are passed
+# DONE:  add weights component to result
 # DONE:  add a method=argument
 # TODO:  should replace X, Y by x, y throughout to avoid another copy
 # DONE:  allow weights, by use of cov.wt() as in dataEllipse()
@@ -117,6 +117,7 @@ cancor.default <- function (x, y,
 			coef = list(X = res$xcoef, Y= res$ycoef),
 			scores = list(X = scores$xscores, Y=scores$yscores),
 			X = X, Y = Y, 
+      weights = if (missing(weights)) NULL else weights,
 			structure = structure)
 	class(result) <- "cancor"
 	return(result)
