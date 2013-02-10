@@ -1,4 +1,5 @@
 # canonical correlation analysis, as a more general method, with method functions
+# Updated to implement weights
 #
 # compare with :
 #      stats::cancor (very basic),
@@ -10,11 +11,8 @@ cancor <- function(x, ...) {
 }
 
 cancor.formula <- function(formula, data, subset, weights, 
-		na.action, 
+		na.action,           # TODO: either na.rm or use na.action=na.omit
 		method = "gensvd",   # "qr" not implemented
-#		model = TRUE,        # not applicable
-#		x = TRUE, y = TRUE, 
-#		qr = TRUE, 
 #		contrasts = NULL,    # would it make any sense to allow factors? should we test for factors in X?
 		...) {
 	
@@ -38,20 +36,39 @@ cancor.formula <- function(formula, data, subset, weights,
 		stop("'weights' must be a numeric vector")
 	
 	x <- model.matrix(mt, mf, contrasts)
-	# browser()
-	z <- if (is.null(w)) 
-				cancor.default(x, y,  ...)
-			else stop("weights are not yet implemented")  # lm.wfit(x, y, w,  ...)
+	z <- cancor.default(x, y, weights=w,  ...)
 	
 	z$call <- cl
 	z$terms <- mt
 	z
 }
 
-# TODO:  should replace X, Y by x, y throughout to avoid another copy
-# TODO:  allow weights, by use of cov.wt() as in dataEllipse()
+
+# var-cov matrix allowing weights
+# Without weights, honors na.rm and use
+# With weights, na.rm --> use='complete.cases'
+
+Var <- function(x, na.rm = TRUE, use, weights) {
+	if(missing(weights) || is.null(weights))
+		res <- var(x, na.rm=na.rm, use=use)
+	else {
+		# cov.wt doesn't allow for missing data, and doesn't allow x, y=NULL, ...
+		if (na.rm) {
+			OK <- complete.cases(x)
+			x <- x[OK,]
+		}
+		res <- cov.wt(x, wt=weights)$cov
+	}
+	res
+}
+
+# TODO: add weights component to result if weights are passed
 # DONE:  add a method=argument
+# TODO:  should replace X, Y by x, y throughout to avoid another copy
+# DONE:  allow weights, by use of cov.wt() as in dataEllipse()
+
 cancor.default <- function (x, y, 
+		weights,
 		X.names = colnames(X),
 		Y.names = colnames(Y),
 		row.names = rownames(X),
@@ -60,42 +77,50 @@ cancor.default <- function (x, y,
 		ndim=min(p,q),
 		set.names=c("X", "Y"), 
 		prefix=c("Xcan", "Ycan"),   # s/b: paste0(set.names, "can")
+#		na.rm = TRUE,
 		use = "complete.obs",
 		method = "gensvd",
 		...
-		) 
+) 
 {
-    X <- as.matrix(x)
-    Y <- as.matrix(y)
-    p <- ncol(X)
-    q <- ncol(Y)
-    n <- length(complete.cases(X,Y))  # TODO: honor use=
- 
-    Cxx <- var(X, na.rm = TRUE, use = use) 
-    Cyy <- var(Y, na.rm = TRUE, use = use) 
-    Cxy <- cov(X, Y, use = use)
-    res <- gensvd(Cxy, Cxx, Cyy, nu=ndim, nv=ndim)
-    names(res) <- c("cor", "xcoef", "ycoef")
-    colnames(res$xcoef) <- paste(prefix[1], 1:ndim, sep="")
-    colnames(res$ycoef) <- paste(prefix[2], 1:ndim, sep="")
-    
-    scores <- can.scores(X, Y, res$xcoef, res$ycoef)
-    colnames(scores$xscores) <- paste(prefix[1], 1:ndim, sep="")
-    colnames(scores$yscores) <- paste(prefix[2], 1:ndim, sep="")
-    
-    structure <- can.structure(X, Y, scores, use=use)
-    result <- list(cancor = res$cor, 
-    		names = list(X = X.names, Y = Y.names, 
-    				row.names = row.names, set.names=set.names),
-    		ndim = ndim,
-    		dim = list(p=p, q=q, n=n),
-    		coef = list(X = res$xcoef, Y= res$ycoef),
-    		scores = list(X = scores$xscores, Y=scores$yscores),
-    		X = X, Y = Y, 
-        structure = structure)
-    class(result) <- "cancor"
-    return(result)
-     
+	X <- as.matrix(x)
+	Y <- as.matrix(y)
+	p <- ncol(X)
+	q <- ncol(Y)
+	n <- length(complete.cases(X,Y))  # TODO: honor use=; take account of 0 weights
+	if(!missing(weights)) n <- n - sum(weights==0)
+	
+#    Cxx <- var(X, na.rm = TRUE, use = use) 
+#    Cyy <- var(Y, na.rm = TRUE, use = use) 
+#    Cxy <- cov(X, Y, use = use)
+	
+	C <- Var(cbind(X, Y), na.rm = TRUE, use=use, weights=weights)
+	Cxx <- C[1:p, 1:p]
+	Cyy <- C[-(1:p), -(1:p)]
+	Cxy <- C[1:p, -(1:p)]
+	
+	res <- gensvd(Cxy, Cxx, Cyy, nu=ndim, nv=ndim)
+	names(res) <- c("cor", "xcoef", "ycoef")
+	colnames(res$xcoef) <- paste(prefix[1], 1:ndim, sep="")
+	colnames(res$ycoef) <- paste(prefix[2], 1:ndim, sep="")
+	
+	scores <- can.scores(X, Y, res$xcoef, res$ycoef)
+	colnames(scores$xscores) <- paste(prefix[1], 1:ndim, sep="")
+	colnames(scores$yscores) <- paste(prefix[2], 1:ndim, sep="")
+	
+	structure <- can.structure(X, Y, scores, use=use)
+	result <- list(cancor = res$cor, 
+			names = list(X = X.names, Y = Y.names, 
+					row.names = row.names, set.names=set.names),
+			ndim = ndim,
+			dim = list(p=p, q=q, n=n),
+			coef = list(X = res$xcoef, Y= res$ycoef),
+			scores = list(X = scores$xscores, Y=scores$yscores),
+			X = X, Y = Y, 
+			structure = structure)
+	class(result) <- "cancor"
+	return(result)
+	
 }
 
 # scores on canonical variates

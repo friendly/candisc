@@ -23,14 +23,14 @@ cancor(x, ...)
 
 \method{cancor}{formula}(formula, data, subset, weights, na.action, method = "gensvd", ...)
 
-\method{cancor}{default}(x, y, 
+\method{cancor}{default}(x, y, weights,
     X.names = colnames(X), Y.names = colnames(Y), row.names = rownames(X), 
     xcenter = TRUE, ycenter = TRUE, xscale = FALSE, yscale = FALSE, 
     ndim = min(p, q), 
     set.names = c("X", "Y"), 
     prefix = c("Xcan", "Ycan"), 
     use = "complete.obs",
-     method = "gensvd",
+    method = "gensvd",
 	...
 	)
 
@@ -58,7 +58,10 @@ The data.frame within which the formula is evaluated
 an optional vector specifying a subset of observations to be used in the calculations.
 }
   \item{weights}{
-Observation weights.  [not yet implemented]
+Observation weights. If supplied, this must be a vector of length equal to the number of
+observations in X and Y, typically within [0,1].  In that case, the variance-covariance
+matrices are computed using \code{\link[stats]{cov.wt}}, and the number of observations
+is taken as the number of non-zero weights.
 }
   \item{na.action}{
 a function which indicates what should happen when the data contain NAs. 
@@ -257,6 +260,11 @@ Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
 # formula method
 cc <- cancor(cbind(SAT, PPVT, Raven) ~  n + s + ns + na + ss, data=Rohwer, 
     set.names=c("PA", "Ability"))
+
+# using observatioon weights
+set.seed(12345)
+wts <- sample(0:1, size=nrow(Rohwer), replace=TRUE, prob=c(.05, .95))
+(ccw <- cancor(X, Y, set.names=c("PA", "Ability"), weights=wts) )
 
 # show correlations of the canonical scores 
 zapsmall(cor(scores(cc, type="x"), scores(cc, type="y")))
