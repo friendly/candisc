@@ -274,6 +274,23 @@ zapsmall(cor(scores(cc, type="x"), scores(cc, type="y")))
 coef(cc, type="both", standardize=TRUE)
 
 plot(cc, smooth=TRUE)
+
+##################
+data(schooldata)
+##################
+
+#fit the MMreg model
+school.mod <- lm(cbind(reading, mathematics, selfesteem) ~ 
+education + occupation + visit + counseling + teacher, data=schooldata)
+Anova(school.mod)
+pairs(school.mod)
+
+# canonical correlation analysis
+school.cc <- cancor(cbind(reading, mathematics, selfesteem) ~ 
+education + occupation + visit + counseling + teacher, data=schooldata)
+school.cc
+heplot(school.cc, xpd=TRUE, scale=0.3)
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
