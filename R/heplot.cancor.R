@@ -5,7 +5,7 @@ heplot.cancor <- function (
 	which=1:2,       # canonical dimensions to plot
 	scale,           # scale factor(s) for variable vectors in can space
 	asp=NA,           # aspect ratio, to ensure equal units?
-	var.vectors = "Y", # which variable vectors to show? [not yet implemented]
+	var.vectors = "Y", # which variable vectors to show?
 	var.col=c("blue", "darkgreen"),  # colors for Y and X variable vectors and labels
 	var.lwd=par("lwd"),
 	var.cex=par("cex"),
@@ -67,19 +67,22 @@ heplot.cancor <- function (
 	struc <- mod$structure
   Xstructure <- struc$X.yscores[,which]
   Ystructure <- struc$Y.yscores[,which]
+  vec <- rbind(
+  	if ("Y" %in% var.vectors) Ystructure else NULL,
+  	if ("X" %in% var.vectors) Xstructure else NULL)
 
 	maxrms <- function(x) { max(sqrt(apply(x^2, 1, sum))) }
 	if (missing(scale)) {
-		vecrange <- range(Ystructure)
+		vecrange <- range(vec)
 		ellrange <- lapply(ellipses, range)
-		vecmax <- maxrms(Ystructure)
+		vecmax <- maxrms(vec)
 		ellmax <- max( maxrms(ellipses$E), unlist(lapply(ellipses$H, maxrms)) )
 		scale <- floor(  0.9 * ellmax / vecmax )
 		cat("Vector scale factor set to ", scale, "\n")
 	}
   
-#  vectors(Xstructure, scale=scale)
-  vectors(Ystructure, scale=scale, col=var.col[1], lwd=var.lwd, cex=var.cex, xpd=var.xpd)
+  if ("Y" %in% var.vectors) vectors(Ystructure, scale=scale, col=var.col[1], lwd=var.lwd, cex=var.cex, xpd=var.xpd)
+  if ("X" %in% var.vectors) vectors(Xstructure, scale=scale, col=var.col[2], lwd=var.lwd, cex=var.cex, xpd=var.xpd)
 
 	invisible(ellipses)
 	

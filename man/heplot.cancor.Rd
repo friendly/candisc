@@ -45,10 +45,11 @@ effects in the space of the canonical Y variables selected by \code{which}.
    to ensure equal units on the axes. Use \code{asp=NA} in 2D plots and \code{asp=NULL} in 3D plots
    to allow separate scaling for the axes. See Details below.}
 
-  \item{var.vectors}{Which variable vectors to plot?  [Not yet implemented; at present only the
-  variable vectors for the Y variables with respect to the Y canonical variates are plotted.]}
+  \item{var.vectors}{Which variable vectors to plot?  A character vector containing one or more
+  of \code{"X"} and \code{"Y"}.}
 
-  \item{var.col}{ Color(s) for variable vectors and labels }
+  \item{var.col}{ Color(s) for variable vectors and labels, a vector of length 1 or 2.
+  The first color is used for Y vectors and the second for X vectors, if these are plotted. }
   \item{var.lwd}{ Line width for variable vectors }
   \item{var.cex}{ Text size for variable vector labels }
   \item{var.xpd}{logical. Allow variable labels outside the plot box? Does not apply to 3D plots.}
