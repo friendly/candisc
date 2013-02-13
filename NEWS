@@ -1,4 +1,9 @@
+Version 0.6-3 (2013-02-13)
+
+o Minor documentation changes
+
 Version 0.6-2 (2013-01-30)
+
 o Reorganized print() and summary() methods for cancor()
 o Smoothed out documentation
 o Added observation weights to cancor() methods
@@ -6,6 +11,7 @@ o Added ability to plot X and or Y vectors in heplot.cancor()
 o Extended example of plot.cancor(), showing variable vectors for X & Y
 
 Version 0.6-1 (2013-1-23)
+
 o Continued development of methods and plots for canonical correlation analysis within the
   HE plot framework:
 o Now export scores() and scores.cancor() method
@@ -18,52 +24,64 @@ o More significantly, re-implemented cancor() as an S3 generic, with a cancor.fo
   the original as the cancor.default method.
 
 Version 0.6-0 (2013-1-20)
+
 o Added cancor and related methods for canonical correlation analysis
 o Added Wilks() methods for Wilks' Lambda canonical tests
 o Added vectors() for drawing labeled vectors
 o Added S3 heplot.cancor() method for cancor objects.
 
 Version 0.5-23 (2012-2-3)
+
 o Fixed buglet in summary.candisc() [thx: David Carlson, dcarlson@tamu.edu]
 o heplot.candisc now uses plot.candisc in the 1 df case
 
 Version 0.5-22 (2011-12-10)
+
 o Extended Description:
 
 Version 0.5-21 (2011-09-12)
+
 o Fixed Authors@R in DESCRIPTION for R 2.14.x
 
 Version 0.5-20 (2010-10-208)
+
 o Updated links to datavis.ca
 o Updated candisc heplot3d() examples
 
 Version 0.5-19 (2010-7-29)
+
  o switched inst/CHANGES to NEWS
  o Extended candiscList and Grass examples
  o Extended package description
  o Fixed minor buglet in print.candisc
 
 Version 0.5-18 (2010-7-27)
+
 o  Fixed predictor.names problem with car_2.0-0
 o  Added var.cex to heplot.candisc and heplot3d.candisc
 
 Version 0.5-17 (2010-2-11)
+
 o  Allow to select canonical dimension in plot(candisc(), which=)
 
 Version 0.5-15 (2009-6-12)
+
 o  Added titles.1d argument to plot.candisc to allow customized titles for 1D plots
    (wish of Manuel Spínola)
 
 Version 0.5-13 (2008-12-16)
+
 o  Added Wolves data, with examples for 2-way design.
 o  Improved plot for 1D case.
 
 Version 0.5-11 (2008-11-12)
+
 o  Michael Friendly now maintainer
 o  now require heplots >= 0.8-3 for use of xlim, ylim, zlim
 o  added asp="iso" to heplot3d.candisc, so default is now equal scaling
 
 Version 0.5-10 (2008-11-5)
+
 o  improved documentation
 o  added var.lwd to heplot3d.candisc
 o  changed rgl.* to *3d functions to avoid rgl problems

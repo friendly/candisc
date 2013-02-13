@@ -1,8 +1,8 @@
 Package: candisc
 Type: Package
 Title: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis
-Version: 0.6-2
-Date: 2013-1-30
+Version: 0.6-3
+Date: 2013-2-13
 Depends: car, heplots (>= 0.8-6), graphics, stats 
 Suggests: rgl
 LazyLoad: yes
@@ -20,6 +20,7 @@ Description: This package includes functions for computing and visualizing
 	The candisc package generalizes this to multi-way MANOVA designs
 	for all factors in a multivariate linear model,
 	computing canonical scores and vectors for each term. The graphic functions provide low-rank (1D, 2D, 3D) 
-	visualizations of terms in an mlm via the plot.candisc and heplot.candisc methods.
+	visualizations of terms in an mlm via the plot.candisc and heplot.candisc methods. Related plots are
+	now provided for canonical correlation analysis when all predictors are quantitative.
 License: GPL (>= 2)
 Packaged: 10/9/2008 6:12PM; Michael Friendly
