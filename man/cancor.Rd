@@ -21,7 +21,7 @@ using methods in the \code{\link[heplots]{heplots}} package.
 
 cancor(x, ...)
 
-\method{cancor}{formula}(formula, data, subset, weights, na.action, method = "gensvd", ...)
+\method{cancor}{formula}(formula, data, subset, weights, na.rm=TRUE, method = "gensvd", ...)
 
 \method{cancor}{default}(x, y, weights,
     X.names = colnames(X), Y.names = colnames(Y), row.names = rownames(X), 
@@ -29,7 +29,7 @@ cancor(x, ...)
     ndim = min(p, q), 
     set.names = c("X", "Y"), 
     prefix = c("Xcan", "Ycan"), 
-    use = "complete.obs",
+    na.rm = TRUE, use = if (na.rm) "complete" else "pairwise",
     method = "gensvd",
 	...
 	)
@@ -63,9 +63,9 @@ observations in X and Y, typically within [0,1].  In that case, the variance-cov
 matrices are computed using \code{\link[stats]{cov.wt}}, and the number of observations
 is taken as the number of non-zero weights.
 }
-  \item{na.action}{
-a function which indicates what should happen when the data contain NAs. 
-At present, this is not implemented and has no effect.
+  \item{na.rm}{
+logical, determining whether observations with missing cases are excluded in the computation
+of the variance matrix of (X,Y).  See Notes for details on missing data.
 }
   \item{method}{
 the method to be used for calculation; currently only \code{method = "gensvd"} is supported;
@@ -104,8 +104,9 @@ A vector of two character strings, giving prefixes used to name the X and Y
 canonical variables, respectively.
 }
   \item{use}{
-argument passed to \code{var} and \code{cov} determining how missing data
-are handled.
+argument passed to \code{var} determining how missing data
+are handled.  Only the default, \code{use="complete"} is allowed 
+when observation weights are supplied.
 }
 
   \item{object}{

@@ -11,7 +11,7 @@ cancor <- function(x, ...) {
 }
 
 cancor.formula <- function(formula, data, subset, weights, 
-		na.action,           # TODO: either na.rm or use na.action=na.omit
+		na.rm = TRUE,        # DONE: now just use na.rm
 		method = "gensvd",   # "qr" not implemented
 #		contrasts = NULL,    # would it make any sense to allow factors? should we test for factors in X?
 		...) {
@@ -22,7 +22,7 @@ cancor.formula <- function(formula, data, subset, weights,
 	cl$formula <- formula
 	mf <- match.call(expand.dots = FALSE)
 	mf$formula <- formula
-	m <- match(c("formula", "data", "subset", "weights", "na.action"), names(mf), 0L)
+	m <- match(c("formula", "data", "subset", "weights"), names(mf), 0L)
 	mf <- mf[c(1L, m)]
 	
 	
@@ -36,7 +36,7 @@ cancor.formula <- function(formula, data, subset, weights,
 		stop("'weights' must be a numeric vector")
 	
 	x <- model.matrix(mt, mf, contrasts)
-	z <- cancor.default(x, y, weights=w,  ...)
+	z <- cancor.default(x, y, weights=w, na.rm=na.rm,  ...)
 	
 	z$call <- cl
 	z$terms <- mt
@@ -46,7 +46,7 @@ cancor.formula <- function(formula, data, subset, weights,
 
 # var-cov matrix allowing weights
 # Without weights, honors na.rm and use
-# With weights, na.rm --> use='complete.cases'
+# With weights, na.rm --> use='complete'
 
 Var <- function(x, na.rm = TRUE, use, weights) {
 	if(missing(weights) || is.null(weights))
@@ -54,6 +54,7 @@ Var <- function(x, na.rm = TRUE, use, weights) {
 	else {
 		# cov.wt doesn't allow for missing data, and doesn't allow x, y=NULL, ...
 		if (na.rm) {
+			if (!pmatch(use, "complete")) warning("Use of weights only supports use='complete'")
 			OK <- complete.cases(x)
 			x <- x[OK,]
 		}
@@ -77,8 +78,8 @@ cancor.default <- function (x, y,
 		ndim=min(p,q),
 		set.names=c("X", "Y"), 
 		prefix=c("Xcan", "Ycan"),   # s/b: paste0(set.names, "can")
-#		na.rm = TRUE,
-		use = "complete.obs",
+		na.rm = TRUE,
+		use = if (na.rm) "complete" else "pairwise",
 		method = "gensvd",
 		...
 ) 
@@ -87,12 +88,8 @@ cancor.default <- function (x, y,
 	Y <- as.matrix(y)
 	p <- ncol(X)
 	q <- ncol(Y)
-	n <- length(complete.cases(X,Y))  # TODO: honor use=; take account of 0 weights
+	n <- length(complete.cases(X,Y))  # DONE: take account of 0 weights
 	if(!missing(weights)) n <- n - sum(weights==0)
-	
-#    Cxx <- var(X, na.rm = TRUE, use = use) 
-#    Cyy <- var(Y, na.rm = TRUE, use = use) 
-#    Cxy <- cov(X, Y, use = use)
 	
 	C <- Var(cbind(X, Y), na.rm = TRUE, use=use, weights=weights)
 	Cxx <- C[1:p, 1:p]
@@ -117,7 +114,7 @@ cancor.default <- function (x, y,
 			coef = list(X = res$xcoef, Y= res$ycoef),
 			scores = list(X = scores$xscores, Y=scores$yscores),
 			X = X, Y = Y, 
-      weights = if (missing(weights)) NULL else weights,
+			weights = if (missing(weights)) NULL else weights,
 			structure = structure)
 	class(result) <- "cancor"
 	return(result)

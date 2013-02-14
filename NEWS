@@ -1,6 +1,7 @@
 Version 0.6-3 (2013-02-13)
 
 o Minor documentation changes
+o In cancor(), now handle missing data more flexibly via na.rm= and use=
 
 Version 0.6-2 (2013-01-30)
 
