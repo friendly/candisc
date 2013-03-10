@@ -239,6 +239,13 @@ data(Rohwer, package="heplots")
 X <- as.matrix(Rohwer[,6:10])  # the PA tests
 Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
 
+# visualize the correlation matrix using corrplot()
+if (require(corrplot)) {
+M <- cor(cbind(X,Y))
+corrplot(M, method="ellipse", order="hclust", addrect=2, addCoef.col="black")
+}
+
+
 (cc <- cancor(X, Y, set.names=c("PA", "Ability")))
 
 ## Canonical correlation analysis of:

@@ -4,7 +4,7 @@ Title: Visualizing Generalized Canonical Discriminant and Canonical Correlation 
 Version: 0.6-3
 Date: 2013-2-13
 Depends: car, heplots (>= 0.8-6), graphics, stats 
-Suggests: rgl
+Suggests: rgl, corrplot
 LazyLoad: yes
 LazyData: yes
 Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),
