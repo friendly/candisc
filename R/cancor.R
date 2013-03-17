@@ -198,7 +198,7 @@ stars <- function(p, width=30) {
 	reps <- round(p * width / max(p))
 	res1 <- sapply(reps, function(x) paste(rep('*', x), sep="", collapse=""))
 	res2 <- sapply(reps, function(x) paste(rep(' ', width-x), sep="", collapse=""))
-	res <- paste0(res1, res2)
+	res <- paste(res1, res2, sep="")
 	res
 }
 
