@@ -59,6 +59,11 @@ candisc.mlm <- function(mod, term, type="2", manova, ndim=rank, ...) {
   dc <- eigen(eHe, symmetric=TRUE)
   rank <- min(dfh, sum(dc$values>0))
   pct <- 100 * dc$values / sum(dc$values)
+  
+  if(ndim > rank) {
+	  warning(paste("You asked for", ndim, "dimensions, but rank is", rank, ". ndim has been reset to", rank))
+	  ndim <- rank
+  }
 
   coeffs.raw <- eInv %*% dc$vectors * sqrt(dfe)
 	# should we drop the coeffs corresponding to 0 eigenvalues here or at the end?

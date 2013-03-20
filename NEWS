@@ -1,3 +1,7 @@
+Version 0.6-5 (2013-03-20)
+
+o candisc() now doesn't allow ndim > rank [thx: yu-chuan.chen@stonybrook.edu]
+
 Version 0.6-4 (2013-03-17)
 
 o Don't use paste0() to avoid dependency on R>2.15.0
