@@ -71,8 +71,8 @@ Var <- function(x, na.rm = TRUE, use, weights) {
 
 cancor.default <- function (x, y, 
 		weights,
-		X.names = colnames(X),
-		Y.names = colnames(Y),
+		X.names = colnames(x),
+		Y.names = colnames(y),
 		row.names = rownames(x),
 		xcenter = TRUE, ycenter = TRUE,    # not yet implemented (used implicitly)
 		xscale = FALSE, yscale = FALSE,    # not yet implemented

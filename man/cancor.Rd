@@ -24,7 +24,8 @@ cancor(x, ...)
 \method{cancor}{formula}(formula, data, subset, weights, na.rm=TRUE, method = "gensvd", ...)
 
 \method{cancor}{default}(x, y, weights,
-    X.names = colnames(X), Y.names = colnames(Y), row.names = rownames(X), 
+    X.names = colnames(x), Y.names = colnames(y), 
+    row.names = rownames(x), 
     xcenter = TRUE, ycenter = TRUE, xscale = FALSE, yscale = FALSE, 
     ndim = min(p, q), 
     set.names = c("X", "Y"), 
@@ -83,7 +84,7 @@ a matrix or data.frame whose columns contain the Y variables
 Character vectors of names for the X and Y variables.
 }
   \item{row.names}{
-Observation names in X, Y
+Observation names in \code{x}, \code{y}
 }
   \item{xcenter, ycenter}{
 logical. Center the X, Y variables? [not yet implemented]
