@@ -11,6 +11,9 @@
 # --- better allocation of horizontal space in 1D case
 # last revised: 2/11/2010 by MF
 # --- allow 1D plots for ndim>1 by specifying which
+# last revised: 6/11/2013 8:39:51 AM
+# --- fixed bug in use of pch and col (thx: dcarlson@tamu.edu)
+# --- now use vectors() to draw variable vectors
 
 plot.candisc <- function (
 		x,		     # output object from candisc
@@ -67,7 +70,6 @@ plot.candisc <- function (
 	}
 	
 	canvar <- paste('Can', which, sep="")   # names of canonical variables to plot
-#	canlab <- paste(prefix, which, " (", round(x$pct[which],1), "%)", sep="")
 	if (is.logical(suffix) & suffix)
 		suffix <- paste( " (", round(x$pct[which],1), "%)", sep="" ) else suffix <- NULL
 	canlab <- paste(prefix, which, suffix, sep="")
@@ -84,9 +86,9 @@ plot.candisc <- function (
 	structure <- x$structure[,which]
 	
 	# use asp=1 to make the plot equally scaled
-#	Ind <- dataIndex(scores,term)
-#	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col[Ind], pch=pch[Ind], ...) 
-	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col, pch=pch, ...) 
+	Ind <- dataIndex(x$scores,term)
+	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col[Ind], pch=pch[Ind], ...) 
+#	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col, pch=pch, ...) 
 	points(means[,1], means[,2], col=col, pch="+", cex=2)
 	pos <- ifelse(means[,2]>0, 3, 1)
 	text(means[,1], means[,2], labels=labels, pos=pos)
@@ -100,18 +102,18 @@ plot.candisc <- function (
 		cat("Vector scale factor set to ", scale, "\n")
 	}
 
-	# TODO: replace with call to vectors()
+	# DONE: replaced with call to vectors()
 	cs <- scale * structure
-	arrows(0, 0, cs[,1], cs[,2], length=.1, angle=15, col=var.col, lwd=var.lwd)
-	vars <- rownames(structure)
-	pos <- ifelse(cs[,1]>0, 4, 2)
-	text(cs[,1], cs[,2], vars, pos=pos,  col=var.col)
+#	arrows(0, 0, cs[,1], cs[,2], length=.1, angle=15, col=var.col, lwd=var.lwd)
+#	vars <- rownames(structure)
+#	pos <- ifelse(cs[,1]>0, 4, 2)
+#	text(cs[,1], cs[,2], vars, pos=pos,  col=var.col)
+	vectors(cs, pos=pos,  col=var.col, ...)
 	
 	### why doesn't this work???
 	circle <- function( center, radius, segments=41, ...) {
 		angles <- (0:segments) * 2 * pi/segments
 		unit.circle <- cbind(cos(angles), sin(angles))
-#    browser()
 		circle <- t(center + radius*t(unit.circle))
 		lines(circle, col = col, ...)
 	}
