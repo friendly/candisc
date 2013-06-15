@@ -25,7 +25,6 @@
 # -- added sufix= to heplot.candisc and heplot3d.candisc
 # last revised: 11/12/2008 by MF
 # -- added asp= to heplot3d.candisc
-
 # last revised: 5/17/2012 9:41AM by MF
 # -- now use plot.candisc for a 1 df term
 # heplot.candisc now returns ellipses

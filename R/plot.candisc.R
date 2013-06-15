@@ -94,11 +94,13 @@ plot.candisc <- function (
 	text(means[,1], means[,2], labels=labels, pos=pos)
 	
 	# plot variable vectors
+	# DONE: replaced previous scaling with vecscale()
 	maxrms <- function(x) { max(sqrt(apply(x^2, 1, sum))) }
 	if (missing(scale)) {
-		vecmax <- maxrms(structure)
-		scrmax <- maxrms(scores)
-		scale <- floor(  0.9 * scrmax / vecmax )
+#		vecmax <- maxrms(structure)
+#		scrmax <- maxrms(scores)
+#		scale <- floor(  0.9 * scrmax / vecmax )
+		scale <- vecscale(structure)
 		cat("Vector scale factor set to ", scale, "\n")
 	}
 
