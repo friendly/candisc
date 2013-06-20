@@ -95,7 +95,7 @@ plot.candisc <- function (
 	
 	# plot variable vectors
 	# DONE: replaced previous scaling with vecscale()
-	maxrms <- function(x) { max(sqrt(apply(x^2, 1, sum))) }
+#	maxrms <- function(x) { max(sqrt(apply(x^2, 1, sum))) }
 	if (missing(scale)) {
 #		vecmax <- maxrms(structure)
 #		scrmax <- maxrms(scores)

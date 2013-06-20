@@ -85,23 +85,26 @@ heplot.candisc <- function (
   
   structure <- mod$structure[,which]
 
-	maxrms <- function(x) { max(sqrt(apply(x^2, 1, sum))) }
+  # DONE: replaced previous scaling with vecscale()
+#  maxrms <- function(x) { max(sqrt(apply(x^2, 1, sum))) }
 	if (missing(scale)) {
-		vecrange <- range(structure)
-		ellrange <- lapply(ellipses, range)
-		vecmax <- maxrms(structure)
-		ellmax <- max( maxrms(ellipses$E), unlist(lapply(ellipses$H, maxrms)) )
-		scale <- floor(  0.9 * ellmax / vecmax )
+#		vecrange <- range(structure)
+#		ellrange <- lapply(ellipses, range)
+#		vecmax <- maxrms(structure)
+#		ellmax <- max( maxrms(ellipses$E), unlist(lapply(ellipses$H, maxrms)) )
+#		scale <- floor(  0.9 * ellmax / vecmax )
+		scale <- vecscale(structure)
 		cat("Vector scale factor set to ", scale, "\n")
 	}
 
-  # TODO: replace with a call to vectors()
+  # DONE: replaced with a call to vectors(); but NB: can't pass ... to vectors()
   cs <- scale * structure
-  arrows(0, 0, cs[,1], cs[,2], length=.1, angle=15, col=var.col, lwd=var.lwd)
-  vars <- rownames(structure)
-  pos<-ifelse(cs[,1]>0, 4, 2)
-  text(cs[,1], cs[,2], vars, pos=pos,  col=var.col, cex=var.cex)
-
+#  arrows(0, 0, cs[,1], cs[,2], length=.1, angle=15, col=var.col, lwd=var.lwd)
+#  vars <- rownames(structure)
+#  pos<-ifelse(cs[,1]>0, 4, 2)
+#  text(cs[,1], cs[,2], vars, pos=pos,  col=var.col, cex=var.cex)
+  vectors(cs, col=var.col, cex=var.cex, lwd=var.lwd)
+  
   invisible(ellipses)
 }
 
