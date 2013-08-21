@@ -85,7 +85,9 @@ maximal separation among the groups (e.g., maximum univariate F statistics), and
 For a one-way MANOVA with g groups and p responses, there are 
 \code{dfh} = min( g-1, p) such canonical dimensions, and tests, initally stated
 by Bartlett (1938) allow one to determine the number of significant 
-canonical dimensions.   Computational details for the one-way case are described
+canonical dimensions.   
+
+Computational details for the one-way case are described
 in Cooley & Lohnes (1971), and in the SAS/STAT User's Guide,  "The CANDISC procedure:
 Computational Details," \url{http://support.sas.com/onlinedoc/913/getDoc/en/statug.hlp/candisc_sect12.htm}.
 
