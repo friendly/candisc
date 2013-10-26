@@ -1,118 +1,119 @@
-Version 0.6-6 (2013-06-17)
+Changes in version 0.6-6 (2013-06-17)
 
-o Added vecscale() to more reliably scale the variable vectors in plot.candisc() and heplot.candisc()
-  to the plot bounding box [thx: Uwe Ligges for the code]
-o Exported vecscale
-o Added mlm2can() to calculate the canonical representation of a term in an mlm
+	o Added vecscale() to more reliably scale the variable vectors in plot.candisc() and heplot.candisc()
+	  to the plot bounding box [thx: Uwe Ligges for the code]
+	o Exported vecscale
+	o Added mlm2can() to calculate the canonical representation of a term in an mlm
 
-Version 0.6-5 (2013-03-20)
+Changes in Version 0.6-5 (2013-03-20)
 
-o candisc() now doesn't allow ndim > rank [thx: yu-chuan.chen@stonybrook.edu]
-o In plot.candisc() fixed bug in use of pch and col [thx: dcarlson@tamu.edu] and cleaned up code
+	o candisc() now doesn't allow ndim > rank [thx: yu-chuan.chen@stonybrook.edu]
+	o In plot.candisc() fixed bug in use of pch and col [thx: dcarlson@tamu.edu] and cleaned up code
 
-Version 0.6-4 (2013-03-17)
+Changes in Version 0.6-4 (2013-03-17)
 
-o Don't use paste0() to avoid dependency on R>2.15.0
+	o Don't use paste0() to avoid dependency on R>2.15.0
 
-Version 0.6-3 (2013-02-13)
+Changes in Version 0.6-3 (2013-02-13)
 
-o Minor documentation changes
-o In cancor(), now handle missing data more flexibly via na.rm= and use=
-o Now suggest corrplot package for cancor.Rd example
+	o Minor documentation changes
+	o In cancor(), now handle missing data more flexibly via na.rm= and use=
+	o Now suggest corrplot package for cancor.Rd example
 
-Version 0.6-2 (2013-01-30)
+Changes in Version 0.6-2 (2013-01-30)
 
-o Reorganized print() and summary() methods for cancor()
-o Smoothed out documentation
-o Added observation weights to cancor() methods
-o Added ability to plot X and or Y vectors in heplot.cancor()
-o Extended example of plot.cancor(), showing variable vectors for X & Y
+	o Reorganized print() and summary() methods for cancor()
+	o Smoothed out documentation
+	o Added observation weights to cancor() methods
+	o Added ability to plot X and or Y vectors in heplot.cancor()
+	o Extended example of plot.cancor(), showing variable vectors for X & Y
+	
+Changes in Version 0.6-1 (2013-1-23)
 
-Version 0.6-1 (2013-1-23)
+	o Continued development of methods and plots for canonical correlation analysis within the
+	  HE plot framework:
+	o Now export scores() and scores.cancor() method
+	o coef.cancor gets a standardize= argument
+	o Added redundancy() for redundancy analysis
+	o Added a plot.cancor() method, visualizing the relations between the Ycan and Xcan variable scores
+	o Added vectors3d()
+	o Added heplot3d() method for cancor objects.
+	o More significantly, re-implemented cancor() as an S3 generic, with a cancor.formula method and 
+	  the original as the cancor.default method.
 
-o Continued development of methods and plots for canonical correlation analysis within the
-  HE plot framework:
-o Now export scores() and scores.cancor() method
-o coef.cancor gets a standardize= argument
-o Added redundancy() for redundancy analysis
-o Added a plot.cancor() method, visualizing the relations between the Ycan and Xcan variable scores
-o Added vectors3d()
-o Added heplot3d() method for cancor objects.
-o More significantly, re-implemented cancor() as an S3 generic, with a cancor.formula method and 
-  the original as the cancor.default method.
+Changes in Version 0.6-0 (2013-1-20)
 
-Version 0.6-0 (2013-1-20)
+	o Added cancor and related methods for canonical correlation analysis
+	o Added Wilks() methods for Wilks' Lambda canonical tests
+	o Added vectors() for drawing labeled vectors
+	o Added S3 heplot.cancor() method for cancor objects.
 
-o Added cancor and related methods for canonical correlation analysis
-o Added Wilks() methods for Wilks' Lambda canonical tests
-o Added vectors() for drawing labeled vectors
-o Added S3 heplot.cancor() method for cancor objects.
+Changes in Version 0.5-23 (2012-2-3)
 
-Version 0.5-23 (2012-2-3)
+	o Fixed buglet in summary.candisc() [thx: David Carlson, dcarlson@tamu.edu]
+	o heplot.candisc now uses plot.candisc in the 1 df case
 
-o Fixed buglet in summary.candisc() [thx: David Carlson, dcarlson@tamu.edu]
-o heplot.candisc now uses plot.candisc in the 1 df case
+Changes in Version 0.5-22 (2011-12-10)
 
-Version 0.5-22 (2011-12-10)
+	o Extended Description:
 
-o Extended Description:
+Changes in Version 0.5-21 (2011-09-12)
 
-Version 0.5-21 (2011-09-12)
+	o Fixed Authors@R in DESCRIPTION for R 2.14.x
 
-o Fixed Authors@R in DESCRIPTION for R 2.14.x
+Changes in Version 0.5-20 (2010-10-208)
 
-Version 0.5-20 (2010-10-208)
+	o Updated links to datavis.ca
+	o Updated candisc heplot3d() examples
 
-o Updated links to datavis.ca
-o Updated candisc heplot3d() examples
+Changes in Version 0.5-19 (2010-7-29)
 
-Version 0.5-19 (2010-7-29)
+	 o switched inst/CHANGES to NEWS
+	 o Extended candiscList and Grass examples
+	 o Extended package description
+	 o Fixed minor buglet in print.candisc
 
- o switched inst/CHANGES to NEWS
- o Extended candiscList and Grass examples
- o Extended package description
- o Fixed minor buglet in print.candisc
+Changes in Version 0.5-18 (2010-7-27)
 
-Version 0.5-18 (2010-7-27)
+	o  Fixed predictor.names problem with car_2.0-0
+	o  Added var.cex to heplot.candisc and heplot3d.candisc
 
-o  Fixed predictor.names problem with car_2.0-0
-o  Added var.cex to heplot.candisc and heplot3d.candisc
+Changes in Version 0.5-17 (2010-2-11)
 
-Version 0.5-17 (2010-2-11)
+	o  Allow to select canonical dimension in plot(candisc(), which=)
 
-o  Allow to select canonical dimension in plot(candisc(), which=)
+Changes in Version 0.5-15 (2009-6-12)
 
-Version 0.5-15 (2009-6-12)
+	o  Added titles.1d argument to plot.candisc to allow customized titles for 1D plots
+	   (wish of Manuel Spínola)
 
-o  Added titles.1d argument to plot.candisc to allow customized titles for 1D plots
-   (wish of Manuel Spínola)
+Changes in Version 0.5-13 (2008-12-16)
 
-Version 0.5-13 (2008-12-16)
+	o  Added Wolves data, with examples for 2-way design.
+	o  Improved plot for 1D case.
 
-o  Added Wolves data, with examples for 2-way design.
-o  Improved plot for 1D case.
+Changes in Version 0.5-11 (2008-11-12)
 
-Version 0.5-11 (2008-11-12)
+	o  Michael Friendly now maintainer
+	o  now require heplots >= 0.8-3 for use of xlim, ylim, zlim
+	o  added asp="iso" to heplot3d.candisc, so default is now equal scaling
 
-o  Michael Friendly now maintainer
-o  now require heplots >= 0.8-3 for use of xlim, ylim, zlim
-o  added asp="iso" to heplot3d.candisc, so default is now equal scaling
+Changes in Version 0.5-10 (2008-11-5)
 
-Version 0.5-10 (2008-11-5)
+	o  improved documentation
+	o  added var.lwd to heplot3d.candisc
+	o  changed rgl.* to *3d functions to avoid rgl problems
+	o  added suffix= to heplot.candisc and heplot3d.candisc
+	o  added graphics=TRUE to menus in *.candiscList functions
+	o  added suffix= to plot.candisc
 
-o  improved documentation
-o  added var.lwd to heplot3d.candisc
-o  changed rgl.* to *3d functions to avoid rgl problems
-o  added suffix= to heplot.candisc and heplot3d.candisc
-o  added graphics=TRUE to menus in *.candiscList functions
-o  added suffix= to plot.candisc
+Changes in Version 0.5-9 (2008-04-24)
 
-Version 0.5-9 (2008-04-24)
+Changes in Version 0.5-8 (2008-04-11)
 
-Version 0.5-8 (2008-04-11)
+Changes in Version 0.5-7 (2007-10-29)
 
-Version 0.5-7 (2007-10-29)
-o Initial version released to CRAN.
+	o Initial version released to CRAN.
 
 
 
