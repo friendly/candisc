@@ -3,7 +3,7 @@ Changes in version 0.6-6 (2013-06-17)
 	o Added vecscale() to more reliably scale the variable vectors in plot.candisc() and heplot.candisc()
 	  to the plot bounding box [thx: Uwe Ligges for the code]
 	o Exported vecscale
-	o Added mlm2can() to calculate the canonical representation of a term in an mlm
+	o Added can_lm() to calculate the canonical lm() representation of a term in an mlm
 
 Changes in Version 0.6-5 (2013-03-20)
 

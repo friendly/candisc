@@ -1,5 +1,5 @@
-\name{mlm2can}
-\alias{mlm2can}
+\name{can_lm}
+\alias{can_lm}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Transform a Multivariate Linear model mlm to a Canonical Representation
@@ -10,7 +10,7 @@ multivariate linear model to scores on canonical variables for a given term and 
 those scores as responses in a linear (lm) or multivariate linear model (mlm).
 }
 \usage{
-mlm2can(mod, term, ...)
+can_lm(mod, term, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -49,7 +49,7 @@ Michael Friendly
 }
 \examples{
 iris.mod <- lm(cbind(Petal.Length, Sepal.Length, Petal.Width, Sepal.Width) ~ Species, data=iris)
-iris.can <- mlm2can(iris.mod, "Species")
+iris.can <- can_lm(iris.mod, "Species")
 iris.can
 Anova(iris.mod)
 Anova(iris.can)

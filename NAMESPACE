@@ -3,7 +3,8 @@
 
 import(heplots)
 export(candisc, candiscList, dataIndex,
-	cancor, vectors, Wilks, scores, redundancy, vecscale, mlm2can)
+	cancor, vectors, Wilks, scores, redundancy, vecscale, can_lm)
+#S3method(can_lm, mlm)
 S3method(candisc, mlm)
 S3method(candiscList, mlm)
 S3method(coef, candisc)

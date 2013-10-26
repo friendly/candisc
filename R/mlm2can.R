@@ -16,18 +16,3 @@ mlm2can <- function(mod, term, ...) {
 	can.mod
 }
 
-
-library(effects)
-data(NLSY, package="heplots")
-mod <- lm(cbind(read,math) ~ income+educ, data=NLSY)
-
-Anova(mod)
-mc1 <- mlm2can(mod, "income")
-Anova(mc1)
-eff.mc1 <- allEffects(mc1)
-plot(eff.mc1, ci.style='bands')
-
-mc2 <- mlm2can(mod, "educ")
-Anova(mc2)
-eff.mc2 <- allEffects(mc2)
-plot(eff.mc2, ci.style='bands')
