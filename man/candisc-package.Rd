@@ -45,8 +45,8 @@ A few of these methods are illustrated in the vignette for the heplots package,
 \tabular{ll}{
 Package: \tab candisc\cr
 Type: \tab Package\cr
-Version: \tab 0.6-6\cr
-Date: \tab 2013-06-17\cr
+Version: \tab 0.6-7\cr
+Date: \tab 2015-04-15\cr
 License: \tab GPL (>= 2)\cr
 }
 The organization of functions in this package and the \pkg{heplots} package

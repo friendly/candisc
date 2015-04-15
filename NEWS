@@ -1,3 +1,7 @@
+Changes in version 0.6-7 (2015-04-15)
+
+  o Now use rgl:: in *3d functions and requireNamespace("rgl")
+
 Changes in version 0.6-6 (2013-06-17)
 
 	o Added vecscale() to more reliably scale the variable vectors in plot.candisc() and heplot.candisc()
@@ -85,7 +89,7 @@ Changes in Version 0.5-17 (2010-2-11)
 Changes in Version 0.5-15 (2009-6-12)
 
 	o  Added titles.1d argument to plot.candisc to allow customized titles for 1D plots
-	   (wish of Manuel Spínola)
+	   (wish of Manuel Sp?nola)
 
 Changes in Version 0.5-13 (2008-12-16)
 

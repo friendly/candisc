@@ -23,6 +23,7 @@ heplot3d.cancor <- function (
 #	   plot(mod, which=which, var.col=var.col, var.lwd=var.lwd, prefix=prefix, suffix=suffix, ...) 
 	   return()
 	}
+  if (!requireNamespace("rgl")) stop("rgl is required")
 
 	Yvars <- mod$names$Y
 	scores <- data.frame(mod$scores$X, mod$scores$Y)
@@ -78,7 +79,7 @@ heplot3d.cancor <- function (
 		ellrange <- lapply(ellipses, range)
 		vecmax <- maxrms(structure)
 		# get bbox of the 3d plot
-        bbox <- matrix(par3d("bbox"),3,2,byrow=TRUE)
+        bbox <- matrix(rgl::par3d("bbox"),3,2,byrow=TRUE)
 #    TODO: calculate scale so that vectors reasonably fill the plot
 		scale <- 3
 		cat("Vector scale factor set to ", scale, "\n")
@@ -90,14 +91,14 @@ heplot3d.cancor <- function (
   cs <- scale * Ystructure
   #  can this be simplified?
   for(i in 1:nrow(cs)) {
-  	lines3d( c(0, cs[i,1]),
+  	rgl::lines3d( c(0, cs[i,1]),
   	         c(0, cs[i,2]),
   	         c(0, cs[i,3]), col=var.col, lwd=var.lwd)
   }
-  texts3d( cs, texts=rownames(cs), col=var.col, cex=var.cex)
+  rgl::texts3d( cs, texts=rownames(cs), col=var.col, cex=var.cex)
 
 
-  if (!is.null(asp)) aspect3d(asp)
+  if (!is.null(asp)) rgl::aspect3d(asp)
   
   invisible(ellipses)
 

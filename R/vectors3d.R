@@ -11,7 +11,7 @@ vectors3d <- function(x, origin=c(0,0,0), labels=rownames(x),
 #	if (is.vector(origin)) origin <- matrix(origin, ncol=3)
 
 	for(i in 1:nrow(x)) {
-		lines3d( 
+		rgl::lines3d( 
 			c(origin[1], x[i, 1]),
 			c(origin[2], x[i, 2]),
 			c(origin[3], x[i, 1]), col=col, lwd=lwd, ...
@@ -19,7 +19,7 @@ vectors3d <- function(x, origin=c(0,0,0), labels=rownames(x),
 	}
 	if (!is.null(labels)) {
 #		if(missing(pos)) pos <- ifelse(x[,1]>0, 4, 2)
-  	texts3d( x, texts=labels, col=col, cex=cex, ...)
+  	rgl::texts3d( x, texts=labels, col=col, cex=cex, ...)
 		}
 }
 
