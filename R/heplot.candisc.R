@@ -160,7 +160,7 @@ heplot3d.candisc <- function (
 		ellrange <- lapply(ellipses, range)
 		vecmax <- maxrms(structure)
 		# get bbox of the 3d plot
-        bbox <- matrix(par3d("bbox"),3,2,byrow=TRUE)
+        bbox <- matrix(rgl::par3d("bbox"),3,2,byrow=TRUE)
 #    TODO: calculate scale so that vectors reasonably fill the plot
 		scale <- 5
 		cat("Vector scale factor set to ", scale, "\n")
@@ -169,14 +169,14 @@ heplot3d.candisc <- function (
   cs <- scale * mod$structure
   #  can this be simplified?
   for(i in 1:nrow(mod$structure)) {
-  	lines3d( c(0, cs[i,1]),
-  	         c(0, cs[i,2]),
-  	         c(0, cs[i,3]), col=var.col, lwd=var.lwd)
+  	rgl::lines3d( c(0, cs[i,1]),
+  	              c(0, cs[i,2]),
+  	              c(0, cs[i,3]), col=var.col, lwd=var.lwd)
   }
 #  rgl.texts( cs, text=rownames(cs), col=var.col)
-  texts3d( cs, texts=rownames(cs), col=var.col, cex=var.cex)
+  rgl::texts3d( cs, texts=rownames(cs), col=var.col, cex=var.cex)
 
-  if (!is.null(asp)) aspect3d(asp)
+  if (!is.null(asp)) rgl::aspect3d(asp)
   
   invisible(ellipses)
 }
