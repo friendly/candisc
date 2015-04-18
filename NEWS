@@ -1,6 +1,7 @@
 Changes in version 0.6-7 (2015-04-15)
 
   o Now use rgl:: in *3d functions and requireNamespace("rgl")
+  o import(car)
 
 Changes in version 0.6-6 (2013-06-17)
 
