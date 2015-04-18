@@ -40,8 +40,8 @@ from Tatsuoka (1988).
 Tatsuoka, M. M. (1988).  Multivariate Analysis: Techniques for Educational and Psychological Research (2nd ed.).
 New York: Macmillan, Appendix F, 430-442.
 
-Retrieved from:
-\url{http://www.gseis.ucla.edu/courses/data/hbs6.dta}
+%Retrieved from:
+%\url{http://www.gseis.ucla.edu/courses/data/hbs6.dta}
 }
 \references{
 High School and Beyond data files:
