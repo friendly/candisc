@@ -11,7 +11,7 @@ Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre")
              person(given = "John", family = "Fox", role="aut"))
 Author: Michael Friendly [aut, cre], John Fox [aut]
 Maintainer: Michael Friendly <friendly@yorku.ca>
-Description: This package includes functions for computing and visualizing 
+Description: Functions for computing and visualizing 
 	generalized canonical discriminant analyses and canonical correlation analysis
 	for a multivariate linear model.
 	Traditional canonical discriminant analysis is restricted to a one-way 'MANOVA'
