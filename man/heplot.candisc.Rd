@@ -99,7 +99,7 @@ heplot(grass.canL, terms=TRUE, ask=FALSE)
 
 heplot3d(grass.can1, wire=FALSE)
 # compare with non-iso scaling
-aspect3d(x=1,y=1,z=1)
+rgl::aspect3d(x=1,y=1,z=1)
 # or,
 # heplot3d(grass.can1, asp=NULL)
 
@@ -112,7 +112,7 @@ heplot(pottery.can, var.lwd=3)
 heplot3d(pottery.can, var.lwd=3, scale=10, zlim=c(-3,3), wire=FALSE)
 
 \dontrun{ 
-play3d(spin3d(axis = c(1, 0, 0), rpm = 5), duration=12)
+play3d(rgl::spin3d(axis = c(1, 0, 0), rpm = 5), duration=12)
 }
 
 ## FootHead data, from heplots package
