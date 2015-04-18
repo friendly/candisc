@@ -121,7 +121,7 @@ heplot3d.candisc <- function (
 	asp="iso",           # aspect ratio, to ensure equal units
 	var.col="blue",
 	var.lwd=par("lwd"),
-	var.cex=par3d("cex"),
+	var.cex=rgl::par3d("cex"),
 	prefix = "Can",  # prefix for labels of canonical dimensions
 	suffix = FALSE,   # add label suffix with can % ?
 	terms=mod$term,  # terms to be plotted in canonical space / TRUE=all

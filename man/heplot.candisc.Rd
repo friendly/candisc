@@ -16,7 +16,7 @@ in the space of maximum discrimination.
     prefix = "Can", suffix = TRUE, terms = mod$term, ...)
 
 \method{heplot3d}{candisc}(mod, which = 1:3, scale, asp="iso", var.col = "blue", 
-    var.lwd=par("lwd"), var.cex=par3d("cex"),
+    var.lwd=par("lwd"), var.cex=rgl::par3d("cex"),
     prefix = "Can", suffix = FALSE, terms = mod$term, 
     ...) 
 }
