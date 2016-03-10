@@ -49,14 +49,14 @@ In R, a comparable data set is contained in the \pkg{ggbiplot} package.
 \examples{
 data(Wine)
 str(Wine)
-summary(Wine)
+#summary(Wine)
 
 Wine.mlm <- lm(as.matrix(Wine[, -1]) ~ Cultivar, data=Wine)
 Wine.can <- candisc(Wine.mlm)
 Wine.can
 
 
-plot(Wine.can)
+plot(Wine.can, ellipse=TRUE)
 plot(Wine.can, which=1)
 
 

@@ -91,15 +91,17 @@ plot.candisc <- function (
 	# use asp=1 to make the plot equally scaled
 	Ind <- dataIndex(x$scores,term)
 	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col[Ind], pch=pch[Ind], ...) 
-
+	abline(h=0, v=0, lty=2, col="grey")
+	
   if(ellipse) {
     fill.col <- heplots::trans.colors(col, fill.alpha)
     radius <- sqrt(qchisq(ellipse.prob, df = 2))
     angles <- (0:60)*2*pi/60
     circle <- radius * cbind( cos(angles), sin(angles))
+
     for(i in 1:nlev) {
       sigma <- var(scores[Ind==i,])
-      mu <- as.numeric(means)[i,]
+      mu <- as.numeric(means[i,])
       Q <- chol(sigma, pivot = TRUE)
       order <- order(attr(Q, "pivot"))
       ell <- sweep(circle %*% Q[, order], 2,
@@ -107,6 +109,7 @@ plot.candisc <- function (
 #      ell <- t( mu + t(circle %*% chol(sigma)))
       polygon(ell, col=fill.col[i], border=col[i],  lty=1)
     }
+
   }
 
 	points(means[,1], means[,2], col=col, pch="+", cex=2)
