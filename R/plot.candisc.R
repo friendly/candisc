@@ -19,12 +19,15 @@ plot.candisc <- function (
 		x,		     # output object from candisc
 		which=1:2,   # canonical dimensions to plot
 		conf=0.95,   # confidence coverage of circles for class means
-		col,         # list of colors used for plotting the canonical scores
-		pch,         # list of point symbols
+		col,         # vector of colors used for plotting the canonical scores
+		pch,         # vector of point symbols
 		scale,       # scale factor for variable vectors in can space
 		asp=1,       # aspect ratio, to ensure equal units
 		var.col="blue",
 		var.lwd=par("lwd"),
+		ellipse=TRUE,    # draw data ellipses for canonical scores?
+		ellipse.prob = 0.68,
+		fill.alpha=0.1,
 		prefix = "Can",  # prefix for labels of canonical dimensions
 		suffix = TRUE,   # add label suffix with can % ?
 		titles.1d = c("Canonical scores", "Structure"),
@@ -88,7 +91,24 @@ plot.candisc <- function (
 	# use asp=1 to make the plot equally scaled
 	Ind <- dataIndex(x$scores,term)
 	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col[Ind], pch=pch[Ind], ...) 
-#	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col, pch=pch, ...) 
+
+  if(ellipse) {
+    fill.col <- heplots::trans.colors(col, fill.alpha)
+    radius <- sqrt(qchisq(ellipse.prob, df = 2))
+    angles <- (0:60)*2*pi/60
+    circle <- radius * cbind( cos(angles), sin(angles))
+    for(i in 1:nlev) {
+      sigma <- var(scores[Ind==i,])
+      mu <- as.numeric(means)[i,]
+      Q <- chol(sigma, pivot = TRUE)
+      order <- order(attr(Q, "pivot"))
+      ell <- sweep(circle %*% Q[, order], 2,
+                   mu, FUN = "+")
+#      ell <- t( mu + t(circle %*% chol(sigma)))
+      polygon(ell, col=fill.col[i], border=col[i],  lty=1)
+    }
+  }
+
 	points(means[,1], means[,2], col=col, pch="+", cex=2)
 	pos <- ifelse(means[,2]>0, 3, 1)
 	text(means[,1], means[,2], labels=labels, pos=pos)
@@ -101,29 +121,25 @@ plot.candisc <- function (
 #		scrmax <- maxrms(scores)
 #		scale <- floor(  0.9 * scrmax / vecmax )
 		scale <- vecscale(structure)
-		cat("Vector scale factor set to ", scale, "\n")
+		message("Vector scale factor set to ", scale)
 	}
 
 	# DONE: replaced with call to vectors()
 	cs <- scale * structure
-#	arrows(0, 0, cs[,1], cs[,2], length=.1, angle=15, col=var.col, lwd=var.lwd)
-#	vars <- rownames(structure)
-#	pos <- ifelse(cs[,1]>0, 4, 2)
-#	text(cs[,1], cs[,2], vars, pos=pos,  col=var.col)
-	vectors(cs, pos=pos,  col=var.col, ...)
+	vectors(cs, pos=pos,  col=var.col, xpd=TRUE, ...)
 	
 	### why doesn't this work???
 	circle <- function( center, radius, segments=41, ...) {
 		angles <- (0:segments) * 2 * pi/segments
 		unit.circle <- cbind(cos(angles), sin(angles))
-		circle <- t(center + radius*t(unit.circle))
+		circle <- t(as.numeric(center) + radius*t(unit.circle))
 		lines(circle, col = col, ...)
 	}
 	
 	# plot confidence circles for canonical means
 	if ( conf>0 ) {
 		n <- as.vector(table(factors))
-		radii <- qchisq(conf, 2) / n
+		radii <- sqrt(qchisq(conf, 2) / n)
 		symbols(means, circles=radii, inches=FALSE, add=TRUE, fg=col)
 #	  for (i in 1:nrow(means)) {
 #	  	circle(means[i,1:2], radii[i],  ...)

@@ -55,7 +55,10 @@ Wine.mlm <- lm(as.matrix(Wine[, -1]) ~ Cultivar, data=Wine)
 Wine.can <- candisc(Wine.mlm)
 Wine.can
 
-plot(Wine.can, xpd=TRUE)
+\donttest{
+plot(Wine.can)
+plot(Wine.can, which=1)
+}
 
 }
 \keyword{datasets}

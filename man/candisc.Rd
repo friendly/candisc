@@ -27,7 +27,9 @@ candisc(mod, ...)
 \method{coef}{candisc}(object, type = c("std", "raw", "structure"), ...)
 
 \method{plot}{candisc}(x, which = 1:2, conf = 0.95, col, pch, scale, asp = 1,
-    var.col = "blue", var.lwd = par("lwd"), prefix = "Can", suffix=TRUE, 
+    var.col = "blue", var.lwd = par("lwd"), 
+		ellipse=TRUE, ellipse.prob = 0.68, fill.alpha=0.1,
+    prefix = "Can", suffix=TRUE, 
     titles.1d = c("Canonical scores", "Structure"), ...)
     
 \method{print}{candisc}(x, digits=max(getOption("digits") - 2, 3), ...)
@@ -38,8 +40,8 @@ candisc(mod, ...)
 
 
 \arguments{
-  \item{mod}{An mlm object, such as computed by lm() with a multivariate response}
-  \item{term}{the name of one term from \code{mod}}
+  \item{mod}{An mlm object, such as computed by \code{lm()} with a multivariate response}
+  \item{term}{the name of one term from \code{mod} for which the canonical analysis is performed.}
   \item{type}{type of test for the model \code{term}, one of: "II", "III", "2", or "3"}
   \item{manova}{the \code{Anova.mlm} object corresponding to \code{mod}.  Normally,
     this is computed internally by  \code{Anova(mod)}}
@@ -49,7 +51,7 @@ candisc(mod, ...)
   term.}
   \item{object, x}{A candisc object}
   \item{which}{A vector of one or two integers, selecting the canonical dimension(s) to plot. If the canonical
-  structure for a term has \code{ndim==1}, or \code{length(which)==1}, a 1D representation of canonical scores
+  structure for a \code{term} has \code{ndim==1}, or \code{length(which)==1}, a 1D representation of canonical scores
   and structure coefficients is produced by the \code{plot} method.  Otherwise, a 2D plot is produced. }
   \item{conf}{Confidence coefficient for the confidence circles plotted in the \code{plot} method}
   \item{col}{A vector of colors to be used for the levels of the term in the \code{plot} method.
@@ -63,6 +65,10 @@ candisc(mod, ...)
   variable vectors are interpretable.}
   \item{var.col}{Color used to plot variable vectors}
   \item{var.lwd}{Line width used to plot variable vectors}
+  \item{ellipse}{Draw data ellipses for canonical scores?}
+  \item{ellipse.prob}{Coverage probability for the data ellipses}
+  \item{fill.alpha}{Transparency value for the color used to fill the ellipses.  Use \code{fill.alpha} to draw
+        the ellipses unfilled.}
   \item{prefix}{Prefix used to label the canonical dimensions plotted}
   \item{suffix}{Suffix for labels of canonical dimensions. If \code{suffix=TRUE}
   the percent of hypothesis (H) variance accounted for by each canonical dimension is added to the axis label.}
@@ -88,7 +94,7 @@ by Bartlett (1938) allow one to determine the number of significant
 canonical dimensions.   
 
 Computational details for the one-way case are described
-in Cooley & Lohnes (1971), and in the SAS/STAT User's Guide,  "The CANDISC procedure:
+in Cooley & Lohnes (1971), and in the \emph{SAS/STAT User's Guide},  "The CANDISC procedure:
 Computational Details," \url{http://support.sas.com/onlinedoc/913/getDoc/en/statug.hlp/candisc_sect12.htm}.
 
 A generalized canonical discriminant analysis extends this idea to a general
@@ -100,6 +106,13 @@ test).  For any given term in the \code{mlm}, the generalized canonical discrimi
 analysis amounts to a standard discriminant analysis based on the H matrix for that
 term in relation to the full-model E matrix.
 
+The plot method for candisc objects is typically a 2D plot, similar to a biplot.
+It shows the canonical scores for the groups defined by the \code{term} as
+points and the canonical structure coefficients as vectors from the origin.
+
+If the canonical structure for a \code{term} has \code{ndim==1}, or \code{length(which)==1},
+the 1D representation consists of a boxplot of canonical scores and a vector diagram
+showing the magnitudes of the structure coefficients.
 }
 \value{
   An object of class \code{candisc} with the following components:
@@ -138,10 +151,10 @@ Berlin: Springer.
 \seealso{ \code{\link{candiscList}}, \code{\link[heplots]{heplot}},  \code{\link[heplots]{heplot3d}}}
 \examples{
 grass.mod <- lm(cbind(N1,N9,N27,N81,N243) ~ Block + Species, data=Grass)
-Anova(grass.mod,test="Wilks")
+Anova(grass.mod, test="Wilks")
 
 grass.can1 <-candisc(grass.mod, term="Species")
-plot(grass.can1, type="n")
+plot(grass.can1)
 
 # library(heplots)
 heplot(grass.can1, scale=6, fill=TRUE)
