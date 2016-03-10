@@ -28,7 +28,7 @@ candisc(mod, ...)
 
 \method{plot}{candisc}(x, which = 1:2, conf = 0.95, col, pch, scale, asp = 1,
     var.col = "blue", var.lwd = par("lwd"), 
-		ellipse=TRUE, ellipse.prob = 0.68, fill.alpha=0.1,
+		ellipse=FALSE, ellipse.prob = 0.68, fill.alpha=0.1,
     prefix = "Can", suffix=TRUE, 
     titles.1d = c("Canonical scores", "Structure"), ...)
     

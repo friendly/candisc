@@ -25,7 +25,7 @@ plot.candisc <- function (
 		asp=1,       # aspect ratio, to ensure equal units
 		var.col="blue",
 		var.lwd=par("lwd"),
-		ellipse=TRUE,    # draw data ellipses for canonical scores?
+		ellipse=FALSE,    # draw data ellipses for canonical scores?
 		ellipse.prob = 0.68,
 		fill.alpha=0.1,
 		prefix = "Can",  # prefix for labels of canonical dimensions
