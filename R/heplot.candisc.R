@@ -28,6 +28,7 @@
 # last revised: 5/17/2012 9:41AM by MF
 # -- now use plot.candisc for a 1 df term
 # heplot.candisc now returns ellipses
+# use xpd=TRUE for vector labels
 
 heplot.candisc <- function (
 	mod,		         # output object from candisc
@@ -82,6 +83,7 @@ heplot.candisc <- function (
   ellipses <- heplot(can.mod, terms=terms, 
   		factor.means=term,
   		xlab=canlab[1], ylab=canlab[2],  asp=asp, ...)
+  abline(h=0, v=0, col="gray")
   
   structure <- mod$structure[,which]
 
@@ -99,11 +101,7 @@ heplot.candisc <- function (
 
   # DONE: replaced with a call to vectors(); but NB: can't pass ... to vectors()
   cs <- scale * structure
-#  arrows(0, 0, cs[,1], cs[,2], length=.1, angle=15, col=var.col, lwd=var.lwd)
-#  vars <- rownames(structure)
-#  pos<-ifelse(cs[,1]>0, 4, 2)
-#  text(cs[,1], cs[,2], vars, pos=pos,  col=var.col, cex=var.cex)
-  vectors(cs, col=var.col, cex=var.cex, lwd=var.lwd)
+  vectors(cs, col=var.col, cex=var.cex, lwd=var.lwd, xpd=TRUE)
   
   invisible(ellipses)
 }
