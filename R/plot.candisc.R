@@ -124,7 +124,7 @@ plot.candisc <- function (
 #		scrmax <- maxrms(scores)
 #		scale <- floor(  0.9 * scrmax / vecmax )
 		scale <- vecscale(structure)
-		message("Vector scale factor set to ", scale)
+		message("Vector scale factor set to ", round(scale, 3))
 	}
 
 	# DONE: replaced with call to vectors()
