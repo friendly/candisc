@@ -95,7 +95,7 @@ canonical dimensions.
 
 Computational details for the one-way case are described
 in Cooley & Lohnes (1971), and in the \emph{SAS/STAT User's Guide},  "The CANDISC procedure:
-Computational Details," \url{http://support.sas.com/onlinedoc/913/getDoc/en/statug.hlp/candisc_sect12.htm}.
+Computational Details," \url{http://support.sas.com/documentation/cdl/en/statug/63962/HTML/default/viewer.htm#statug_candisc_sect012.htm}.
 
 A generalized canonical discriminant analysis extends this idea to a general
 multivariate linear model.  Analysis of each term in the \code{mlm} produces
