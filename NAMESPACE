@@ -5,7 +5,7 @@ import(car)
 
 import(heplots)
 export(candisc, candiscList, dataIndex,
-	cancor, vectors, Wilks, scores, redundancy, vecscale, can_lm)
+	cancor, vectors, Wilks, scores, redundancy, vecscale, can_lm, varOrder)
 #S3method(can_lm, mlm)
 S3method(candisc, mlm)
 S3method(candiscList, mlm)
@@ -35,6 +35,10 @@ S3method(scores, cancor)
 S3method(print, cancor.redundancy)
 S3method(plot, cancor)
 S3method(heplot3d, cancor)
+
+S3method(varOrder, mlm)
+S3method(varOrder, data.frame)
+
 
 
 
