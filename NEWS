@@ -1,7 +1,9 @@
+
 Changes in version 0.6-8 (2016-03-09)
 
   o Added Wine data -- three cultivars with a very simple canonical structure
   o Added ellipses to plot.candisc(); enhanced candisc.Rd documentation
+  o Added varOrder() for effect ordering in MLMs
 
 Changes in version 0.6-7 (2015-04-15)
 
