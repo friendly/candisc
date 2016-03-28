@@ -25,6 +25,7 @@ plot.candisc <- function (
 		asp=1,       # aspect ratio, to ensure equal units
 		var.col="blue",
 		var.lwd=par("lwd"),
+		var.labels,
 		ellipse=FALSE,    # draw data ellipses for canonical scores?
 		ellipse.prob = 0.68,
 		fill.alpha=0.1,
@@ -62,7 +63,7 @@ plot.candisc <- function (
 		arrows(xx, 0, xx, structure, length=.1, 	angle=15,
 				col=var.col, lwd=var.lwd )	
 		abline(h=0, lty=2, col="gray")	
-		vars <- rownames(x$structure)
+		vars <- if(missing(var.labels)) rownames(x$structure) else var.labels
 		adj1 <- as.vector(ifelse (structure > 0, 1, 0))
 		adj2 <- rep(-0.3, ns)
 		adj2[1] <- 1.1
@@ -85,7 +86,7 @@ plot.candisc <- function (
 	
 	scores <- x$scores[,canvar]
 	means <- x$means[,which]
-	labels <- rownames(x$means)
+	labels <- rownames(x$means) 
 	structure <- x$structure[,which]
 	
 	# use asp=1 to make the plot equally scaled
@@ -129,6 +130,7 @@ plot.candisc <- function (
 
 	# DONE: replaced with call to vectors()
 	cs <- scale * structure
+	if(!missing(var.labels)) rownames(cs) <- var.labels
 	vectors(cs, pos=pos,  col=var.col, xpd=TRUE, ...)
 	
 	### why doesn't this work???

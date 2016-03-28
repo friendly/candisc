@@ -27,7 +27,7 @@ candisc(mod, ...)
 \method{coef}{candisc}(object, type = c("std", "raw", "structure"), ...)
 
 \method{plot}{candisc}(x, which = 1:2, conf = 0.95, col, pch, scale, asp = 1,
-    var.col = "blue", var.lwd = par("lwd"), 
+    var.col = "blue", var.lwd = par("lwd"), var.labels,
 		ellipse=FALSE, ellipse.prob = 0.68, fill.alpha=0.1,
     prefix = "Can", suffix=TRUE, 
     titles.1d = c("Canonical scores", "Structure"), ...)
@@ -65,6 +65,7 @@ candisc(mod, ...)
   variable vectors are interpretable.}
   \item{var.col}{Color used to plot variable vectors}
   \item{var.lwd}{Line width used to plot variable vectors}
+  \item{var.labels}{Optional vector of variable labels to replace variable names in the plots}
   \item{ellipse}{Draw data ellipses for canonical scores?}
   \item{ellipse.prob}{Coverage probability for the data ellipses}
   \item{fill.alpha}{Transparency value for the color used to fill the ellipses.  Use \code{fill.alpha} to draw
