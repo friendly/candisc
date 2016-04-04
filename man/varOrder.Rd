@@ -27,12 +27,12 @@ varOrder(x, ...)
 
 \method{varOrder}{mlm}(x, term, variables, 
       type = c("can", "pc"), 
-      method = c("angles", "dim1", "dim2", "alphabet", "data"), 
-      names = FALSE, ...)
+      method = c("angles", "dim1", "dim2", "alphabet", "data", "colmean"), 
+      names = FALSE, descending = FALSE, ...)
 
 \method{varOrder}{data.frame}(x, variables, 
-      method = c("angles", "dim1", "dim2", "alphabet", "data"),
-      names = FALSE, ...)
+      method = c("angles", "dim1", "dim2", "alphabet", "data", "colmean"),
+      names = FALSE, descending = FALSE, ...)
 
 }
 %- maybe also 'usage' for other objects documented here.
@@ -54,7 +54,7 @@ For an MLM, \code{type="can"} uses the canonical structure coefficients for the 
 \code{type="pc"} uses the principal component variable eigenvectors.
 }
   \item{method}{
-One of \code{c("angles", "dim1", "dim2", "alphabet", "data")} giving the effect ordering method.
+One of \code{c("angles", "dim1", "dim2", "alphabet", "data", "colmean")} giving the effect ordering method.
 	\describe{
 		\item{"angles"}{Orders variables according to the angles their vectors make with dimensions 1 and 2, 
 		counter-clockwise starting from the lower-left quadrant in a 2D biplot or candisc display.}
@@ -62,13 +62,14 @@ One of \code{c("angles", "dim1", "dim2", "alphabet", "data")} giving the effect 
 		\item{"dim2"}{Orders variables in increasing order of their coordinates on dimension 2}
 		\item{"alphabet"}{Orders variables alphabetically}
 		\item{"data"}{Uses the order of the variables in the data frame or the list of responses in the MLM}
-		
+		\item{"colmean"}{Uses the order of the column means of the variables in the data frame or the list of responses in the MLM}
 	}
 }
   \item{names}{
 logical; if \code{TRUE} the effect ordered names of the variables are returned;
 otherwise, their indices in \code{variables} are returned.
 }
+  \item{descending}{If \code{TRUE}, the ordered result is reversed to a descending order.}
   \item{\dots}{
 Arguments passed to methods
 }

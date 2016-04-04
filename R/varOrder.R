@@ -8,8 +8,9 @@ varOrder.mlm <- function(x,
                      term,
                      variables, 
                      type = c("can", "pc"),
-                     method = c("angles", "dim1", "dim2", "alphabet", "data"),
+                     method = c("angles", "dim1", "dim2", "alphabet", "data", "colmean"),
                      names = FALSE,
+                     descending = FALSE,
                      ...)
 {
 	data <- model.frame(x)
@@ -32,11 +33,12 @@ varOrder.mlm <- function(x,
 	method = match.arg(method)
 	type   = match.arg(type)
 
-	if (type == "pc")
-		struc <- eigen(cor(Y))$vectors
-	else
-		struc <- candisc(x, term)$structure
-	
+	if (method %in% c("angles", "dim1", "dim2")) {
+  	if (type == "pc")
+  		struc <- eigen(cor(Y))$vectors
+  	else
+  		struc <- candisc(x, term)$structure
+	}
 	order <- switch( method,
 		alphabet = order(vars),
 		angles = order( ifelse( struc[vars,1] >0, 
@@ -44,16 +46,20 @@ varOrder.mlm <- function(x,
 		                        atan(struc[vars,2]/struc[vars,1]) + pi)),
 		dim1 = order(struc[vars,1]),
 		dim2 = order(struc[vars,2]),
-		data = seq_along(vars)
-		)
-		if (names) vars[order] else order
+		data = seq_along(vars),
+		colmean = order(colMeans(Y))
+	)
+  
+  if (descending) order <- rev(order)
+	if (names) vars[order] else order
 }
 
 varOrder.data.frame <- 
 	function(x, 
            variables, 
-           method = c("angles", "dim1", "dim2", "alphabet", "data"),
+           method = c("angles", "dim1", "dim2", "alphabet", "data", "colmean"),
            names = FALSE,
+	         descending = FALSE,
 	         ...) {
 	Y <- x
 	vars <- colnames(Y)
@@ -66,7 +72,7 @@ varOrder.data.frame <-
           check <- !(variables %in% vars)
           if (any(check)) stop(paste("The following", 
               if (sum(check) > 1) "variables are" else "variable is",
-              "not in the model:", paste(variables[check], collapse=", ")))
+              "not in the data:", paste(variables[check], collapse=", ")))
           vars <- variables
           }
       }
@@ -74,14 +80,16 @@ varOrder.data.frame <-
 	method = match.arg(method)
 	struc <- eigen(cor(Y))$vectors
 	order <- switch( method,
-	alphabet = order(vars),
-	angles = order( ifelse( struc[vars,1] >0, 
-	                        atan(struc[vars,2]/struc[vars,1]), 
-	                        atan(struc[vars,2]/struc[vars,1]) + pi)),
-	dim1 = order(struc[vars,1]),
-	dim2 = order(struc[vars,2]),
-	data = seq_along(vars)
+  	alphabet = order(vars),
+  	angles = order( ifelse( struc[vars,1] >0, 
+  	                        atan(struc[vars,2]/struc[vars,1]), 
+  	                        atan(struc[vars,2]/struc[vars,1]) + pi)),
+  	dim1 = order(struc[vars,1]),
+  	dim2 = order(struc[vars,2]),
+  	data = seq_along(vars),
+  	colmean = order(colMeans(Y))
 	)
+	if (descending) order <- rev(order)
 	if (names) vars[order] else order
 
 }

@@ -5,6 +5,7 @@ Changes in version 0.6-8 (2016-03-09)
   o Added ellipses to plot.candisc(); enhanced candisc.Rd documentation
   o Added varOrder() for effect ordering in MLMs
   o plot.candisc() gets a var.labels argument
+  o added method="colmean" and descending=T/F to varOrder()
 
 Changes in version 0.6-7 (2015-04-15)
 
