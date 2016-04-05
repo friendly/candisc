@@ -78,7 +78,9 @@ varOrder.data.frame <-
       }
 
 	method = match.arg(method)
-	struc <- eigen(cor(Y))$vectors
+	if (method %in% c("angles", "dim1", "dim2")) {
+	  struc <- eigen(cor(Y))$vectors
+	}
 	order <- switch( method,
   	alphabet = order(vars),
   	angles = order( ifelse( struc[vars,1] >0, 
