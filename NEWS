@@ -1,5 +1,5 @@
 
-Changes in version 0.6-8 (2016-03-09)
+Changes in version 0.6-8 (2016-04-25)
 
   o Added Wine data -- three cultivars with a very simple canonical structure
   o Added ellipses to plot.candisc(); enhanced candisc.Rd documentation
