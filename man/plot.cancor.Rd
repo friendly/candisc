@@ -52,7 +52,7 @@ Color for points.
 logical. Draw a data ellipse for the canonical scores?
 }
   \item{ellipse.args}{
-Arguments passed to \code{\link[car]{dataEllipse}}.
+A list of arguments passed to \code{\link[car]{dataEllipse}}.
 Internally, the function sets the default value for \code{levels} to 0.68.
 }
   \item{smooth}{

@@ -26,6 +26,7 @@ plot.candisc <- function (
 		var.col="blue",
 		var.lwd=par("lwd"),
 		var.labels,
+		rev.axes=c(FALSE, FALSE),
 		ellipse=FALSE,    # draw data ellipses for canonical scores?
 		ellipse.prob = 0.68,
 		fill.alpha=0.1,
@@ -37,6 +38,8 @@ plot.candisc <- function (
 	
 	term <- x$term
 	factors <- x$factors
+	rev.axes <- rep(rev.axes, length.out=2)
+	
 	if (x$ndim < 2 || length(which)==1) {
 		which <- which[1]
 		### is there a better way to show the 1D distributions of canonical scores?
@@ -44,16 +47,23 @@ plot.candisc <- function (
 		op <- par(no.readonly = TRUE) # save default, for resetting...
 		ng <- length(x$means)
 		structure <- as.vector(x$structure[,which])
+		canvar <- paste('Can', which, sep="")   # names of canonical variable to plot
+		scores <- x$scores[, canvar]
+		
+		if(isTRUE(rev.axes[1])) {
+		  scores <- -scores
+		  structure <- -structure
+		}
+		
 		ns <- length(structure)
 		wid <- if (ns < 2*ng) c(2,1) else c(1.2,1)
 		#cat("ng:", ng, "\tns:", ns, "\twid:", wid, "\n")
 		layout(matrix(c(1,2),1,2), widths=wid)
 		par(mar=c(5,4,4,0)+.1)
-		canvar <- paste('Can', which, sep="")   # names of canonical variable to plot
 		if (is.logical(suffix) & suffix)
 			suffix <- paste( " (", round(x$pct[which],1), "%)", sep="" ) else suffix <- NULL
 		canlab <- paste(prefix, which, suffix, sep="")
-		scores <- x$scores[,canvar]
+#		scores <- x$scores[,canvar]
 		formule <- formula( paste(canvar, " ~", term, sep="") )
 		boxplot(formule, data=x$scores, ylab=canlab, xlab=term, main=titles.1d[1])
 		xx <- 1:ns
@@ -88,6 +98,17 @@ plot.candisc <- function (
 	means <- x$means[,which]
 	labels <- rownames(x$means) 
 	structure <- x$structure[,which]
+	
+	if(isTRUE(rev.axes[1])) {
+	  scores[, 1] <- -scores[, 1]
+	  means[, 1] <- -means[, 1]
+	  structure[, 1] <- -structure[, 1]
+	}
+	if(isTRUE(rev.axes[2])) {
+	  scores[, 2] <- -scores[, 2]
+	  means[, 2] <- -means[, 2]
+	  structure[, 2] <- -structure[, 2]
+	}
 	
 	# use asp=1 to make the plot equally scaled
 	Ind <- dataIndex(x$scores,term)
