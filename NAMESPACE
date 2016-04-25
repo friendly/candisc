@@ -4,6 +4,11 @@
 import(car)
 
 import(heplots)
+import(graphics)
+import(stats)
+importFrom("grDevices", "palette")
+importFrom("utils", "menu")
+
 export(candisc, candiscList, dataIndex,
 	cancor, vectors, Wilks, scores, redundancy, vecscale, can_lm, varOrder)
 #S3method(can_lm, mlm)
