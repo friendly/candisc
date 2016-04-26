@@ -45,7 +45,7 @@ A few of these methods are illustrated in the vignette for the heplots package,
 \tabular{ll}{
 Package: \tab candisc\cr
 Type: \tab Package\cr
-Version: \tab 0.6-8\cr
+Version: \tab 0.7-0\cr
 Date: \tab 2016-04-25\cr
 License: \tab GPL (>= 2)\cr
 }
@@ -64,6 +64,7 @@ Friendly, M. (2007).
   \emph{Journal of Computational and Graphical Statistics}, \bold{16}(2) 421--444.
   \url{http://datavis.ca/papers/jcgs-heplots.pdf} 
 
+Friendly, M. & Sigal, M.. (2014). Recent Advances in Visualizing Multivariate Linear Models. \emph{Revista Colombiana de Estadística} , 37(2), 261-283. \url{http://dx.doi.org/10.15446/rce.v37n2spe.47934}.
 
 Gittins, R. (1985). Canonical Analysis: A Review with Applications in Ecology,
 Berlin: Springer.
