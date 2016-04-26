@@ -64,7 +64,7 @@ Friendly, M. (2007).
   \emph{Journal of Computational and Graphical Statistics}, \bold{16}(2) 421--444.
   \url{http://datavis.ca/papers/jcgs-heplots.pdf} 
 
-Friendly, M. & Sigal, M.. (2014). Recent Advances in Visualizing Multivariate Linear Models. \emph{Revista Colombiana de Estadistica} , 37(2), 261-283. \url{http://dx.doi.org/10.15446/rce.v37n2spe.47934}.
+Friendly, M. & Sigal, M.. (2014). Recent Advances in Visualizing Multivariate Linear Models. \emph{Revista Colombiana de Estadistica} , \bold{37}(2), 261-283. \url{http://dx.doi.org/10.15446/rce.v37n2spe.47934}.
 
 Gittins, R. (1985). Canonical Analysis: A Review with Applications in Ecology,
 Berlin: Springer.
