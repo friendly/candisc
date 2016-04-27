@@ -14,6 +14,8 @@
 # last revised: 6/11/2013 8:39:51 AM
 # --- fixed bug in use of pch and col (thx: dcarlson@tamu.edu)
 # --- now use vectors() to draw variable vectors
+# --- added var.labels, var.cex
+# --- added rev.axes arg
 
 plot.candisc <- function (
 		x,		     # output object from candisc
@@ -26,6 +28,7 @@ plot.candisc <- function (
 		var.col="blue",
 		var.lwd=par("lwd"),
 		var.labels,
+		var.cex = 1, 
 		rev.axes=c(FALSE, FALSE),
 		ellipse=FALSE,    # draw data ellipses for canonical scores?
 		ellipse.prob = 0.68,
@@ -78,7 +81,7 @@ plot.candisc <- function (
 		adj2 <- rep(-0.3, ns)
 		adj2[1] <- 1.1
 		for (i in 1:ns) text(xx[i], structure[i], paste("  ", vars[i] ,"  "), 
-					adj=c(adj1[i], adj2[i]),  col=var.col, srt=90, xpd=TRUE)
+					adj=c(adj1[i], adj2[i]),  col=var.col, srt=90, cex=var.cex, xpd=TRUE)
 		par(op)
 		return(invisible())
 	}
@@ -152,7 +155,7 @@ plot.candisc <- function (
 	# DONE: replaced with call to vectors()
 	cs <- scale * structure
 	if(!missing(var.labels)) rownames(cs) <- var.labels
-	vectors(cs, pos=pos,  col=var.col, xpd=TRUE, ...)
+	vectors(cs, pos=pos,  col=var.col, xpd=TRUE, cex=var.cex, ...)
 	
 	### why doesn't this work???
 	circle <- function( center, radius, segments=41, ...) {

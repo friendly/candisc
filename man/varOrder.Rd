@@ -89,6 +89,7 @@ A vector of integer indices of the variables or a character vector of their name
 Friendly, M. & Kwan, E. (2003).
 Effect Ordering for Data Displays,
 \emph{Computational Statistics and Data Analysis}, \bold{43}, 509-539.
+\url{http://dx.doi.org/10.1016/S0167-9473(02)00290-6}
 }
 \author{
 Michael Friendly

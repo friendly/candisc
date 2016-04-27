@@ -15,7 +15,7 @@
  for the term, controlling for other model terms.
  
  In typical usage,
- the term should be a factor or interaction corresponding to a
+ the \code{term} should be a factor or interaction corresponding to a
  multivariate test with 2 or more degrees of freedom for the
  null hypothesis.
 }
@@ -27,7 +27,7 @@ candisc(mod, ...)
 \method{coef}{candisc}(object, type = c("std", "raw", "structure"), ...)
 
 \method{plot}{candisc}(x, which = 1:2, conf = 0.95, col, pch, scale, asp = 1,
-    var.col = "blue", var.lwd = par("lwd"), var.labels,
+    var.col = "blue", var.lwd = par("lwd"), var.labels, var.cex = 1,
     rev.axes=c(FALSE, FALSE),
 		ellipse=FALSE, ellipse.prob = 0.68, fill.alpha=0.1,
     prefix = "Can", suffix=TRUE, 
@@ -54,10 +54,10 @@ candisc(mod, ...)
   \item{which}{A vector of one or two integers, selecting the canonical dimension(s) to plot. If the canonical
   structure for a \code{term} has \code{ndim==1}, or \code{length(which)==1}, a 1D representation of canonical scores
   and structure coefficients is produced by the \code{plot} method.  Otherwise, a 2D plot is produced. }
-  \item{conf}{Confidence coefficient for the confidence circles plotted in the \code{plot} method}
+  \item{conf}{Confidence coefficient for the confidence circles around canonical means plotted in the \code{plot} method}
   \item{col}{A vector of colors to be used for the levels of the term in the \code{plot} method.
   In this version, you should assign colors and point symbols explicitly, rather than relying on
-  the somewhat arbitrary defaults.}
+  the somewhat arbitrary defaults, based on \code{\link[grDevices]{palette}} }
   \item{pch}{A vector of point symbols to be used for the levels of the term in the \code{plot} method}
   \item{scale}{Scale factor for the variable vectors in canonical space.  If not specified, a scale
   factor is calculated to make the variable vectors approximately fill the plot space. }
@@ -67,6 +67,7 @@ candisc(mod, ...)
   \item{var.col}{Color used to plot variable vectors}
   \item{var.lwd}{Line width used to plot variable vectors}
   \item{var.labels}{Optional vector of variable labels to replace variable names in the plots}
+  \item{var.cex}{Character expansion size for variable labels in the plots}
   \item{rev.axes}{Logical, a vector of \code{length(which)}. \code{TRUE} causes the orientation of the canonical
   scores and structure coefficients to be reversed along a given axis.}
   \item{ellipse}{Draw data ellipses for canonical scores?}

@@ -29,13 +29,20 @@ For \code{mlm}s with more than a few response variables, these methods often pro
 much simpler interpretation of the nature of effects in canonical space than
 heplots for pairs of responses or an HE plot matrix of all responses in variable space.
 
-Analogously, a multivariate linear model with quantitative predictors can also be
+Analogously, a multivariate linear (regression) model with quantitative predictors can also be
 represented in a reduced-rank space by means of a canonical correlation
 transformation of the Y and X variables to uncorrelated canonical variates,
 Ycan and Xcan.  Computation for this analysis is provided by \code{\link{cancor}}
 and related methods.  Visualization of these results in canonical space
 are provided by the \code{\link{plot.cancor}},  \code{\link{heplot.cancor}} 
 and \code{\link{heplot3d.cancor}} methods.
+
+These relations among response variables in linear models can also be
+useful for \dQuote{effect ordering}
+(Friendly & Kwan (2003)
+for \emph{variables} in other multivariate data displays to make the
+displayed relationships more coherent.  The function \code{\link{varOrder}}
+implements a collection of these methods.
 
 A few of these methods are illustrated in the vignette for the heplots package,
 
@@ -45,8 +52,8 @@ A few of these methods are illustrated in the vignette for the heplots package,
 \tabular{ll}{
 Package: \tab candisc\cr
 Type: \tab Package\cr
-Version: \tab 0.7-0\cr
-Date: \tab 2016-04-25\cr
+Version: \tab 0.7-1\cr
+Date: \tab 2016-04-27\cr
 License: \tab GPL (>= 2)\cr
 }
 The organization of functions in this package and the \pkg{heplots} package
@@ -63,6 +70,11 @@ Friendly, M. (2007).
   HE plots for Multivariate General Linear Models.
   \emph{Journal of Computational and Graphical Statistics}, \bold{16}(2) 421--444.
   \url{http://datavis.ca/papers/jcgs-heplots.pdf} 
+
+Friendly, M. & Kwan, E. (2003).
+Effect Ordering for Data Displays,
+\emph{Computational Statistics and Data Analysis}, \bold{43}, 509-539.
+\url{http://dx.doi.org/10.1016/S0167-9473(02)00290-6}
 
 Friendly, M. & Sigal, M.. (2014). Recent Advances in Visualizing Multivariate Linear Models. \emph{Revista Colombiana de Estadistica} , \bold{37}(2), 261-283. \url{http://dx.doi.org/10.15446/rce.v37n2spe.47934}.
 

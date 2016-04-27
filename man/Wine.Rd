@@ -2,7 +2,6 @@
 \alias{Wine}
 \docType{data}
 \title{
-	R Documentation
 Chemical composition of three cultivars of wine 
 }
 \description{
