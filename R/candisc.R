@@ -160,6 +160,9 @@ canrsqTable <- function( obj ) {
 # See:
 #    http://www.gseis.ucla.edu/courses/ed231a1/notes2/can1.html
 #    http://www.gseis.ucla.edu/courses/ed231a1/notes3/manova.html
+# Now only on wayback machine:
+#    https://web.archive.org/web/20100205104138/http://www.gseis.ucla.edu/courses/ed231a1/notes2/can1.html
+#    https://web.archive.org/web/20090309033727/http://www.gseis.ucla.edu/courses/ed231a1/notes3/manova.html
 
 seqWilks <- function (eig, p, df.h, df.e) 
 {

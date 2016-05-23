@@ -4,7 +4,7 @@ heplot.cancor <- function (
 	mod,		         # output object from cancor
 	which=1:2,       # canonical dimensions to plot
 	scale,           # scale factor(s) for variable vectors in can space
-	asp=NA,           # aspect ratio, to ensure equal units?
+	asp=1,           # aspect ratio, to ensure equal units?
 	var.vectors = "Y", # which variable vectors to show?
 	var.col=c("blue", "darkgreen"),  # colors for Y and X variable vectors and labels
 	var.lwd=par("lwd"),
@@ -62,7 +62,7 @@ heplot.cancor <- function (
 	canlab <- paste(prefix, which, suffix, sep="")
 
   ellipses <- heplot(can.mod, terms=terms, 
-  		xlab=canlab[1], ylab=canlab[2],  ...)
+  		xlab=canlab[1], ylab=canlab[2], asp=asp, ...)
   
 	struc <- mod$structure
   Xstructure <- struc$X.yscores[,which]
