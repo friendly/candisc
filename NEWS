@@ -1,4 +1,8 @@
 
+Changes in version 0.7-1 (2016-05-23)
+
+  o respect var.lwd in 2D plot.candisc()
+
 Changes in version 0.7-0 (2016-04-25)
 
   o Added Wine data -- three cultivars with a very simple canonical structure

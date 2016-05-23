@@ -155,7 +155,7 @@ plot.candisc <- function (
 	# DONE: replaced with call to vectors()
 	cs <- scale * structure
 	if(!missing(var.labels)) rownames(cs) <- var.labels
-	vectors(cs, pos=pos,  col=var.col, xpd=TRUE, cex=var.cex, ...)
+	vectors(cs, pos=pos,  col=var.col, xpd=TRUE, cex=var.cex, lwd=var.lwd, ...)
 	
 	### why doesn't this work???
 	circle <- function( center, radius, segments=41, ...) {
