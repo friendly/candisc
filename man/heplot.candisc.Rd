@@ -12,7 +12,7 @@ in the space of maximum discrimination.
 }
 \usage{
 \method{heplot}{candisc}(mod, which = 1:2, scale, asp = 1, var.col = "blue", 
-    var.lwd = par("lwd"), var.cex=par("cex"), 
+    var.lwd = par("lwd"), var.cex=par("cex"), var.pos,
     rev.axes=c(FALSE, FALSE),
     prefix = "Can", suffix = TRUE, terms = mod$term, ...)
 
@@ -42,6 +42,7 @@ in the space of maximum discrimination.
   \item{var.col}{ Color for variable vectors and labels }
   \item{var.lwd}{ Line width for variable vectors }
   \item{var.cex}{ Text size for variable vector labels }
+  \item{var.pos}{ Position(s) of variable vector labels wrt. the end point}
   \item{rev.axes}{Logical, a vector of \code{length(which)}. \code{TRUE} causes the orientation of the canonical
   scores and structure coefficients to be reversed along a given axis.}
   \item{prefix}{ Prefix for labels of canonical dimensions.}

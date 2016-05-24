@@ -29,6 +29,7 @@
 # -- now use plot.candisc for a 1 df term
 # heplot.candisc now returns ellipses
 # use xpd=TRUE for vector labels
+# added rev.axes, var.pos
 
 heplot.candisc <- function (
 	mod,		         # output object from candisc
@@ -38,6 +39,7 @@ heplot.candisc <- function (
 	var.col="blue",  # color for variable vectors and labels
 	var.lwd=par("lwd"),
 	var.cex=par("cex"),
+	var.pos,
 	rev.axes=c(FALSE, FALSE),
 	prefix = "Can",  # prefix for labels of canonical dimensions
 	suffix = TRUE,   # add label suffix with can % ?
@@ -60,7 +62,8 @@ heplot.candisc <- function (
 	scores <- mod$scores
 	structure <- mod$structure
   structure <- mod$structure[,which]
-#browser()
+
+
   rev.axes <- rep(rev.axes, length.out=2)
   if(isTRUE(rev.axes[1])) {
     scores[, nf+which[1]] <- -scores[, nf+which[1]]
@@ -70,8 +73,9 @@ heplot.candisc <- function (
     scores[, nf+which[2]] <- -scores[, nf+which[2]]
     structure[, 2] <- -structure[, 2]
   }
+
 ##   Construct the model formula to fit mod$scores ~ terms in original lm()
-##   in  the mod$scores data.frame
+##   with the mod$scores data.frame
 
   txt <- paste( "lm( cbind(",
               paste("Can",1:mod$rank,sep="", collapse = ","),
@@ -103,18 +107,13 @@ heplot.candisc <- function (
   # DONE: replaced previous scaling with vecscale()
 #  maxrms <- function(x) { max(sqrt(apply(x^2, 1, sum))) }
 	if (missing(scale)) {
-#		vecrange <- range(structure)
-#		ellrange <- lapply(ellipses, range)
-#		vecmax <- maxrms(structure)
-#		ellmax <- max( maxrms(ellipses$E), unlist(lapply(ellipses$H, maxrms)) )
-#		scale <- floor(  0.9 * ellmax / vecmax )
 		scale <- vecscale(structure)
 		cat("Vector scale factor set to ", scale, "\n")
 	}
 
   # DONE: replaced with a call to vectors(); but NB: can't pass ... to vectors()
   cs <- scale * structure
-  vectors(cs, col=var.col, cex=var.cex, lwd=var.lwd, xpd=TRUE)
+  vectors(cs, col=var.col, cex=var.cex, lwd=var.lwd, pos=var.pos, xpd=TRUE)
   
   invisible(ellipses)
 }

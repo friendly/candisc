@@ -15,7 +15,7 @@ vectors(x, origin = c(0, 0), labels = rownames(x),
     scale = 1, 
     col="blue",
     lwd=1, cex=1,
-    length=.1, angle=12, pos=NULL,	
+    length=.1, angle=13, pos=NULL,	
     ...)
 
 vectors3d(x, origin=c(0,0,0), labels=rownames(x), 

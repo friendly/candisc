@@ -8,15 +8,22 @@ vectors <- function(x, origin=c(0,0), labels=rownames(x),
 		col="blue",
 		lwd=1,
 		cex=1,
-		length=.1, angle=12, 
+		length=.1, angle=13, 
 		pos=NULL, ...) {
 
 	x <- scale*x
 	if (is.vector(origin)) origin <- matrix(origin, ncol=2)
-	arrows(origin[,1], origin[,2], x[,1], x[,2], lwd=lwd, col=col, length=length, angle=angle, ...)
+	.arrows(origin[,1], origin[,2], x[,1], x[,2], lwd=lwd, col=col, length=length, angle=angle, ...)
 	if (!is.null(labels)) {
 		if(missing(pos)) pos <- ifelse(x[,1]>0, 4, 2)
 		# DONE: position labels relative to arrow ends (outside)
 		text(x[,1], x[,2], labels, pos=pos, cex=cex, col=col, ...)
 		}
+}
+
+# the following function isn't exported
+
+.arrows <- function(..., angle=13){
+  angles <- seq(1, angle, by=3)
+  for (ang in angles) arrows(..., angle=ang)
 }
