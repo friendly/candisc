@@ -38,6 +38,7 @@ heplot.candisc <- function (
 	var.col="blue",  # color for variable vectors and labels
 	var.lwd=par("lwd"),
 	var.cex=par("cex"),
+	rev.axes=c(FALSE, FALSE),
 	prefix = "Can",  # prefix for labels of canonical dimensions
 	suffix = TRUE,   # add label suffix with can % ?
 	terms=mod$term,  # terms to be plotted in canonical space / TRUE=all
@@ -53,10 +54,22 @@ heplot.candisc <- function (
 	}
 
 	factors <- mod$factors                  # factor variable(s) from candisc
+	nf <- ncol(factors)
 	term <- mod$term                        # term for which candisc was done
 	lm.terms <- mod$terms                   # terms in original lm
 	scores <- mod$scores
-
+	structure <- mod$structure
+  structure <- mod$structure[,which]
+#browser()
+  rev.axes <- rep(rev.axes, length.out=2)
+  if(isTRUE(rev.axes[1])) {
+    scores[, nf+which[1]] <- -scores[, nf+which[1]]
+    structure[, 1] <- -structure[, 1]
+  }
+  if(isTRUE(rev.axes[2])) {
+    scores[, nf+which[2]] <- -scores[, nf+which[2]]
+    structure[, 2] <- -structure[, 2]
+  }
 ##   Construct the model formula to fit mod$scores ~ terms in original lm()
 ##   in  the mod$scores data.frame
 
@@ -66,6 +79,7 @@ heplot.candisc <- function (
               paste( lm.terms, collapse = "+"), ", data=scores)" )
   can.mod <- eval(parse(text=txt))
 
+  
 ##   Construct labels for canonical variables
 	canvar <- paste('Can', which, sep="")   # names of canonical variables to plot
 	if (is.logical(suffix) & suffix)
@@ -85,7 +99,6 @@ heplot.candisc <- function (
   		xlab=canlab[1], ylab=canlab[2],  asp=asp, ...)
   abline(h=0, v=0, col="gray")
   
-  structure <- mod$structure[,which]
 
   # DONE: replaced previous scaling with vecscale()
 #  maxrms <- function(x) { max(sqrt(apply(x^2, 1, sum))) }

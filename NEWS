@@ -2,6 +2,7 @@
 Changes in version 0.7-1 (2016-05-23)
 
   o respect var.lwd in 2D plot.candisc()
+  o heplot.candisc gets a rev.axes argument
 
 Changes in version 0.7-0 (2016-04-25)
 

@@ -21,7 +21,7 @@ effects in the space of the canonical Y variables selected by \code{which}.
 }
 
 \usage{
-\method{heplot}{cancor}(mod, which = 1:2, scale, asp=NA,
+\method{heplot}{cancor}(mod, which = 1:2, scale, asp=1,
     var.vectors = "Y", var.col = c("blue", "darkgreen"), var.lwd = par("lwd"), 
     var.cex = par("cex"), var.xpd = TRUE, 
     prefix = "Ycan", suffix = TRUE, terms = TRUE, ...)
