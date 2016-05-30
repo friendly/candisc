@@ -157,7 +157,6 @@ plot.candisc <- function (
 	# DONE: replaced with call to vectors()
 	cs <- scale * structure
 	if(!missing(var.labels)) rownames(cs) <- var.labels
-	vectors(cs, pos=pos,  col=var.col, xpd=TRUE, cex=var.cex, lwd=var.lwd, ...)
 	vectors(cs, col=var.col, cex=var.cex, lwd=var.lwd, pos=var.pos, xpd=TRUE)
 	
 	### why doesn't this work???
