@@ -27,7 +27,7 @@ candisc(mod, ...)
 \method{coef}{candisc}(object, type = c("std", "raw", "structure"), ...)
 
 \method{plot}{candisc}(x, which = 1:2, conf = 0.95, col, pch, scale, asp = 1,
-    var.col = "blue", var.lwd = par("lwd"), var.labels, var.cex = 1,
+    var.col = "blue", var.lwd = par("lwd"), var.labels, var.cex = 1, var.pos,
     rev.axes=c(FALSE, FALSE),
 		ellipse=FALSE, ellipse.prob = 0.68, fill.alpha=0.1,
     prefix = "Can", suffix=TRUE, 
@@ -68,6 +68,8 @@ candisc(mod, ...)
   \item{var.lwd}{Line width used to plot variable vectors}
   \item{var.labels}{Optional vector of variable labels to replace variable names in the plots}
   \item{var.cex}{Character expansion size for variable labels in the plots}
+  \item{var.pos}{ Position(s) of variable vector labels wrt. the end point.  If not specified, the labels are
+  out-justified left and right with respect to the end points.}
   \item{rev.axes}{Logical, a vector of \code{length(which)}. \code{TRUE} causes the orientation of the canonical
   scores and structure coefficients to be reversed along a given axis.}
   \item{ellipse}{Draw data ellipses for canonical scores?}

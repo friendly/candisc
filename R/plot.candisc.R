@@ -16,6 +16,7 @@
 # --- now use vectors() to draw variable vectors
 # --- added var.labels, var.cex
 # --- added rev.axes arg
+# --- added var.pos, same as in heplot.candisc
 
 plot.candisc <- function (
 		x,		     # output object from candisc
@@ -29,6 +30,7 @@ plot.candisc <- function (
 		var.lwd=par("lwd"),
 		var.labels,
 		var.cex = 1, 
+		var.pos,
 		rev.axes=c(FALSE, FALSE),
 		ellipse=FALSE,    # draw data ellipses for canonical scores?
 		ellipse.prob = 0.68,
@@ -156,6 +158,7 @@ plot.candisc <- function (
 	cs <- scale * structure
 	if(!missing(var.labels)) rownames(cs) <- var.labels
 	vectors(cs, pos=pos,  col=var.col, xpd=TRUE, cex=var.cex, lwd=var.lwd, ...)
+	vectors(cs, col=var.col, cex=var.cex, lwd=var.lwd, pos=var.pos, xpd=TRUE)
 	
 	### why doesn't this work???
 	circle <- function( center, radius, segments=41, ...) {

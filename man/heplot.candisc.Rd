@@ -42,7 +42,8 @@ in the space of maximum discrimination.
   \item{var.col}{ Color for variable vectors and labels }
   \item{var.lwd}{ Line width for variable vectors }
   \item{var.cex}{ Text size for variable vector labels }
-  \item{var.pos}{ Position(s) of variable vector labels wrt. the end point}
+  \item{var.pos}{ Position(s) of variable vector labels wrt. the end point.  If not specified, the labels are
+  out-justified left and right with respect to the end points.}
   \item{rev.axes}{Logical, a vector of \code{length(which)}. \code{TRUE} causes the orientation of the canonical
   scores and structure coefficients to be reversed along a given axis.}
   \item{prefix}{ Prefix for labels of canonical dimensions.}
