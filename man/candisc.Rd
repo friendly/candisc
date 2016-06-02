@@ -33,7 +33,7 @@ candisc(mod, ...)
     prefix = "Can", suffix=TRUE, 
     titles.1d = c("Canonical scores", "Structure"), ...)
     
-\method{print}{candisc}(x, digits=max(getOption("digits") - 2, 3), ...)
+\method{print}{candisc}(x, digits=max(getOption("digits") - 2, 3), LRtests=TRUE, ...)
 
 \method{summary}{candisc}(object, means = TRUE, scores = FALSE, coef = c("std"),
     ndim, digits = max(getOption("digits") - 2, 4), ...)
@@ -86,6 +86,8 @@ candisc(mod, ...)
   \item{coef}{Type of coefficients printed by the summary method. Any one or more of
   "std", "raw", or "structure"}
   \item{digits}{significant digits to print.}
+  \item{LRtests}{logical; should likelihood ratio tests for the canonical dimensions 
+  be printed?}
   \item{\dots}{arguments to be passed down.  In particular, \code{type="n"} can be used with
   the \code{plot} method to suppress the display of canonical scores.}
 }
