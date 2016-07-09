@@ -10,7 +10,7 @@ dataIndex <- function(x, term){
     factors <- data[, sapply(data, is.factor), drop=FALSE]
     term.factors <- unlist(strsplit(term, ":"))
     if (any(which <- !term.factors %in% colnames(factors))) 
-        stop(paste(term.factors[which], collapse=", "), " not in the model")
+        stop(paste(term.factors[which], collapse=", "), " not a factor in the model or data")
     n.factors <- length(term.factors)
     factor.values <- factors[,term.factors, drop=FALSE]
     rows <- nrow(levs <- unique(factor.values))

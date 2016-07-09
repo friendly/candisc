@@ -116,7 +116,7 @@ plot.candisc <- function (
 	}
 	
 	# use asp=1 to make the plot equally scaled
-	Ind <- dataIndex(x$scores,term)
+	Ind <- dataIndex(x$scores, term)
 	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col[Ind], pch=pch[Ind], ...) 
 	abline(h=0, v=0, lty=2, col="grey")
 	
