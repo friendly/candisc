@@ -44,7 +44,7 @@ for \emph{variables} in other multivariate data displays to make the
 displayed relationships more coherent.  The function \code{\link{varOrder}}
 implements a collection of these methods.
 
-A few of these methods are illustrated in the vignette for the heplots package,
+A few of these methods are illustrated in the vignette for the \pkg{heplots} package,
 
 \code{vignette("HE-examples", package="heplots")}.
 }
@@ -52,8 +52,8 @@ A few of these methods are illustrated in the vignette for the heplots package,
 \tabular{ll}{
 Package: \tab candisc\cr
 Type: \tab Package\cr
-Version: \tab 0.7-1\cr
-Date: \tab 2016-04-27\cr
+Version: \tab 0.7-2\cr
+Date: \tab 2016-11-09\cr
 License: \tab GPL (>= 2)\cr
 }
 The organization of functions in this package and the \pkg{heplots} package
@@ -76,7 +76,9 @@ Effect Ordering for Data Displays,
 \emph{Computational Statistics and Data Analysis}, \bold{43}, 509-539.
 \url{http://dx.doi.org/10.1016/S0167-9473(02)00290-6}
 
-Friendly, M. & Sigal, M.. (2014). Recent Advances in Visualizing Multivariate Linear Models. \emph{Revista Colombiana de Estadistica} , \bold{37}(2), 261-283. \url{http://dx.doi.org/10.15446/rce.v37n2spe.47934}.
+Friendly, M. & Sigal, M. (2014). Recent Advances in Visualizing Multivariate Linear Models. \emph{Revista Colombiana de Estadistica} , \bold{37}(2), 261-283. \url{http://dx.doi.org/10.15446/rce.v37n2spe.47934}.
+
+Friendly, M. & Sigal, M. (2016). Graphical Methods for Multivariate Linear Models in Psychological Research: An R Tutorial, \emph{The Quantitative Methods for Psychology}, in press.
 
 Gittins, R. (1985). Canonical Analysis: A Review with Applications in Ecology,
 Berlin: Springer.

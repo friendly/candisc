@@ -1,3 +1,6 @@
+Changes in version 0.7-2 (2016-11-09)
+
+  o Add Wilks.candisc method;  this corrects a bug where the values of the stepdown tests for canonical discriminant analysis were calculated incorrectly [thx: Martina Vandebroek]
 
 Changes in version 0.7-1 (2016-05-23)
 

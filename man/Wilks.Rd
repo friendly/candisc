@@ -1,34 +1,37 @@
 \name{Wilks}
 \alias{Wilks}
 \alias{Wilks.cancor}
+\alias{Wilks.candisc}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Wilks Lambda Tests for Canonical Correlations
 }
 \description{
-Tests the sequential hypotheses that a given canonical correlation and all
-that follow it are zero.
+Tests the sequential hypotheses that the \eqn{i}th canonical correlation and all
+that follow it are zero,
+\deqn{\rho_i = \rho_{i+1} = \cdots = 0}
 }
 \usage{
 
 Wilks(object, ...)
 
 \method{Wilks}{cancor}(object, ...)
+\method{Wilks}{candisc}(object, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
 
   \item{object}{
-An object of class \code{cancor}
+An object of class \code{"cancor""} or \code{"candisc""}
 }
   \item{\dots}{
-Other arguments passed to methods
+Other arguments passed to methods (not used)
 }
 
 }
 \details{
-Wilks' Lambda values are converted to F statistics using Rao's 
-approximation.
+Wilks' Lambda values are calculated from the eigenvalues and converted to F statistics using Rao's 
+approximation.  
 }
 \value{
 A data.frame (of class \code{"anova"}) containing the test statistics
@@ -61,6 +64,10 @@ Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
 
 cc <- cancor(X, Y, set.names=c("PA", "Ability"))
 Wilks(cc)
+
+iris.mod <- lm(cbind(Petal.Length, Sepal.Length, Petal.Width, Sepal.Width) ~ Species, data=iris)
+iris.can <- candisc(iris.mod, data=iris)
+Wilks(iris.can)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
