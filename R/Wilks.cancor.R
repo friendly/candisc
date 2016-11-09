@@ -32,7 +32,8 @@ for (i in 1:k) {
 }
 
 pv <- pf(Fstat, df1, df2, lower.tail = FALSE)
-tests <- cbind(CanR=object$cancor, WilksL = w, F = Fstat, df1 = df1, df2 = df2, p.value = pv)
+tests <- cbind(CanR=object$cancor, w, Fstat, df1, df2, pv)
+colnames(tests) <- c("CanR", "LR test stat", "approx F", "numDF", "denDF", "Pr(> F)")
 
 tests <- structure(as.data.frame(tests), 
 heading = paste("\nTest of H0: The canonical correlations in the",
