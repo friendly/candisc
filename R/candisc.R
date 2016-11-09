@@ -126,13 +126,14 @@ print.candisc <- function( x, digits=max(getOption("digits") - 2, 3), LRtests=TR
   print(table, digits=digits,na.print = "")
   
   if (LRtests) {
-    rank <- x$rank
-    eigs <- x$eigenvalues[1:rank]
-    tests <- seqWilks(eigs, rank, x$dfh, x$dfe)
-    tests <- structure(as.data.frame(tests), 
-                       heading = paste("\nTest of H0: The canonical correlations in the",
-                                       "\ncurrent row and all that follow are zero\n") , 
-                       class = c("anova", "data.frame"))
+    # rank <- x$rank
+    # eigs <- x$eigenvalues[1:rank]
+    # tests <- seqWilks(eigs, rank, x$dfh, x$dfe)
+    # tests <- structure(as.data.frame(tests), 
+    #                    heading = paste("\nTest of H0: The canonical correlations in the",
+    #                                    "\ncurrent row and all that follow are zero\n") , 
+    #                    class = c("anova", "data.frame"))
+    tests <- Wilks(x)
     print(tests)
   }
   invisible(x)      
