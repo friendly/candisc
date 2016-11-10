@@ -147,7 +147,10 @@ heplot(cc, hypotheses=list("All X"=colnames(X)),
 	)
 
 # 3D version
-heplot3d(cc, var.lwd=3, var.col="red")	
+\dontrun{
+heplot3d(cc, var.lwd=3, var.col="red")
+}
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
