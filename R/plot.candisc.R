@@ -44,6 +44,10 @@ plot.candisc <- function (
 	term <- x$term
 	factors <- x$factors
 	rev.axes <- rep(rev.axes, length.out=2)
+
+	nlev <- if(is.matrix(x$means)) nrow(x$means) else length(x$means)     # number of groups
+	if (missing(col)) col <- rep(palette()[-1], length.out=nlev)
+	fill.col <- heplots::trans.colors(col, fill.alpha)
 	
 	if (x$ndim < 2 || length(which)==1) {
 		which <- which[1]
@@ -70,11 +74,18 @@ plot.candisc <- function (
 		canlab <- paste(prefix, which, suffix, sep="")
 #		scores <- x$scores[,canvar]
 		formule <- formula( paste(canvar, " ~", term, sep="") )
-		boxplot(formule, data=x$scores, ylab=canlab, xlab=term, main=titles.1d[1])
+		boxplot(formule, data=x$scores, ylab=canlab, xlab=term, col=fill.col, main=titles.1d[1])
 		xx <- 1:ns
 		par(mar=c(5,0,4,1)+.1)
-# TODO: should set ylim = c(0,1) or c(-1,1) and maybe draw tick marks
-		plot(xx, structure, type="n", ylab="", xlab="", xaxt="n", yaxt="n", main=titles.1d[2])
+
+		# TODO: should set ylim = c(0,1) or c(-1,1) and maybe draw tick marks
+		ylim <- range( c(structure,
+		                 if (all(structure > 0)) +1 else 0,
+		                 if (all(structure < 0)) -1 else 0)
+		                 )
+		xlim <- c(0.5, ns+0.5)
+		plot(xx, structure, type="n", ylab="", xlab="", 
+		     xaxt="n", yaxt="n", xlim=xlim, ylim=ylim, main=titles.1d[2])
 		arrows(xx, 0, xx, structure, length=.1, 	angle=15,
 				col=var.col, lwd=var.lwd )	
 		abline(h=0, lty=2, col="gray")	
