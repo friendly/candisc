@@ -74,7 +74,7 @@ plot.candisc <- function (
 		canlab <- paste(prefix, which, suffix, sep="")
 #		scores <- x$scores[,canvar]
 		formule <- formula( paste(canvar, " ~", term, sep="") )
-		boxplot(formule, data=x$scores, ylab=canlab, xlab=term, col=fill.col, main=titles.1d[1])
+		boxplot(formule, data=x$scores, ylab=canlab, xlab=term, col=fill.col, main=titles.1d[1], ...)
 		xx <- 1:ns
 		par(mar=c(5,0,4,1)+.1)
 
