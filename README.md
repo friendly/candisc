@@ -49,3 +49,15 @@ A few of these methods are illustrated in the vignette for the `heplots` package
 
 `vignette("HE-examples", package="heplots")`.
 
+## Installation
+
+Get the released version from CRAN:
+
+     install.packages("candisc")
+
+The development version can be installed to your R library directly from this repo via:
+
+     if (!require(devtools)) install.packages("devtools")
+     library(devtools)
+     install_github("friendly/candisc")
+
