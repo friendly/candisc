@@ -45,7 +45,7 @@ New York: Macmillan, Appendix F, 430-442.
 }
 \references{
 High School and Beyond data files:
-\url{http://www.sscnet.ucla.edu/issr/da/index/techinfo/I78961.HTM}
+\url{http://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/7896}
 }
 \examples{
 str(HSB)

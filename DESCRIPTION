@@ -2,7 +2,7 @@ Package: candisc
 Type: Package
 Title: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis
 Version: 0.7-3
-Date: 2016-11-20
+Date: 2017-09-15
 Depends: car, heplots (>= 0.8-6), graphics, stats 
 Suggests: rgl, corrplot
 LazyLoad: yes
