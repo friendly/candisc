@@ -1,7 +1,7 @@
 ## Test environments
-* local Windows 7 install, 3.2.5 (2016-04-14)
-* R-Forge R version 3.3.2 Patched (2016-11-07 r71637)
-* win-builder R Under development (unstable) (2016-11-09 r71639)
+* local Windows 7 install, 3.3.2 (2016-10-31)
+* R-Forge R 3.3.3 Patched (2017-03-15 r72357)
+* win-builder R Under development (unstable) (2017-09-12 r73242)
 
 ## R CMD check results
 There were no ERRORs or WARNINGs.  There was one NOTE:
@@ -11,22 +11,22 @@ Examples with CPU or elapsed time > 10s
                 user system elapsed
 heplot.candisc 18.25   0.11   18.89
 
-I have already made several examples \dontrun{}, but would prefer not to reduce the
+I have already made most of the examples \dontrun{}, but would prefer not to reduce the
 number of run-able examples further.
 
 ## Comments
-This is a minor release, fixing a serious bug and adding some enhancements
+This is a minor release, adding some enhancements
+
+### Changes in version 0.7-3 (2016-11-20)
+
+o Fix 1D plot.candisc to better reflect the canonical structure coefficients. The ylim of the
+  scale is now forced to include 0 and -1 and/or +1 depending on the signs of the structure
+  coefficients.  [thx: Martina Vandebroek]
+o Pass ... to boxplot() and plot() for 1D in plot.candisc
 
 ### candisc 0.7-2
 
   o Add Wilks.candisc method;  this corrects a bug where the values of the stepdown tests for canonical discriminant analysis were calculated incorrectly [thx: Martina Vandebroek]
   o Now use Wilks.candisc in print.candisc
 
-### candisc 0.7-1
 
-  o respect var.lwd in 2D plot.candisc()
-  o heplot.candisc() gets a rev.axes argument to reverse the axes and a var.pos argument to position  variable labels
-  o vectors() now produces nicer arrow head a la matlib::vectors()
-  o added var.pos argument to plot.candisc
-  o allow to suppress likelihood ratio tests in print.candisc
-  

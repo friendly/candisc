@@ -102,7 +102,7 @@ heplot(grass.can1, scale=6)
 heplot(grass.can1, scale=6, terms=TRUE)
 heplot(grass.canL, terms=TRUE, ask=FALSE)
 
-\dontrun{ 
+\donttest{ 
 heplot3d(grass.can1, wire=FALSE)
 # compare with non-iso scaling
 rgl::aspect3d(x=1,y=1,z=1)
@@ -117,7 +117,7 @@ pottery.can <-candisc(pottery.mod)
 heplot(pottery.can, var.lwd=3)
 heplot3d(pottery.can, var.lwd=3, scale=10, zlim=c(-3,3), wire=FALSE)
 
-\dontrun{ 
+\donttest{ 
 play3d(rgl::spin3d(axis = c(1, 0, 0), rpm = 5), duration=12)
 }
 
