@@ -1,5 +1,5 @@
 ## Test environments
-* local Windows 7 install, 3.3.2 (2016-10-31)
+* local Windows 7 install, 3.4.1 (2017-06-30)
 * R-Forge R 3.3.3 Patched (2017-03-15 r72357)
 * win-builder R Under development (unstable) (2017-09-12 r73242)
 
