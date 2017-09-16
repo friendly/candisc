@@ -1,4 +1,4 @@
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/candisc)](http://cran.r-project.org/package=candisc)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/candisc)](https://cran.r-project.org/package=candisc)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/candisc)](https://cran.r-project.org/package=candisc)
 [![Rdoc](http://www.rdocumentation.org/badges/version/candisc)](http://www.rdocumentation.org/packages/candisc)
 
