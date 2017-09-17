@@ -15,11 +15,14 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE, collapse=TRUE, R.options=lis
 
 ## Background
 
-This vignette uses the `Diabetes` data from the `heplots` package to illustrate various graphical methods for multivariate linear models.
 
 Reaven and Miller (1979) examined the relationship among blood chemistry measures of glucose tolerance and insulin in 145 nonobese adults. They used the PRIM9 system at the Stanford Linear Accelerator Center to visualize the data in 3D, and discovered a peculiar pattern that looked like a large blob with two wings in different directions.
 
-After further analysis, the subjects were classified as subclinical (chemical) diabetics, overt diabetics and normals. This study was influential in defining the stages of development of Type 2 diabetes. Overt diabetes is the most advanced stage, characterized by elevated fasting blood glucose concentration and classical symptoms. Preceding overt diabetes is the latent or chemical diabetic stage, with no symptoms of diabetes but demonstrable abnormality of oral or intravenous glucose tolerance. 
+After further analysis, the subjects were classified as subclinical (chemical) diabetics, overt diabetics and normals. This study was influential in defining the stages of development of Type 2 diabetes. Overt diabetes is the most advanced stage, characterized by elevated fasting blood glucose concentration and classical symptoms. Preceding overt diabetes is the latent or chemical diabetic stage, with no symptoms of diabetes but demonstrable abnormality of oral or intravenous glucose tolerance.
+
+The `Diabetes` data is contained in the `heplots` package.  This vignette uses this data set to illustrate various graphical methods for multivariate linear models. As we'll see, the data is peculiar in several respects and a standard MANOVA
+is problematic because some assumptions are violated.  We treat this as a learning opportunity, because it allows us
+to illustrate several diagnostic plots.
 
 ### Setting up
 Load the required packages and the data
@@ -28,6 +31,11 @@ library(heplots)
 library(candisc)
 library(car)
 ```
+```{r}
+data(Diabetes, package="heplots")
+str(Diabetes)
+```
+
 The variables are:
 
 * `relwt`: relative weight, expressed as the ratio of actual weight to expected weight, given the person's height
@@ -37,21 +45,20 @@ The variables are:
 * `sspg`: steady state plasma glucose, a measure of insulin resistance
 * `group`: diagnostic group
 
-```{r}
-data(Diabetes, package="heplots")
-str(Diabetes)
-```
-
 ## Homogeneity of variance
 We start by plotting covariance ellipses for three of the variables in the data set.
+`heplots::covEllipses` is similar to `dataEllipse` in the `car` package, but tuned
+to plots designed to assess homogeneity of covariance matrices in MANOVA designs.
+
 It is clear from this that there is a problem of heterogeneity of variance-covariance matrices here.
+The normal group shows the smallest variances and the overt diabetic group the largest.
 ```{r covEllipse, fig.height=5, fig.width=5}
 covEllipses(Diabetes[,2:5], Diabetes$group, fill=TRUE, pooled=FALSE, 
 	col=c("blue", "red", "darkgreen"), variables=1:3)
 ```
 
-Box's M test confirms that there is substantial heterogeneity of covariance matrices.  The `plot` method for the result gives a convenient
-display of how the groups differ.
+### Box's M test
+Box's M test confirms that there is substantial heterogeneity of covariance matrices.  The `plot` method for the result gives a convenient and informative display of how the groups differ in the components ($log | S_i |$) that go into Box's M test.
 
 ```{r boxm, fig.width=7, fig.height=3}
 diab.boxm <- boxM(Diabetes[,2:5], Diabetes$group)
@@ -63,31 +70,59 @@ plot(diab.boxm)
 We ignore this problem for the sake of this example, and proceed to fit the MANOVA model for the mean differences
 among groups.
 
-```{r}
+The MANOVA shows a highly significant effect of `group` on the collection of response variables.
+
+```{r diab-mlm}
 diab.mlm <- lm(cbind(glufast, glutest, instest, sspg) ~ group, data=Diabetes)
 Anova(diab.mlm)
 ```
 
+### Examine residuals in a QQ plot
 
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r cqplot, fig.width=5, fig.height=4}
+cqplot(diab.mlm)
 ```
 
+## HE plots
 
-## More Examples
+An HE plot shows the $H$ ellipse for differences among means together with the $E$ ellipse for error.
+By default, the first two response variables are plotted.
+The result shows that the means on both `glufast` and `glutest` are ordered
+`Normal < Chemical < Overt`.
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+```{r he1, fig.width=5, fig.height=5}
+heplot(diab.mlm, fill=TRUE, fill.alpha=0.1)
 ```
 
-Also a quote using `>`:
+The `pairs` method for an MLM gives a scatterplot matrix of HE plots.
+The pattern for `instest` seems to differ from the other variables.
+```{r he2, fig.width=5, fig.height=5}
+pairs(diab.mlm, fill=TRUE, fill.alpha=0.1)
+```
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+## Canonical discriminant analysis
+
+Canonical discriminant analysis effectively projects the data into the space
+of linear combinations of the responses that accounts for the greatest
+proportion of the between-group variance relative to within-group variance.
+
+In this case, with $g=3$ groups, this space is two-dimensional, so all differences
+can be seen in a 2D plot.
+
+```{r diab-can}
+diab.can <- candisc(diab.mlm)
+diab.can
+```
+
+### Canonical discriminant plot
+
+```{r diab-can-plot, fig.width=6, fig.height=4}
+plot(diab.can, ellipse=TRUE)
+```
+
+### Canonical HE plot
+
+```{r diab-heplot, , fig.width=6, fig.height=4}
+heplot(diab.can, fill=c(TRUE, FALSE), fill.alpha=0.1)
+```
+
