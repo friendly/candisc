@@ -4,7 +4,9 @@ Title: Visualizing Generalized Canonical Discriminant and Canonical Correlation 
 Version: 0.7-3
 Date: 2017-09-15
 Depends: car, heplots (>= 0.8-6), graphics, stats 
-Suggests: rgl, corrplot
+Suggests: rgl, corrplot,
+    knitr,
+    rmarkdown
 LazyLoad: yes
 LazyData: yes
 Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),
@@ -24,3 +26,4 @@ Description: Functions for computing and visualizing
 	now provided for canonical correlation analysis when all predictors are quantitative.
 License: GPL (>= 2)
 Packaged: 10/9/2008 6:12PM; Michael Friendly
+VignetteBuilder: knitr

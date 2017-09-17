@@ -1,0 +1,90 @@
+---
+title: "Diabetes data: heplots and candisc examples"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Diabetes data: heplots and candisc examples}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE, collapse=TRUE, R.options=list(digits=4))
+```
+
+## Background
+
+This vignette uses the `Diabetes` data from the `heplots` package to illustrate various graphical methods for multivariate linear models.
+
+Reaven and Miller (1979) examined the relationship among blood chemistry measures of glucose tolerance and insulin in 145 nonobese adults. They used the PRIM9 system at the Stanford Linear Accelerator Center to visualize the data in 3D, and discovered a peculiar pattern that looked like a large blob with two wings in different directions.
+
+After further analysis, the subjects were classified as subclinical (chemical) diabetics, overt diabetics and normals. This study was influential in defining the stages of development of Type 2 diabetes. Overt diabetes is the most advanced stage, characterized by elevated fasting blood glucose concentration and classical symptoms. Preceding overt diabetes is the latent or chemical diabetic stage, with no symptoms of diabetes but demonstrable abnormality of oral or intravenous glucose tolerance. 
+
+### Setting up
+Load the required packages and the data
+```{r setup}
+library(heplots)
+library(candisc)
+library(car)
+```
+The variables are:
+
+* `relwt`: relative weight, expressed as the ratio of actual weight to expected weight, given the person's height
+* `glufast`: fasting plasma glucose level
+* `glutest`: test plasma glucose level, a measure of glucose intolerance,
+* `instest`: plasma insulin during test, a measure of insulin response to oral glucose,
+* `sspg`: steady state plasma glucose, a measure of insulin resistance
+* `group`: diagnostic group
+
+```{r}
+data(Diabetes, package="heplots")
+str(Diabetes)
+```
+
+## Covariance ellipses
+We start by plotting covariance ellipses for three of the variables in the data set.
+It is clear from this that there is a problem of heterogeneity of variance-covariance matrices here.
+```{r covEllipse, fig.height=5, fig.width=5}
+covEllipses(Diabetes[,2:5], Diabetes$group, fill=TRUE, pooled=FALSE, 
+	col=c("blue", "red", "darkgreen"), variables=1:3)
+```
+
+
+## Styles
+
+The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+
+    output: 
+      rmarkdown::html_vignette:
+        css: mystyles.css
+
+## Figures
+
+The figure sizes have been customised so that you can easily put two images side-by-side. 
+
+```{r, fig.show='hold'}
+plot(1:10)
+plot(10:1)
+```
+
+You can enable figure captions by `fig_caption: yes` in YAML:
+
+    output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+
+Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+
+## More Examples
+
+You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+> "He who gives up [code] safety for [code] speed deserves neither."
+([via](https://twitter.com/hadleywickham/status/504368538874703872))
