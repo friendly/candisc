@@ -15,7 +15,7 @@ I have already made most of the examples \dontrun{}, but would prefer not to red
 number of run-able examples further.
 
 ## Comments
-This is a minor release, adding some enhancements
+This is a minor release, adding some enhancements and a new vignette.
 
 ### Changes in version 0.7-3 (2016-11-20)
 
@@ -23,6 +23,7 @@ o Fix 1D plot.candisc to better reflect the canonical structure coefficients. Th
   scale is now forced to include 0 and -1 and/or +1 depending on the signs of the structure
   coefficients.  [thx: Martina Vandebroek]
 o Pass ... to boxplot() and plot() for 1D in plot.candisc
+o Added diabetes vignette
 
 ### candisc 0.7-2
 
