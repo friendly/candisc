@@ -18,9 +18,9 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE, collapse=TRUE, R.options=lis
 
 Reaven and Miller (1979) examined the relationship among blood chemistry measures of glucose tolerance and insulin in 145 nonobese adults. They used the PRIM9 system at the Stanford Linear Accelerator Center to visualize the data in 3D, and discovered a peculiar pattern that looked like a large blob with two wings in different directions.
 
-After further analysis, the subjects were classified as subclinical (chemical) diabetics, overt diabetics and normals. This study was influential in defining the stages of development of Type 2 diabetes. Overt diabetes is the most advanced stage, characterized by elevated fasting blood glucose concentration and classical symptoms. Preceding overt diabetes is the latent or chemical diabetic stage, with no symptoms of diabetes but demonstrable abnormality of oral or intravenous glucose tolerance.
+After further analysis, the subjects were classified as sub-clinical (chemical) diabetics, overt diabetics and normals. This study was influential in defining the stages of development of Type 2 diabetes. Overt diabetes is the most advanced stage, characterized by elevated fasting blood glucose concentration and classical symptoms. Preceding overt diabetes is the latent or chemical diabetic stage, with no symptoms of diabetes but demonstrable abnormality of oral or intravenous glucose tolerance.
 
-The `Diabetes` data is contained in the `heplots` package.  This vignette uses this data set to illustrate various graphical methods for multivariate linear models. As we'll see, the data is peculiar in several respects and a standard MANOVA
+The `Diabetes` data set is contained in the `heplots` package.  This vignette uses this data set to illustrate various graphical methods for multivariate linear models. As we'll see, the data is peculiar in several respects and a standard MANOVA
 is problematic because some assumptions are violated.  We treat this as a learning opportunity, because it allows us
 to illustrate several diagnostic plots.
 
@@ -79,7 +79,18 @@ Anova(diab.mlm)
 
 ### Examine residuals in a QQ plot
 
-```{r cqplot, fig.width=5, fig.height=4}
+Another assumption of MANOVA is that the residuals have a multivaruiate normal distribution.
+This can be assessed visually with a Chi-square QQ plot, that plots 
+squared Mahalanobis distances ($D^2$) of the residuals vs. corresponding quantiles of the 
+$\chi^2$ distribution with $p$ degrees of freedom.
+The `cqplot` function in the `heplots` package is designed to do this from a fitted
+MLM object. A confidence envelope makes it easy to see when the departure
+is large enough to cause concern.
+
+It can be seen here that the points differ substantially from the red line
+of equality.  There are far too many points with large $D^2$ values.
+
+```{r cqplot, fig.width=6, fig.height=5}
 cqplot(diab.mlm)
 ```
 
@@ -96,6 +107,7 @@ heplot(diab.mlm, fill=TRUE, fill.alpha=0.1)
 
 The `pairs` method for an MLM gives a scatterplot matrix of HE plots.
 The pattern for `instest` seems to differ from the other variables.
+
 ```{r he2, fig.width=5, fig.height=5}
 pairs(diab.mlm, fill=TRUE, fill.alpha=0.1)
 ```
@@ -107,7 +119,9 @@ of linear combinations of the responses that accounts for the greatest
 proportion of the between-group variance relative to within-group variance.
 
 In this case, with $g=3$ groups, this space is two-dimensional, so all differences
-can be seen in a 2D plot.
+can be seen in a 2D plot.  From the output below, nearly 90% of between-group
+mean differences are accounted for by the first canonical dimension.
+Both canonical dimensions are significant, by a likelihood ratio stepdown test.
 
 ```{r diab-can}
 diab.can <- candisc(diab.mlm)
@@ -115,14 +129,50 @@ diab.can
 ```
 
 ### Canonical discriminant plot
+The `plot` method for a `candisc` object plots the scores on the canonical dimensions and overlays
+60% data ellipses for each group. The positions of the group means show the the means on
+the canonical dimensions.
+
+The relationship of the response variables to the canonical dimensions
+is shown by vectors (similar to a biplot).  Each vector is defined by the correlations
+(structure coefficients) it has with the canonical dimensions.^[The structure coefficients determine 
+only the angle of the vector with respect to the coordinate
+axes.  The vectors are all multiplied by a scale factor, chosen so the vectors nearly fill the
+plot frame.]
 
 ```{r diab-can-plot, fig.width=6, fig.height=4}
-plot(diab.can, ellipse=TRUE)
+plot(diab.can, ellipse=TRUE, var.lwd=2)
 ```
+
+In this plot it can be seen that: 
+
+* Dimension 1 is highly related to `glufast`, `glutest` and `sspg`,
+and the groups are ordered `Normal < Chemical < Overt`.
+
+* Dimension 2 distinguishes the `Chemical_Diabetic` group from the other two.
+This dimension is largely related to `instest`, the plasma insulin during test.
+This confirms what we saw in the HE plot matrix for all the responses.
+
+* The relative sizes of the data ellipses for the canonical scores is another visual indication
+of the lack of heterogeneity of variances.
 
 ### Canonical HE plot
 
+The `heplot` method for `candisc` objects gives an HE plot summary of the canonical
+discriminant analysis. The variable vectors are the same as in the canonical
+structure plot. The size of the $H$ ellipse relative to that of the $E$ ellipse
+is an indication of the magnitude of the multivariate effect for `group`.
+
 ```{r diab-heplot, , fig.width=6, fig.height=4}
-heplot(diab.can, fill=c(TRUE, FALSE), fill.alpha=0.1)
+heplot(diab.can, fill=c(TRUE, FALSE), fill.alpha=0.1, var.lwd=2)
 ```
 
+## Other analyses
+
+There are other methods that could be used to analyse these data.
+
+## References
+
+Reaven, G. M. & Miller, R. G. (1979).
+An Attempt to Define the Nature of Chemical Diabetes Using a Multidimensional Analysis 
+*Diabetologia*, **16**, 17-24.
