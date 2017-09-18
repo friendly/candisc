@@ -45,8 +45,9 @@ for *variables* in other multivariate data displays to make the
 displayed relationships more coherent.  The function `varOrder`
 implements a collection of these methods.
 
-A few of these methods are illustrated in the vignette for the `heplots` package,
-
+A new vignette, `vignette("diabetes", package="candisc")`,
+illustrates some of these methods.
+A more comprehensive collection of examples is contained in the vignette for the `heplots` package,
 `vignette("HE-examples", package="heplots")`.
 
 ## Installation
