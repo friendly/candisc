@@ -102,13 +102,11 @@ heplot(grass.can1, scale=6)
 heplot(grass.can1, scale=6, terms=TRUE)
 heplot(grass.canL, terms=TRUE, ask=FALSE)
 
-\donttest{ 
 heplot3d(grass.can1, wire=FALSE)
 # compare with non-iso scaling
 rgl::aspect3d(x=1,y=1,z=1)
 # or,
 # heplot3d(grass.can1, asp=NULL)
-}
 
 ## Pottery data, from car package
 pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data=Pottery)
@@ -117,12 +115,11 @@ pottery.can <-candisc(pottery.mod)
 heplot(pottery.can, var.lwd=3)
 heplot3d(pottery.can, var.lwd=3, scale=10, zlim=c(-3,3), wire=FALSE)
 
-\donttest{ 
-play3d(rgl::spin3d(axis = c(1, 0, 0), rpm = 5), duration=12)
-}
+## Can't run this in example
+# rgl::play3d(rgl::spin3d(axis = c(1, 0, 0), rpm = 5), duration=12)
+
 
 ## FootHead data, from heplots package
-\dontrun{ 
 library(heplots)
 data(FootHead)
 
@@ -134,7 +131,6 @@ foot.can <- candisc(foot.mod)
 heplot(foot.can, main="Candisc HE plot", 
  hypotheses=list("group.1"="group1","group.2"="group2"),
  col=c("red", "blue", "green3", "green3" ), var.col="red")
-}
 
 }
 \keyword{multivariate}
