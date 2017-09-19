@@ -44,7 +44,9 @@ for \emph{variables} in other multivariate data displays to make the
 displayed relationships more coherent.  The function \code{\link{varOrder}}
 implements a collection of these methods.
 
-A few of these methods are illustrated in the vignette for the \pkg{heplots} package,
+A new vignette, \code{vignette("diabetes", package="candisc")},
+illustrates some of these methods.
+A more comprehensive collection of examples is contained in the vignette for the \pkg{heplots} package,
 
 \code{vignette("HE-examples", package="heplots")}.
 }
@@ -52,7 +54,7 @@ A few of these methods are illustrated in the vignette for the \pkg{heplots} pac
 \tabular{ll}{
 Package: \tab candisc\cr
 Type: \tab Package\cr
-Version: \tab 0.7-3\cr
+Version: \tab 0.8-0\cr
 Date: \tab 2017-09-15\cr
 License: \tab GPL (>= 2)\cr
 }
