@@ -221,7 +221,10 @@ From the LDA perspective, one goal in visualizing the results is to see the boun
 based on the `LD1` and `LD2` scores.  The plot shown here was produced with `ggplot2`, following a method
 described in [this stackoverflow question](https://stackoverflow.com/questions/31893423/r-plotting-posterior-classification-probabilities-of-a-linear-discriminant-anal).  What is missing here is any indication of how this relates to the response variables.
 
+<div style="height:80%">
 ![LDA classification for the diabetes data](diabetes-lda.png)
+</div>
+
 
 Quadratic discriminant analysis can be carried out in a similar way, using the `qda` function.
 The results are not shown.
