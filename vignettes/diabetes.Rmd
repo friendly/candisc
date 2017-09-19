@@ -83,11 +83,11 @@ This insight was part of the reason that Reaven and Miller
 concluded that chemical diabetes and overt diabetes reflected different disease regimes, rather than
 an increasing progression of severity.
 
-As an aside, we note that the differences among the groups can be readily seen in 3D using `scatter3d` in the `rgl` package.
+As an aside, we note that the differences among the groups can be readily seen in 3D using `scatter3d` in the `car` package.
 ```{r scatter3d, eval=FALSE}
 scatter3d(sspg ~ glutest + instest | group, data=Diabetes, 
           surface=FALSE,	sphere.size=1.5, ellipsoid=TRUE,
-          surface.col=c("blue", "darkgreen", "red"))
+          surface.col=c("blue", "red", "darkgreen"))
 ```
 
 ![3D scatterplot of the diabetes data, with 50% data ellipsoids](diabetes-rgl.png)
