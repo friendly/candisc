@@ -28,3 +28,4 @@ Description: Functions for computing and visualizing
 License: GPL (>= 2)
 Packaged: 10/9/2008 6:12PM; Michael Friendly
 VignetteBuilder: knitr
+BugReports: https://github.com/friendly/candisc/issues
