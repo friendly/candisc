@@ -17,6 +17,8 @@
 # --- added var.labels, var.cex
 # --- added rev.axes arg
 # --- added var.pos, same as in heplot.candisc
+# last revised: 10/03/2017 
+# --- fixed bug in use of pch and col (thx: dcarlson@tamu.edu)
 
 plot.candisc <- function (
 		x,		     # output object from candisc
@@ -45,7 +47,7 @@ plot.candisc <- function (
 	factors <- x$factors
 	rev.axes <- rep(rev.axes, length.out=2)
 
-	nlev <- if(is.matrix(x$means)) nrow(x$means) else length(x$means)     # number of groups
+	nlev <- if(length(dim(x$means))>1) nrow(x$means) else length(x$means)     # number of groups
 	if (missing(col)) col <- rep(palette()[-1], length.out=nlev)
 	fill.col <- heplots::trans.colors(col, fill.alpha)
 	
@@ -107,7 +109,7 @@ plot.candisc <- function (
 	nlev <- nrow(x$means)                 # number of groups
 	# TODO: can we be more clever about assigning default col & pch by taking the
 	# structure of x$factors into account?
-	if (missing(col)) col <- rep(palette(), length.out=nlev)
+#	if (missing(col)) col <- rep(palette(), length.out=nlev)
 	if (missing(pch)) pch <- rep(1:18, length.out=nlev)
 	
 	scores <- x$scores[,canvar]
@@ -127,7 +129,9 @@ plot.candisc <- function (
 	}
 	
 	# use asp=1 to make the plot equally scaled
-	Ind <- dataIndex(x$scores, term)
+	Ind <- if(length(factors)==1) 
+	    match(x$scores[,term], levels(x$scores[,term]))
+	      else dataIndex(x$scores, term)
 	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col[Ind], pch=pch[Ind], ...) 
 	abline(h=0, v=0, lty=2, col="grey")
 	
