@@ -1,3 +1,7 @@
+Changes in version 0.8-2 (2019-01-21)
+
+o Clarify docs for plot.candisc wrt col & pch (thx: Mohammad Bahram)
+
 Changes in version 0.8-1 (2017-10-05)
 
 o Fixed bug in plot.candisc with default col and pch values (thx: David Carlson)

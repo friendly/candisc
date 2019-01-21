@@ -24,8 +24,8 @@ plot.candisc <- function (
 		x,		     # output object from candisc
 		which=1:2,   # canonical dimensions to plot
 		conf=0.95,   # confidence coverage of circles for class means
-		col,         # vector of colors used for plotting the canonical scores
-		pch,         # vector of point symbols
+		col,         # vector of unique colors used for plotting the canonical scores
+		pch,         # vector of unique point symbols
 		scale,       # scale factor for variable vectors in can space
 		asp=1,       # aspect ratio, to ensure equal units
 		var.col="blue",
