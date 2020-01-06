@@ -1,7 +1,8 @@
-Changes in version 0.8-2 (2019-01-21)
+Changes in version 0.8-2 (2020-01-06)
 
 o Clarify docs for plot.candisc wrt col & pch (thx: Mohammad Bahram)
 o candisc gets a hex sticker on GitHub
+o Fix notes from devtools::check_win_devel
 
 Changes in version 0.8-1 (2017-10-05)
 
