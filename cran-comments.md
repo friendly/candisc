@@ -5,11 +5,13 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs.  There was one NOTE:
 
-** running examples for arch 'i386' ... [32s] NOTE
-Examples with CPU or elapsed time > 10s
+** running examples for arch 'i386' ... [34s] NOTE
+Examples with CPU (user + system) or elapsed time > 10s
                 user system elapsed
-heplot.candisc 18.25   0.11   18.89
+heplot.candisc 24.39   0.11    24.9
+** running examples for arch 'x64' ... [13s] OK
 
+This only applies to i386.
 I have already made most of the examples \dontrun{}, but would prefer not to reduce the
 number of run-able examples further.
 
