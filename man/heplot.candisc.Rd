@@ -108,12 +108,14 @@ rgl::aspect3d(x=1,y=1,z=1)
 # or,
 # heplot3d(grass.can1, asp=NULL)
 
+\donttest{
 ## Pottery data, from car package
 pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data=Pottery)
 pottery.can <-candisc(pottery.mod)
 
 heplot(pottery.can, var.lwd=3)
 heplot3d(pottery.can, var.lwd=3, scale=10, zlim=c(-3,3), wire=FALSE)
+}
 
 ## Can't run this in example
 # rgl::play3d(rgl::spin3d(axis = c(1, 0, 0), rpm = 5), duration=12)
