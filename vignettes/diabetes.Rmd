@@ -122,7 +122,7 @@ Anova(diab.mlm)
 
 ### Examine residuals in a QQ plot
 
-Another assumption of MANOVA is that the residuals have a multivaruiate normal distribution.
+Another assumption of MANOVA is that the residuals have a multivariate normal distribution.
 This can be assessed visually with a Chi-square QQ plot. This plots 
 squared Mahalanobis distances ($D^2$) of the residuals vs. corresponding quantiles of the 
 $\chi^2$ distribution with $p$ degrees of freedom.
