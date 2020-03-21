@@ -1,9 +1,9 @@
 ## Test environments
-* local Windows 7 install, 3.6.2 (2019-12-12) 
+* local Windows 7 install, 3.6.2 (2019-12-12) using -run--donttests
 * win-builder R Under development (unstable) (2020-03-11 r77925)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs.  There was one NOTE:, only under Windows 32-bit
+There were no ERRORs or WARNINGs.  There was one NOTE from win-builder, but only under Windows 32-bit
 
 ** running examples for arch 'i386' ... [32s] NOTE
 Examples with CPU (user + system) or elapsed time > 10s
@@ -17,5 +17,5 @@ number of run-able examples further.
 
 ## Comments
 This is a minor release, cleaning up some documentation problems and notes. Also testing
-under 3.6.2 revealed a glitch in the vignette, now fixed.
+under 3.6.2 revealed a small glitch in the vignette, now fixed.
 
