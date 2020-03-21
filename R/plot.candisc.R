@@ -107,9 +107,9 @@ plot.candisc <- function (
 	nlev <- nrow(x$means)                 # number of groups
 	# TODO: can we be more clever about assigning default col & pch by taking the
 	# structure of x$factors into account?
-	if (missing(col)) col <- rep(palette(), length.out=nlev)
+#	if (missing(col)) col <- rep(palette(), length.out=nlev)
 	if (missing(pch)) pch <- rep(1:18, length.out=nlev)
-	
+
 	scores <- x$scores[,canvar]
 	means <- x$means[,which]
 	labels <- rownames(x$means) 
