@@ -13,7 +13,7 @@ originally from Jolicoeur (1959).
   \describe{
     \item{\code{group}}{a factor with levels \code{ar:f} \code{ar:m} \code{rm:f} \code{rm:m},
     comprising the combinations of \code{location} and \code{sex}}
-    \item{\code{location}}{a factor with levels \code{ar}=Artic, \code{rm}=Rocky Mountain}
+    \item{\code{location}}{a factor with levels \code{ar}=Arctic, \code{rm}=Rocky Mountain}
     \item{\code{sex}}{a factor with levels \code{f}=female, \code{m}=male}
     \item{\code{x1}}{palatal length, a numeric vector}
     \item{\code{x2}}{postpalatal length, a numeric vector}

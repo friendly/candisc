@@ -3,4 +3,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 README.md
+^candisc-logo\.png$
 
+^CRAN-RELEASE$

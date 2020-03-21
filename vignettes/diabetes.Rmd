@@ -75,8 +75,11 @@ op <- par(mar=c(4,4,0,1)+.5)
 scatterplot( instest ~ glutest | group, data=Diabetes, 
              pch=c(16,15,17), 
              col=c("blue", "red", "darkgreen"),
-             smooth=FALSE, grid=FALSE, legend.coords="topright", lwd=2,
-             ellipse=TRUE, levels=0.5)
+             smooth=FALSE, 
+             grid=FALSE, 
+             legend=list(coords="topright"), 
+             lwd=2,
+             ellipse=list(levels=0.5))
 ```
 
 This insight was part of the reason that Reaven and Miller

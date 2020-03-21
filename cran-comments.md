@@ -1,34 +1,21 @@
 ## Test environments
-* local Windows 7 install, 3.4.1 (2017-06-30)
-* R-Forge R 3.3.3 Patched (2017-03-15 r72357)
-* win-builder R Under development (unstable) (2017-09-12 r73242)
+* local Windows 7 install, 3.6.2 (2019-12-12) 
+* win-builder R Under development (unstable) (2020-03-11 r77925)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs.  There was one NOTE:
+There were no ERRORs or WARNINGs.  There was one NOTE:, only under Windows 32-bit
 
 ** running examples for arch 'i386' ... [32s] NOTE
-Examples with CPU or elapsed time > 10s
+Examples with CPU (user + system) or elapsed time > 10s
                 user system elapsed
-heplot.candisc 18.25   0.11   18.89
+heplot.candisc 23.46   0.22   23.79
+** running examples for arch 'x64' ... [10s] OK
 
-I have already made most of the examples \dontrun{}, but would prefer not to reduce the
+This only applies to i386.
+I have already made most of the examples \donttest{}, but would prefer not to reduce the
 number of run-able examples further.
 
 ## Comments
-This is a semi-major release, adding some enhancements and a new vignette.
-The package development was migrated from F-Forge to github.
-
-### Changes in version 0.8-0 (2017-09-15)
-
-o Fix 1D plot.candisc to better reflect the canonical structure coefficients. The ylim of the
-  scale is now forced to include 0 and -1 and/or +1 depending on the signs of the structure
-  coefficients.  [thx: Martina Vandebroek]
-o Pass ... to boxplot() and plot() for 1D in plot.candisc
-o Added diabetes vignette
-
-### candisc 0.7-2
-
-  o Add Wilks.candisc method;  this corrects a bug where the values of the stepdown tests for canonical discriminant analysis were calculated incorrectly [thx: Martina Vandebroek]
-  o Now use Wilks.candisc in print.candisc
-
+This is a minor release, cleaning up some documentation problems and notes. Also testing
+under 3.6.2 revealed a glitch in the vignette, now fixed.
 

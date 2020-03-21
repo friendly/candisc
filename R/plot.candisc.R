@@ -17,13 +17,15 @@
 # --- added var.labels, var.cex
 # --- added rev.axes arg
 # --- added var.pos, same as in heplot.candisc
+# last revised: 10/03/2017 
+# --- fixed bug in use of pch and col (thx: dcarlson@tamu.edu)
 
 plot.candisc <- function (
 		x,		     # output object from candisc
 		which=1:2,   # canonical dimensions to plot
 		conf=0.95,   # confidence coverage of circles for class means
-		col,         # vector of colors used for plotting the canonical scores
-		pch,         # vector of point symbols
+		col,         # vector of unique colors used for plotting the canonical scores
+		pch,         # vector of unique point symbols
 		scale,       # scale factor for variable vectors in can space
 		asp=1,       # aspect ratio, to ensure equal units
 		var.col="blue",
@@ -45,7 +47,7 @@ plot.candisc <- function (
 	factors <- x$factors
 	rev.axes <- rep(rev.axes, length.out=2)
 
-	nlev <- if(is.matrix(x$means)) nrow(x$means) else length(x$means)     # number of groups
+	nlev <- if(length(dim(x$means))>1) nrow(x$means) else length(x$means)     # number of groups
 	if (missing(col)) col <- rep(palette()[-1], length.out=nlev)
 	fill.col <- heplots::trans.colors(col, fill.alpha)
 	
@@ -127,7 +129,9 @@ plot.candisc <- function (
 	}
 	
 	# use asp=1 to make the plot equally scaled
-	Ind <- dataIndex(x$scores, term)
+	Ind <- if(length(factors)==1) 
+	    match(x$scores[,term], levels(x$scores[,term]))
+	      else dataIndex(x$scores, term)
 	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col[Ind], pch=pch[Ind], ...) 
 	abline(h=0, v=0, lty=2, col="grey")
 	

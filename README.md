@@ -2,10 +2,10 @@
 [![](https://cranlogs.r-pkg.org/badges/grand-total/candisc)](https://cran.r-project.org/package=candisc)
 [![Rdoc](https://www.rdocumentation.org/badges/version/candisc)](http://www.rdocumentation.org/packages/candisc)
 
-# candisc
-Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis
+# candisc  <img src="candisc-logo.png" align="right" height="200px" />
+**Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis**
 
-Version 0.8-0
+Version 0.8-2
 
 This package includes functions for computing and visualizing 
 generalized canonical discriminant analyses 

@@ -20,7 +20,7 @@ problem, but is also of interest for examples of MANOVA and discriminant analysi
     \item{\code{Alcohol}}{a numeric vector}
     \item{\code{MalicAcid}}{a numeric vector}
     \item{\code{Ash}}{a numeric vector}
-    \item{\code{AlcAsh}}{a numeric vector, Alcalinity of ash}
+    \item{\code{AlcAsh}}{a numeric vector, Alkalinity of ash}
     \item{\code{Mg}}{a numeric vector, Magnesium}
     \item{\code{Phenols}}{a numeric vector, Total phenols}
     \item{\code{Flav}}{a numeric vector, Flavanoids}
