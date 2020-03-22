@@ -63,7 +63,7 @@ The development version can be installed to your R library directly from this re
      install_github("friendly/candisc")
 
  ## Vignettes
- 
+
 * A new vignette, `vignette("diabetes", package="candisc")`,
 illustrates some of these methods.
 
