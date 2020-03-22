@@ -62,3 +62,13 @@ The development version can be installed to your R library directly from this re
      library(devtools)
      install_github("friendly/candisc")
 
+ ## vignettes
+ 
+* A new vignette, `vignette("diabetes", package="candisc")`,
+illustrates some of these methods.
+
+* A more comprehensive collection of examples is contained in the vignette for the `heplots` package,
+`vignette("HE-examples", package="heplots")`.
+
+
+ 
