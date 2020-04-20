@@ -5,7 +5,7 @@
 # candisc  <img src="candisc-logo.png" align="right" height="200px" />
 **Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis**
 
-Version 0.8-2
+Version 0.8-3
 
 This package includes functions for computing and visualizing 
 generalized canonical discriminant analyses 
