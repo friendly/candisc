@@ -1,23 +1,13 @@
 ## Test environments
-* local Windows 7 install, 3.6.2 (2019-12-12) using -run--donttests
-* win-builder R Under development (unstable) (2020-03-11 r77925)
+* local Windows 7 install, 3.6.3 (2020-02-29) using -run--donttests
+* win-builder, r-devel, R version 4.0.0 RC (2020-04-17 r78247)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs.  There was one NOTE from win-builder, but only under Windows 32-bit
-
-** running examples for arch 'i386' ... [32s] NOTE
-Examples with CPU (user + system) or elapsed time > 10s
-                user system elapsed
-heplot.candisc 23.46   0.22   23.79
-** running examples for arch 'x64' ... [10s] OK
-
-This only applies to i386.
-I have already made most of the examples \donttest{}, but would prefer not to reduce the
-number of run-able examples further.
+There were no ERRORs, WARNINGs or NOTES under r-devel.
 
 ## reverse dependencies
 
-Ran `revdepcheck(): packages: heplots smacof
+Ran `revdepcheck()`, on dependent packages: heplots smacof
 
 *Wow, no problems at all. :)*
 

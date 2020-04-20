@@ -1,3 +1,7 @@
+Changes in version 0.8-3 (2020-04-20)
+
+o dontrun/donttest more examples from heplot.candisc to appease the CRAN daemon.
+
 Changes in version 0.8-2 (2020-01-06)
 
 o Clarify docs for plot.candisc wrt col & pch (thx: Mohammad Bahram)
