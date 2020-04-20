@@ -15,6 +15,12 @@ This only applies to i386.
 I have already made most of the examples \donttest{}, but would prefer not to reduce the
 number of run-able examples further.
 
+## reverse dependencies
+
+Ran `revdepcheck(): packages: heplots smacof
+
+*Wow, no problems at all. :)*
+
 ## Comments
 This is a minor release, cleaning up some documentation problems and notes. Also testing
 under 3.6.2 revealed a small glitch in the vignette, now fixed.
