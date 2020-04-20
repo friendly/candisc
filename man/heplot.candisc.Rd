@@ -93,6 +93,16 @@ Friendly, M. (2007).
     \code{\link[heplots]{heplot}}, \code{\link[heplots]{heplot3d}}, \code{\link[rgl]{aspect3d}}}
 
 \examples{
+## Pottery data, from car package
+pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data=Pottery)
+pottery.can <-candisc(pottery.mod)
+
+heplot(pottery.can, var.lwd=3)
+heplot3d(pottery.can, var.lwd=3, scale=10, zlim=c(-3,3), wire=FALSE)
+
+
+# reduce example for CRAN checks time
+\donttest{
 grass.mod <- lm(cbind(N1,N9,N27,N81,N243) ~ Block + Species, data=Grass)
 
 grass.can1 <-candisc(grass.mod, term="Species")
@@ -107,14 +117,6 @@ heplot3d(grass.can1, wire=FALSE)
 rgl::aspect3d(x=1,y=1,z=1)
 # or,
 # heplot3d(grass.can1, asp=NULL)
-
-\donttest{
-## Pottery data, from car package
-pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data=Pottery)
-pottery.can <-candisc(pottery.mod)
-
-heplot(pottery.can, var.lwd=3)
-heplot3d(pottery.can, var.lwd=3, scale=10, zlim=c(-3,3), wire=FALSE)
 }
 
 ## Can't run this in example
