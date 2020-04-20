@@ -3,7 +3,7 @@ Type: Package
 Title: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis
 Version: 0.8-2
 Date: 2020-03-20
-Depends: car, heplots (>= 0.8-6), graphics, stats 
+Depends: R (>= 3.5.0), car, heplots (>= 0.8-6), graphics, stats 
 Suggests: rgl, corrplot,
     knitr,
     rmarkdown,
