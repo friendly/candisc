@@ -31,7 +31,8 @@ candisc(mod, ...)
     rev.axes=c(FALSE, FALSE),
 		ellipse=FALSE, ellipse.prob = 0.68, fill.alpha=0.1,
     prefix = "Can", suffix=TRUE, 
-    titles.1d = c("Canonical scores", "Structure"), ...)
+    titles.1d = c("Canonical scores", "Structure"),
+    points.1d = FALSE, ...)
     
 \method{print}{candisc}(x, digits=max(getOption("digits") - 2, 3), LRtests=TRUE, ...)
 
@@ -82,6 +83,7 @@ candisc(mod, ...)
   the percent of hypothesis (H) variance accounted for by each canonical dimension is added to the axis label.}
   \item{titles.1d}{A character vector of length 2, containing titles for the panels used to plot the
   canonical scores and structure vectors, for the case in which there is only one canonical dimension.}
+  \item{points.1d}{Logical value for \code{plot.candisc} when only one canonical dimension. }
   \item{means}{Logical value used to determine if canonical means are printed}
   \item{scores}{Logical value used to determine if canonical scores are printed}
   \item{coef}{Type of coefficients printed by the summary method. Any one or more of
