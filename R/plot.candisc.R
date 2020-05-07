@@ -42,7 +42,7 @@ plot.candisc <- function (
 		prefix = "Can",  # prefix for labels of canonical dimensions
 		suffix = TRUE,   # add label suffix with can % ?
 		titles.1d = c("Canonical scores", "Structure"),
-		points.1d = FALSE,
+		points.1d = TRUE,
 		...         # extra args passed to plot, e.g., notch = TRUE for boxplot
 ) {
 	
@@ -53,6 +53,7 @@ plot.candisc <- function (
 	nlev <- if(length(dim(x$means))>1) nrow(x$means) else length(x$means)     # number of groups
 	if (missing(col)) col <- rep(palette()[-1], length.out=nlev)
 	fill.col <- heplots::trans.colors(col, fill.alpha)
+	if (missing(pch)) pch <- rep(1:18, length.out=nlev)
 	
 	if (x$ndim < 2 || length(which)==1) {
 		which <- which[1]
@@ -83,7 +84,8 @@ plot.candisc <- function (
 		boxplot(formule, data=x$scores, ylab=canlab, xlab=term, col=fill.col, main=titles.1d[1], ...)
     # add points?
 		if (points.1d) points(jitter(as.numeric(x$scores[, term]), factor=0.5), x$scores[,canvar], 
-		                      col=col[x$scores[, term]])
+		                      col=col[x$scores[, term]],
+		                      pch=pch[x$scores[, term]] )
 
 		xx <- 1:ns
 		par(mar=c(5,0,4,1)+.1)
@@ -118,7 +120,6 @@ plot.candisc <- function (
 	# TODO: can we be more clever about assigning default col & pch by taking the
 	# structure of x$factors into account?
 	if (missing(col)) col <- rep(palette(), length.out=nlev)
-	if (missing(pch)) pch <- rep(1:18, length.out=nlev)
 
 	scores <- x$scores[,canvar]
 	means <- x$means[,which]
