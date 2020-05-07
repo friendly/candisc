@@ -42,7 +42,7 @@ plot.candisc <- function (
 		prefix = "Can",  # prefix for labels of canonical dimensions
 		suffix = TRUE,   # add label suffix with can % ?
 		titles.1d = c("Canonical scores", "Structure"),
-		points.1d = TRUE,
+		points.1d = FALSE,
 		...         # extra args passed to plot, e.g., notch = TRUE for boxplot
 ) {
 	
