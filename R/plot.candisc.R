@@ -66,7 +66,7 @@ plot.candisc <- function (
 		scores <- x$scores[, canvar]
 		
 		if(isTRUE(rev.axes[1])) {
-		  scores <- -scores
+		  x$scores[, canvar] <- -x$scores[, canvar]
 		  structure <- -structure
 		}
 		
