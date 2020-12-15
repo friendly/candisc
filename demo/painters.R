@@ -24,6 +24,8 @@ summary(painters.can)
 heplot(painters.can)
 
 # There seem to be 3 significant dimensions. View it in 3D
-heplot3d(painters.can, col=c("pink", "brown"))
+if(requireNamespace("rgl")){
+  heplot3d(painters.can, col=c("pink", "brown"))
+}
 						
 						
