@@ -37,7 +37,7 @@ No useful value; used for the side-effect of producing canonical HE plots.
 }
 
 \references{ 
-Friendly, M. (2006). Data Ellipses, HE Plots and Reduced-Rank Displays for Multivariate Linear Models: SAS Software and Examples Journal of Statistical Software, 17(6), 1-42. \url{http://www.jstatsoft.org/v17/i06/} 
+Friendly, M. (2006). Data Ellipses, HE Plots and Reduced-Rank Displays for Multivariate Linear Models: SAS Software and Examples Journal of Statistical Software, 17(6), 1-42. \url{https://www.jstatsoft.org/v17/i06/} 
 
 Friendly, M. (2007).
   HE plots for Multivariate General Linear Models.
