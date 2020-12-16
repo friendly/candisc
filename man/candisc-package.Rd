@@ -54,8 +54,8 @@ A more comprehensive collection of examples is contained in the vignette for the
 \tabular{ll}{
 Package: \tab candisc\cr
 Type: \tab Package\cr
-Version: \tab 0.8-4\cr
-Date: \tab 2020-05-06\cr
+Version: \tab 0.8-5\cr
+Date: \tab 2020-12-15\cr
 License: \tab GPL (>= 2)\cr
 }
 The organization of functions in this package and the \pkg{heplots} package
@@ -82,7 +82,7 @@ Friendly, M. & Sigal, M. (2014). Recent Advances in Visualizing Multivariate Lin
 
 Friendly, M. & Sigal, M. (2016). Graphical Methods for Multivariate Linear Models in Psychological Research: An R Tutorial, \emph{The Quantitative Methods for Psychology}, in press.
 
-Gittins, R. (1985). Canonical Analysis: A Review with Applications in Ecology,
+Gittins, R. (1985). \emph{Canonical Analysis: A Review with Applications in Ecology},
 Berlin: Springer.
 
 
