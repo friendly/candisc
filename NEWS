@@ -1,3 +1,7 @@
+Changes in version 0.8-5 (2020-12-15)
+
+* Fix CRAN nits re conditional use of rgl in examples
+
 Changes in version 0.8-4 (2020-05-06)
 
 * add points.1d option to plot.candisc for 1D case
