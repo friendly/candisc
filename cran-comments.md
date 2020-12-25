@@ -1,6 +1,6 @@
 ## Test environments
 * local Windows 7 install, 3.6.3 (2020-02-29) using -run--donttests
-* win-builder, R Under development (unstable) (2020-12-13 r79623)
+* R Under development (unstable) (2020-12-19 r79650)
 
 ## R CMD check results
 There were no ERRORs, WARNINGs or NOTES under r-devel.
