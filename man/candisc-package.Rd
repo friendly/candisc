@@ -76,9 +76,9 @@ Friendly, M. (2007).
 Friendly, M. & Kwan, E. (2003).
 Effect Ordering for Data Displays,
 \emph{Computational Statistics and Data Analysis}, \bold{43}, 509-539.
-\url{http://dx.doi.org/10.1016/S0167-9473(02)00290-6}
+\doi{10.1016/S0167-9473(02)00290-6}
 
-Friendly, M. & Sigal, M. (2014). Recent Advances in Visualizing Multivariate Linear Models. \emph{Revista Colombiana de Estadistica} , \bold{37}(2), 261-283. \url{http://dx.doi.org/10.15446/rce.v37n2spe.47934}.
+Friendly, M. & Sigal, M. (2014). Recent Advances in Visualizing Multivariate Linear Models. \emph{Revista Colombiana de Estadistica} , \bold{37}(2), 261-283. \doi{10.15446/rce.v37n2spe.47934}.
 
 Friendly, M. & Sigal, M. (2016). Graphical Methods for Multivariate Linear Models in Psychological Research: An R Tutorial, \emph{The Quantitative Methods for Psychology}, in press.
 
