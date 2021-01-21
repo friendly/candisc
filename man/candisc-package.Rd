@@ -55,7 +55,7 @@ A more comprehensive collection of examples is contained in the vignette for the
 Package: \tab candisc\cr
 Type: \tab Package\cr
 Version: \tab 0.8-5\cr
-Date: \tab 2020-12-15\cr
+Date: \tab 2021-01-21\cr
 License: \tab GPL (>= 2)\cr
 }
 The organization of functions in this package and the \pkg{heplots} package
