@@ -80,13 +80,14 @@ Effect Ordering for Data Displays,
 
 Friendly, M. & Sigal, M. (2014). Recent Advances in Visualizing Multivariate Linear Models. \emph{Revista Colombiana de Estadistica} , \bold{37}(2), 261-283. \doi{10.15446/rce.v37n2spe.47934}.
 
-Friendly, M. & Sigal, M. (2016). Graphical Methods for Multivariate Linear Models in Psychological Research: An R Tutorial, \emph{The Quantitative Methods for Psychology}, in press.
+Friendly, M. & Sigal, M. (2017). Graphical Methods for Multivariate Linear Models in Psychological Research: An R Tutorial, \emph{The Quantitative Methods for Psychology}, 13 (1), 20-45. \doi{10.20982/tqmp.13.1.p020}.
 
 Gittins, R. (1985). \emph{Canonical Analysis: A Review with Applications in Ecology},
 Berlin: Springer.
 
-
 }
+
+
 
 \keyword{ package }
 \keyword{multivariate}
