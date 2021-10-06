@@ -79,7 +79,9 @@ range in \code{zlim} to \code{\link[heplots]{heplot3d}} usually helps.
 }
 
 \references{ 
-Friendly, M. (2006). Data Ellipses, HE Plots and Reduced-Rank Displays for Multivariate Linear Models: SAS Software and Examples Journal of Statistical Software, 17(6), 1-42. \url{https://www.jstatsoft.org/v17/i06/} 
+Friendly, M. (2006). Data Ellipses, HE Plots and Reduced-Rank Displays for Multivariate Linear Models: SAS Software and Examples \emph{Journal of Statistical Software}, 17(6), 1-42. 
+% \url{https://www.jstatsoft.org/v17/i06/}
+\doi{10.18637/jss.v017.i06}
 
 Friendly, M. (2007).
   HE plots for Multivariate General Linear Models.
