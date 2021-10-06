@@ -54,8 +54,8 @@ A more comprehensive collection of examples is contained in the vignette for the
 \tabular{ll}{
 Package: \tab candisc\cr
 Type: \tab Package\cr
-Version: \tab 0.8-5\cr
-Date: \tab 2021-01-21\cr
+Version: \tab 0.8-6\cr
+Date: \tab 2021-10-06\cr
 License: \tab GPL (>= 2)\cr
 }
 The organization of functions in this package and the \pkg{heplots} package
