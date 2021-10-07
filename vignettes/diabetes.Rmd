@@ -219,7 +219,7 @@ heplot(diab.can, fill=c(TRUE, FALSE), fill.alpha=0.1, var.lwd=2)
 
 ## Other analyses
 
-There are other methods that could be used to analyse these data and display the results visually.
+There are other methods that could be used to analyze these data and display the results visually.
 We merely sketch some alternatives here.
 
 ### Linear and quadratic discriminant analysis
