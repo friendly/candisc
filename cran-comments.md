@@ -8,7 +8,7 @@ There were no ERRORs, WARNINGs or NOTES under r-devel.
 
 ## reverse dependencies
 
-Ran `revdepcheck()`, on dependent packages: heplots smacof
+Ran `revdepcheck()`, on dependent packages: Guerry heplots MultivariateAnalysis smacof
 
 *Wow, no problems at all. :)*
 
