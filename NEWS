@@ -1,3 +1,7 @@
+Version 0.8-6 (2021-10-06)
+
+* Fix JSS URLs -> DOI
+
 Changes in version 0.8-5 (2020-12-15)
 
 * Fix CRAN nits re conditional use of rgl in examples
