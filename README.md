@@ -2,10 +2,10 @@
 [![](https://cranlogs.r-pkg.org/badges/grand-total/candisc)](https://cran.r-project.org/package=candisc)
 [![Rdoc](https://www.rdocumentation.org/badges/version/candisc)](http://www.rdocumentation.org/packages/candisc)
 
-# candisc  <img src="candisc-logo.png" align="right" height="200px" />
+# candisc  <img src="man/figures/logo.png" align="right" height="200px" />
 **Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis**
 
-Version 0.8-5
+Version 0.8-6
 
 This package includes functions for computing and visualizing 
 generalized canonical discriminant analyses 
@@ -62,7 +62,7 @@ The development version can be installed to your R library directly from this re
      library(devtools)
      install_github("friendly/candisc")
 
- ## Vignettes
+## Vignettes
 
 * A new vignette, `vignette("diabetes", package="candisc")`,
 illustrates some of these methods.
