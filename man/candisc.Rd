@@ -101,7 +101,7 @@ into a canonical space in which (a) each successive canonical variate produces
 maximal separation among the groups (e.g., maximum univariate F statistics), and
 (b) all canonical variates are mutually uncorrelated. 
 For a one-way MANOVA with g groups and p responses, there are 
-\code{dfh} = min( g-1, p) such canonical dimensions, and tests, initally stated
+\code{dfh} = min( g-1, p) such canonical dimensions, and tests, initially stated
 by Bartlett (1938) allow one to determine the number of significant 
 canonical dimensions.   
 
@@ -150,7 +150,7 @@ showing the magnitudes of the structure coefficients.
   	standardized response variables.}
 }
 \references{
-Bartlett, M. S. (1938). Further aspects of the theory of multiple regression. Proc. Camb. Phil. Soc. 34, 33-34.
+Bartlett, M. S. (1938). Further aspects of the theory of multiple regression. Proc. Cambridge Philosophical Society \bold{34}, 33-34.
 
 Cooley, W.W. & Lohnes, P.R. (1971). Multivariate Data Analysis,  New York: Wiley.
 
