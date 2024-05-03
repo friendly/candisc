@@ -61,7 +61,7 @@ implements a collection of these methods.
 illustrates some of these methods.
 
 * A more comprehensive collection of examples is contained in the vignette for the `heplots` package,
-`vignette("HE-examples", package="heplots")`.
+`browseVignettes(package = "heplots")`.
 
 
  
