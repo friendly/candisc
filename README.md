@@ -20,11 +20,11 @@ design and is equivalent to canonical correlation analysis between a set of quan
 response variables and a set of dummy variables coded from the factor variable.
 The `candisc` package generalizes this to multi-way MANOVA designs
 for all terms in a multivariate linear model (i.e., an `mlm` object),
-computing canonical scores and vectors for each term (giving a `candiscList` object).
+computing canonical scores and vectors for each term (giving a `"candiscList"` object).
 
 The graphic functions are designed to provide low-rank (1D, 2D, 3D) visualizations of
 terms in a `mlm` via the `plot.candisc` method, 
-and the HE plot `heplot.candisc` and `heplot3d.candisc`
+and the HE plot `heplot.candisc()` and `heplot3d.candisc()`
 methods.
 For `mlm`s with more than a few response variables, these methods often provide a 
 much simpler interpretation of the nature of effects in canonical space than
@@ -35,32 +35,25 @@ represented in a reduced-rank space by means of a canonical correlation
 transformation of the Y and X variables to uncorrelated canonical variates,
 Ycan and Xcan.  Computation for this analysis is provided by `cancor`
 and related methods.  Visualization of these results in canonical space
-are provided by the `plot.cancor`,  `heplot.cancor` 
-and `heplot3d.cancor}` methods.
+are provided by the `plot.cancor()`,  `heplot.cancor()` 
+and `heplot3d.cancor()` methods.
 
 These relations among response variables in linear models can also be
 useful for "effect ordering"
 (Friendly & Kwan (2003)
 for *variables* in other multivariate data displays to make the
-displayed relationships more coherent.  The function `varOrder`
+displayed relationships more coherent.  The function `varOrder()`
 implements a collection of these methods.
 
-A new vignette, `vignette("diabetes", package="candisc")`,
-illustrates some of these methods.
-A more comprehensive collection of examples is contained in the vignette for the `heplots` package,
-`vignette("HE-examples", package="heplots")`.
 
 ## Installation
 
-Get the released version from CRAN:
+|                     |                                               |
+|---------------------|-----------------------------------------------|
+| CRAN version        | `install.packages("candisc")`                 |
+| Development version | `remotes::install_github("friendly/candisc")` |
 
-     install.packages("candisc")
 
-The development version can be installed to your R library directly from this repo via:
-
-     if (!require(devtools)) install.packages("devtools")
-     library(devtools)
-     install_github("friendly/candisc")
 
 ## Vignettes
 
