@@ -1,5 +1,58 @@
 # calculate redundancy indices for canonical correlation analysis
 
+
+
+#' Canonical Redundancy Analysis
+#' 
+#' Calculates indices of redundancy (Stewart & Love, 1968) from a canonical
+#' correlation analysis. These give the proportion of variances of the
+#' variables in each set (X and Y) which are accounted for by the variables in
+#' the other set through the canonical variates.
+#' 
+#' None yet. %Repeat with and variables interchanged, and you get the same
+#' eigenvalues.
+#' 
+#' @aliases redundancy print.cancor.redundancy
+#' @param object A \code{"cancor"} object
+#' @param x A \code{"cancor.redundancy"} for the \code{print} method.
+#' @param digits Number of digits to print
+#' @param \dots Other arguments
+#' @return %% ~Describe the value returned An object of class
+#' \code{"cancor.redundancy"}, a list with the following 5 components:
+#' \item{Xcan.redun}{Canonical redundancies for the X variables, i.e., the
+#' total fraction of X variance accounted for by the Y variables through each
+#' canonical variate.} \item{Ycan.redun}{Canonical redundancies for the Y
+#' variables} \item{X.redun}{Total canonical redundancy for the X variables,
+#' i.e., the sum of \code{Xcan.redun}.} \item{Y.redun}{Total canonical
+#' redundancy for the Y variables} \item{set.names}{names for the X and Y sets
+#' of variables}
+#' @author Michael Friendly
+#' @seealso \code{\link{cancor}}, ~~~
+#' @references Stewart, D. and Love, W. (1968). A general canonical correlation
+#' index.  \emph{Psychological Bulletin}, 70, 160-163.
+#' @keywords multivariate
+#' @examples
+#' 
+#' 	data(Rohwer, package="heplots")
+#' X <- as.matrix(Rohwer[,6:10])  # the PA tests
+#' Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
+#' 
+#' cc <- cancor(X, Y, set.names=c("PA", "Ability"))
+#' 
+#' redundancy(cc)
+#' ## 
+#' ## Redundancies for the PA variables & total X canonical redundancy
+#' ## 
+#' ##     Xcan1     Xcan2     Xcan3 total X|Y 
+#' ##   0.17342   0.04211   0.00797   0.22350 
+#' ## 
+#' ## Redundancies for the Ability variables & total Y canonical redundancy
+#' ## 
+#' ##     Ycan1     Ycan2     Ycan3 total Y|X 
+#' ##    0.2249    0.0369    0.0156    0.2774 
+#' 
+#' 
+#' @export redundancy
 redundancy <- function(object, ...) {
     if (!inherits(object, "cancor")) 
         stop("Not a cancor object")
