@@ -14,3 +14,44 @@ figures:
     rgl:
       fig.asp: 1
 
+reference:
+  - title: candisc
+    desc:  Canonical discriminant analysis
+    contents:
+      - candisc-package
+      - candisc
+      - candiscList
+      - can_lm
+      - dataIndex
+      - heplot.candisc
+      - heplot.candiscList
+
+  - title: cancor
+    desc:  Canonical correlation analysis
+    contents:
+      - cancor
+      - heplot.cancor
+      - plot.cancor
+      - redundancy
+      - scores
+      - Wilks
+
+  - title: Graphics
+    desc: Graphic utilities
+    contents:
+      - varOrder
+      - vectors
+      - vectors3d
+      - vecscale
+
+  - title: Data
+    desc: Datasets
+    contents:
+      - Grass
+      - HSB
+      - Wine
+      - Wolves
+    
+
+
+
