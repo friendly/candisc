@@ -145,6 +145,17 @@ The formula method also returns components \code{call} and \code{terms} }
 The function \code{cancor} generalizes and regularizes computation for
 canonical correlation analysis in a way conducive to visualization using
 methods in the \code{\link[heplots]{heplots}} package.
+
+The package provides the following display, extractor and plotting methods for \code{"cancor"} objects
+\describe{
+   \item{\code{print(), summary()}}{Print and summarise the CCA}
+   \item{\code{coef()}}{Extract coefficients for X, Y, or both }
+   \item{\code{scores()}}{Extract observation scores on the canonical variables}
+   \item{\code{redundancy()}}{Redundancy analysis}
+   \item{\code{plot()}}{Plot pairs of canonical scores}
+   \item{\code{heplot()}}{HE plot of the Y canonical variables showing effects of the X variables and projections
+         of the Y variables in this space.}
+}
 }
 \details{
 Canonical correlation analysis (CCA), as traditionally presented is used to
@@ -158,8 +169,19 @@ having maximal (canonical) correlations. On the other hand, MMRA is
 \emph{each one} to be explained by \emph{separate} linear combinations of
 the Xs.
 
+Let \eqn{\mathbf{Y}_{n \times p}} and \eqn{\mathbf{X}_{n \times q}} be two sets of variables over which 
+CCA is computed. We find canonical coefficients \eqn{\mathbf{A}_{p \times k}} and 
+\eqn{\mathbf{B}_{q \times k}, k=\min(p,q)} such that the canonical variables 
+\eqn{\mathbf{U}_{n \times k}} and \eqn{\mathbf{V}_{n \times k}} have maximal, diagonal correlation structure.
+That is, the coefficients \eqn{\mathbf{A}} and \eqn{\mathbf{B}} are chosen such that the correlations between
+each pair \eqn{r_i = \text{cor}(\mathbf{u}_i, \mathbf{v}_i), i=1, 2, \dots , k} 
+are maximized and all other pairs are uncorrelated,
+\eqn{r_{ij} = \text{cor}(\mathbf{u}_i, \mathbf{v}_j) = 0,  i \ne j}
+
 This implementation of \code{cancor} provides the basic computations for
-CCA, together with some extractor functions and methods for working with the
+CCA, together with some extractor functions and methods 
+(\code{scores()}, \code{})
+for working with the
 results in a convenient fashion.
 
 However, for visualization using HE plots, it is most natural to consider

@@ -7,6 +7,16 @@
 #' variables in each set (X and Y) which are accounted for by the variables in
 #' the other set through the canonical variates.
 #' 
+#' @details
+#' 
+#' The term "redundancy analysis" has a different interpretation and implementation in the
+#' environmental ecology literature, such as the \pkg{vegan}.
+#' In that context, each \eqn{Y_i} variable is regressed separately on the predictors in \eqn{X},
+#' to give fitted values \eqn{\widehat{Y} = [\widehat{Y}_1, \widehat{Y}_2, \dots}.
+#' Then a PCA of \eqn{\widehat{Y}} is carried out to determine a reduced-rank structure of 
+#' the predictions.
+#' 
+#' 
 #' @aliases redundancy print.cancor.redundancy
 #' @param object A \code{"cancor"} object
 #' @param x A \code{"cancor.redundancy"} for the \code{print} method.
@@ -24,8 +34,17 @@
 #' \item{set.names}{names for the X and Y sets of variables}
 #' @author Michael Friendly
 #' @seealso \code{\link{cancor}}
-#' @references Stewart, D. and Love, W. (1968). A general canonical correlation
+#' @references 
+#' Muller K. E. (1981).
+#'Relationships between redundancy analysis, canonical correlation, and multivariate regression. 
+#' \emph{Psychometrika}, \bold{46}(2), 139-42.
+#' 
+#' Stewart, D. and Love, W. (1968). A general canonical correlation
 #' index.  \emph{Psychological Bulletin}, 70, 160-163.
+#'
+#' Brainder, "Redundancy in canonical correlation analysis", 
+#' \url{https://brainder.org/2019/12/27/redundancy-in-canonical-correlation-analysis/}
+#' 
 #' @keywords multivariate
 #' @examples
 #' 
