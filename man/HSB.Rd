@@ -52,7 +52,7 @@ str(HSB)
 # main effects model
 hsb.mod <- lm( cbind(read, write, math, sci, ss) ~
 		gender + race + ses + sch + prog, data=HSB)
-Anova(hsb.mod)
+car::Anova(hsb.mod)
 
 # Add some interactions
 hsb.mod1 <- update(hsb.mod, . ~ . + gender:race + ses:prog)

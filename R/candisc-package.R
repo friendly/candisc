@@ -130,7 +130,7 @@
 #' 
 #' str(Grass)
 #' grass.mod <- lm(cbind(N1,N9,N27,N81,N243) ~ Block + Species, data=Grass)
-#' Anova(grass.mod)
+#' car::Anova(grass.mod)
 #' 
 #' grass.canL <-candiscList(grass.mod)
 #' names(grass.canL)
@@ -194,7 +194,7 @@ NULL
 #' # main effects model
 #' hsb.mod <- lm( cbind(read, write, math, sci, ss) ~
 #' 		gender + race + ses + sch + prog, data=HSB)
-#' Anova(hsb.mod)
+#' car::Anova(hsb.mod)
 #' 
 #' # Add some interactions
 #' hsb.mod1 <- update(hsb.mod, . ~ . + gender:race + ses:prog)
@@ -320,7 +320,7 @@ NULL
 #' 
 #' # using group
 #' wolf.mod <-lm(cbind(x1,x2,x3,x4,x5,x6,x7,x8,x9) ~ group, data=Wolves)
-#' Anova(wolf.mod)
+#' car::Anova(wolf.mod)
 #' 
 #' wolf.can <-candisc(wolf.mod)
 #' plot(wolf.can)
@@ -328,7 +328,7 @@ NULL
 #' 
 #' # using location, sex
 #' wolf.mod2 <-lm(cbind(x1,x2,x3,x4,x5,x6,x7,x8,x9) ~ location*sex, data=Wolves)
-#' Anova(wolf.mod2)
+#' car::Anova(wolf.mod2)
 #' 
 #' wolf.can2 <-candiscList(wolf.mod2)
 #' plot(wolf.can2)

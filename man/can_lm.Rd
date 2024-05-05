@@ -30,8 +30,8 @@ then runs lm() with that formula.
 iris.mod <- lm(cbind(Petal.Length, Sepal.Length, Petal.Width, Sepal.Width) ~ Species, data=iris)
 iris.can <- can_lm(iris.mod, "Species")
 iris.can
-Anova(iris.mod)
-Anova(iris.can)
+car::Anova(iris.mod)
+car::Anova(iris.can)
 
 }
 \seealso{

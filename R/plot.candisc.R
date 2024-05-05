@@ -22,6 +22,7 @@
 # last revised: 05/06/20
 # --- add points.1d option
 
+#' @describeIn candisc \code{"plot"} method.
 #' @export
 plot.candisc <- function (
 		x,		     # output object from candisc

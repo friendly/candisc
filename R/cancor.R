@@ -469,6 +469,7 @@ summary.cancor <- function(object, digits = max(getOption("digits") - 2, 3), ...
 
 
 # extractor functions
+#' @export
 scores <- function(x, ...) {
   UseMethod("scores")
 }

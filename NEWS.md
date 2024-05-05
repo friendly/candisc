@@ -1,3 +1,7 @@
+## Version 0.9.0 (2024-05-05)
+
+* Convert documentation to roxygen
+
 ## Version 0.8-6 (2021-10-06)
 
 * Fix JSS URLs -> DOI

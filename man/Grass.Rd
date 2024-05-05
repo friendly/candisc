@@ -43,7 +43,7 @@ composite representative of a species rather than to an individual exemplar.
 
 str(Grass)
 grass.mod <- lm(cbind(N1,N9,N27,N81,N243) ~ Block + Species, data=Grass)
-Anova(grass.mod)
+car::Anova(grass.mod)
 
 grass.canL <-candiscList(grass.mod)
 names(grass.canL)
