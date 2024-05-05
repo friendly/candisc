@@ -10,8 +10,7 @@
 #' @param object An object of class \code{"cancor""} or \code{"candisc""}
 #' @param \dots Other arguments passed to methods (not used)
 #' @return A data.frame (of class \code{"anova"}) containing the test
-#' statistics %% If it is a LIST, use %% \item{comp1 }{Description of 'comp1'}
-#' %% \item{comp2 }{Description of 'comp2'} %% ...
+#' statistics 
 #' @author Michael Friendly
 #' @seealso \code{\link{cancor}}, ~~~
 #' @references Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979).

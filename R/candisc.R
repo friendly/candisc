@@ -79,96 +79,99 @@ predictor.names.default <- function(model, ...) {
 #' structure coefficients.
 #' 
 #' @aliases candisc candisc.mlm coef.candisc plot.candisc print.candisc
-#' summary.candisc
+#'          summary.candisc
 #' @param mod An mlm object, such as computed by \code{lm()} with a
-#' multivariate response
+#'        multivariate response
 #' @param term the name of one term from \code{mod} for which the canonical
-#' analysis is performed.
-#' @param type type of test for the model \code{term}, one of: "II", "III",
-#' "2", or "3"
+#'        analysis is performed.
+#' @param type type of test for the model \code{term}, one of: "II", "III", "2", or "3"
 #' @param manova the \code{Anova.mlm} object corresponding to \code{mod}.
-#' Normally, this is computed internally by \code{Anova(mod)}
+#'        Normally, this is computed internally by \code{Anova(mod)}
 #' @param ndim Number of dimensions to store in (or retrieve from, for the
-#' \code{summary} method) the \code{means}, \code{structure}, \code{scores} and
-#' \code{coeffs.*} components.  The default is the rank of the H matrix for the
-#' hypothesis term.
+#'        \code{summary} method) the \code{means}, \code{structure}, \code{scores} and
+#'        \code{coeffs.*} components.  
+#'        The default is the rank of the H matrix for the hypothesis term.
 #' @param object,x A candisc object
 #' @param which A vector of one or two integers, selecting the canonical
-#' dimension(s) to plot. If the canonical structure for a \code{term} has
-#' \code{ndim==1}, or \code{length(which)==1}, a 1D representation of canonical
-#' scores and structure coefficients is produced by the \code{plot} method.
-#' Otherwise, a 2D plot is produced.
+#'        dimension(s) to plot. If the canonical structure for a \code{term} has
+#'        \code{ndim==1}, or \code{length(which)==1}, a 1D representation of canonical
+#'        scores and structure coefficients is produced by the \code{plot} method.
+#'        Otherwise, a 2D plot is produced.
 #' @param conf Confidence coefficient for the confidence circles around
-#' canonical means plotted in the \code{plot} method
+#'        canonical means plotted in the \code{plot} method
 #' @param col A vector of the unique colors to be used for the levels of the
-#' term in the \code{plot} method, one for each level of the \code{term}.  In
-#' this version, you should assign colors and point symbols explicitly, rather
-#' than relying on the somewhat arbitrary defaults, based on
-#' \code{\link[grDevices]{palette}}
+#'        term in the \code{plot} method, one for each level of the \code{term}.  In
+#'        this version, you should assign colors and point symbols explicitly, rather
+#'        than relying on the somewhat arbitrary defaults, based on
+#'        \code{\link[grDevices]{palette}}
 #' @param pch A vector of the unique point symbols to be used for the levels of
-#' the term in the \code{plot} method
+#'        the term in the \code{plot} method
 #' @param scale Scale factor for the variable vectors in canonical space.  If
-#' not specified, a scale factor is calculated to make the variable vectors
-#' approximately fill the plot space.
+#'        not specified, a scale factor is calculated to make the variable vectors
+#'        approximately fill the plot space.
 #' @param asp Aspect ratio for the \code{plot} method.  The \code{asp=1} (the
-#' default) assures that the units on the horizontal and vertical axes are the
-#' same, so that lengths and angles of the variable vectors are interpretable.
+#'        default) assures that the units on the horizontal and vertical axes are the
+#'        same, so that lengths and angles of the variable vectors are interpretable.
 #' @param var.col Color used to plot variable vectors
 #' @param var.lwd Line width used to plot variable vectors
 #' @param var.labels Optional vector of variable labels to replace variable
-#' names in the plots
+#'        names in the plots
 #' @param var.cex Character expansion size for variable labels in the plots
 #' @param var.pos Position(s) of variable vector labels wrt. the end point.  If
-#' not specified, the labels are out-justified left and right with respect to
-#' the end points.
+#'        not specified, the labels are out-justified left and right with respect to
+#'        the end points.
 #' @param rev.axes Logical, a vector of \code{length(which)}. \code{TRUE}
-#' causes the orientation of the canonical scores and structure coefficients to
-#' be reversed along a given axis.
+#'        causes the orientation of the canonical scores and structure coefficients to
+#'        be reversed along a given axis.
 #' @param ellipse Draw data ellipses for canonical scores?
 #' @param ellipse.prob Coverage probability for the data ellipses
 #' @param fill.alpha Transparency value for the color used to fill the
-#' ellipses.  Use \code{fill.alpha} to draw the ellipses unfilled.
+#'        ellipses.  Use \code{fill.alpha} to draw the ellipses unfilled.
 #' @param prefix Prefix used to label the canonical dimensions plotted
 #' @param suffix Suffix for labels of canonical dimensions. If
-#' \code{suffix=TRUE} the percent of hypothesis (H) variance accounted for by
-#' each canonical dimension is added to the axis label.
+#'        \code{suffix=TRUE} the percent of hypothesis (H) variance accounted for by
+#'        each canonical dimension is added to the axis label.
 #' @param titles.1d A character vector of length 2, containing titles for the
-#' panels used to plot the canonical scores and structure vectors, for the case
-#' in which there is only one canonical dimension.
+#'        panels used to plot the canonical scores and structure vectors, for the case
+#'        in which there is only one canonical dimension.
 #' @param points.1d Logical value for \code{plot.candisc} when only one
-#' canonical dimension.
+#'        canonical dimension.
 #' @param means Logical value used to determine if canonical means are printed
 #' @param scores Logical value used to determine if canonical scores are
-#' printed
+#'        printed
 #' @param coef Type of coefficients printed by the summary method. Any one or
-#' more of "std", "raw", or "structure"
+#'        more of \code{"std"}, \code{"raw"}, or \code{"structure"}
 #' @param digits significant digits to print.
 #' @param LRtests logical; should likelihood ratio tests for the canonical
-#' dimensions be printed?
+#'        dimensions be printed?
 #' @param \dots arguments to be passed down.  In particular, \code{type="n"}
-#' can be used with the \code{plot} method to suppress the display of canonical
-#' scores.
+#'        can be used with the \code{plot} method to suppress the display of canonical
+#'        scores.
 #' @return An object of class \code{candisc} with the following components:
-#' \item{dfh }{hypothesis degrees of freedom for \code{term}} \item{dfe }{error
-#' degrees of freedom for the \code{mlm}} \item{rank }{number of non-zero
-#' eigenvalues of \eqn{HE^{-1}}} \item{eigenvalues }{eigenvalues of
-#' \eqn{HE^{-1}}} \item{canrsq }{squared canonical correlations} \item{pct }{A
-#' vector containing the percentages of the \code{canrsq} of their total.}
+#' \item{dfh }{hypothesis degrees of freedom for \code{term}} 
+#' \item{dfe }{error degrees of freedom for the \code{mlm}} 
+#' \item{rank }{number of non-zero eigenvalues of \eqn{HE^{-1}}} 
+#' \item{eigenvalues }{eigenvalues of \eqn{HE^{-1}}} 
+#' \item{canrsq }{squared canonical correlations} 
+#' \item{pct }{A vector containing the percentages of the \code{canrsq} of their total.}
 #' \item{ndim }{Number of canonical dimensions stored in the \code{means},
-#' \code{structure} and \code{coeffs.*} components} \item{means }{A data.frame
-#' containing the class means for the levels of the factor(s) in the term}
-#' \item{factors }{A data frame containing the levels of the factor(s) in the
-#' \code{term}} \item{term }{name of the \code{term}} \item{terms }{A character
-#' vector containing the names of the terms in the \code{mlm} object}
+#'      \code{structure} and \code{coeffs.*} components} 
+#' \item{means }{A data.frame containing the class means for the levels of the 
+#'      factor(s) in the term}
+#' \item{factors }{A data frame containing the levels of the factor(s) in the \code{term}} 
+#' \item{term }{name of the \code{term}} 
+#' \item{terms }{A character vector containing the names of the terms in the
+#'      \code{mlm} object}
 #' \item{coeffs.raw }{A matrix containing the raw canonical coefficients}
-#' \item{coeffs.std }{A matrix containing the standardized canonical
-#' coefficients} \item{structure }{A matrix containing the canonical structure
-#' coefficients on \code{ndim} dimensions, i.e., the correlations between the
-#' original variates and the canonical scores.  These are sometimes referred to
-#' as Total Structure Coefficients.} \item{scores }{A data frame containing the
-#' predictors in the \code{mlm} model and the canonical scores on \code{ndim}
-#' dimensions.  These are calculated as \code{Y %*% coeffs.raw}, where \code{Y}
-#' contains the standardized response variables.}
+#' \item{coeffs.std }{A matrix containing the standardized canonical coefficients} 
+#' \item{structure }{A matrix containing the canonical structure
+#'     coefficients on \code{ndim} dimensions, i.e., the correlations between the
+#'     original variates and the canonical scores.  These are sometimes referred to
+#'     as Total Structure Coefficients.} 
+#' \item{scores }{A data frame containing the
+#'     predictors in the \code{mlm} model and the canonical scores on \code{ndim}
+#'     dimensions.  These are calculated as \code{Y %*% coeffs.raw}, where \code{Y}
+#'     contains the standardized response variables.}
 #' @author Michael Friendly and John Fox
 #' @seealso \code{\link{candiscList}}, \code{\link[heplots]{heplot}},
 #' \code{\link[heplots]{heplot3d}}

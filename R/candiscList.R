@@ -17,32 +17,32 @@
 #' 
 #' 
 #' @aliases candiscList candiscList.mlm plot.candiscList print.candiscList
-#' summary.candiscList
+#'          summary.candiscList
 #' @param mod An mlm object, such as computed by lm() with a multivariate
-#' response
+#'          response
 #' @param type type of test for the model \code{term}, one of: "II", "III",
-#' "2", or "3"
+#'          "2", or "3"
 #' @param manova the \code{Anova.mlm} object corresponding to \code{mod}.
-#' Normally, this is computed internally by \code{Anova(mod)}
+#'       Normally, this is computed internally by \code{Anova(mod)}
 #' @param ndim Number of dimensions to store in the \code{means},
-#' \code{structure}, \code{scores} and \code{coeffs.*} components.  The default
-#' is the rank of the H matrix for the hypothesis term.
+#'       \code{structure}, \code{scores} and \code{coeffs.*} components.  
+#'       The default is the rank of the H matrix for the hypothesis term.
 #' @param object,x A candiscList object
 #' @param term The name of one term to be plotted for the \code{plot} method.
-#' If not specified, one candisc plot is produced for each term in the
-#' \code{mlm} object.
+#'       If not specified, one candisc plot is produced for each term in the
+#'       \code{mlm} object.
 #' @param ask If \code{TRUE} (the default, when running interactively), a menu
-#' of terms is presented; if ask is FALSE, canonical plots for all terms are
-#' produced.
+#'       of terms is presented; if ask is FALSE, canonical plots for all terms are
+#'       produced.
 #' @param graphics if \code{TRUE} (the default, when running interactively),
-#' then the menu of terms to plot is presented in a dialog box rather than as a
-#' text menu.
+#'       then the menu of terms to plot is presented in a dialog box rather than as a
+#'       text menu.
 #' @param \dots arguments to be passed down.
 #' @return An object of class \code{candiscList} which is a list of
-#' \code{candisc} objects for the terms in the mlm.
+#'       \code{"candisc"} objects for the terms in the mlm.
 #' @author Michael Friendly and John Fox
 #' @seealso \code{\link{candisc}}, \code{\link[heplots]{heplot}},
-#' \code{\link[heplots]{heplot3d}}
+#'       \code{\link[heplots]{heplot3d}}
 #' @keywords multivariate hplot
 #' @examples
 #' 

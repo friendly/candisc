@@ -3,7 +3,9 @@
 
 
 #' Canonical Correlation HE plots
-#' 
+#'
+#' @description
+#'  
 #' These functions plot ellipses (or ellipsoids in 3D) in canonical space
 #' representing the hypothesis and error sums-of-squares-and-products matrices
 #' for terms in a multivariate linear model representing the result of a
@@ -44,46 +46,45 @@
 #' @aliases heplot.cancor heplot3d.cancor
 #' @param mod A \code{cancor} object
 #' @param which A numeric vector containing the indices of the Y canonical
-#' dimensions to plot.
+#'        dimensions to plot.
 #' @param scale Scale factor for the variable vectors in canonical space.  If
-#' not specified, the function calculates one to make the variable vectors
-#' approximately fill the plot window.
+#'        not specified, the function calculates one to make the variable vectors
+#'        approximately fill the plot window.
 #' @param asp aspect ratio setting. Use \code{asp=1} in 2D plots and
-#' \code{asp="iso"} in 3D plots to ensure equal units on the axes. Use
-#' \code{asp=NA} in 2D plots and \code{asp=NULL} in 3D plots to allow separate
-#' scaling for the axes. See Details below.
+#'        \code{asp="iso"} in 3D plots to ensure equal units on the axes. Use
+#'        \code{asp=NA} in 2D plots and \code{asp=NULL} in 3D plots to 
+#'        allow separate scaling for the axes. See Details below.
 #' @param var.vectors Which variable vectors to plot?  A character vector
-#' containing one or more of \code{"X"} and \code{"Y"}.
+#'        containing one or more of \code{"X"} and \code{"Y"}.
 #' @param var.col Color(s) for variable vectors and labels, a vector of length
-#' 1 or 2.  The first color is used for Y vectors and the second for X vectors,
-#' if these are plotted.
+#'        1 or 2.  The first color is used for Y vectors and the second for X vectors,
+#'        if these are plotted.
 #' @param var.lwd Line width for variable vectors
 #' @param var.cex Text size for variable vector labels
 #' @param var.xpd logical. Allow variable labels outside the plot box? Does not
-#' apply to 3D plots.
+#'        apply to 3D plots.
 #' @param prefix Prefix for labels of the Y canonical dimensions.
 #' @param suffix Suffix for labels of canonical dimensions. If
-#' \code{suffix=TRUE} the percent of hypothesis (H) variance accounted for by
-#' each canonical dimension is added to the axis label.
+#'        \code{suffix=TRUE} the percent of hypothesis (H) variance accounted for by
+#'        each canonical dimension is added to the axis label.
 #' @param terms Terms for the X variables to be plotted in canonical space. The
-#' default, \code{terms=TRUE} or \code{terms="X"} plots H ellipses for all of
-#' the X variables. \code{terms="Xcan"} plots H ellipses for all of the X
-#' canonical variables, \code{Xcan1}, \code{Xcan2}, \dots.
+#'        default, \code{terms=TRUE} or \code{terms="X"} plots H ellipses for all of
+#'       the X variables. \code{terms="Xcan"} plots H ellipses for all of the X
+#'       canonical variables, \code{Xcan1}, \code{Xcan2}, \dots.
 #' @param \dots Other arguments passed to \code{link[heplots]{heplot}}. In
-#' particular, you can pass linear hypotheses among the term variables via
-#' \code{hypotheses}.
+#'       particular, you can pass linear hypotheses among the term variables via
+#'       \code{hypotheses}.
 #' @return Returns invisibly an object of class \code{"heplot"}, with
-#' coordinates for the various hypothesis ellipses and the error ellipse, and
-#' the limits of the horizontal and vertical axes. %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
+#'       coordinates for the various hypothesis ellipses and the error ellipse, and
+#'       the limits of the horizontal and vertical axes. 
 #' @author Michael Friendly
-#' @seealso \code{\link{cancor}} for details on canonical correlation as
-#' implemented here; \code{\link{plot.cancor}} for scatterplots of canonical
-#' variable scores.
-#' 
-#' \code{\link{heplot.candisc}}, \code{\link[heplots]{heplot}},
-#' \code{\link[car]{linearHypothesis}}
+#' @seealso 
+#'       \code{\link{cancor}} for details on canonical correlation as
+#'       implemented here; 
+#'       \code{\link{plot.cancor}} for scatterplots of canonical 
+#'       variable scores.
+#'       \code{\link{heplot.candisc}}, \code{\link[heplots]{heplot}},
+#'       \code{\link[car]{linearHypothesis}}
 #' @references Gittins, R. (1985). \emph{Canonical Analysis: A Review with
 #' Applications in Ecology}, Berlin: Springer.
 #' 

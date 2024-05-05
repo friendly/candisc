@@ -1,33 +1,29 @@
-# calculate redundancy indices for canonical correlation analysis
-
-
 
 #' Canonical Redundancy Analysis
 #' 
+#' @description
 #' Calculates indices of redundancy (Stewart & Love, 1968) from a canonical
 #' correlation analysis. These give the proportion of variances of the
 #' variables in each set (X and Y) which are accounted for by the variables in
 #' the other set through the canonical variates.
-#' 
-#' None yet. %Repeat with and variables interchanged, and you get the same
-#' eigenvalues.
 #' 
 #' @aliases redundancy print.cancor.redundancy
 #' @param object A \code{"cancor"} object
 #' @param x A \code{"cancor.redundancy"} for the \code{print} method.
 #' @param digits Number of digits to print
 #' @param \dots Other arguments
-#' @return %% ~Describe the value returned An object of class
-#' \code{"cancor.redundancy"}, a list with the following 5 components:
-#' \item{Xcan.redun}{Canonical redundancies for the X variables, i.e., the
-#' total fraction of X variance accounted for by the Y variables through each
-#' canonical variate.} \item{Ycan.redun}{Canonical redundancies for the Y
-#' variables} \item{X.redun}{Total canonical redundancy for the X variables,
-#' i.e., the sum of \code{Xcan.redun}.} \item{Y.redun}{Total canonical
-#' redundancy for the Y variables} \item{set.names}{names for the X and Y sets
-#' of variables}
+#' @return An object of class \code{"cancor.redundancy"}, a list with the 
+#' following 5 components:
+#'    \item{Xcan.redun}{Canonical redundancies for the X variables, i.e., the
+#'       total fraction of X variance accounted for by the Y variables through each
+#'       canonical variate.} 
+#' \item{Ycan.redun}{Canonical redundancies for the Y variables} 
+#' \item{X.redun}{Total canonical redundancy for the X variables,
+#'       i.e., the sum of \code{Xcan.redun}.} 
+#' \item{Y.redun}{Total canonical redundancy for the Y variables} 
+#' \item{set.names}{names for the X and Y sets of variables}
 #' @author Michael Friendly
-#' @seealso \code{\link{cancor}}, ~~~
+#' @seealso \code{\link{cancor}}
 #' @references Stewart, D. and Love, W. (1968). A general canonical correlation
 #' index.  \emph{Psychological Bulletin}, 70, 160-163.
 #' @keywords multivariate

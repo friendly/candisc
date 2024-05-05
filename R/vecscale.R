@@ -1,12 +1,3 @@
-#' Scale vectors to fill the current plot
-
-#' @param vectors a two-column matrix giving the end points of a collection of vectors
-#' @param bbox the bounding box of the containing plot region within which the vectors are to be plotted
-#' @param origin origin of the vectors
-#' @param factor maximum length of the rescaled vectors
-#' @return scale factor 
-
-
 
 #' Scale vectors to fill the current plot
 #' 
@@ -16,12 +7,12 @@
 #' 
 #' 
 #' @param vectors a two-column matrix giving the end points of a collection of
-#' vectors
+#'        vectors
 #' @param bbox the bounding box of the containing plot region within which the
-#' vectors are to be plotted
+#'        vectors are to be plotted
 #' @param origin origin of the vectors
 #' @param factor maximum length of the rescaled vectors relative to the maximum
-#' possible
+#'        possible
 #' @return scale factor, the multiplier of the vectors
 #' @author Michael Friendly
 #' @seealso \code{\link{vectors}}

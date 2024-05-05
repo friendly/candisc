@@ -17,7 +17,7 @@
 #' 
 #' @aliases vectors vectors3d
 #' @param x A two-column matrix or a three-column matrix containing the end
-#' points of the vectors
+#'          points of the vectors
 #' @param origin Starting point(s) for the vectors
 #' @param labels Labels for the vectors
 #' @param scale A multiplier for the length of each vector
@@ -25,16 +25,14 @@
 #' @param lwd line width(s) for the vectors.
 #' @param cex color(s) for the vectors.
 #' @param length For \code{vectors}, length of the edges of the arrow head (in
-#' inches).
+#'        inches).
 #' @param angle For \code{vectors}, angle from the shaft of the arrow to the
-#' edge of the arrow head.
+#'        edge of the arrow head.
 #' @param pos For \code{vectors}, position of the text label relative to the
-#' vector head. If \code{pos==NULL}, labels are positioned labels outside,
-#' relative to arrow ends.
+#'        vector head. If \code{pos==NULL}, labels are positioned labels outside,
+#'        relative to arrow ends.
 #' @param \dots other graphical parameters, such as \code{lty}, \code{xpd}, ...
-#' @return None %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
+#' @return None
 #' @author Michael Friendly
 #' @seealso \code{\link[graphics]{arrows}}, \code{\link[graphics]{text}},
 #' \code{\link[graphics]{segments}}
@@ -60,7 +58,10 @@ vectors <- function(x, origin=c(0,0), labels=rownames(x),
 
 	x <- scale*x
 	if (is.vector(origin)) origin <- matrix(origin, ncol=2)
-	.arrows(origin[,1], origin[,2], x[,1], x[,2], lwd=lwd, col=col, length=length, angle=angle, ...)
+	.arrows(origin[,1], origin[,2], 
+	        x[,1], x[,2], 
+	        lwd=lwd, col=col, length=length, 
+	        angle=angle, ...)
 	if (!is.null(labels)) {
 		if(missing(pos)) pos <- ifelse(x[,1]>0, 4, 2)
 		# DONE: position labels relative to arrow ends (outside)

@@ -8,6 +8,7 @@ default.arg <- function(args.list, arg, default){
 
 #' Canonical Correlation Plots
 #' 
+#' @description
 #' This function produces plots to help visualize X, Y data in canonical space.
 #' 
 #' The present implementation plots the canonical scores for the Y variables
@@ -29,40 +30,41 @@ default.arg <- function(args.list, arg, default){
 #' @param which Which dimension to plot? An integer in \code{1:x$ndim}.
 #' @param xlim,ylim Limits for x and y axes
 #' @param xlab,ylab Labels for x and y axes.  If not specified, these are
-#' constructed from the \code{set.names} component of \code{x}.
+#'        constructed from the \code{set.names} component of \code{x}.
 #' @param points logical.  Display the points?
 #' @param add logical.  Add to an existing plot?
 #' @param col Color for points.
 #' @param ellipse logical. Draw a data ellipse for the canonical scores?
 #' @param ellipse.args A list of arguments passed to
-#' \code{\link[car]{dataEllipse}}. Internally, the function sets the default
-#' value for \code{levels} to 0.68.
+#'        \code{\link[car]{dataEllipse}}. Internally, the function sets the default
+#'        value for \code{levels} to 0.68.
 #' @param smooth logical. Draw a (loess) smoothed curve?
 #' @param smoother.args Arguments passed to \code{\link[car]{loessLine}}, which
-#' should be consulted for details and defaults.
+#'        should be consulted for details and defaults.
 #' @param col.smooth Color for the smoothed curve.
 #' @param abline logical. Draw the linear regression line for Ycan[,which] on
-#' Xcan[,which]?
+#'        Xcan[,which]?
 #' @param col.lines Color for the linear regression line
 #' @param lwd Line widths
 #' @param labels Point labels for point identification via the \code{id.method}
-#' argument.
+#'        argument.
 #' @param id.method Method used to identify individual points. See
-#' \code{\link[car]{showLabels}} for details.  The default, \code{id.method =
-#' "mahal"} identifies the \code{id.n} points furthest from the centroid.
+#'        \code{\link[car]{showLabels}} for details.  The default, 
+#'        \code{id.method = "mahal"} identifies the \code{id.n} points furthest 
+#'        from the centroid.
 #' @param id.n Number of points to identify
 #' @param id.cex,id.col Character size and color for labeled points
 #' @param \dots Other arguments passed down to \code{plot(\dots)} and
-#' \code{points(\dots)}
+#'        \code{points(\dots)}
 #' @return None.  Used for its side effect of producing a plot. %% ~Describe
-#' the value returned %% If it is a LIST, use %% \item{comp1 }{Description of
-#' 'comp1'} %% \item{comp2 }{Description of 'comp2'} %% ...
+#'        the value returned 
 #' @author Michael Friendly
 #' @seealso \code{\link{cancor}},
 #' 
 #' \code{\link[car]{dataEllipse}}, \code{\link[car]{loessLine}},
 #' \code{\link[car]{showLabels}}
-#' @references Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979).
+#' @references 
+#' Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979).
 #' \emph{Multivariate Analysis}. London: Academic Press.
 #' @keywords hplot
 #' @examples

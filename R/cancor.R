@@ -107,19 +107,17 @@
 #'    \item{dim}{Problem dimensions, a list of 3 components:
 #'          \code{p} (number of X variables), \code{q} (number of Y variables), \code{n} (sample size)} 
 #'     \item{coef}{Canonical coefficients, a list of 2 components:
-#' \code{X}, \code{Y}} % \item{scores}{Canonical variate scores, a list of 2
-#' components: \code{X}, \code{Y}} 
-#'     \item{scores}{Canonical variate scores, a
-#' list of 2 components: 
+#' \code{X}, \code{Y}} % 
+#'     \item{scores}{Canonical variate scores, a list of 2 components: \code{X}, \code{Y}} 
+#'     \item{scores}{Canonical variate scores, a list of 2 components: 
 #'      \describe{ 
-#'         \item{list("X")}{Canonical variate scores
-#' for the X variables} 
-#'         \item{list("Y")}{Canonical variate scores for the Y
-#' variables} } } 
-#'         \item{X}{The matrix X} \item{Y}{The matrix Y}
+#'         \item{list("X")}{Canonical variate scores for the X variables} 
+#'         \item{list("Y")}{Canonical variate scores for the Y variables} } 
+#'         } 
+#'     \item{X}{The matrix X} \item{Y}{The matrix Y}
 #' \item{weights}{Observation weights, if supplied, else \code{NULL}} %
 #' \item{structure}{Structure correlations, a list of 4 components:
-#' \code{X.xscores}, \code{Y.xscores}, \code{X.yscores}, \code{Y.yscores}}
+#'     \code{X.xscores}, \code{Y.xscores}, \code{X.yscores}, \code{Y.yscores}}
 #' 
 #' \item{structure}{Structure correlations ("loadings"), a list of 4
 #' components: 
