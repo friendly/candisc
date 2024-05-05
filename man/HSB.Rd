@@ -6,28 +6,30 @@
 \title{High School and Beyond Data}
 \format{
 A data frame with 600 observations on the following 15 variables.
-There is no missing data.  \describe{ \item{list("id")}{Observation id: a
-numeric vector} \item{list("gender")}{a factor with levels \code{male}
-\code{female}} \item{list("race")}{Race or ethnicity: a factor with levels
-\code{hispanic} \code{asian} \code{african-amer} \code{white}}
-\item{list("ses")}{Socioeconomic status: a factor with levels \code{low}
-\code{middle} \code{high}} \item{list("sch")}{School type: a factor with
-levels \code{public} \code{private}} \item{list("prog")}{High school
-program: a factor with levels \code{general} \code{academic}
-\code{vocation}} \item{list("locus")}{Locus of control: a numeric vector}
-\item{list("concept")}{Self-concept: a numeric vector}
-\item{list("mot")}{Motivation: a numeric vector}
-\item{list("career")}{Career plan: a factor with levels \code{clerical}
-\code{craftsman} \code{farmer} \code{homemaker} \code{laborer}
-\code{manager} \code{military} \code{operative} \code{prof1} \code{prof2}
-\code{proprietor} \code{protective} \code{sales} \code{school}
-\code{service} \code{technical} \code{not working}}
-\item{list("read")}{Standardized reading score: a numeric vector}
-\item{list("write")}{Standardized writing score: a numeric vector}
-\item{list("math")}{Standardized math score: a numeric vector}
-\item{list("sci")}{Standardized science score: a numeric vector}
-\item{list("ss")}{Standardized social science (civics) score: a numeric
-vector} }
+There is no missing data.  
+\describe{ 
+\item{\code{id}}{Observation id: a numeric vector} 
+\item{\code{gender}}{a factor with levels \code{male} \code{female}} 
+\item{\code{race}}{Race or ethnicity: a factor with levels
+     \code{hispanic} \code{asian} \code{african-amer} \code{white}}
+\item{\code{ses}}{Socioeconomic status: a factor with levels \code{low} \code{middle} \code{high}} 
+\item{\code{sch}}{School type: a factor with levels \code{public} \code{private}} 
+\item{\code{prog}}{High school program: a factor with levels \code{general} \code{academic}
+     \code{vocation}} 
+\item{\code{locus}}{Locus of control: a numeric vector}
+\item{\code{concept}}{Self-concept: a numeric vector}
+\item{\code{mot}}{Motivation: a numeric vector}
+\item{\code{career}}{Career plan: a factor with levels \code{clerical}
+     \code{craftsman} \code{farmer} \code{homemaker} \code{laborer}
+     \code{manager} \code{military} \code{operative} \code{prof1} \code{prof2}
+     \code{proprietor} \code{protective} \code{sales} \code{school}
+     \code{service} \code{technical} \code{not working}}
+\item{\code{read}}{Standardized reading score: a numeric vector}
+\item{\code{write}}{Standardized writing score: a numeric vector}
+\item{\code{math}}{Standardized math score: a numeric vector}
+\item{\code{sci}}{Standardized science score: a numeric vector}
+\item{\code{ss}}{Standardized social science (civics) score: a numeric vector} 
+}
 }
 \source{
 Tatsuoka, M. M. (1988).  Multivariate Analysis: Techniques for

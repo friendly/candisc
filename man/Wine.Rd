@@ -6,17 +6,22 @@
 \title{Chemical composition of three cultivars of wine}
 \format{
 A data frame with 178 observations on the following 14 variables.
-\describe{ \item{list("Cultivar")}{a factor with levels \code{barolo}
-\code{grignolino} \code{barbera}} \item{list("Alcohol")}{a numeric vector}
-\item{list("MalicAcid")}{a numeric vector} \item{list("Ash")}{a numeric
-vector} \item{list("AlcAsh")}{a numeric vector, Alkalinity of ash}
-\item{list("Mg")}{a numeric vector, Magnesium} \item{list("Phenols")}{a
-numeric vector, Total phenols} \item{list("Flav")}{a numeric vector,
-Flavanoids} \item{list("NonFlavPhenols")}{a numeric vector}
-\item{list("Proa")}{a numeric vector, Proanthocyanins}
-\item{list("Color")}{a numeric vector, color intensity} \item{list("Hue")}{a
-numeric vector} \item{list("OD")}{a numeric vector, OD280/OD315 of diluted
-wines} \item{list("Proline")}{a numeric vector} }
+\describe{ 
+\item{\code{Cultivar}}{a factor with levels \code{barolo} \code{grignolino} \code{barbera}} 
+\item{\code{Alcohol}}{a numeric vector}
+\item{\code{MalicAcid}}{a numeric vector} 
+\item{\code{Ash}}{a numeric vector} 
+\item{\code{AlcAsh}}{a numeric vector, Alkalinity of ash}
+\item{\code{Mg}}{a numeric vector, Magnesium} 
+\item{\code{Phenols}}{a numeric vector, Total phenols} 
+\item{\code{Flav}}{a numeric vector, Flavanoids} 
+\item{\code{NonFlavPhenols}}{a numeric vector}
+\item{\code{Proa}}{a numeric vector, Proanthocyanins}
+\item{\code{Color}}{a numeric vector, color intensity} 
+\item{\code{Hue}}{a numeric vector} 
+\item{\code{OD}}{a numeric vector, OD280/OD315 of diluted wines} 
+\item{\code{Proline}}{a numeric vector} 
+}
 }
 \source{
 This data set was obtained from the UCI Machine Learning Repository,

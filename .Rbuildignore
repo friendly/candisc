@@ -11,3 +11,5 @@ README.md
 ^docs$
 ^pkgdown$
 .nojekyll
+man-old/
+NAMESPACE-old

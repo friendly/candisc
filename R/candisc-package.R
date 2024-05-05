@@ -70,14 +70,13 @@
 #' 
 #' Friendly, M. & Sigal, M. (2014). Recent Advances in Visualizing Multivariate
 #' Linear Models. \emph{Revista Colombiana de Estadistica} , \bold{37}(2),
-#' 261-283. c("\\Sexpr[results=rd]{tools:::Rd_expr_doi(\"#1\")}",
-#' "10.15446/rce.v37n2spe.47934")\Sexpr{tools:::Rd_expr_doi("10.15446/rce.v37n2spe.47934")}.
+#' 261-283. 
+#' \doi{10.15446/rce.v37n2spe.47934}.
 #' 
 #' Friendly, M. & Sigal, M. (2017). Graphical Methods for Multivariate Linear
 #' Models in Psychological Research: An R Tutorial, \emph{The Quantitative
 #' Methods for Psychology}, 13 (1), 20-45.
-#' c("\\Sexpr[results=rd]{tools:::Rd_expr_doi(\"#1\")}",
-#' "10.20982/tqmp.13.1.p020")\Sexpr{tools:::Rd_expr_doi("10.20982/tqmp.13.1.p020")}.
+#' \doi{10.20982/tqmp.13.1.p020}.
 #' 
 #' Gittins, R. (1985). \emph{Canonical Analysis: A Review with Applications in
 #' Ecology}, Berlin: Springer.
@@ -109,16 +108,19 @@
 #' @name Grass
 #' @docType data
 #' @format A data frame with 40 observations on the following 7 variables.
-#' \describe{ \item{list("Species")}{a factor with levels \code{B.media}
-#' \code{D.glomerata} \code{F.ovina} \code{F.rubra} \code{H.pubesens}
-#' \code{K.cristata} \code{L.perenne} \code{P.bertolonii}}
-#' \item{list("Block")}{a factor with levels \code{1} \code{2} \code{3}
-#' \code{4} \code{5}} \item{list("N1")}{species yield at 1 ppm Nitrogen}
-#' \item{list("N9")}{species yield at 9 ppm Nitrogen}
-#' \item{list("N27")}{species yield at 27 ppm Nitrogen}
-#' \item{list("N81")}{species yield at 81 ppm Nitrogen}
-#' \item{list("N243")}{species yield at 243 ppm Nitrogen} }
-#' @source Gittins, R. (1985), Canonical Analysis: A Review with Applications
+#' \describe{ 
+#' \item{\code{Species}}{a factor with levels \code{B.media}
+#'       \code{D.glomerata} \code{F.ovina} \code{F.rubra} \code{H.pubesens}
+#'       \code{K.cristata} \code{L.perenne} \code{P.bertolonii}}
+#' \item{\code{Block}}{a factor with levels \code{1} \code{2} \code{3} \code{4} \code{5}} 
+#' \item{\code{N1}}{species yield at 1 ppm Nitrogen}
+#' \item{\code{N9}}{species yield at 9 ppm Nitrogen}
+#' \item{\code{N27}}{species yield at 27 ppm Nitrogen}
+#' \item{\code{N81}}{species yield at 81 ppm Nitrogen}
+#' \item{\code{N243}}{species yield at 243 ppm Nitrogen} 
+#' }
+#' @source 
+#' Gittins, R. (1985), Canonical Analysis: A Review with Applications
 #' in Ecology, Berlin: Springer-Verlag, Table A-5.
 #' @keywords datasets
 #' @examples
@@ -151,28 +153,30 @@ NULL
 #' @name HSB
 #' @docType data
 #' @format A data frame with 600 observations on the following 15 variables.
-#' There is no missing data.  \describe{ \item{list("id")}{Observation id: a
-#' numeric vector} \item{list("gender")}{a factor with levels \code{male}
-#' \code{female}} \item{list("race")}{Race or ethnicity: a factor with levels
-#' \code{hispanic} \code{asian} \code{african-amer} \code{white}}
-#' \item{list("ses")}{Socioeconomic status: a factor with levels \code{low}
-#' \code{middle} \code{high}} \item{list("sch")}{School type: a factor with
-#' levels \code{public} \code{private}} \item{list("prog")}{High school
-#' program: a factor with levels \code{general} \code{academic}
-#' \code{vocation}} \item{list("locus")}{Locus of control: a numeric vector}
-#' \item{list("concept")}{Self-concept: a numeric vector}
-#' \item{list("mot")}{Motivation: a numeric vector}
-#' \item{list("career")}{Career plan: a factor with levels \code{clerical}
-#' \code{craftsman} \code{farmer} \code{homemaker} \code{laborer}
-#' \code{manager} \code{military} \code{operative} \code{prof1} \code{prof2}
-#' \code{proprietor} \code{protective} \code{sales} \code{school}
-#' \code{service} \code{technical} \code{not working}}
-#' \item{list("read")}{Standardized reading score: a numeric vector}
-#' \item{list("write")}{Standardized writing score: a numeric vector}
-#' \item{list("math")}{Standardized math score: a numeric vector}
-#' \item{list("sci")}{Standardized science score: a numeric vector}
-#' \item{list("ss")}{Standardized social science (civics) score: a numeric
-#' vector} }
+#' There is no missing data.  
+#' \describe{ 
+#' \item{\code{id}}{Observation id: a numeric vector} 
+#' \item{\code{gender}}{a factor with levels \code{male} \code{female}} 
+#' \item{\code{race}}{Race or ethnicity: a factor with levels
+#'      \code{hispanic} \code{asian} \code{african-amer} \code{white}}
+#' \item{\code{ses}}{Socioeconomic status: a factor with levels \code{low} \code{middle} \code{high}} 
+#' \item{\code{sch}}{School type: a factor with levels \code{public} \code{private}} 
+#' \item{\code{prog}}{High school program: a factor with levels \code{general} \code{academic}
+#'      \code{vocation}} 
+#' \item{\code{locus}}{Locus of control: a numeric vector}
+#' \item{\code{concept}}{Self-concept: a numeric vector}
+#' \item{\code{mot}}{Motivation: a numeric vector}
+#' \item{\code{career}}{Career plan: a factor with levels \code{clerical}
+#'      \code{craftsman} \code{farmer} \code{homemaker} \code{laborer}
+#'      \code{manager} \code{military} \code{operative} \code{prof1} \code{prof2}
+#'      \code{proprietor} \code{protective} \code{sales} \code{school}
+#'      \code{service} \code{technical} \code{not working}}
+#' \item{\code{read}}{Standardized reading score: a numeric vector}
+#' \item{\code{write}}{Standardized writing score: a numeric vector}
+#' \item{\code{math}}{Standardized math score: a numeric vector}
+#' \item{\code{sci}}{Standardized science score: a numeric vector}
+#' \item{\code{ss}}{Standardized social science (civics) score: a numeric vector} 
+#' }
 #' @references High School and Beyond data files:
 #' \url{http://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/7896}
 #' @source Tatsuoka, M. M. (1988).  Multivariate Analysis: Techniques for
@@ -226,17 +230,22 @@ NULL
 #' @name Wine
 #' @docType data
 #' @format A data frame with 178 observations on the following 14 variables.
-#' \describe{ \item{list("Cultivar")}{a factor with levels \code{barolo}
-#' \code{grignolino} \code{barbera}} \item{list("Alcohol")}{a numeric vector}
-#' \item{list("MalicAcid")}{a numeric vector} \item{list("Ash")}{a numeric
-#' vector} \item{list("AlcAsh")}{a numeric vector, Alkalinity of ash}
-#' \item{list("Mg")}{a numeric vector, Magnesium} \item{list("Phenols")}{a
-#' numeric vector, Total phenols} \item{list("Flav")}{a numeric vector,
-#' Flavanoids} \item{list("NonFlavPhenols")}{a numeric vector}
-#' \item{list("Proa")}{a numeric vector, Proanthocyanins}
-#' \item{list("Color")}{a numeric vector, color intensity} \item{list("Hue")}{a
-#' numeric vector} \item{list("OD")}{a numeric vector, OD280/OD315 of diluted
-#' wines} \item{list("Proline")}{a numeric vector} }
+#' \describe{ 
+#' \item{\code{Cultivar}}{a factor with levels \code{barolo} \code{grignolino} \code{barbera}} 
+#' \item{\code{Alcohol}}{a numeric vector}
+#' \item{\code{MalicAcid}}{a numeric vector} 
+#' \item{\code{Ash}}{a numeric vector} 
+#' \item{\code{AlcAsh}}{a numeric vector, Alkalinity of ash}
+#' \item{\code{Mg}}{a numeric vector, Magnesium} 
+#' \item{\code{Phenols}}{a numeric vector, Total phenols} 
+#' \item{\code{Flav}}{a numeric vector, Flavanoids} 
+#' \item{\code{NonFlavPhenols}}{a numeric vector}
+#' \item{\code{Proa}}{a numeric vector, Proanthocyanins}
+#' \item{\code{Color}}{a numeric vector, color intensity} 
+#' \item{\code{Hue}}{a numeric vector} 
+#' \item{\code{OD}}{a numeric vector, OD280/OD315 of diluted wines} 
+#' \item{\code{Proline}}{a numeric vector} 
+#' }
 #' @references In R, a comparable data set is contained in the \pkg{ggbiplot}
 #' package.
 #' @source This data set was obtained from the UCI Machine Learning Repository,
@@ -280,19 +289,21 @@ NULL
 #' @name Wolves
 #' @docType data
 #' @format A data frame with 25 observations on the following 11 variables.
-#' \describe{ \item{list("group")}{a factor with levels \code{ar:f} \code{ar:m}
-#' \code{rm:f} \code{rm:m}, comprising the combinations of \code{location} and
-#' \code{sex}} \item{list("location")}{a factor with levels \code{ar}=Arctic,
-#' \code{rm}=Rocky Mountain} \item{list("sex")}{a factor with levels
-#' \code{f}=female, \code{m}=male} \item{list("x1")}{palatal length, a numeric
-#' vector} \item{list("x2")}{postpalatal length, a numeric vector}
-#' \item{list("x3")}{zygomatic width, a numeric vector}
-#' \item{list("x4")}{palatal width outside first upper molars, a numeric
-#' vector} \item{list("x5")}{palatal width inside second upper molars, a
-#' numeric vector} \item{list("x6")}{postglenoid foramina width, a numeric
-#' vector} \item{list("x7")}{interorbital width, a numeric vector}
-#' \item{list("x8")}{braincase width, a numeric vector} \item{list("x9")}{crown
-#' length, a numeric vector} }
+#' \describe{ 
+#' \item{\code{group}}{a factor with levels \code{ar:f} \code{ar:m}
+#'       \code{rm:f} \code{rm:m}, comprising the combinations of \code{location} and \code{sex}} 
+#' \item{\code{location}}{a factor with levels \code{ar}=Arctic, \code{rm}=Rocky Mountain} 
+#' \item{\code{sex}}{a factor with levels \code{f}=female, \code{m}=male} 
+#' \item{\code{x1}}{palatal length, a numeric vector} 
+#' \item{\code{x2}}{postpalatal length, a numeric vector}
+#' \item{\code{x3}}{zygomatic width, a numeric vector}
+#' \item{\code{x4}}{palatal width outside first upper molars, a numeric vector} 
+#' \item{\code{x5}}{palatal width inside second upper molars, a numeric vector} 
+#' \item{\code{x6}}{postglenoid foramina width, a numeric vector} 
+#' \item{\code{x7}}{interorbital width, a numeric vector}
+#' \item{\code{x8}}{braincase width, a numeric vector} 
+#' \item{\code{x9}}{crown length, a numeric vector} 
+#' }
 #' @references Jolicoeur, P. ``Multivariate geographical variation in the wolf
 #' \emph{Canis lupis L.}'', \emph{Evolution}, XIII, 283--299.
 #' @source Morrison, D. F.  \emph{Multivariate Statistical Methods}, (3rd ed.),
