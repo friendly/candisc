@@ -67,6 +67,7 @@ default.arg <- function(args.list, arg, default){
 #' Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979).
 #' \emph{Multivariate Analysis}. London: Academic Press.
 #' @keywords hplot
+#' @importFrom car dataEllipse showLabels loessLine
 #' @examples
 #' 
 #' data(Rohwer, package="heplots")

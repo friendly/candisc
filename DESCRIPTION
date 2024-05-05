@@ -3,11 +3,16 @@ Type: Package
 Title: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis
 Version: 0.8-6
 Date: 2021-10-06
-Depends: R (>= 3.5.0), car, heplots (>= 0.8-6), graphics, stats 
-Suggests: rgl, corrplot,
+Depends: R (>= 3.5.0), heplots (>= 0.8-6)
+Imports: car, graphics, stats
+Suggests: 
+    rgl, 
+    corrplot,
     knitr,
     rmarkdown,
-    MASS, rpart, rpart.plot
+    MASS, 
+    rpart, 
+    rpart.plot
 LazyLoad: yes
 LazyData: yes
 Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),

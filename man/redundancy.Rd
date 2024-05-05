@@ -6,6 +6,8 @@
 \title{Canonical Redundancy Analysis}
 \usage{
 redundancy(object, ...)
+
+\method{print}{cancor.redundancy}(x, digits = max(getOption("digits") - 3, 3), ...)
 }
 \arguments{
 \item{object}{A \code{"cancor"} object}
@@ -34,6 +36,11 @@ correlation analysis. These give the proportion of variances of the
 variables in each set (X and Y) which are accounted for by the variables in
 the other set through the canonical variates.
 }
+\section{Functions}{
+\itemize{
+\item \code{print(cancor.redundancy)}: \code{print()} method for \code{"cancor.redundancy"} objects.
+
+}}
 \examples{
 
 	data(Rohwer, package="heplots")

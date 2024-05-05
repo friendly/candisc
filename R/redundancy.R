@@ -75,6 +75,7 @@ redundancy <- function(object, ...) {
     result
 } 
 
+#' @describeIn redundancy \code{print()} method for \code{"cancor.redundancy"} objects.
 #' @export
 print.cancor.redundancy <- function(x, digits=max(getOption("digits") - 3, 3), ...) {
 	Xname <- x$set.names[1]

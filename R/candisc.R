@@ -171,6 +171,8 @@
 #' 
 #' Gittins, R. (1985). Canonical Analysis: A Review with Applications in
 #' Ecology, Berlin: Springer.
+#' @importFrom grDevices palette
+#' @importFrom car Anova
 #' @keywords multivariate hplot
 #' @examples
 #' 
@@ -211,7 +213,7 @@ candisc.mlm <- function(mod,
                         manova,
                         ndim = rank, ...) {
   if (!inherits(mod, "mlm")) stop("Not an mlm object")
-  if (missing(manova)) manova <- Anova(mod, type = as.character(type))
+  if (missing(manova)) manova <- car::Anova(mod, type = as.character(type))
   terms <- manova$terms
   if (missing(term)) term <- terms[1]
   E <- manova$SSPE

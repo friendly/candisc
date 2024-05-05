@@ -354,6 +354,8 @@ heplot3d.candisc <- function (
 #' \emph{Journal of Computational and Graphical Statistics}, \bold{16}(2)
 #' 421--444.  \url{http://datavis.ca/papers/jcgs-heplots.pdf}
 #' @keywords multivariate hplot
+#' @importFrom utils menu
+#' @importFrom heplots heplot heplot3d
 #' @export
 heplot.candiscList <- function(mod, term, ask=interactive(), graphics = TRUE, ...) {
     if (!missing(term)){
