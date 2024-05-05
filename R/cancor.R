@@ -224,6 +224,8 @@ cancor <- function(x, ...) {
   UseMethod("cancor", x)
 }
 
+#' @describeIn cancor \code{"formula"} method.
+#' @export
 cancor.formula <- function(formula, data, subset, weights,
                            na.rm = TRUE,           # DONE: now just use na.rm
                            method = "gensvd",      # "qr" not implemented
@@ -284,6 +286,8 @@ Var <- function(x, na.rm = TRUE, use, weights) {
 # DONE:  allow weights, by use of cov.wt() as in dataEllipse()
 # FIXED: row.names should refer to original x, because as.matrix() strips them
 
+#' @describeIn cancor \code{"default"} method.
+#' @export
 cancor.default <- function(x, y,
                            weights,
                            X.names = colnames(x),
@@ -419,6 +423,8 @@ stars <- function(p, width = 30) {
 }
 
 # DONE: move the printout of coefficients to a summary method
+#' @describeIn cancor \code{print()} method for \code{"cancor"} objects.
+#' @export
 print.cancor <- function(x, digits = max(getOption("digits") - 2, 3), ...) {
   names <- x$names
   cat("\nCanonical correlation analysis of:\n")
@@ -447,6 +453,8 @@ print.cancor <- function(x, digits = max(getOption("digits") - 2, 3), ...) {
 }
 
 # moved printout of coefficients here
+#' @describeIn cancor \code{summary()} method for \code{"cancor"} objects.
+#' @export
 summary.cancor <- function(object, digits = max(getOption("digits") - 2, 3), ...) {
   names <- object$names
   print(object, digits = digits, ...)
@@ -466,7 +474,10 @@ scores <- function(x, ...) {
 }
 
 # TODO: check rownames
-scores.cancor <- function(x, type = c("x", "y", "both", "list", "data.frame"), ...) {
+#' @describeIn cancor \code{scores()} method for \code{"cancor"} objects.
+#' @export
+scores.cancor <- function(x, 
+                          type = c("x", "y", "both", "list", "data.frame"), ...) {
   type <- match.arg(type)
   switch(type,
     x = x$scores$X,
@@ -477,7 +488,11 @@ scores.cancor <- function(x, type = c("x", "y", "both", "list", "data.frame"), .
   )
 }
 
-coef.cancor <- function(object, type = c("x", "y", "both", "list"), standardize = FALSE, ...) {
+#' @describeIn cancor \code{coef()} method for \code{"cancor"} objects.
+#' @export
+coef.cancor <- function(object, 
+                        type = c("x", "y", "both", "list"), 
+                        standardize = FALSE, ...) {
   coef <- object$coef
   if (standardize) {
     coef$X <- diag(sqrt(diag(cov(object$X)))) %*% coef$X

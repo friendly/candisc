@@ -27,6 +27,8 @@ Description: Functions for computing and visualizing
 	visualizations of terms in an 'mlm' via the 'plot.candisc' and 'heplot.candisc' methods. Related plots are
 	now provided for canonical correlation analysis when all predictors are quantitative.
 License: GPL (>= 2)
+Encoding: UTF-8
 Packaged: 10/9/2008 6:12PM; Michael Friendly
 VignetteBuilder: knitr
 BugReports: https://github.com/friendly/candisc/issues
+RoxygenNote: 7.3.1

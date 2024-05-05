@@ -51,22 +51,22 @@
 #' may change in a later version.
 #' 
 #' @name candisc-package
-#' @docType package
 #' @author Michael Friendly and John Fox
 #' 
-#' Maintainer: Michael Friendly <friendly@@yorku.ca>
-#' @seealso \code{\link[heplots]{heplot}} for details about HE plots.
+#' Maintainer: Michael Friendly <friendly@yorku.ca>
+#' @seealso 
+#' \code{\link[heplots]{heplot}} for details about HE plots.
 #' 
 #' \code{\link{candisc}}, \code{\link{cancor}} for details about canonical
 #' discriminant analysis and canonical correlation analysis.
-#' @references Friendly, M. (2007).  HE plots for Multivariate General Linear
+#' @references 
+#' Friendly, M. (2007).  HE plots for Multivariate General Linear
 #' Models.  \emph{Journal of Computational and Graphical Statistics},
 #' \bold{16}(2) 421--444.  \url{http://datavis.ca/papers/jcgs-heplots.pdf}
 #' 
 #' Friendly, M. & Kwan, E. (2003). Effect Ordering for Data Displays,
 #' \emph{Computational Statistics and Data Analysis}, \bold{43}, 509-539.
-#' c("\\Sexpr[results=rd]{tools:::Rd_expr_doi(\"#1\")}",
-#' "10.1016/S0167-9473(02)00290-6")\Sexpr{tools:::Rd_expr_doi("10.1016/S0167-9473(02)00290-6")}
+#' \doi{10.1016/S0167-9473(02)00290-6}
 #' 
 #' Friendly, M. & Sigal, M. (2014). Recent Advances in Visualizing Multivariate
 #' Linear Models. \emph{Revista Colombiana de Estadistica} , \bold{37}(2),
@@ -81,8 +81,9 @@
 #' 
 #' Gittins, R. (1985). \emph{Canonical Analysis: A Review with Applications in
 #' Ecology}, Berlin: Springer.
+#' @aliases candisc-package
 #' @keywords package multivariate
-NULL
+"_PACKAGE"
 
 
 

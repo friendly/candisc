@@ -8,8 +8,6 @@
 # -- fixed candisc.mlm bug for 1 factor designs
 # -- moved plot.candisc to its own file
 # -- plot.candisc: added boxplot of canonical scores when ndim==1
-# Now refer to car:::predictor.names for car_2.0
-# Now just copy predictor.names from car to avoid namespace problem
 
 ## ----------------------------------------------------------------------------
 # Provides:
@@ -19,16 +17,6 @@
 ## ----------------------------------------------------------------------------
 ## canonical scores and vectors from an mlm object
 ## TODO: provide a data.frame / formula method
-
-predictor.names <- function(model, ...) {
-  UseMethod("predictor.names")
-}
-
-predictor.names.default <- function(model, ...) {
-  predictors <- attr(terms(model), "variables")
-  as.character(predictors[3:length(predictors)])
-}
-
 
 
 #' Canonical discriminant analysis
@@ -170,7 +158,7 @@ predictor.names.default <- function(model, ...) {
 #'     as Total Structure Coefficients.} 
 #' \item{scores }{A data frame containing the
 #'     predictors in the \code{mlm} model and the canonical scores on \code{ndim}
-#'     dimensions.  These are calculated as \code{Y %*% coeffs.raw}, where \code{Y}
+#'     dimensions.  These are calculated as \code{Y \%*\% coeffs.raw}, where \code{Y}
 #'     contains the standardized response variables.}
 #' @author Michael Friendly and John Fox
 #' @seealso \code{\link{candiscList}}, \code{\link[heplots]{heplot}},
@@ -215,6 +203,8 @@ candisc <-
   function(mod, ...) UseMethod("candisc")
 
 
+#' @describeIn candisc \code{"mlm"} method.
+#' @export
 candisc.mlm <- function(mod,
                         term,
                         type = "2",
@@ -306,6 +296,8 @@ candisc.mlm <- function(mod,
 
 # print method for candisc objects
 
+#' @describeIn candisc \code{print()} method for \code{"candisc"} objects.
+#' @export
 print.candisc <- function(x, digits = max(getOption("digits") - 2, 3), LRtests = TRUE, ...) {
   table <- canrsqTable(x)
   cat(paste("\nCanonical Discriminant Analysis for ", x$term, ":\n\n", sep = ""))
@@ -382,6 +374,8 @@ seqWilks <- function(eig, p, df.h, df.e) {
 
 ## summary method for a candisc object
 
+#' @describeIn candisc \code{summary()} method for \code{"candisc"} objects.
+#' @export
 summary.candisc <- function(object, means = TRUE, scores = FALSE,
                             coef = c("std"),
                             ndim, # default is min(3, rank, #cumsum(object$pct) < 99) unless ndim<rank
@@ -429,6 +423,8 @@ summary.candisc <- function(object, means = TRUE, scores = FALSE,
 }
 
 ## coef method for a candisc object
+#' @describeIn candisc \code{coef()} method for \code{"candisc"} objects.
+#' @export
 coef.candisc <- function(object, type = c("std", "raw", "structure"), ...) {
   type <- match.arg(type)
   switch(type,
@@ -437,3 +433,28 @@ coef.candisc <- function(object, type = c("std", "raw", "structure"), ...) {
     structure = object$structure
   )
 }
+
+# Now refer to car:::predictor.names for car_2.0
+# Now just copy predictor.names from car to avoid namespace problem
+
+#' Get predictor names from a \code{lm}-like model
+#'
+#' @param model Model object
+#' @param ...   other arguments (ignored)
+#'
+#' @return A character vector of variable names
+#' @export
+#'
+#' @examples
+#' #none
+predictor.names <- function(model, ...) {
+  UseMethod("predictor.names")
+}
+
+#' @describeIn predictor.names \code{"default"} method.
+#' @export
+predictor.names.default <- function(model, ...) {
+  predictors <- attr(terms(model), "variables")
+  as.character(predictors[3:length(predictors)])
+}
+

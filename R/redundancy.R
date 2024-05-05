@@ -75,6 +75,7 @@ redundancy <- function(object, ...) {
     result
 } 
 
+#' @export
 print.cancor.redundancy <- function(x, digits=max(getOption("digits") - 3, 3), ...) {
 	Xname <- x$set.names[1]
 	Yname <- x$set.names[2]

@@ -99,13 +99,13 @@
 #' Displays for Multivariate Linear Models: SAS Software and Examples
 #' \emph{Journal of Statistical Software}, 17(6), 1-42.  %
 #' \url{https://www.jstatsoft.org/v17/i06/}
-#' c("\\Sexpr[results=rd]{tools:::Rd_expr_doi(\"#1\")}",
-#' "10.18637/jss.v017.i06")\Sexpr{tools:::Rd_expr_doi("10.18637/jss.v017.i06")}
+#' \doi{10.18637/jss.v017.i06}
 #' 
 #' Friendly, M. (2007).  HE plots for Multivariate General Linear Models.
 #' \emph{Journal of Computational and Graphical Statistics}, \bold{16}(2)
 #' 421--444.  \url{http://datavis.ca/papers/jcgs-heplots.pdf}
 #' @keywords multivariate hplot
+#' @export
 #' @examples
 #' 
 #' ## Pottery data, from car package
@@ -249,6 +249,7 @@ heplot.candisc <- function (
 #       dimensions will be extremely thin on the 3rd dimension.)
 #  TODO: Complete the calculation of scale when missing
 
+#' @export
 heplot3d.candisc <- function (
 	mod,		    # output object from candisc
 	which=1:3,  # canonical dimensions to plot
@@ -344,16 +345,16 @@ heplot3d.candisc <- function (
 #' @seealso \code{\link{candisc}}, \code{\link{candiscList}},
 #' \code{\link[heplots]{heplot}}, \code{\link[heplots]{heplot3d}}
 #' @references Friendly, M. (2006). Data Ellipses, HE Plots and Reduced-Rank
-#' Displays for Multivariate Linear Models: SAS Software and Examples Journal
-#' of Statistical Software, 17(6), 1-42.  %
+#' Displays for Multivariate Linear Models: SAS Software and Examples 
+#' \emph{Journal of Statistical Software}, 17(6), 1-42.
 #' \url{https://www.jstatsoft.org/v17/i06/}
-#' c("\\Sexpr[results=rd]{tools:::Rd_expr_doi(\"#1\")}",
-#' "10.18637/jss.v017.i06")\Sexpr{tools:::Rd_expr_doi("10.18637/jss.v017.i06")}.
+#' \doi{10.18637/jss.v017.i06}.
 #' 
 #' Friendly, M. (2007).  HE plots for Multivariate General Linear Models.
 #' \emph{Journal of Computational and Graphical Statistics}, \bold{16}(2)
 #' 421--444.  \url{http://datavis.ca/papers/jcgs-heplots.pdf}
 #' @keywords multivariate hplot
+#' @export
 heplot.candiscList <- function(mod, term, ask=interactive(), graphics = TRUE, ...) {
     if (!missing(term)){
         if (is.character(term)) term <- gsub(" ", "", term)
@@ -379,6 +380,7 @@ heplot.candiscList <- function(mod, term, ask=interactive(), graphics = TRUE, ..
         }
 }
 
+#' @export
 heplot3d.candiscList <- function(mod, term, ask=interactive(), graphics = TRUE, ...) {
     if (!missing(term)){
         if (is.character(term)) term <- gsub(" ", "", term)

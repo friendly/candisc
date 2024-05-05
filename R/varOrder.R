@@ -69,6 +69,8 @@ varOrder <- function(x, ...) {
 	UseMethod("varOrder")
 }
 
+#' @describeIn varOrder \code{"mlm"} method.
+#' @export
 varOrder.mlm <- function(x,
                      term,
                      variables, 
@@ -119,6 +121,8 @@ varOrder.mlm <- function(x,
 	if (names) vars[order] else order
 }
 
+#' @describeIn varOrder \code{"data.frame"} method.
+#' @export
 varOrder.data.frame <- 
 	function(x, 
            variables, 
@@ -160,6 +164,9 @@ varOrder.data.frame <-
 	if (names) vars[order] else order
 
 }
+
+#' @describeIn varOrder \code{"default"} method.
+#' @export
 varOrder.default <- function(x, ...) {
 	stop("no methods are yet available for objects of class ", class(x))
 }

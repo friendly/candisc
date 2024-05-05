@@ -22,6 +22,7 @@
 # last revised: 05/06/20
 # --- add points.1d option
 
+#' @export
 plot.candisc <- function (
 		x,		     # output object from candisc
 		which=1:2,   # canonical dimensions to plot

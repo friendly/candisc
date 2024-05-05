@@ -65,6 +65,8 @@ candiscList <- function(mod, ...){
     UseMethod("candiscList")
     }
     
+#' @describeIn candiscList \code{"mlm"} method.
+#' @export
 candiscList.mlm <- function(mod, type="2", manova, ndim, ...){
     if (missing(manova)) manova <- Anova(mod, type=type)
     result <- as.list(1:length(manova$terms))
@@ -82,6 +84,8 @@ candiscList.mlm <- function(mod, type="2", manova, ndim, ...){
     result
     }
 
+#' @describeIn candiscList \code{print()} method for \code{"candiscList"} objects.
+#' @export
 print.candiscList <- function(x, ...){
     terms <- names(x)
     for (term in terms){
@@ -91,6 +95,8 @@ print.candiscList <- function(x, ...){
         }
     }
 
+#' @describeIn candiscList \code{summary()} method for \code{"candiscList"} objects.
+#' @export
 summary.candiscList <- function(object, ...){
     terms <- names(object)
     for (term in terms){
@@ -100,6 +106,8 @@ summary.candiscList <- function(object, ...){
         }
     }
 
+#' @describeIn candiscList \code{plot()} method for \code{"candiscList"} objects.
+#' @export
 plot.candiscList <- function(x, term, ask=interactive(), graphics = TRUE, ...) {
     if (!missing(term)){
         if (is.character(term)) term <- gsub(" ", "", term)

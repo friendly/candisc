@@ -35,6 +35,8 @@ Wilks <- function (object, ...) {
 	UseMethod("Wilks")
 }
 
+#' @describeIn Wilks \code{"cancor"} method.
+#' @export
 Wilks.cancor <- function(object, ...) {
 # tests of canonical dimensions
 
@@ -78,6 +80,8 @@ tests
 # Rao's F approximation for canonical discriminant analysis
 # using code from Martina Vandebroek <martina.vandebroek@kuleuven.be>
 
+#' @describeIn Wilks \code{print()} method for \code{"candisc"} objects.
+#' @export
 Wilks.candisc <- function(object, ...) {
   
   ev <- object$eigenvalues
