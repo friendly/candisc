@@ -73,4 +73,6 @@ hsb.can
 High School and Beyond data files:
 \url{http://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/7896}
 }
+\concept{MMRA}
+\concept{cancor}
 \keyword{datasets}

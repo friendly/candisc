@@ -126,6 +126,8 @@
 #' Gittins, R. (1985), Canonical Analysis: A Review with Applications
 #' in Ecology, Berlin: Springer-Verlag, Table A-5.
 #' @keywords datasets
+#' @concept MANOVA
+#' @concept candisc
 #' @examples
 #' 
 #' str(Grass)
@@ -188,6 +190,8 @@ NULL
 #' 
 #' %Retrieved from: %\url{http://www.gseis.ucla.edu/courses/data/hbs6.dta}
 #' @keywords datasets
+#' @concept MMRA
+#' @concept cancor
 #' @examples
 #' 
 #' str(HSB)
@@ -255,6 +259,8 @@ NULL
 #' \code{http://archive.ics.uci.edu/ml/datasets/Wine}. This page references a
 #' large number of papers that use this data set to compare different methods.
 #' @keywords datasets
+#' @concept MANOVA
+#' @concept candisc
 #' @examples
 #' 
 #' data(Wine)

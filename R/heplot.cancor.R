@@ -91,6 +91,7 @@
 #' Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979). \emph{Multivariate
 #' Analysis}. London: Academic Press.
 #' @keywords hplot multivariate
+#' @export
 #' @examples
 #' 
 #' data(Rohwer, package="heplots")

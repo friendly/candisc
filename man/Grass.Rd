@@ -51,4 +51,6 @@ names(grass.canL$Species)
 
 
 }
+\concept{MANOVA}
+\concept{candisc}
 \keyword{datasets}

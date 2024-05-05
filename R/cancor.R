@@ -209,7 +209,7 @@
 #' #fit the MMreg model
 #' school.mod <- lm(cbind(reading, mathematics, selfesteem) ~ 
 #' education + occupation + visit + counseling + teacher, data=schooldata)
-#' Anova(school.mod)
+#' car::Anova(school.mod)
 #' pairs(school.mod)
 #' 
 #' # canonical correlation analysis

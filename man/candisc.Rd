@@ -243,7 +243,7 @@ structure coefficients.
 \examples{
 
 grass.mod <- lm(cbind(N1,N9,N27,N81,N243) ~ Block + Species, data=Grass)
-Anova(grass.mod, test="Wilks")
+car::Anova(grass.mod, test="Wilks")
 
 grass.can1 <-candisc(grass.mod, term="Species")
 plot(grass.can1)

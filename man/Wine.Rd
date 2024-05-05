@@ -63,4 +63,6 @@ plot(Wine.can, which=1)
 In R, a comparable data set is contained in the \pkg{ggbiplot}
 package.
 }
+\concept{MANOVA}
+\concept{candisc}
 \keyword{datasets}

@@ -101,6 +101,7 @@ default.arg <- function(args.list, arg, default){
 #' text(xpos, scale*Ystruc, names(Ystruc), pos=1, col="darkgreen")
 #' 
 #' 
+#' @export
 plot.cancor <- function(x, which=1, 
 		xlim, ylim, xlab, ylab,
     points=TRUE, add=FALSE, col=palette()[1],

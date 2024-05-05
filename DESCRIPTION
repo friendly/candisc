@@ -6,7 +6,8 @@ Date: 2024-05-05
 Depends: R (>= 3.5.0), heplots (>= 0.8-6)
 Imports: car, graphics, stats
 Suggests: 
-    rgl, 
+    rgl,
+    carData,
     corrplot,
     knitr,
     rmarkdown,
