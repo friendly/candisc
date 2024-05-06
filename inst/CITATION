@@ -1,26 +1,33 @@
-
 ## R >= 2.8.0 passes package metadata to citation().
 if(!exists("meta") || is.null(meta)) meta <- packageDescription("candisc")
 year <- sub("-.*", "", meta$Date)
 note <- sprintf("R package version %s", meta$Version)
-     
 
+c(
+  bibentry(
+    bibtype  = "Manual",
+    title    = "{candisc}: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis",
+    author   = c(
+              person(given = "Michael", 
+                     family = "Friendly", 
+                     role=c("aut", "cre")),
+              person(given = "John", 
+                     family = "Fox", role="aut")),
+    year     = year,
+    note     = note,
+    url      = "https://CRAN.R-project.org/package=heplots"
+  ),
 
-citHeader("To cite package 'candisc' in publications use:")
-
-citEntry(
-  entry    = "Manual",
-  title    = "candisc: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis",
-  author   =  personList(as.person("Michael Friendly"),
-                  as.person("John Fox")),
-  year = year,
-  note = note,
-  url = "https://CRAN.R-project.org/package=heplots",
-
-  textVersion =
-  paste("Michael Friendly and John Fox",
-       sprintf("(%s).", year),
-       "candisc: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis.",
-       paste(note, ".", sep = ""),
-       "URL https://CRAN.R-project.org/package=candisc")
+  bibentry(
+    bibtype  = "Article",
+    title    = "HE plots for Multivariate General Linear Models",
+    author   = person(given = "Michael", 
+                     family = "Friendly"),
+    journal  = "Journal of Computational and Graphical Statistics",
+    year     = 2007,
+    volume   = 16,
+    number   = 2,
+    pages    = "421-444",
+    doi      = "10.1198/106186007X208407"
+  )
 )
