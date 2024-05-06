@@ -116,19 +116,24 @@ An object of class \code{cancorr}, a list with the following
        items, a list of 4 components: \code{X}, \code{Y}, \code{row.names}, \code{set.names}} 
    \item{ndim}{Number of canonical dimensions extracted, \code{<= min(p,q)}} 
    \item{dim}{Problem dimensions, a list of 3 components:
-         \code{p} (number of X variables), \code{q} (number of Y variables), \code{n} (sample size)} 
-    \item{coef}{Canonical coefficients, a list of 2 components:
-\code{X}, \code{Y}} % 
+         \code{p} (number of X variables), 
+         \code{q} (number of Y variables), 
+         \code{n} (sample size)} 
+    \item{coef}{Canonical coefficients, a list of 2 components: \code{X}, \code{Y}} 
     \item{scores}{Canonical variate scores, a list of 2 components: \code{X}, \code{Y}} 
     \item{scores}{Canonical variate scores, a list of 2 components: 
      \describe{ 
-        \item{list("X")}{Canonical variate scores for the X variables} 
-        \item{list("Y")}{Canonical variate scores for the Y variables} } 
+        \item{\code{X}}{Canonical variate scores for the X variables} 
+        \item{\code{Y}}{Canonical variate scores for the Y variables} } 
         } 
-    \item{X}{The matrix X} \item{Y}{The matrix Y}
-\item{weights}{Observation weights, if supplied, else \code{NULL}} %
+    \item{X}{The matrix X} 
+    \item{Y}{The matrix Y}
+\item{weights}{Observation weights, if supplied, else \code{NULL}}
 \item{structure}{Structure correlations, a list of 4 components:
-    \code{X.xscores}, \code{Y.xscores}, \code{X.yscores}, \code{Y.yscores}}
+    \code{X.xscores}, 
+    \code{Y.xscores}, 
+    \code{X.yscores}, 
+    \code{Y.yscores}}
 
 \item{structure}{Structure correlations ("loadings"), a list of 4
 components: 
@@ -151,11 +156,16 @@ The package provides the following display, extractor and plotting methods for \
    \item{\code{print(), summary()}}{Print and summarise the CCA}
    \item{\code{coef()}}{Extract coefficients for X, Y, or both }
    \item{\code{scores()}}{Extract observation scores on the canonical variables}
-   \item{\code{redundancy()}}{Redundancy analysis}
-   \item{\code{plot()}}{Plot pairs of canonical scores}
+   \item{\code{redundancy()}}{Redundancy analysis: proportion of variances of the
+variables in each set (X and Y) accounted for by the variables in
+the other set through the canonical variates}
+   \item{\code{plot()}}{Plot pairs of canonical scores with a data ellipse and regression line}
    \item{\code{heplot()}}{HE plot of the Y canonical variables showing effects of the X variables and projections
          of the Y variables in this space.}
 }
+
+As well, the function provides for observation weights, which may be useful in some situations, as well
+as providing a basis for robust methods in which potential outliers can be down-weighted.
 }
 \details{
 Canonical correlation analysis (CCA), as traditionally presented is used to
@@ -174,11 +184,16 @@ the Xs.
 Let \eqn{\mathbf{Y}_{n \times p}} and \eqn{\mathbf{X}_{n \times q}} be two sets of variables over which 
 CCA is computed. We find canonical coefficients \eqn{\mathbf{A}_{p \times k}} and 
 \eqn{\mathbf{B}_{q \times k}, k=\min(p,q)} such that the canonical variables 
-\eqn{\mathbf{U}_{n \times k}} and \eqn{\mathbf{V}_{n \times k}} have maximal, diagonal correlation structure.
-That is, the coefficients \eqn{\mathbf{A}} and \eqn{\mathbf{B}} are chosen such that the correlations between
+\deqn{\mathbf{U}_{n \times k} = \mathbf{Y} \mathbf{A} \quad \text{and} \quad 
+      \mathbf{V}_{n \times k} = \mathbf{X} \mathbf{B}} 
+have maximal, diagonal correlation structure.
+That is, the coefficients \eqn{\mathbf{A}} and \eqn{\mathbf{B}} are chosen such that the (canonical)
+correlations between
 each pair \eqn{r_i = \text{cor}(\mathbf{u}_i, \mathbf{v}_i), i=1, 2, \dots , k} 
 are maximized and all other pairs are uncorrelated,
-\eqn{r_{ij} = \text{cor}(\mathbf{u}_i, \mathbf{v}_j) = 0,  i \ne j}
+\eqn{r_{ij} = \text{cor}(\mathbf{u}_i, \mathbf{v}_j) = 0,  i \ne j}.
+Thus, all correlations between the X and Y variables are channeled through the correlations between
+the pairs of canonical variates.
 
 For visualization using HE plots, it is most natural to consider
 plots representing the relations among the canonical variables for the Y
@@ -274,7 +289,13 @@ zapsmall(cor(scores(cc, type="x"), scores(cc, type="y")))
 # standardized coefficients
 coef(cc, type="both", standardize=TRUE)
 
-plot(cc, smooth=TRUE)
+# plot canonical scores
+plot(cc, 
+     smooth=TRUE, pch=16, id.n = 3)
+text(-2, 1.5, paste("Can R =", round(cc$cancor[1], 3)), pos = 4)
+plot(cc, which = 2,
+     smooth=TRUE, pch=16, id.n = 3)
+text(-2.2, 2.5, paste("Can R =", round(cc$cancor[2], 3)), pos = 4)
 
 ##################
 data(schooldata)

@@ -113,7 +113,10 @@ cc <- cancor(X, Y, set.names=c("PA", "Ability"))
 
 plot(cc)
 # exercise some options
-plot(cc, smooth=TRUE, id.n=3, ellipse.args=list(fill=TRUE))
+plot(cc, which=1,
+     smooth=TRUE, 
+     pch = 16,
+     id.n=3, ellipse.args=list(fill=TRUE, fill.alpha = 0.2))
 plot(cc, which=2, smooth=TRUE)
 plot(cc, which=3, smooth=TRUE)
 
