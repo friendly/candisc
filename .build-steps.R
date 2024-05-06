@@ -14,6 +14,10 @@ devtools::revdep()
 # revdep
 #remotes::install_github("r-lib/revdepcheck")
 #library(revdepcheck)
+# need to set the env variable R_BIOC_VERSION env var to 3.18.
+# per: https://github.com/r-lib/revdepcheck/issues/376
+
+Sys.setenv(R_BIOC_VERSION = 3.18)
 revdepcheck::revdep_check(num_workers = 4)
 
 

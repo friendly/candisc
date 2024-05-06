@@ -1,0 +1,185 @@
+
+R version 4.3.2 (2023-10-31 ucrt) -- "Eye Holes"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "SurveyCC"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> options(pager = "console")
+> library('SurveyCC')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("surveycc")
+> ### * surveycc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: surveycc
+> ### Title: Canonical correlation analysis for complex survey data
+> ### Aliases: surveycc
+> 
+> ### ** Examples
+> 
+> # PATH example
+> design_object <-
++  survey::svrepdesign(
++  id = ~PERSONID,
++  weights = ~R01_A_PWGT,
++  repweights = "R01_A_PWGT[1-9]+",
++  type = "Fay",
++  rho = 0.3,
++  data=reducedPATHdata,
++  mse = TRUE
++  )
+> var.x <- c("R01_AC1022", "R01_AE1022", "R01_AG1022CG")
+> var.y <- c("R01_AX0075", "R01_AX0076")
+> howmany <- 2
+> dim1 <- 1
+> dim2 <- 2
+> surveycc(design_object, var.x, var.y, howmany = howmany,
++   dim1 = dim1, dim2 = dim2, selection = "x")
+$Stats.cancor
+$Stats.cancor$Stats.cancor.1
+                       Statistic df1 df2 Chi-Sq/F   p-val
+Wilks' Lambda            0.93636   6  NA  9.47145 0.14875
+Pillai's Trace           0.06395   5  NA  9.33935 0.15537
+Hotelling-Lawley Trace   0.06763   6  NA  9.60680 0.14222
+Roy's Greatest Root      0.05866   3 128  2.65880 0.05106
+Weighted Survey CC       0.24187 131 130  1.15077 0.25194
+Complex Survey CC        0.24187 131  98  1.13501 0.25914
+
+$Stats.cancor$Stats.cancor.2
+                       Statistic df1 df2 Chi-Sq/F   p-val
+Wilks' Lambda            0.99471   2  NA  1.76100 0.41458
+Pillai's Trace           0.00529   1  NA  1.76162 0.41445
+Hotelling-Lawley Trace   0.00532   2  NA  1.76036 0.41471
+Roy's Greatest Root      0.05866   2 129  4.01935 0.02026
+Weighted Survey CC       0.07375 131 130  0.79444 0.42839
+Complex Survey CC        0.07375 131  98  0.89128 0.37496
+
+
+$cc_object
+
+Canonical correlation analysis of:
+	 3   X  variables:  R01_AC1022, R01_AE1022, R01_AG1022CG 
+  with	 2   Y  variables:  R01_AX0075, R01_AX0076 
+
+     CanR   CanRSQ    Eigen percent    cum                          scree
+1 0.24187 0.058499 0.062134  91.911  91.91 ******************************
+2 0.07375 0.005439 0.005469   8.089 100.00 ***                           
+
+Test of H0: The canonical correlations in the 
+current row and all that follow are zero
+
+      CanR LR test stat approx F numDF denDF Pr(> F)
+1 0.241867      0.93638   1.4145     6   254  0.2093
+2 0.073748      0.99456      NaN     2   NaN     NaN
+
+> 
+> # NYTS example
+> design_object <-
++   survey::svydesign(
++   ids = ~psu2,
++   nest = TRUE,
++   strata = ~v_stratum2,
++   weights = ~finwgt,
++   data = reducedNYTS2021data
++ )
+> var.x <- c("qn9", "qn38", "qn40", "qn53", "qn54", "qn64", "qn69", "qn74",
++            "qn76", "qn78", "qn80", "qn82", "qn85", "qn88", "qn89")
+> var.y <- c("qn128", "qn129", "qn130", "qn131", "qn132", "qn134")
+> howmany <- 3
+> surveycc(design_object = design_object, var.x = var.x,
++   var.y = var.y, howmany = howmany, selection = "x")
+$Stats.cancor
+$Stats.cancor$Stats.cancor.1
+                       Statistic  df1  df2  Chi-Sq/F   p-val
+Wilks' Lambda            0.88398   90   NA 143.58266 0.00029
+Pillai's Trace           0.12173   89   NA 142.94303 0.00032
+Hotelling-Lawley Trace   0.12495   90   NA 144.22768 0.00025
+Roy's Greatest Root      0.03663   15 1134   2.87474 0.00018
+Weighted Survey CC       0.19387 1149 1148   1.56828 0.11709
+Complex Survey CC        0.19387 1149   75   1.51094 0.13501
+
+$Stats.cancor$Stats.cancor.2
+                       Statistic  df1  df2  Chi-Sq/F   p-val
+Wilks' Lambda            0.91759   70   NA 102.88481 0.00641
+Pillai's Trace           0.08509   69   NA 102.56555 0.00679
+Hotelling-Lawley Trace   0.08692   70   NA 103.20553 0.00604
+Roy's Greatest Root      0.03663   14 1135   3.08280 0.00010
+Weighted Survey CC       0.17412 1149 1148   1.91871 0.05527
+Complex Survey CC        0.17412 1149   75   1.86544 0.06603
+
+$Stats.cancor$Stats.cancor.3
+                       Statistic  df1  df2 Chi-Sq/F   p-val
+Wilks' Lambda            0.94624   52   NA 68.54747 0.06171
+Pillai's Trace           0.05482   51   NA 68.44115 0.06277
+Hotelling-Lawley Trace   0.05570   52   NA 68.65328 0.06066
+Roy's Greatest Root      0.03663   13 1136  3.32286 0.00005
+Weighted Survey CC       0.14872 1149 1148  2.02639 0.04296
+Complex Survey CC        0.14872 1149   75  2.02187 0.04676
+
+
+$cc_object
+
+Canonical correlation analysis of:
+	 15   X  variables:  qn9, qn38, qn40, qn53, qn54, qn64, qn69, qn74, qn76, qn78, qn80, qn82, qn85, qn88, qn89 
+  with	 6   Y  variables:  qn128, qn129, qn130, qn131, qn132, qn134 
+
+     CanR   CanRSQ    Eigen percent    cum                          scree
+1 0.19387 0.037585 0.039053  30.904  30.90 ******************************
+2 0.17412 0.030317 0.031265  24.741  55.64 ************************      
+3 0.14872 0.022118 0.022618  17.898  73.54 *****************             
+4 0.11860 0.014066 0.014267  11.290  84.83 ***********                   
+5 0.10631 0.011301 0.011430   9.045  93.88 *********                     
+6 0.08762 0.007678 0.007737   6.123 100.00 ******                        
+
+Test of H0: The canonical correlations in the 
+current row and all that follow are zero
+
+      CanR LR test stat approx F numDF  denDF   Pr(> F)    
+1 0.193869      0.88276  1.58342    90 6355.7 0.0003999 ***
+2 0.174117      0.91724  1.40840    70 5384.0 0.0144608 *  
+3 0.148720      0.94591  1.21872    52 4382.5 0.1358675    
+4 0.118602      0.96731  1.05132    36 3345.3 0.3859128    
+5 0.106305      0.98111  0.98695    22 2266.0 0.4776264    
+6 0.087625      0.99232  0.87743    10 1134.0 0.5539335    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  1.47 0.25 1.72 NA NA 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

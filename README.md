@@ -2,11 +2,11 @@
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/candisc)](https://cran.r-project.org/package=candisc)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/candisc)](https://cran.r-project.org/package=candisc)
-[![](https://img.shields.io/badge/pkgdown%20site-blue)](https://friendly.github.io/candisc)
+[![](https://img.shields.io/badge/documentation-blue)](https://friendly.github.io/candisc)
 <!-- badges: end -->
 
 
-# candisc  <img src="man/figures/logo.png" align="right" height="200px" />
+# candisc  <img src="man/figures/logo.png" align="right" height="160px" />
 **Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis**
 
 Version 0.7.0

@@ -1,0 +1,257 @@
+
+R version 4.3.2 (2023-10-31 ucrt) -- "Eye Holes"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "KnowBR"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> options(pager = "console")
+> library('KnowBR')
+Loading required package: fossil
+Warning: package 'fossil' was built under R version 4.3.3
+Loading required package: sp
+Warning: package 'sp' was built under R version 4.3.3
+Loading required package: maps
+Loading required package: shapefiles
+Loading required package: foreign
+
+Attaching package: 'shapefiles'
+
+The following objects are masked from 'package:foreign':
+
+    read.dbf, write.dbf
+
+Loading required package: mgcv
+Loading required package: nlme
+This is mgcv 1.9-1. For overview type 'help("mgcv-package")'.
+Loading required package: plotrix
+Loading required package: vegan
+Loading required package: permute
+Loading required package: lattice
+Warning: package 'lattice' was built under R version 4.3.3
+This is vegan 2.6-4
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("KnowB")
+> ### * KnowB
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: KnowB
+> ### Title: Discriminating well surveyed cell units from exhaustive
+> ###   biodiversity databases
+> ### Aliases: KnowB
+> ### Keywords: KnowB
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D 
+> ##D #Example 1. Default conditions using estimator 1 (method exact)
+> ##D #but only slopes lower than 0.1 are selected for depicting
+> ##D #and, therefore, only the completeness is depicted for those
+> ##D #cells with the slope lower than 0.1.
+> ##D #If using RWizard, for a better quality of the geographic
+> ##D #coordinates, replace data(adworld) by @_Build_AdWorld_
+> ##D 
+> ##D data(adworld)
+> ##D data(Beetles)
+> ##D KnowB(data=Beetles, save="RData", jpg=FALSE, cutoffSlope=0.1, xl=6.1, xr=6.3)
+> ##D 
+> ##D #Only to be used with RWizard. 
+> ##D #Example 2. Using @_Build_AdWorld_
+> ##D 
+> ##D data(Beetles)
+> ##D @_Build_AdWorld_
+> ##D KnowB(Beetles, cell=15, save="RData")
+> ##D 
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("KnowBPolygon")
+> ### * KnowBPolygon
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: KnowBPolygon
+> ### Title: Discriminating well surveyed polygon units from exhaustive
+> ###   biodiversity databases
+> ### Aliases: KnowBPolygon
+> ### Keywords: KnowBPolygon
+> 
+> ### ** Examples
+> 
+> 
+> ## Not run: 
+> ##D 
+> ##D #Download records from GBIF of the flowering plants of the family Polygonaceae
+> ##D 
+> ##D library(rgbif)
+> ##D records<-occ_search(scientificName = "Polygonaceae", limit=5000, return='data',
+> ##D hasCoordinate=TRUE)
+> ##D 
+> ##D #Data frame with the format A required by the function KnowBPolygon
+> ##D 
+> ##D records<-data.frame(records$species,records$decimalLongitude, records$decimalLatitude)
+> ##D names(records)<-c("Species","Longitude","Latitude")
+> ##D 
+> ##D #A column is added to the records with the number of counts
+> ##D #(format A), assuming 1 count per record
+> ##D 
+> ##D dim<-dim(records)
+> ##D Counts<-rep(1,dim[1])
+> ##D records<-cbind(records,Counts)
+> ##D 
+> ##D #Running the function
+> ##D 
+> ##D data(States) #State Boundaries of the United States
+> ##D data(adworld)
+> ##D KnowBPolygon(data=records, shape=States, admAreas=TRUE, shapenames="NAME", minLon=-130,
+> ##D maxLon=-70, minLat=25, maxLat=50, colscale=rev(heat.colors(100)), jpg=FALSE)
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("MapCell")
+> ### * MapCell
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: MapCell
+> ### Title: Cell maps
+> ### Aliases: MapCell
+> ### Keywords: MapCell
+> 
+> ### ** Examples
+> 
+> 
+> ## Not run: 
+> ##D 
+> ##D #Example 1. Observed pecies richness of freshwater fishes around the world.
+> ##D 
+> ##D data(RFishes)
+> ##D data(adworld)
+> ##D MapCell(data=RFishes, main= "Species richness of freshwater fishes")
+> ##D 
+> ##D 
+> ##D 
+> ##D #Example 2. Only to be used with RWizard.
+> ##D 
+> ##D data(RFishes)
+> ##D @_Build_AdWorld_
+> ##D MapCell(data = RFishes , Area = c("Argentina", "Bolivia", "Brazil", "Chile",
+> ##D "Colombia", "Ecuador", "French Guiana", "Guyana", "Paraguay", "Peru", "Suriname",
+> ##D "Uruguay", "Venezuela","Panama","Nicaragua","Costa Rica"),
+> ##D main = "Species richness of freshwater fishes in South America")
+> ## End(Not run)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("MapPolygon")
+> ### * MapPolygon
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: MapPolygon
+> ### Title: Choropleth maps
+> ### Aliases: MapPolygon
+> ### Keywords: MapPolygon
+> 
+> ### ** Examples
+> 
+> 
+> 
+> data(Estimators)
+> data(adworld)
+> MapPolygon(data=Estimators, polygonname="Area", var="Completeness",
++ colscale=rev(heat.colors(100)))
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("SurveyQ")
+> ### * SurveyQ
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: SurveyQ
+> ### Title: Survey quality
+> ### Aliases: SurveyQ
+> ### Keywords: SurveyQ
+> 
+> ### ** Examples
+> 
+> 
+> ## Not run: 
+> ##D 
+> ##D data(adworld)
+> ##D data(Estimators)
+> ##D SurveyQ(data=Estimators, Areas="Area")
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("SurveyQCZ")
+> ### * SurveyQCZ
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: SurveyQCZ
+> ### Title: Survey quality of climate zones
+> ### Aliases: SurveyQCZ
+> ### Keywords: SurveyQCZ
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D ####This script only works if there are ASC files, with
+> ##D ####environmental variables, in the working directory
+> ##D 
+> ##D data(FishIrelandUK)
+> ##D 
+> ##D data(adworld)
+> ##D 
+> ##D SurveyQCZ(data=FishIrelandUK, maxLon=3, mfrowBOXPLOT=c(3,3), cexCM=0.2)
+> ## End(Not run)
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  1.75 0.3 2.08 NA NA 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

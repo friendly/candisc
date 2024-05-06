@@ -1,5 +1,7 @@
 ## Version 0.9.0 (2024-05-05)
 
+This is a semi-major release, largely of the documentation of the package.
+
 * Created `pkgdown` site, https://friendly.github.io/candisc/
 * Convert documentation to roxygen
 * Extend description of candisc/cancor methods

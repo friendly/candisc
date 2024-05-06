@@ -1,0 +1,22 @@
+Grass                   Yields from Nitrogen nutrition of grass species
+HSB                     High School and Beyond Data
+Wilks                   Wilks Lambda Tests for Canonical Correlations
+Wine                    Chemical composition of three cultivars of wine
+Wolves                  Wolf skulls
+can_lm                  Transform a Multivariate Linear model mlm to a
+                        Canonical Representation
+cancor                  Canonical Correlation Analysis
+candisc                 Canonical discriminant analysis
+candisc-package         Visualizing Generalized Canonical Discriminant
+                        and Canonical Correlation Analysis
+candiscList             Canonical discriminant analyses
+dataIndex               Indices of observations in a model data frame
+heplot.cancor           Canonical Correlation HE plots
+heplot.candisc          Canonical Discriminant HE plots
+heplot.candiscList      Canonical Discriminant HE plots
+plot.cancor             Canonical Correlation Plots
+redundancy              Canonical Redundancy Analysis
+varOrder                Order variables according to canonical
+                        structure or other criteria
+vecscale                Scale vectors to fill the current plot
+vectors                 Draw Labeled Vectors in 2D or 3D

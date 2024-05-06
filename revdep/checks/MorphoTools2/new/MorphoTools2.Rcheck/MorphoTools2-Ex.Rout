@@ -1,0 +1,2098 @@
+
+R version 4.3.2 (2023-10-31 ucrt) -- "Eye Holes"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "MorphoTools2"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> options(pager = "console")
+> library('MorphoTools2')
+MorphoTools2 v1.0.1.1.  For help: https://github.com/MarekSlenker/MorphoTools2/wiki
+
+If you use MorphoTools2 in published research, please cite: 
+Slenker, M., Koutecky, P. & Marhold, K. (2022). MorphoTools2: an R package for multivariate morphometric analysis. Bioinformatics 38: 2954-2955. 
+https://doi.org/10.1093/bioinformatics/btac173 
+
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("boxMTest")
+> ### * boxMTest
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: boxMTest
+> ### Title: Box's M-test for Homogeneity of Covariance Matrices
+> ### Aliases: boxMTest
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> # remove NAs and linearly dependent characters (characters with unique contributions
+> #                  can be identified by stepwise discriminant analysis.)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> centaurea = keepCharacter(centaurea, c("MLW", "ML", "IW", "LS", "IV", "MW", "MF",
++                                     "AP", "IS", "LBA", "LW", "AL", "ILW", "LBS",
++                                     "SFT", "CG", "IL", "LM", "ALW", "AW", "SF") )
+> # add a small constant to characters witch are invariant within taxa
+> centaurea$data[ centaurea$Taxon == "hybr", "LM" ][1] =
++              centaurea$data[ centaurea$Taxon == "hybr", "LM" ][1] + 0.000001
+> centaurea$data[ centaurea$Taxon == "ph", "IV" ][1] =
++              centaurea$data[ centaurea$Taxon == "ph", "IV" ][1] + 0.000001
+> centaurea$data[ centaurea$Taxon == "st", "LBS"][1] =
++              centaurea$data[ centaurea$Taxon == "st", "LBS"][1] + 0.000001
+> 
+> boxMTest(centaurea)
+Box's M-test for homogeneity of covariance matrices
+ Chi-Sq (approx.) = 14628, df = 693, p-value < 2.2e-16
+> 
+> 
+> 
+> cleanEx()
+> nameEx("boxplotCharacter")
+> ### * boxplotCharacter
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: boxplotCharacter
+> ### Title: Box Plots
+> ### Aliases: boxplotCharacter boxplotAll
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> boxplotCharacter(centaurea, character = "ST", col = "orange", border = "red")
+> 
+> boxplotCharacter(centaurea, character = "ST", outliers = FALSE,
++           lowerWhisker = 0.1, upperWhisker = 0.9)
+> 
+> boxplotCharacter(centaurea, "ST", varwidth = TRUE, notch = TRUE,
++           boxwex = 0.4, staplewex = 1.3, horizontal = TRUE)
+> 
+> boxplotCharacter(centaurea, "ST", boxlty = 1, medlwd = 5,
++           whisklty = 2, whiskcol = "red", staplecol = "red",
++           outcol = "grey30", pch = "-")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cda.calc")
+> ### * cda.calc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cda.calc
+> ### Title: Canonical Discriminant Analysis
+> ### Aliases: cda.calc
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> 
+> cdaRes = cda.calc(centaurea)
+> 
+> summary(cdaRes)
+Object of class 'cdadata'; storing results of canonical discriminant analysis
+
+Variation explained by individual axes:
+                                       Can1   Can2   Can3
+Eigenvalues                          4.4194 2.0049 0.3647
+Eigenvalues as percentages           0.6505 0.2951 0.0537
+Cumulative percentage of eigenvalues 0.6505 0.9456 0.9993
+
+Total canonical structure coefficients:
+            Can1         Can2         Can3
+SN  -0.145905291 -0.143820071  0.187446717
+SF   0.226719447  0.288948819 -0.088309973
+ST  -0.027765120  0.004883579  0.135653239
+SFT  0.233159338  0.331672879 -0.213795111
+LL  -0.067843561  0.057468347 -0.252875809
+LW   0.007404962  0.296609347 -0.354584342
+LLW -0.051697329 -0.350145429  0.279507573
+LM   0.297463454 -0.045009362 -0.047078365
+LBA -0.318778094 -0.539202777 -0.294264249
+LBS -0.163214379  0.469973590  0.277373927
+LS  -0.251889023 -0.640679116  0.197855575
+IL  -0.058484540  0.488340257  0.343069292
+IW   0.389239321  0.685339935  0.239991480
+ILW -0.525181687 -0.611784805 -0.002541299
+CG  -0.157798961  0.163326602  0.015718224
+ML  -0.831038839  0.379514738  0.079785332
+MW   0.735479254  0.267972743 -0.012135822
+MLW -0.867777425 -0.282448838  0.009070526
+MF  -0.347280596  0.504543863  0.175527742
+IS  -0.508744545  0.113697036  0.012459746
+IV  -0.735244321  0.270554318 -0.229699765
+AL  -0.014053761  0.326312832 -0.008420114
+AW   0.124084168  0.210514371  0.067441011
+ALW -0.183216081  0.102614196 -0.134701510
+AP   0.117451381  0.528786582 -0.006020908
+> 
+> plotPoints(cdaRes, col = c("red", "green", "blue", "red"),
++   pch = c(20, 17, 8, 21), pt.bg = "orange", legend = TRUE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("characters")
+> ### * characters
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: characters
+> ### Title: List Morphological Characters
+> ### Aliases: characters
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> characters(centaurea)
+ [1] "SN"  "SF"  "ST"  "SFT" "LL"  "LW"  "LLW" "LM"  "LBA" "LBS" "LS"  "IL" 
+[13] "IW"  "ILW" "CG"  "ML"  "MW"  "MLW" "MF"  "IS"  "IV"  "AL"  "AW"  "ALW"
+[25] "AP" 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classif.lda")
+> ### * classif.lda
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: classif.lda
+> ### Title: Classificatory Discriminant Analysis
+> ### Aliases: classif.lda classif.qda classif.knn
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> # remove NAs and linearly dependent characters (characters with unique contributions
+> #                  can be identified by stepwise discriminant analysis.)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> centaurea = keepCharacter(centaurea, c("MLW", "ML", "IW", "LS", "IV", "MW", "MF",
++                                     "AP", "IS", "LBA", "LW", "AL", "ILW", "LBS",
++                                     "SFT", "CG", "IL", "LM", "ALW", "AW", "SF") )
+> # add a small constant to characters witch are invariant within taxa
+> centaurea$data[ centaurea$Taxon == "hybr", "LM" ][1] =
++              centaurea$data[ centaurea$Taxon == "hybr", "LM" ][1] + 0.000001
+> centaurea$data[ centaurea$Taxon == "ph", "IV" ][1] =
++              centaurea$data[ centaurea$Taxon == "ph", "IV" ][1] + 0.000001
+> centaurea$data[ centaurea$Taxon == "st", "LBS"][1] =
++              centaurea$data[ centaurea$Taxon == "st", "LBS"][1] + 0.000001
+> 
+> 
+> 
+> # classification by linear discriminant function
+> classifRes.lda = classif.lda(centaurea, crossval = "indiv")
+> 
+> # classification by quadratic discriminant function
+> classifRes.qda = classif.qda(centaurea, crossval = "indiv")
+> 
+> # classification by nonparametric k-nearest neighbour method
+> # use knn.select to find the optimal K.
+> classifRes.knn = classif.knn(centaurea, k = 12, crossval = "pop")
+> 
+> # exporting results
+> classif.matrix(classifRes.lda, level = "taxon")
+  Taxon   N as.hybr as.ph as.ps as.st correct correct[%]
+1  hybr 120      92     0    23     5      92      76.67
+2    ph 160       0   154     6     0     154      96.25
+3    ps 240      36     8   195     1     195      81.25
+4    st  92      12     0     3    77      77      83.70
+5 Total 612     140   162   227    83     518      84.64
+> classif.matrix(classifRes.qda, level = "taxon")
+  Taxon   N as.hybr as.ph as.ps as.st correct correct[%]
+1  hybr 120     105     0     3    12     105      87.50
+2    ph 160       0   158     2     0     158      98.75
+3    ps 240     118    31    74    17      74      30.83
+4    st  92       8     0     2    82      82      89.13
+5 Total 612     231   189    81   111     419      68.46
+> classif.matrix(classifRes.knn, level = "taxon")
+  Taxon   N as.hybr as.ph as.ps as.st correct correct[%]
+1  hybr 120      60     0    50    10      60      50.00
+2    ph 160       0   152     6     2     152      95.00
+3    ps 240      17    13   209     1     209      87.08
+4    st  92      33     4    11    44      44      47.83
+5 Total 612     110   169   276    57     465      75.98
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classif.matrix")
+> ### * classif.matrix
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: classif.matrix
+> ### Title: Format the Classifdata to Summary Table
+> ### Aliases: classif.matrix
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> 
+> # classification by linear discriminant function
+> classifRes.lda = classif.lda(centaurea, crossval = "indiv")
+Warning in lda.default(x, grouping, ...) : variables are collinear
+> 
+> # exporting results
+> classif.matrix(classifRes.lda, level = "taxon")
+  Taxon   N as.hybr as.ph as.ps as.st correct correct[%]
+1  hybr 120      92     0    23     5      92      76.67
+2    ph 160       0   154     6     0     154      96.25
+3    ps 240      31     8   201     0     201      83.75
+4    st  92      13     0     2    77      77      83.70
+5 Total 612     136   162   232    82     524      85.62
+> classif.matrix(classifRes.lda, level = "pop")
+   Population Taxon   N as.hybr as.ph as.ps as.st correct correct[%]
+1        BABL    ps  20       9     0    11     0      11      55.00
+2        BABU  hybr  20      18     0     0     2      18      90.00
+3         BOL    ps  20       3     0    17     0      17      85.00
+4         BRT    ph  20       0    20     0     0      20     100.00
+5         BUK    ph  20       0    15     5     0      15      75.00
+6        CERM    ps  20      10     0    10     0      10      50.00
+7        CERV    ph  20       0    20     0     0      20     100.00
+8        CZLE    ps  20       0     1    19     0      19      95.00
+9         DEB  hybr  20      14     0     5     1      14      70.00
+10        DOM    st  12       1     0     0    11      11      91.67
+11        DUB    st  20       4     0     0    16      16      80.00
+12       HVLT    ps  20       1     0    19     0      19      95.00
+13       KASH    ps  20       0     1    19     0      19      95.00
+14        KOT    ph  20       0    20     0     0      20     100.00
+15       KOZH    ps  20       0     0    20     0      20     100.00
+16        KRO    ph  20       0    20     0     0      20     100.00
+17        LES    st  20       5     0     2    13      13      65.00
+18        MIL    st  20       2     0     0    18      18      90.00
+19        NEJ    ph  20       0    20     0     0      20     100.00
+20       NSED    ph  20       0    19     1     0      19      95.00
+21       OLE1    ps  20       1     0    19     0      19      95.00
+22       OLE2    ps  20       1     6    13     0      13      65.00
+23       PRIS    ps  20       3     0    17     0      17      85.00
+24       PROS  hybr  20       7     0    13     0       7      35.00
+25        RTE  hybr  20      20     0     0     0      20     100.00
+26        RUS  hybr  20      18     0     1     1      18      90.00
+27        SOK    ps  20       1     0    19     0      19      95.00
+28       STCV    ph  20       0    20     0     0      20     100.00
+29       STGH    ps  20       2     0    18     0      18      90.00
+30        VIT  hybr  20      15     0     4     1      15      75.00
+31        VOL    st  20       1     0     0    19      19      95.00
+32      Total       612     136   162   232    82     524      85.62
+> 
+> 
+> 
+> cleanEx()
+> nameEx("classifSample.lda")
+> ### * classifSample.lda
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: classifSample.lda
+> ### Title: Classificatory Discriminant Analysis
+> ### Aliases: classifSample.knn classifSample.lda classifSample.qda
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> # remove NAs and linearly dependent characters (characters with unique contributions
+> #                  can be identified by stepwise discriminant analysis.)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> centaurea = keepCharacter(centaurea, c("MLW", "ML", "IW", "LS", "IV", "MW", "MF",
++                                     "AP", "IS", "LBA", "LW", "AL", "ILW", "LBS",
++                                     "SFT", "CG", "IL", "LM", "ALW", "AW", "SF") )
+> # add a small constant to characters witch are invariant within taxa
+> centaurea$data[ centaurea$Taxon == "hybr", "LM" ][1] =
++              centaurea$data[ centaurea$Taxon == "hybr", "LM" ][1] + 0.000001
+> centaurea$data[ centaurea$Taxon == "ph", "IV" ][1] =
++              centaurea$data[ centaurea$Taxon == "ph", "IV" ][1] + 0.000001
+> centaurea$data[ centaurea$Taxon == "st", "LBS"][1] =
++              centaurea$data[ centaurea$Taxon == "st", "LBS"][1] + 0.000001
+> 
+> 
+> trainingSet = removePopulation(centaurea, populationName = "LES")
+> LES = keepPopulation(centaurea, populationName = "LES")
+> 
+> 
+> # classification by linear discriminant function
+> classifSample.lda(LES, trainingSet)
+        ID Population Taxon classification as.hybr  as.ph  as.ps  as.st
+1  LES1116        LES    st             st  0.0105 0.0143 0.0029 0.9723
+2  LES1119        LES    st           hybr  0.9462 0.0015 0.0215 0.0307
+3  LES1120        LES    st           hybr  0.7201 0.0045 0.2733 0.0020
+4  LES1121        LES    st             st  0.0452 0.0002 0.0240 0.9306
+5  LES1123        LES    st           hybr  0.6134 0.0062 0.3722 0.0082
+6  LES1124        LES    st           hybr  0.5291 0.0023 0.4660 0.0025
+7  LES1127        LES    st             ph  0.0246 0.5574 0.4139 0.0041
+8  LES1130        LES    st             st  0.0150 0.0001 0.0015 0.9834
+9  LES1132        LES    st           hybr  0.9570 0.0000 0.0409 0.0021
+10 LES1133        LES    st             ps  0.0225 0.1188 0.8584 0.0004
+11 LES1135        LES    st             ps  0.0480 0.0288 0.9231 0.0001
+12 LES1136        LES    st             st  0.4155 0.0014 0.0283 0.5549
+13 LES1137        LES    st             ps  0.4818 0.0229 0.4864 0.0089
+14 LES1138        LES    st             ps  0.0271 0.3437 0.6042 0.0250
+15 LES1139        LES    st           hybr  0.7259 0.0404 0.2111 0.0227
+16 LES1141        LES    st             ps  0.0727 0.1185 0.8079 0.0009
+17 LES1142        LES    st             st  0.2239 0.0038 0.0266 0.7457
+18 LES1143        LES    st           hybr  0.9926 0.0000 0.0074 0.0000
+19 LES1144        LES    st           hybr  0.9907 0.0000 0.0083 0.0011
+20 LES1145        LES    st             st  0.0281 0.0000 0.0001 0.9718
+> 
+> # classification by quadratic discriminant function
+> classifSample.qda(LES, trainingSet)
+        ID Population Taxon classification as.hybr as.ph  as.ps  as.st
+1  LES1116        LES    st             st  0.0000     0 0.0000 1.0000
+2  LES1119        LES    st             st  0.0000     0 0.0000 1.0000
+3  LES1120        LES    st             ps  0.0000     0 0.9449 0.0551
+4  LES1121        LES    st             st  0.0000     0 0.0000 1.0000
+5  LES1123        LES    st             st  0.0000     0 0.0000 1.0000
+6  LES1124        LES    st           hybr  1.0000     0 0.0000 0.0000
+7  LES1127        LES    st             ps  0.0000     0 1.0000 0.0000
+8  LES1130        LES    st             st  0.0000     0 0.0000 1.0000
+9  LES1132        LES    st             st  0.0000     0 0.0000 1.0000
+10 LES1133        LES    st             st  0.0000     0 0.0061 0.9939
+11 LES1135        LES    st             st  0.0000     0 0.0000 1.0000
+12 LES1136        LES    st             st  0.0000     0 0.0000 1.0000
+13 LES1137        LES    st             st  0.0000     0 0.0000 1.0000
+14 LES1138        LES    st             st  0.0000     0 0.0000 1.0000
+15 LES1139        LES    st             st  0.0000     0 0.0037 0.9963
+16 LES1141        LES    st             ps  0.0000     0 0.9998 0.0002
+17 LES1142        LES    st             st  0.0000     0 0.0001 0.9999
+18 LES1143        LES    st           hybr  1.0000     0 0.0000 0.0000
+19 LES1144        LES    st           hybr  0.9995     0 0.0000 0.0005
+20 LES1145        LES    st           hybr  0.9924     0 0.0000 0.0076
+> 
+> # classification by nonparametric k-nearest neighbour method
+> # use knn.select to find the optimal K.
+> classifSample.knn(LES, trainingSet, k = 12)
+        ID Population Taxon classification
+1  LES1116        LES    st             st
+2  LES1119        LES    st           hybr
+3  LES1120        LES    st             ps
+4  LES1121        LES    st             st
+5  LES1123        LES    st             ph
+6  LES1124        LES    st           hybr
+7  LES1127        LES    st             ph
+8  LES1130        LES    st             st
+9  LES1132        LES    st           hybr
+10 LES1133        LES    st             ph
+11 LES1135        LES    st             ps
+12 LES1136        LES    st             st
+13 LES1137        LES    st           hybr
+14 LES1138        LES    st             ph
+15 LES1139        LES    st             ph
+16 LES1141        LES    st             ps
+17 LES1142        LES    st           hybr
+18 LES1143        LES    st           hybr
+19 LES1144        LES    st           hybr
+20 LES1145        LES    st             st
+   Proportion.of.the.votes.for.the.winning.class
+1                                         0.5833
+2                                         0.7500
+3                                         0.3333
+4                                         0.4167
+5                                         0.3333
+6                                         0.4167
+7                                         0.5000
+8                                         0.8333
+9                                         0.7500
+10                                        0.5000
+11                                        0.5000
+12                                        0.5833
+13                                        0.5000
+14                                        0.5000
+15                                        0.5000
+16                                        0.7500
+17                                        0.5000
+18                                        0.6667
+19                                        0.9167
+20                                        0.6667
+> 
+> 
+> 
+> cleanEx()
+> nameEx("clust")
+> ### * clust
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clust
+> ### Title: Hierarchical Clustering
+> ### Aliases: clust
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> clustering.UPGMA = clust(centaurea)
+Warning: Values of some characters are NA.
+> 
+> plot(clustering.UPGMA, cex = 0.6, frame.plot = TRUE, hang = -1,
++         main = "", sub = "", xlab = "", ylab = "distance")
+> 
+> 
+> # using Gower's method
+> data = list(
++     ID = as.factor(c("id1","id2","id3","id4","id5","id6")),
++     Population = as.factor(c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3")),
++     Taxon = as.factor(c("TaxA", "TaxA", "TaxA", "TaxB", "TaxB", "TaxB")),
++     data = data.frame(
++      stemBranching = c(1, 1, 1, 0, 0, 0),  # binaryChs
++      petalColour = c(1, 1, 2, 3, 3, 3),  # nominalChs; 1=white, 2=red, 3=blue
++      leaves = c(1,1,1,2,2,3), # nominalChs; 1=simple, 2=palmately compound, 3=pinnately compound
++      taste = c(2, 2, 2, 3, 1, 1),   # ordinal; 1=hot, 2=hotter, 3=hottest
++      stemHeight = c(10, 11, 14, 22, 23, 21),         # quantitative
++      leafLength = c(8, 7.1, 9.4, 1.2, 2.3, 2.1)  )   # quantitative
++ )
+> attr(data, "class") = "morphodata"
+> 
+> clustering.GOWER = clust(data, distMethod = "Gower", clustMethod = "UPGMA",
++                                binaryChs = c("stemBranching"),
++                                nominalChs = c("petalColour", "leaves"),
++                                ordinalChs = c("taste"))
+> 
+> plot(clustering.GOWER, cex = 0.6, frame.plot = TRUE, hang = -1,
++         main = "", sub = "", xlab = "", ylab = "distance")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("cormat")
+> ### * cormat
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: cormat
+> ### Title: Correlations of Characters
+> ### Aliases: cormat cormatSignifTest
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> correlations.p = cormat(centaurea, method = "Pearson")
+> correlations.s = cormat(centaurea, method = "Spearman")
+> 
+> 
+> correlations.p = cormatSignifTest(centaurea, method = "Pearson")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("descrTaxon")
+> ### * descrTaxon
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: descrTaxon
+> ### Title: Descriptive Statistics
+> ### Aliases: descrTaxon descrPopulation descrAll
+> 
+> ### ** Examples
+> 
+> data(centaurea, decimalPlaces = 3)
+Warning in data(centaurea, decimalPlaces = 3) : data set '3' not found
+> 
+> descrTaxon(centaurea)
+   characters    N   Mean     SD   Min     5%    25% Median    75%    95%   Max
+1       Taxon hybr   hybr   hybr  hybr   hybr   hybr   hybr   hybr   hybr  hybr
+2          SN  120 48.323 23.069    10 17.945  33.95   44.3   57.8  93.04 124.1
+3          SF  120 16.331  9.827   1.9  3.895   8.75  14.15 23.425 35.435  47.7
+4          ST  120 64.654 23.128  26.8  36.97   47.9   59.8     78 111.32 134.6
+5         SFT  120  0.271  0.164  0.03   0.06   0.13   0.24   0.39  0.601  0.67
+6          LL  120 10.778  2.557   4.9  7.095      9   10.4 12.325   15.1  18.4
+7          LW  120  3.596   0.78   1.8    2.6      3    3.5      4      5   5.6
+8         LLW  120  3.025  0.492  1.81    2.3   2.68   2.94   3.36  3.943  4.12
+9          LM  120      0      0     0      0      0      0      0      0     0
+10        LBA  120  0.467  0.501     0      0      0      0      1      1     1
+11        LBS  120  0.167  0.374     0      0      0      0      0      1     1
+12         LS  120   0.15  0.359     0      0      0      0      0      1     1
+13         IL  120  1.677  0.152   1.4    1.4    1.6    1.7    1.8  1.905     2
+14         IW  120  1.385  0.234     1  1.095    1.2    1.4    1.5    1.8     2
+15        ILW  120  1.231  0.147  0.94      1  1.128   1.25   1.33   1.45   1.6
+16         CG  120   0.25  0.435     0      0      0      0   0.25      1     1
+17         ML  120 11.865   1.66   7.4  9.595   10.6  11.65     13 14.405  17.1
+18         MW  120  0.612  0.123   0.4  0.495    0.5    0.6    0.7    0.8   1.2
+19        MLW  120 19.844  3.912 11.56 13.976 17.355   19.3 22.042 26.772 30.29
+20         MF  120  15.35  2.069    12     13     14     15     17     20    23
+21         IS  120  0.867  0.341     0      0      1      1      1      1     1
+22         IV  120  0.983  0.129     0      1      1      1      1      1     1
+23         AL  120  3.327  0.329     1      3    3.2    3.4    3.5  3.675   3.9
+24         AW  120  1.335  0.102   1.1    1.2    1.3    1.4    1.4    1.5   1.5
+25        ALW  120  2.532  0.212  2.17   2.23   2.37   2.52   2.63  2.928  3.29
+26         AP  120  0.945  0.229   0.4   0.62    0.8    0.9    1.1   1.36   1.6
+     N   Mean     SD  Min     5%    25% Median    75%    95%   Max   N   Mean
+1   ph     ph     ph   ph     ph     ph     ph     ph     ph    ph  ps     ps
+2  160 45.216 17.032 16.3 23.265 32.625  42.25  53.95 73.065 107.9 240 49.075
+3  160  20.12 10.211  3.1  7.095 13.175  18.35 24.925 35.305  71.5 240 18.852
+4  160 65.336 17.634   30 42.285 53.675   62.4   75.3  99.07   127 240 67.927
+5  160  0.314  0.139 0.06   0.13   0.21   0.29   0.42   0.59  0.71 240   0.29
+6  160  9.921  2.412  4.5  5.895  8.375   9.85   11.5 14.305  17.7 240 10.005
+7  160  3.285  1.049  1.2    1.6    2.5    3.2    3.9  5.005   5.9 240  3.383
+8  160  3.168  0.702 1.87  2.148  2.705   3.12  3.593   4.28  6.35 240  3.071
+9  160  0.144  0.352    0      0      0      0      0      1     1 240  0.021
+10 160  0.125  0.332    0      0      0      0      0      1     1 240  0.042
+11 160  0.038  0.191    0      0      0      0      0      0     1 240  0.412
+12 160  0.062  0.243    0      0      0      0      0      1     1 240  0.013
+13 160  1.672  0.133  1.3    1.4    1.6    1.7    1.8    1.9     2 240  1.794
+14 160  1.622  0.175    1    1.3    1.5    1.6    1.7    1.9     2 240  1.676
+15 160  1.036  0.078 0.93   0.94      1      1  1.062   1.17  1.42 240  1.081
+16 160  0.088  0.283    0      0      0      0      0      1     1 240  0.267
+17 160  6.851  1.255  4.5      5    5.9    6.7    7.6   9.01  10.4 240 11.494
+18 160  1.216  0.394  0.7    0.8    0.9    1.1  1.425  1.905   2.6 240  0.858
+19 160  6.155  1.962 2.24  3.409  4.667   6.09  7.482  9.811 11.47 240 14.447
+20 160 13.363  2.066    9     10     12     13     15     17    19 240 16.262
+21 160  0.288  0.454    0      0      0      0      1      1     1 240  0.758
+22 160      0      0    0      0      0      0      0      0     0 240    0.7
+23 160  3.338  0.226  2.7      3    3.2    3.4    3.5    3.6   3.9 240  3.412
+24 160  1.374  0.114  1.1    1.2    1.3    1.4    1.4    1.6   1.7 240  1.347
+25 160  2.444  0.199 1.89  2.134   2.33   2.43   2.57  2.776   3.1 240  2.565
+26 160  0.965  0.272  0.4    0.6    0.8      1    1.1    1.4   1.7 240  1.044
+       SD  Min    5%    25% Median    75%     95%   Max   N   Mean     SD   Min
+1      ps   ps    ps     ps     ps     ps      ps    ps  st     st     st    st
+2  19.132  8.2 19.59 35.525  48.75   61.9  81.915 112.4 132 55.468 14.804  26.7
+3   9.084    2   6.3   12.7   17.8   23.8  36.415  61.6 132  9.642  7.964   0.3
+4  20.935 26.3 37.05 52.375  67.75 82.025 103.435 138.9 132 65.111 17.166    28
+5   0.142 0.04  0.11   0.19   0.26   0.35   0.571  0.77 132  0.142  0.098  0.01
+6    2.17  5.7 6.795    8.3    9.9   11.3      14  16.8 132  8.959  2.319   4.2
+7    0.86    1   2.1    2.8    3.4    3.9     4.9   6.1 132  2.573  0.727   1.1
+8   0.784 1.74  2.14  2.587  2.965  3.402   4.252   9.5 132  3.585  0.776  2.04
+9   0.143    0     0      0      0      0       0     1 132  0.008  0.087     0
+10    0.2    0     0      0      0      0       0     1 132  0.568  0.497     0
+11  0.493    0     0      0      0      1       1     1 132  0.008  0.087     0
+12  0.111    0     0      0      0      0       0     1 132  0.652  0.478     0
+13  0.135  1.4   1.6    1.7    1.8    1.9       2   2.2 132  1.567  0.151   1.2
+14  0.192  1.1   1.3    1.6    1.7    1.8       2   2.2 132   1.14  0.198   0.8
+15  0.117 0.84  0.95      1   1.06   1.13    1.33  1.64 132    1.4  0.196     1
+16  0.443    0     0      0      0      1       1     1 132  0.121  0.328     0
+17  1.548  7.3 9.195   10.4   11.5 12.525  13.825  17.1 132  9.852  1.353     7
+18  0.251  0.4   0.5    0.7    0.8      1   1.305   1.6 132  0.486  0.101   0.3
+19  4.522 5.26  7.91  10.87  13.85   17.3  22.125 29.33 132 21.152  5.203 11.67
+20  2.054    9    13     15     16     18      20    22 132 13.386  1.781    10
+21  0.429    0     0      1      1      1       1     1 132  0.659  0.476     0
+22  0.459    0     0      0      1      1       1     1 132  0.515  0.502     0
+23  0.247  2.9     3    3.2    3.4    3.6     3.8     4 132  3.145  0.266   2.8
+24  0.118  1.1   1.2    1.3    1.4    1.4     1.5   1.8 132  1.307    0.1   1.1
+25  0.218    2  2.23   2.42   2.57   2.71   2.946  3.11 132  2.441  0.238  1.99
+26  0.247  0.6   0.7    0.9      1    1.2     1.5     2 132  0.735  0.224   0.1
+       5%    25% Median    75%    95%   Max
+1      st     st     st     st     st    st
+2  34.755 45.825   53.6  62.35 83.695 104.5
+3   1.255  4.075      8  12.85  22.67  47.6
+4  41.165 54.525  63.05   77.1  96.81 117.9
+5    0.02   0.07   0.12  0.202  0.304  0.54
+6    6.01  7.275    8.6   10.4 13.325  15.3
+7     1.6      2    2.5      3  3.845   4.9
+8    2.58   3.04   3.46    3.9   5.04  6.43
+9       0      0      0      0      0     1
+10      0      0      1      1      1     1
+11      0      0      0      0      0     1
+12      0      0      1      1      1     1
+13    1.3    1.5    1.6    1.7    1.8   1.9
+14    0.9      1    1.1    1.3    1.5   1.7
+15   1.13   1.25    1.4   1.55    1.7     2
+16      0      0      0      0      1     1
+17  7.955  8.875   9.55   10.8   12.3  13.4
+18  0.355    0.4    0.5    0.5    0.6   0.9
+19  14.67 17.298     20 23.812 30.901 36.92
+20     11     12     13  14.25  16.45    18
+21      0      0      1      1      1     1
+22      0      0      1      1      1     1
+23    2.8    2.9    3.1    3.3    3.6     4
+24    1.2    1.2    1.3    1.4  1.435   1.6
+25   2.12  2.285    2.4   2.56  2.851  3.26
+26    0.4    0.6    0.7    0.9  1.135   1.3
+> 
+> descrTaxon(centaurea, format = "($MEAN ± $SD)")
+    group              hybr                ph                ps
+1  format       (MEAN ± SD)       (MEAN ± SD)       (MEAN ± SD)
+2       N               120               160               240
+3      SN (48.323 ± 23.069) (45.216 ± 17.032) (49.075 ± 19.132)
+4      SF  (16.331 ± 9.827)  (20.12 ± 10.211)  (18.852 ± 9.084)
+5      ST (64.654 ± 23.128) (65.336 ± 17.634) (67.927 ± 20.935)
+6     SFT   (0.271 ± 0.164)   (0.314 ± 0.139)    (0.29 ± 0.142)
+7      LL  (10.778 ± 2.557)   (9.921 ± 2.412)   (10.005 ± 2.17)
+8      LW    (3.596 ± 0.78)   (3.285 ± 1.049)    (3.383 ± 0.86)
+9     LLW   (3.025 ± 0.492)   (3.168 ± 0.702)   (3.071 ± 0.784)
+10     LM           (0 ± 0)   (0.144 ± 0.352)   (0.021 ± 0.143)
+11    LBA   (0.467 ± 0.501)   (0.125 ± 0.332)     (0.042 ± 0.2)
+12    LBS   (0.167 ± 0.374)   (0.038 ± 0.191)   (0.412 ± 0.493)
+13     LS    (0.15 ± 0.359)   (0.062 ± 0.243)   (0.013 ± 0.111)
+14     IL   (1.677 ± 0.152)   (1.672 ± 0.133)   (1.794 ± 0.135)
+15     IW   (1.385 ± 0.234)   (1.622 ± 0.175)   (1.676 ± 0.192)
+16    ILW   (1.231 ± 0.147)   (1.036 ± 0.078)   (1.081 ± 0.117)
+17     CG    (0.25 ± 0.435)   (0.088 ± 0.283)   (0.267 ± 0.443)
+18     ML   (11.865 ± 1.66)   (6.851 ± 1.255)  (11.494 ± 1.548)
+19     MW   (0.612 ± 0.123)   (1.216 ± 0.394)   (0.858 ± 0.251)
+20    MLW  (19.844 ± 3.912)   (6.155 ± 1.962)  (14.447 ± 4.522)
+21     MF   (15.35 ± 2.069)  (13.363 ± 2.066)  (16.262 ± 2.054)
+22     IS   (0.867 ± 0.341)   (0.288 ± 0.454)   (0.758 ± 0.429)
+23     IV   (0.983 ± 0.129)           (0 ± 0)     (0.7 ± 0.459)
+24     AL   (3.327 ± 0.329)   (3.338 ± 0.226)   (3.412 ± 0.247)
+25     AW   (1.335 ± 0.102)   (1.374 ± 0.114)   (1.347 ± 0.118)
+26    ALW   (2.532 ± 0.212)   (2.444 ± 0.199)   (2.565 ± 0.218)
+27     AP   (0.945 ± 0.229)   (0.965 ± 0.272)   (1.044 ± 0.247)
+                  st
+1        (MEAN ± SD)
+2                132
+3  (55.468 ± 14.804)
+4    (9.642 ± 7.964)
+5  (65.111 ± 17.166)
+6    (0.142 ± 0.098)
+7    (8.959 ± 2.319)
+8    (2.573 ± 0.727)
+9    (3.585 ± 0.776)
+10   (0.008 ± 0.087)
+11   (0.568 ± 0.497)
+12   (0.008 ± 0.087)
+13   (0.652 ± 0.478)
+14   (1.567 ± 0.151)
+15    (1.14 ± 0.198)
+16     (1.4 ± 0.196)
+17   (0.121 ± 0.328)
+18   (9.852 ± 1.353)
+19   (0.486 ± 0.101)
+20  (21.152 ± 5.203)
+21  (13.386 ± 1.781)
+22   (0.659 ± 0.476)
+23   (0.515 ± 0.502)
+24   (3.145 ± 0.266)
+25     (1.307 ± 0.1)
+26   (2.441 ± 0.238)
+27   (0.735 ± 0.224)
+> 
+> descrPopulation(centaurea, format = "$MEAN ($MIN - $MAX)")
+    group                   BABL                BABU                    BOL
+1  format       MEAN (MIN - MAX)    MEAN (MIN - MAX)       MEAN (MIN - MAX)
+2       N                     20                  20                     20
+3      SN   36.875 (20.2 - 70.2) 40.83 (16.9 - 57.8)   41.655 (21.2 - 71.1)
+4      SF     20.12 (8.4 - 34.6)   8.65 (1.9 - 19.7)     15.87 (4.1 - 29.2)
+5      ST  56.995 (35.6 - 101.6)   49.48 (31 - 67.8)   57.525 (38.5 - 86.9)
+6     SFT    0.356 (0.21 - 0.57) 0.174 (0.05 - 0.45)     0.286 (0.1 - 0.47)
+7      LL     9.005 (5.7 - 13.3)   10.065 (4.9 - 13)       11.55 (8 - 15.6)
+8      LW         2.41 (1 - 3.8)   3.585 (2.6 - 4.8)       4.08 (2.9 - 6.1)
+9     LLW     4.062 (2.41 - 9.5)  2.832 (1.81 - 3.5)    2.881 (2.29 - 3.94)
+10     LM              0 (0 - 0)           0 (0 - 0)           0.05 (0 - 1)
+11    LBA            0.4 (0 - 1)        0.85 (0 - 1)              0 (0 - 0)
+12    LBS            0.2 (0 - 1)           0 (0 - 0)            0.7 (0 - 1)
+13     LS              0 (0 - 0)        0.15 (0 - 1)            0.1 (0 - 1)
+14     IL      1.735 (1.6 - 1.9)     1.695 (1.5 - 2)        1.7 (1.5 - 1.8)
+15     IW      1.515 (1.2 - 1.9)   1.325 (1.2 - 1.7)       1.65 (1.4 - 1.9)
+16    ILW    1.162 (0.94 - 1.42) 1.283 (1.12 - 1.46)     1.036 (0.84 - 1.2)
+17     CG           0.15 (0 - 1)           0 (0 - 0)              0 (0 - 0)
+18     ML     11.39 (8.5 - 13.5)  12.47 (9.9 - 14.7)     11.92 (9.9 - 14.5)
+19     MW      0.505 (0.4 - 0.6)    0.55 (0.5 - 0.6)       0.78 (0.6 - 1.1)
+20    MLW 22.722 (17.91 - 29.33) 23.049 (17.74 - 30) 15.433 (11.18 - 20.16)
+21     MF        14.75 (12 - 19)        14 (13 - 17)        15.95 (11 - 19)
+22     IS            0.7 (0 - 1)        0.65 (0 - 1)            0.9 (0 - 1)
+23     IV            0.9 (0 - 1)           1 (1 - 1)           0.85 (0 - 1)
+24     AL      3.587 (3.1 - 3.8)   3.494 (3.3 - 3.8)       3.42 (3.1 - 3.8)
+25     AW      1.331 (1.2 - 1.5)   1.412 (1.3 - 1.5)       1.42 (1.3 - 1.5)
+26    ALW    2.763 (2.51 - 3.03) 2.491 (2.17 - 2.83)      2.4 (2.12 - 2.64)
+27     AP      0.925 (0.6 - 1.3)   0.981 (0.7 - 1.4)         1.04 (1 - 1.1)
+                    BRT                  BUK                   CERM
+1      MEAN (MIN - MAX)     MEAN (MIN - MAX)       MEAN (MIN - MAX)
+2                    20                   20                     20
+3  49.435 (31.3 - 81.4) 62.61 (28.4 - 107.9)     41.815 (23.1 - 58)
+4   17.265 (5.9 - 32.8)  22.555 (3.1 - 71.5)       8.465 (2 - 19.7)
+5   66.7 (44.6 - 102.9)  85.165 (49.3 - 127)    50.28 (31.4 - 68.1)
+6   0.257 (0.11 - 0.46)  0.259 (0.06 - 0.71)    0.168 (0.04 - 0.35)
+7     11.245 (8 - 14.7)    9.71 (6.6 - 15.2)     9.835 (6.9 - 15.5)
+8     4.085 (2.3 - 5.4)       2.82 (2 - 4.8)       3.83 (2.7 - 5.7)
+9   2.802 (2.06 - 3.57)  3.483 (2.79 - 4.29)    2.622 (2.04 - 4.11)
+10          0.2 (0 - 1)         0.05 (0 - 1)              0 (0 - 0)
+11            0 (0 - 0)          0.2 (0 - 1)              0 (0 - 0)
+12         0.15 (0 - 1)            0 (0 - 0)            0.3 (0 - 1)
+13            0 (0 - 0)          0.2 (0 - 1)              0 (0 - 0)
+14     1.66 (1.4 - 1.9)      1.705 (1.5 - 2)       1.72 (1.5 - 1.9)
+15       1.66 (1.3 - 2)        1.7 (1.5 - 2)       1.45 (1.2 - 1.8)
+16  1.004 (0.93 - 1.15)  1.003 (0.94 - 1.06)    1.199 (0.94 - 1.42)
+17            0 (0 - 0)          0.3 (0 - 1)              0 (0 - 0)
+18   6.975 (5.3 - 10.4)   7.985 (5.9 - 10.2)     11.38 (9.5 - 13.6)
+19     1.64 (0.8 - 2.6)    0.975 (0.7 - 1.2)       0.68 (0.6 - 0.9)
+20  4.598 (2.24 - 8.38) 8.421 (6.29 - 10.76) 16.956 (12.83 - 21.57)
+21       13.4 (11 - 15)      13.25 (11 - 17)        16.05 (13 - 19)
+22         0.55 (0 - 1)         0.35 (0 - 1)              1 (1 - 1)
+23            0 (0 - 0)            0 (0 - 0)            0.8 (0 - 1)
+24    3.321 (2.9 - 3.6)       3.36 (3 - 3.5)      3.279 (2.9 - 3.6)
+25    1.357 (1.2 - 1.5)      1.4 (1.2 - 1.6)      1.279 (1.1 - 1.6)
+26  2.453 (1.91 - 2.86)  2.422 (1.89 - 2.68)    2.601 (2.33 - 2.94)
+27    0.829 (0.5 - 1.1)     0.76 (0.4 - 1.6)      0.986 (0.7 - 1.4)
+                   CERV                 CZLE                   DEB
+1      MEAN (MIN - MAX)     MEAN (MIN - MAX)      MEAN (MIN - MAX)
+2                    20                   20                    20
+3  43.375 (17.5 - 65.8)   35.075 (12.8 - 57)  59.96 (34.4 - 101.8)
+4   22.97 (11.2 - 41.6)   18.67 (5.8 - 29.6)   14.445 (3.8 - 32.3)
+5  66.345 (51.7 - 88.7) 53.745 (37.1 - 76.4) 74.405 (40.2 - 114.1)
+6   0.351 (0.17 - 0.67)  0.355 (0.13 - 0.67)   0.186 (0.06 - 0.42)
+7    9.025 (5.9 - 12.1)   9.245 (6.2 - 13.8)   12.205 (6.8 - 18.4)
+8      2.71 (1.8 - 3.8)    3.325 (2.1 - 5.2)       3.9 (1.8 - 5.5)
+9   3.382 (2.34 - 4.53)    2.828 (2.1 - 4.5)      3.146 (2.33 - 4)
+10         0.15 (0 - 1)            0 (0 - 0)             0 (0 - 0)
+11            0 (0 - 0)            0 (0 - 0)           0.4 (0 - 1)
+12         0.05 (0 - 1)         0.45 (0 - 1)             0 (0 - 0)
+13            0 (0 - 0)            0 (0 - 0)          0.05 (0 - 1)
+14    1.535 (1.3 - 1.7)       1.79 (1.6 - 2)        1.73 (1.5 - 2)
+15    1.455 (1.3 - 1.7)      1.735 (1.6 - 2)       1.5 (1.2 - 1.8)
+16     1.055 (1 - 1.23)  1.034 (0.95 - 1.13)      1.172 (1 - 1.42)
+17          0.1 (0 - 1)         0.25 (0 - 1)             0 (0 - 0)
+18     5.42 (4.5 - 6.8)    10.725 (8.6 - 15)   11.495 (9.6 - 15.6)
+19     0.85 (0.7 - 1.1)    1.015 (0.6 - 1.4)      0.58 (0.4 - 0.7)
+20   6.42 (4.76 - 7.76) 10.937 (7.3 - 16.36) 20.545 (13.1 - 30.29)
+21       10.85 (9 - 13)       15.9 (14 - 20)       15.65 (13 - 20)
+22          0.3 (0 - 1)          0.9 (0 - 1)          0.95 (0 - 1)
+23            0 (0 - 0)          0.7 (0 - 1)          0.95 (0 - 1)
+24    3.167 (2.9 - 3.5)     3.54 (3.1 - 3.9)      3.33 (2.9 - 3.6)
+25    1.311 (1.2 - 1.4)      1.4 (1.2 - 1.8)     1.325 (1.2 - 1.5)
+26  2.416 (2.23 - 2.72)  2.605 (2.32 - 3.11)   2.522 (2.23 - 3.05)
+27    0.933 (0.6 - 1.4)     1.09 (0.7 - 1.5)     0.775 (0.4 - 1.2)
+                    DOM                   DUB                  HVLT
+1      MEAN (MIN - MAX)      MEAN (MIN - MAX)      MEAN (MIN - MAX)
+2                    12                    20                    20
+3  61.242 (39.5 - 83.2)   46.21 (26.7 - 68.7) 77.425 (53.2 - 112.4)
+4   10.258 (1.5 - 39.8)    4.385 (1.1 - 14.1)  22.755 (12.5 - 37.3)
+5      71.5 (41 - 94.7)    50.595 (28 - 77.1) 100.18 (68.7 - 138.9)
+6   0.132 (0.03 - 0.47)   0.083 (0.02 - 0.22)   0.224 (0.15 - 0.32)
+7    9.558 (6.6 - 15.1)       8.73 (4.5 - 14)    10.06 (6.8 - 14.8)
+8       2.633 (1.7 - 4)      2.46 (1.1 - 4.9)      3.41 (2.2 - 5.3)
+9   3.743 (3.03 - 5.59)   3.657 (2.58 - 5.09)   3.011 (2.03 - 4.04)
+10            0 (0 - 0)          0.05 (0 - 1)             0 (0 - 0)
+11        0.583 (0 - 1)          0.75 (0 - 1)             0 (0 - 0)
+12            0 (0 - 0)             0 (0 - 0)           0.4 (0 - 1)
+13        0.833 (0 - 1)           0.7 (0 - 1)             0 (0 - 0)
+14      1.5 (1.3 - 1.7)     1.585 (1.3 - 1.8)        1.83 (1.6 - 2)
+15     1.15 (0.8 - 1.4)      1.09 (0.8 - 1.7)       1.765 (1.4 - 2)
+16  1.331 (1.15 - 1.88)       1.49 (1.06 - 2)     1.04 (0.9 - 1.25)
+17        0.167 (0 - 1)             0 (0 - 0)          0.35 (0 - 1)
+18   9.417 (8.1 - 10.5)   10.615 (7.9 - 12.3)     11.6 (9.5 - 13.3)
+19    0.458 (0.4 - 0.6)     0.415 (0.3 - 0.6)     0.835 (0.5 - 1.2)
+20  20.367 (17.74 - 25) 26.279 (21.6 - 36.92) 14.462 (8.89 - 18.67)
+21      14.75 (13 - 18)        14.8 (11 - 18)       16.75 (13 - 21)
+22            1 (1 - 1)          0.75 (0 - 1)          0.85 (0 - 1)
+23        0.833 (0 - 1)          0.75 (0 - 1)          0.75 (0 - 1)
+24    2.929 (2.8 - 3.1)        3.57 (3.2 - 4)     3.275 (2.9 - 3.7)
+25    1.186 (1.1 - 1.3)      1.28 (1.2 - 1.4)      1.31 (1.1 - 1.5)
+26  2.479 (2.32 - 2.62)   2.829 (2.43 - 3.26)   2.542 (2.15 - 3.04)
+27      0.757 (0.5 - 1)        0.65 (0.4 - 1)      1.19 (0.8 - 1.8)
+                    KASH                  KOT                  KOZH
+1       MEAN (MIN - MAX)     MEAN (MIN - MAX)      MEAN (MIN - MAX)
+2                     20                   20                    20
+3   62.235 (35.1 - 83.5)  31.69 (16.3 - 44.4)    19.48 (8.2 - 34.1)
+4    26.545 (7.4 - 49.6)  22.29 (12.2 - 37.6)     18.075 (6.5 - 32)
+5   88.78 (72.2 - 103.4)  53.98 (41.9 - 69.2)  37.555 (26.3 - 48.5)
+6    0.304 (0.09 - 0.51)   0.41 (0.25 - 0.61)   0.485 (0.17 - 0.77)
+7      10.885 (8 - 16.8)   9.785 (7.2 - 14.8)    8.485 (6.6 - 12.6)
+8        3.625 (2.5 - 5)      3.945 (3 - 5.1)       3.5 (2.2 - 5.1)
+9    3.023 (2.58 - 3.57)  2.497 (1.87 - 3.36)   2.465 (1.74 - 3.23)
+10           0.2 (0 - 1)          0.1 (0 - 1)             0 (0 - 0)
+11          0.05 (0 - 1)            0 (0 - 0)             0 (0 - 0)
+12           0.6 (0 - 1)            0 (0 - 0)           0.8 (0 - 1)
+13             0 (0 - 0)            0 (0 - 0)             0 (0 - 0)
+14      1.78 (1.6 - 1.9)       1.75 (1.6 - 2)     1.895 (1.6 - 2.2)
+15        1.72 (1.6 - 2)       1.71 (1.4 - 2)      1.81 (1.5 - 2.2)
+16   1.037 (0.95 - 1.13)  1.026 (0.94 - 1.21)    1.052 (0.95 - 1.2)
+17           0.4 (0 - 1)            0 (0 - 0)             0 (0 - 0)
+18      10.79 (9 - 14.3)    6.965 (5.6 - 8.6)  13.355 (10.6 - 15.4)
+19     0.975 (0.6 - 1.4)    1.105 (0.8 - 1.7)     0.995 (0.6 - 1.4)
+20 11.555 (7.82 - 18.53) 6.829 (3.39 - 10.42) 13.811 (9.64 - 21.28)
+21       16.85 (13 - 22)       13.6 (11 - 17)       15.75 (14 - 19)
+22           0.7 (0 - 1)         0.15 (0 - 1)          0.95 (0 - 1)
+23          0.75 (0 - 1)            0 (0 - 0)          0.75 (0 - 1)
+24       3.5 (3.1 - 3.9)      3.365 (3 - 3.6)             3 (3 - 3)
+25      1.36 (1.2 - 1.5)     1.39 (1.1 - 1.6)       1.4 (1.4 - 1.4)
+26   2.611 (2.25 - 3.08)  2.442 (2.11 - 2.78)       2.1 (2.1 - 2.1)
+27       1.065 (0.7 - 2)    1.025 (0.7 - 1.7)       1.5 (1.5 - 1.5)
+                    KRO                  LES                    LIP
+1      MEAN (MIN - MAX)     MEAN (MIN - MAX)       MEAN (MIN - MAX)
+2                    20                   20                     20
+3  34.225 (20.3 - 50.6)  55.54 (27.5 - 88.1)       44.875 (32 - 59)
+4      22.67 (6 - 33.7)  20.52 (10.2 - 47.6)        7.94 (2.4 - 14)
+5  56.895 (40.8 - 73.6) 76.06 (47.6 - 111.7)   52.815 (41.3 - 65.8)
+6   0.396 (0.15 - 0.59)    0.27 (0.1 - 0.54)    0.154 (0.05 - 0.28)
+7    10.39 (8.1 - 15.2)    9.86 (5.9 - 13.6)      7.465 (6.2 - 9.7)
+8     4.245 (3.1 - 5.7)     2.91 (1.5 - 4.1)      2.675 (2.2 - 3.4)
+9   2.477 (2.05 - 3.08)    3.47 (2.6 - 4.86)    2.809 (2.25 - 3.34)
+10          0.2 (0 - 1)            0 (0 - 0)              0 (0 - 0)
+11         0.15 (0 - 1)          0.5 (0 - 1)            0.3 (0 - 1)
+12            0 (0 - 0)            0 (0 - 0)              0 (0 - 0)
+13            0 (0 - 0)         0.15 (0 - 1)            0.7 (0 - 1)
+14       1.73 (1.5 - 2)    1.695 (1.5 - 1.9)      1.425 (1.2 - 1.7)
+15     1.69 (1.5 - 1.9)    1.415 (1.2 - 1.6)      1.025 (0.9 - 1.3)
+16  1.025 (0.94 - 1.18)     1.202 (1 - 1.38)     1.395 (1.15 - 1.6)
+17            0 (0 - 0)          0.4 (0 - 1)            0.1 (0 - 1)
+18     7.355 (5.6 - 10)    9.81 (8.8 - 12.4)        8.71 (7 - 11.3)
+19    1.095 (0.7 - 1.6)    0.565 (0.4 - 0.9)       0.47 (0.4 - 0.6)
+20  7.18 (3.93 - 11.47)  17.701 (11.67 - 24) 19.087 (14.32 - 23.47)
+21      12.75 (11 - 15)       13.5 (11 - 16)         11.9 (10 - 15)
+22         0.25 (0 - 1)          0.7 (0 - 1)            0.3 (0 - 1)
+23            0 (0 - 0)          0.2 (0 - 1)            0.2 (0 - 1)
+24     3.51 (3.1 - 3.9)    3.065 (2.8 - 3.6)                   <NA>
+25    1.425 (1.1 - 1.7)      1.3 (1.2 - 1.5)                   <NA>
+26   2.484 (2.03 - 3.1)  2.382 (2.12 - 2.66)                   <NA>
+27     1.04 (0.6 - 1.5)     0.63 (0.1 - 1.3)                   <NA>
+                     MIL                  NEJ                  NSED
+1       MEAN (MIN - MAX)     MEAN (MIN - MAX)      MEAN (MIN - MAX)
+2                     20                   20                    20
+3  70.015 (42.7 - 104.5) 51.555 (27.4 - 77.9)   52.79 (28.2 - 96.8)
+4          8.02 (1 - 23)   20.13 (9.4 - 40.5)   20.435 (9.7 - 38.3)
+5  78.035 (43.7 - 117.9) 71.685 (53.7 - 93.5) 73.225 (44.7 - 114.4)
+6    0.098 (0.01 - 0.24)   0.291 (0.13 - 0.6)   0.287 (0.14 - 0.53)
+7      11.2 (7.4 - 15.3)   11.64 (8.2 - 17.7)    11.03 (5.5 - 13.9)
+8       2.94 (1.7 - 4.7)    3.205 (1.7 - 5.9)     3.435 (2.4 - 4.3)
+9     3.893 (2.04 - 5.1)  3.823 (2.89 - 6.35)   3.221 (2.29 - 4.24)
+10             0 (0 - 0)          0.3 (0 - 1)          0.05 (0 - 1)
+11           0.8 (0 - 1)         0.05 (0 - 1)           0.1 (0 - 1)
+12             0 (0 - 0)          0.1 (0 - 1)             0 (0 - 0)
+13           0.7 (0 - 1)            0 (0 - 0)             0 (0 - 0)
+14      1.66 (1.4 - 1.8)    1.675 (1.5 - 1.8)     1.715 (1.5 - 1.9)
+15     1.135 (0.9 - 1.6)    1.605 (1.5 - 1.8)      1.72 (1.5 - 1.9)
+16   1.498 (1.06 - 1.78)     1.045 (1 - 1.13)   0.997 (0.94 - 1.06)
+17             0 (0 - 0)          0.1 (0 - 1)          0.05 (0 - 1)
+18    11.05 (9.4 - 13.4)     7.06 (5.4 - 8.8)       7.32 (6 - 10.2)
+19       0.4 (0.3 - 0.5)    1.535 (0.9 - 2.3)       1.445 (1 - 2.3)
+20   28.264 (21 - 32.86)   4.835 (3.2 - 8.12)   5.384 (2.93 - 8.68)
+21       13.45 (11 - 16)       14.5 (11 - 18)        16.3 (13 - 19)
+22          0.75 (0 - 1)         0.25 (0 - 1)           0.4 (0 - 1)
+23             1 (1 - 1)            0 (0 - 0)             0 (0 - 0)
+24     3.247 (2.9 - 3.6)      3.289 (3 - 3.6)       3.394 (3 - 3.7)
+25     1.374 (1.2 - 1.6)    1.379 (1.2 - 1.6)     1.376 (1.2 - 1.6)
+26    2.39 (2.06 - 2.83)  2.401 (2.09 - 2.85)   2.465 (2.12 - 2.92)
+27     0.737 (0.4 - 1.2)    0.953 (0.5 - 1.3)     1.088 (0.6 - 1.7)
+                    OLE1                 OLE2                   PREL
+1       MEAN (MIN - MAX)     MEAN (MIN - MAX)       MEAN (MIN - MAX)
+2                     20                   20                     20
+3    50.69 (34.7 - 62.6)    54.96 (35.7 - 70)   55.635 (38.9 - 65.5)
+4      18.765 (8.8 - 37)    18.765 (3 - 33.5)      7.01 (0.3 - 18.8)
+5   69.455 (54.9 - 84.6) 73.725 (54.8 - 88.5)   62.645 (52.9 - 72.7)
+6     0.268 (0.13 - 0.5)  0.255 (0.04 - 0.47)      0.11 (0.01 - 0.3)
+7      9.37 (7.1 - 12.5)  11.125 (8.9 - 14.2)       7.13 (4.2 - 9.4)
+8       2.67 (1.9 - 4.2)    3.415 (2.4 - 4.5)       2.03 (1.5 - 3.3)
+9    3.586 (2.67 - 4.64)   3.332 (2.6 - 5.04)       3.582 (2.33 - 5)
+10             0 (0 - 0)            0 (0 - 0)              0 (0 - 0)
+11             0 (0 - 0)         0.05 (0 - 1)           0.45 (0 - 1)
+12          0.45 (0 - 1)            0 (0 - 0)           0.05 (0 - 1)
+13             0 (0 - 0)            0 (0 - 0)            0.8 (0 - 1)
+14     1.785 (1.5 - 2.1)      1.785 (1.6 - 2)      1.435 (1.3 - 1.7)
+15     1.615 (1.1 - 1.8)       1.73 (1.2 - 2)       1.05 (0.9 - 1.4)
+16      1.116 (1 - 1.64)  1.039 (0.94 - 1.33)     1.38 (1.15 - 1.67)
+17           0.5 (0 - 1)          0.4 (0 - 1)           0.05 (0 - 1)
+18    11.86 (9.2 - 16.5)   10.07 (7.3 - 12.2)      9.09 (7.6 - 11.3)
+19       1.1 (0.8 - 1.5)    1.075 (0.6 - 1.6)       0.53 (0.4 - 0.6)
+20 11.126 (7.53 - 20.13) 9.704 (5.26 - 17.83) 17.612 (14.43 - 24.75)
+21       17.75 (15 - 21)        15.9 (9 - 20)        12.85 (11 - 15)
+22           0.3 (0 - 1)         0.55 (0 - 1)            0.6 (0 - 1)
+23          0.45 (0 - 1)         0.15 (0 - 1)            0.7 (0 - 1)
+24     3.482 (3.1 - 3.9)    3.353 (2.9 - 3.8)                   <NA>
+25     1.453 (1.3 - 1.6)    1.433 (1.3 - 1.5)                   <NA>
+26   2.418 (2.08 - 2.75)     2.375 (2 - 2.77)                   <NA>
+27         1 (0.7 - 1.4)     0.94 (0.6 - 1.6)                   <NA>
+                     PRIS                   PROS                    RTE
+1        MEAN (MIN - MAX)       MEAN (MIN - MAX)       MEAN (MIN - MAX)
+2                      20                     20                     20
+3    62.395 (41.2 - 79.8)      30.32 (10 - 51.9)     31.4 (12.6 - 64.4)
+4       16.445 (7.9 - 26)    16.655 (3.6 - 47.7)   25.265 (11.8 - 46.4)
+5     78.84 (60.6 - 94.4)   46.975 (26.8 - 74.1)   56.665 (35.9 - 96.2)
+6     0.211 (0.09 - 0.32)    0.364 (0.07 - 0.64)    0.458 (0.17 - 0.67)
+7      9.915 (7.9 - 12.8)       8.675 (6 - 11.6)        10.495 (7 - 16)
+8       3.455 (2.4 - 4.5)       3.33 (2.1 - 4.9)      3.595 (2.6 - 5.6)
+9     2.912 (2.08 - 3.82)    2.656 (1.92 - 3.58)    2.942 (2.44 - 3.66)
+10              0 (0 - 0)              0 (0 - 0)              0 (0 - 0)
+11              0 (0 - 0)           0.15 (0 - 1)            0.3 (0 - 1)
+12           0.35 (0 - 1)           0.55 (0 - 1)           0.25 (0 - 1)
+13              0 (0 - 0)           0.05 (0 - 1)              0 (0 - 0)
+14         1.87 (1.7 - 2)        1.765 (1.5 - 2)      1.645 (1.4 - 1.9)
+15          1.7 (1.2 - 2)          1.595 (1 - 2)         1.26 (1 - 1.5)
+16     1.115 (0.95 - 1.5)     1.127 (0.94 - 1.5)    1.313 (1.14 - 1.45)
+17            0.6 (0 - 1)            0.3 (0 - 1)           0.55 (0 - 1)
+18     11.54 (9.6 - 13.8)     13.4 (10.8 - 17.1)    12.27 (10.1 - 14.4)
+19         0.68 (0.5 - 1)       0.75 (0.6 - 1.2)      0.605 (0.4 - 0.9)
+20 17.215 (13.09 - 21.09) 18.349 (11.56 - 27.83) 20.619 (15.29 - 26.75)
+21         16.9 (14 - 19)        15.85 (13 - 21)         15.5 (13 - 19)
+22            0.8 (0 - 1)           0.85 (0 - 1)           0.85 (0 - 1)
+23           0.65 (0 - 1)              1 (1 - 1)              1 (1 - 1)
+24        3.411 (3 - 3.9)        3.486 (3 - 3.9)        3.078 (1 - 3.7)
+25      1.321 (1.1 - 1.6)      1.343 (1.2 - 1.5)      1.188 (1.1 - 1.3)
+26       2.591 (2.33 - 3)        2.643 (2.2 - 3)    2.779 (2.42 - 3.29)
+27          1 (0.7 - 1.4)      1.029 (0.8 - 1.4)      0.963 (0.7 - 1.2)
+                      RUS                   SOK                 STCV
+1        MEAN (MIN - MAX)      MEAN (MIN - MAX)     MEAN (MIN - MAX)
+2                      20                    20                   20
+3    43.315 (27.2 - 57.8)  49.835 (29.5 - 83.8) 36.045 (18.7 - 65.2)
+4       19.435 (8 - 40.7)  26.475 (13.6 - 61.6)  12.645 (5.6 - 27.6)
+5     62.75 (44.9 - 82.4)  76.31 (52.5 - 111.8)    48.69 (30 - 81.8)
+6      0.303 (0.15 - 0.6)   0.351 (0.15 - 0.63)   0.262 (0.11 - 0.6)
+7          10.04 (7 - 14)   11.145 (6.4 - 15.1)    6.545 (4.5 - 9.2)
+8          3.31 (2 - 5.1)     3.645 (2.3 - 5.2)    1.835 (1.2 - 2.9)
+9     3.096 (2.35 - 4.11)    3.057 (2.29 - 3.9)  3.659 (2.92 - 5.33)
+10              0 (0 - 0)             0 (0 - 0)          0.1 (0 - 1)
+11           0.55 (0 - 1)             0 (0 - 0)          0.5 (0 - 1)
+12           0.05 (0 - 1)           0.4 (0 - 1)            0 (0 - 0)
+13           0.15 (0 - 1)             0 (0 - 0)          0.3 (0 - 1)
+14       1.57 (1.4 - 1.8)      1.91 (1.6 - 2.2)    1.605 (1.4 - 1.9)
+15        1.195 (1 - 1.5)       1.745 (1.1 - 2)      1.435 (1 - 1.7)
+16     1.325 (1.07 - 1.6)      1.105 (1 - 1.45)     1.134 (1 - 1.42)
+17            0.5 (0 - 1)          0.35 (0 - 1)         0.15 (0 - 1)
+18    10.765 (9.1 - 13.5)    12.02 (9.5 - 17.1)    5.725 (4.6 - 7.1)
+19       0.63 (0.5 - 0.8)     0.795 (0.5 - 1.2)     1.08 (0.8 - 1.5)
+20 17.298 (13.03 - 22.86) 15.896 (9.18 - 25.69)     5.577 (3 - 8.27)
+21        13.85 (12 - 16)        15.7 (13 - 21)      12.25 (10 - 14)
+22            0.9 (0 - 1)           0.7 (0 - 1)         0.05 (0 - 1)
+23              1 (1 - 1)           0.9 (0 - 1)            0 (0 - 0)
+24       3.27 (2.9 - 3.6)     3.514 (3.2 - 3.8)      2.9 (2.7 - 3.1)
+25       1.35 (1.1 - 1.5)     1.329 (1.2 - 1.5)    1.183 (1.1 - 1.3)
+26    2.452 (2.19 - 2.73)   2.633 (2.35 - 2.84)   2.48 (2.28 - 2.67)
+27       1.06 (0.7 - 1.6)     1.121 (0.6 - 1.6)       1.25 (1 - 1.5)
+                    STGH                   VIT                   VOL
+1       MEAN (MIN - MAX)      MEAN (MIN - MAX)      MEAN (MIN - MAX)
+2                     20                    20                    20
+3   56.455 (32.2 - 81.9) 84.115 (47.5 - 124.1)   57.07 (35.9 - 95.4)
+4     15.28 (5.6 - 28.7)   13.535 (4.3 - 29.7)     9.61 (1.8 - 22.4)
+5  71.735 (50.3 - 105.6)  97.65 (55.3 - 134.6)  66.68 (45.3 - 106.1)
+6     0.213 (0.1 - 0.43)    0.14 (0.03 - 0.32)   0.145 (0.03 - 0.28)
+7      9.44 (6.1 - 14.4)   13.185 (9.6 - 18.1)     9.01 (7.1 - 12.6)
+8         3.23 (1.3 - 5)     3.855 (2.6 - 5.2)     2.385 (1.4 - 4.1)
+9    3.077 (2.04 - 6.31)    3.475 (2.4 - 4.12)   4.004 (2.88 - 6.43)
+10             0 (0 - 0)             0 (0 - 0)             0 (0 - 0)
+11             0 (0 - 0)          0.55 (0 - 1)           0.6 (0 - 1)
+12           0.3 (0 - 1)          0.15 (0 - 1)             0 (0 - 0)
+13          0.05 (0 - 1)           0.5 (0 - 1)          0.75 (0 - 1)
+14       1.725 (1.4 - 2)     1.655 (1.4 - 1.9)      1.64 (1.5 - 1.8)
+15     1.675 (1.3 - 1.9)     1.435 (1.1 - 1.8)      1.12 (0.9 - 1.4)
+16   1.034 (0.88 - 1.25)      1.167 (1 - 1.38)   1.478 (1.21 - 1.89)
+17           0.2 (0 - 1)          0.15 (0 - 1)          0.15 (0 - 1)
+18      11.28 (9 - 13.8)    10.79 (7.4 - 12.8)   10.095 (8.3 - 13.1)
+19      0.86 (0.5 - 1.3)      0.56 (0.4 - 0.8)     0.555 (0.4 - 0.8)
+20  13.546 (7.29 - 19.2)  19.204 (14.8 - 26.5) 18.44 (14.67 - 24.44)
+21        16.9 (13 - 19)       17.25 (14 - 23)          13 (11 - 18)
+22          0.75 (0 - 1)             1 (1 - 1)          0.65 (0 - 1)
+23          0.75 (0 - 1)          0.95 (0 - 1)          0.05 (0 - 1)
+24       3.267 (2.9 - 4)     3.293 (3.1 - 3.6)     2.972 (2.8 - 3.2)
+25     1.261 (1.1 - 1.4)     1.321 (1.2 - 1.4)     1.306 (1.2 - 1.4)
+26   2.599 (2.23 - 3.08)   2.511 (2.31 - 2.88)    2.33 (1.99 - 2.71)
+27     1.072 (0.7 - 1.5)     0.929 (0.6 - 1.2)     0.889 (0.6 - 1.3)
+> 
+> descrAll(centaurea, format = "$MEAN ± $SD ($5% - $95%)")
+    group                             all
+1  format            MEAN ± SD (5% - 95%)
+2       N                             652
+3      SN   49.284 ± 18.937 (21.2 - 83.4)
+4      SF    16.835 ± 10.043 (2.9 - 35.3)
+5      ST  66.119 ± 19.897 (37.5 - 102.8)
+6     SFT     0.262 ± 0.151 (0.06 - 0.55)
+7      LL    9.915 ± 2.398 (6.5 - 14.345)
+8      LW       3.234 ± 0.938 (1.8 - 4.9)
+9     LLW     3.19 ± 0.744 (2.25 - 4.444)
+10     LM           0.044 ± 0.206 (0 - 0)
+11    LBA           0.247 ± 0.432 (0 - 1)
+12    LBS           0.193 ± 0.395 (0 - 1)
+13     LS           0.179 ± 0.384 (0 - 1)
+14     IL         1.696 ± 0.164 (1.4 - 2)
+15     IW         1.501 ± 0.287 (1 - 1.9)
+16    ILW     1.162 ± 0.192 (0.95 - 1.55)
+17     CG            0.19 ± 0.393 (0 - 1)
+18     ML      10.09 ± 2.456 (5.8 - 13.6)
+19     MW       0.825 ± 0.368 (0.4 - 1.5)
+20    MLW 14.763 ± 6.926 (4.292 - 26.461)
+21     MF        14.801 ± 2.402 (11 - 19)
+22     IS            0.643 ± 0.48 (0 - 1)
+23     IV           0.543 ± 0.499 (0 - 1)
+24     AL       3.332 ± 0.276 (2.9 - 3.7)
+25     AW       1.346 ± 0.113 (1.2 - 1.5)
+26    ALW      2.505 ± 0.221 (2.16 - 2.9)
+27     AP       0.953 ± 0.268 (0.6 - 1.4)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("exportRes")
+> ### * exportRes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: exportRes
+> ### Title: Export Data
+> ### Aliases: exportRes
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> descr = descrTaxon(centaurea, format = "($MEAN ± $SD)")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("head.morphodata")
+> ### * head.morphodata
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: head.morphodata
+> ### Title: Return the First or Last Parts of an Object
+> ### Aliases: head.classifdata tail.classifdata head.morphodata
+> ###   tail.morphodata
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> head(centaurea)
+    ID Population Taxon   SN   SF   ST  SFT   LL  LW  LLW LM LBA LBS LS  IL  IW
+1 RTE1        RTE  hybr 35.2 23.6 58.8 0.40 11.2 3.9 2.87  0   1   0  0 1.7 1.3
+2 RTE2        RTE  hybr 39.0 11.8 50.8 0.23  7.2 2.6 2.77  0   0   0  0 1.4 1.0
+3 RTE3        RTE  hybr 24.8 23.4 48.2 0.49  7.1 2.8 2.54  0   0   1  0 1.5 1.1
+4 RTE4        RTE  hybr 30.0 25.5 55.5 0.46 10.2 3.7 2.76  0   0   1  0 1.7 1.3
+5 RTE5        RTE  hybr 30.6 27.8 58.4 0.48  9.8 3.4 2.88  0   0   0  0 1.8 1.5
+6 RTE6        RTE  hybr 20.8 19.6 40.4 0.49  9.5 3.9 2.44  0   0   0  0 1.7 1.2
+   ILW CG   ML  MW   MLW MF IS IV AL AW ALW AP
+1 1.31  0 13.6 0.5 25.33 16  1  1  1 NA  NA NA
+2 1.40  0 13.0 0.5 25.40 15  1  1 NA NA  NA NA
+3 1.36  0 12.4 0.6 21.04 13  1  1 NA NA  NA NA
+4 1.31  0 12.1 0.5 22.48 19  1  1 NA NA  NA NA
+5 1.20  0 11.0 0.7 15.29 17  1  1 NA NA  NA NA
+6 1.42  1 10.1 0.6 16.33 14  1  1 NA NA  NA NA
+> tail(centaurea)
+         ID Population Taxon   SN   SF   ST  SFT   LL  LW  LLW LM LBA LBS LS
+647 KOT2283        KOT    ph 30.1 15.1 45.2 0.33  7.3 3.9 1.87  0   0   0  0
+648 KOT2289        KOT    ph 44.4 24.8 69.2 0.36 10.5 3.7 2.84  0   0   0  0
+649 KOT2290        KOT    ph 36.4 30.5 66.9 0.46 14.8 4.4 3.36  0   0   0  0
+650 KOT2292        KOT    ph 28.6 27.6 56.2 0.49  8.9 3.9 2.28  0   0   0  0
+651 KOT2294        KOT    ph 29.0 32.9 61.9 0.53  9.2 3.0 3.07  0   0   0  0
+652 KOT2295        KOT    ph 41.7 20.3 62.0 0.33 10.7 5.1 2.10  0   0   0  0
+     IL  IW  ILW CG  ML  MW  MLW MF IS IV  AL  AW  ALW  AP
+647 1.8 1.7 1.06  0 7.4 1.0 7.40 14  0  0 3.0 1.4 2.11 1.1
+648 1.7 1.6 1.06  0 5.8 0.8 7.03 15  1  0 3.1 1.3 2.41 0.8
+649 1.7 1.4 1.21  0 8.0 1.3 6.15 13  0  0 3.6 1.4 2.64 1.1
+650 2.0 1.9 1.05  0 7.7 0.9 8.56 13  0  0 3.1 1.1 2.78 0.9
+651 1.7 1.8 0.94  0 7.8 1.1 7.43 17  0  0 3.4 1.5 2.32 1.2
+652 1.8 1.8 1.00  0 6.4 1.7 3.82 13  0  0 3.6 1.5 2.43 1.0
+> 
+> 
+> 
+> cleanEx()
+> nameEx("histCharacter")
+> ### * histCharacter
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: histCharacter
+> ### Title: Histograms of Characters
+> ### Aliases: histCharacter histAll
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> histCharacter(centaurea, character = "IW", breaks = seq(0.5, 2.5, 0.1))
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("keepTaxon")
+> ### * keepTaxon
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: keepTaxon
+> ### Title: Keep Items (Taxa, Populations, Samples, Morphological
+> ###   Characters) in an Morphodata Object (and Remove Others)
+> ### Aliases: keepTaxon keepPopulation keepCharacter keepSample
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> centaurea.hybr = keepTaxon(centaurea, "hybr")
+> centaurea.PhHybr = keepTaxon(centaurea, c("ph", "hybr"))
+> 
+> centaurea.PREL = keepPopulation(centaurea, "PREL")
+> 
+> centaurea.NA_0.1 = keepSample(centaurea, missingPercentage = 0.1)
+> 
+> centaurea.stem = keepCharacter(centaurea, c("SN", "SF", "ST"))
+> 
+> 
+> 
+> cleanEx()
+> nameEx("knn.select")
+> ### * knn.select
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: knn.select
+> ### Title: Search for the Optimal K-nearest Neighbours
+> ### Aliases: knn.select
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> 
+> # classification by nonparametric k-nearest neighbour method
+> classifRes.knn = classif.knn(centaurea, k = 12, crossval = "indiv")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("missingCharactersTable")
+> ### * missingCharactersTable
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: missingCharactersTable
+> ### Title: Summarize Missing Data
+> ### Aliases: missingCharactersTable
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> missingCharactersTable(centaurea, level = "pop")
+   Population Taxon  N missing.percentage missing.values
+1        BABL    ps 20               0.03             16
+2        BABU  hybr 20               0.03             16
+3         BOL    ps 20               0.12             60
+4         BRT    ph 20               0.05             24
+5         BUK    ph 20               0.00              0
+6        CERM    ps 20               0.05             24
+7        CERV    ph 20               0.09             44
+8        CZLE    ps 20               0.08             40
+9         DEB  hybr 20               0.00              0
+10        DOM    st 12               0.07             20
+11        DUB    st 20               0.08             40
+12       HVLT    ps 20               0.00              0
+13       KASH    ps 20               0.00              0
+14        KOT    ph 20               0.00              0
+15       KOZH    ps 20               0.15             76
+16        KRO    ph 20               0.00              0
+17        LES    st 20               0.00              0
+18        LIP    st 20               0.16             80
+19        MIL    st 20               0.01              4
+20        NEJ    ph 20               0.01              4
+21       NSED    ph 20               0.02             12
+22       OLE1    ps 20               0.02             12
+23       OLE2    ps 20               0.04             20
+24       PREL    st 20               0.16             80
+25       PRIS    ps 20               0.01              4
+26       PROS  hybr 20               0.10             52
+27        RTE  hybr 20               0.09             47
+28        RUS  hybr 20               0.00              0
+29        SOK    ps 20               0.05             24
+30       STCV    ph 20               0.11             56
+31       STGH    ps 20               0.02              8
+32        VIT  hybr 20               0.05             24
+33        VOL    st 20               0.02              8
+> 
+> 
+> 
+> cleanEx()
+> nameEx("missingSamplesTable")
+> ### * missingSamplesTable
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: missingSamplesTable
+> ### Title: Summarize Missing Data
+> ### Aliases: missingSamplesTable
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> missingSamplesTable(centaurea, level = "pop")
+   Population  N SN SF ST SFT LL LW LLW LM LBA LBS LS IL IW ILW CG ML MW MLW MF
+1        BABL 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+2        BABU 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+3         BOL 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+4         BRT 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+5         BUK 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+6        CERM 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+7        CERV 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+8        CZLE 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+9         DEB 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+10        DOM 12  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+11        DUB 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+12       HVLT 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+13       KASH 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+14        KOT 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+15       KOZH 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+16        KRO 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+17        LES 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+18        LIP 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+19        MIL 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+20        NEJ 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+21       NSED 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+22       OLE1 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+23       OLE2 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+24       PREL 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+25       PRIS 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+26       PROS 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+27        RTE 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+28        RUS 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+29        SOK 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+30       STCV 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+31       STGH 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+32        VIT 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+33        VOL 20  0  0  0   0  0  0   0  0   0   0  0  0  0   0  0  0  0   0  0
+   IS IV   AL   AW  ALW   AP missing.percentage missing.values
+1   0  0 0.20 0.20 0.20 0.20               0.03             16
+2   0  0 0.20 0.20 0.20 0.20               0.03             16
+3   0  0 0.75 0.75 0.75 0.75               0.12             60
+4   0  0 0.30 0.30 0.30 0.30               0.05             24
+5   0  0 0.00 0.00 0.00 0.00               0.00              0
+6   0  0 0.30 0.30 0.30 0.30               0.05             24
+7   0  0 0.55 0.55 0.55 0.55               0.09             44
+8   0  0 0.50 0.50 0.50 0.50               0.08             40
+9   0  0 0.00 0.00 0.00 0.00               0.00              0
+10  0  0 0.42 0.42 0.42 0.42               0.07             20
+11  0  0 0.50 0.50 0.50 0.50               0.08             40
+12  0  0 0.00 0.00 0.00 0.00               0.00              0
+13  0  0 0.00 0.00 0.00 0.00               0.00              0
+14  0  0 0.00 0.00 0.00 0.00               0.00              0
+15  0  0 0.95 0.95 0.95 0.95               0.15             76
+16  0  0 0.00 0.00 0.00 0.00               0.00              0
+17  0  0 0.00 0.00 0.00 0.00               0.00              0
+18  0  0 1.00 1.00 1.00 1.00               0.16             80
+19  0  0 0.05 0.05 0.05 0.05               0.01              4
+20  0  0 0.05 0.05 0.05 0.05               0.01              4
+21  0  0 0.15 0.15 0.15 0.15               0.02             12
+22  0  0 0.15 0.15 0.15 0.15               0.02             12
+23  0  0 0.25 0.25 0.25 0.25               0.04             20
+24  0  0 1.00 1.00 1.00 1.00               0.16             80
+25  0  0 0.05 0.05 0.05 0.05               0.01              4
+26  0  0 0.65 0.65 0.65 0.65               0.10             52
+27  0  0 0.55 0.60 0.60 0.60               0.09             47
+28  0  0 0.00 0.00 0.00 0.00               0.00              0
+29  0  0 0.30 0.30 0.30 0.30               0.05             24
+30  0  0 0.70 0.70 0.70 0.70               0.11             56
+31  0  0 0.10 0.10 0.10 0.10               0.02              8
+32  0  0 0.30 0.30 0.30 0.30               0.05             24
+33  0  0 0.10 0.10 0.10 0.10               0.02              8
+> 
+> 
+> 
+> cleanEx()
+> nameEx("naMeanSubst")
+> ### * naMeanSubst
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: naMeanSubst
+> ### Title: Replace Missing Data by Population Average
+> ### Aliases: naMeanSubst
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("nmds.calc")
+> ### * nmds.calc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: nmds.calc
+> ### Title: Non-metric Multidimensional Scaling (NMDS)
+> ### Aliases: nmds.calc
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> nmdsRes = nmds.calc(centaurea, distMethod = "Euclidean", k = 3)
+> 
+> summary(nmdsRes)
+Object of class 'nmdsdata'; storing results of non-metric multidimensional scaling
+Resemblance coefficient:  Euclidean 
+
+Dimensions:  3
+Stress:  0.1540942
+Scores scaled to unit root mean square, rotated to principal components> 
+> plotPoints(nmdsRes, axes = c(1,2), col = c("red", "green", "blue", "black"),
++   pch = c(20,17,8,21), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
+> 
+> # using Gower's method
+> data = list(
++     ID = as.factor(c("id1","id2","id3","id4","id5","id6")),
++     Population = as.factor(c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3")),
++     Taxon = as.factor(c("TaxA", "TaxA", "TaxA", "TaxB", "TaxB", "TaxB")),
++     data = data.frame(
++      stemBranching = c(1, 1, 1, 0, 0, 0),  # binaryChs
++      petalColour = c(1, 1, 2, 3, 3, 3),  # nominalChs; 1=white, 2=red, 3=blue
++      leaves = c(1,1,1,2,2,3), # nominalChs; 1=simple, 2=palmately compound, 3=pinnately compound
++      taste = c(2, 2, 2, 3, 1, 1),   # ordinal; 1=hot, 2=hotter, 3=hottest
++      stemHeight = c(10, 11, 14, 22, 23, 21),         # quantitative
++      leafLength = c(8, 7.1, 9.4, 1.2, 2.3, 2.1)  )   # quantitative
++ )
+> attr(data, "class") = "morphodata"
+> 
+> nmdsGower = nmds.calc(data, distMethod = "Gower", k = 2, binaryChs = c("stemBranching"),
++                       nominalChs = c("petalColour", "leaves"), ordinalChs = c("taste"))
+> 
+> plotPoints(nmdsGower, axes = c(1,2), col = c("red","green"),
++            pch = c(20,17), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("pca.calc")
+> ### * pca.calc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: pca.calc
+> ### Title: Principal Component Analysis
+> ### Aliases: pca.calc
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> 
+> pcaRes = pca.calc(centaurea)
+> 
+> summary(pcaRes)
+Object of class 'pcadata'; storing results of principal component analysis
+
+Variation explained by individual axes (listing of axes is truncated):
+                                        PC1    PC2    PC3    PC4
+Eigenvalues                          5.1628 3.5660 2.6634 1.7359
+Eigenvalues as percentages           0.2065 0.1426 0.1065 0.0694
+Cumulative percentage of eigenvalues 0.2065 0.3492 0.4557 0.5251
+
+Eigenvectors (listing of axes is truncated):
+            PC1         PC2          PC3          PC4
+SN   0.10771859  0.09373031  0.533139126  0.173265222
+SF  -0.26900856  0.08099386  0.059673923 -0.462177220
+ST  -0.02956541  0.12948462  0.538957839 -0.062077155
+SFT -0.27145559  0.02321041 -0.244805653 -0.411793361
+LL  -0.07372490  0.19206329  0.383723626 -0.232003396
+LW  -0.20896559  0.21922418  0.152923297 -0.218305082
+LLW  0.20543544 -0.11181134  0.188443414  0.037332596
+LM  -0.07506076 -0.13142341  0.065759045 -0.102072769
+LBA  0.27729432 -0.03899012 -0.004432443 -0.089885703
+LBS -0.16210200  0.23562860 -0.130667743  0.042490929
+LS   0.27249981 -0.04295413  0.111132394  0.048352730
+IL  -0.19760433  0.22449890 -0.018527821  0.225092141
+IW  -0.36011332  0.06964662  0.053343011  0.247319193
+ILW  0.34334276  0.04623376 -0.072130258 -0.164859081
+CG  -0.06830949  0.13736296  0.084854346 -0.328948291
+ML   0.05725511  0.43511355 -0.160955641  0.110889828
+MW  -0.29802964 -0.21870414  0.082791806  0.115179104
+MLW  0.29947004  0.31462784 -0.094592634 -0.054858668
+MF  -0.08778147  0.29116204  0.056231096  0.280578287
+IS   0.08041006  0.28299106 -0.024499585 -0.005958801
+IV   0.11618582  0.38976694 -0.132320620  0.023846312
+AL  -0.09081621  0.17748220  0.040970839  0.096019665
+AW  -0.15019826 -0.01005744  0.068461967  0.199327016
+ALW  0.07423929  0.17727677 -0.045932295 -0.125053688
+AP  -0.17335796  0.03916467 -0.186656354  0.194208856
+> 
+> plotPoints(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "black"),
++   pch = c(20,17,8,21), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("pcoa.calc")
+> ### * pcoa.calc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: pcoa.calc
+> ### Title: Principal Coordinates Analysis (PCoA)
+> ### Aliases: pcoa.calc
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> pcoRes = pcoa.calc(centaurea, distMethod = "Manhattan")
+> 
+> summary(pcoRes)
+Object of class 'pcoadata'; storing results of principal coordinates analysis
+Resemblance coefficient:  Manhattan 
+
+Variation explained by individual axes (listing of axes is truncated):
+                                            PCo1        PCo2        PCo3
+Eigenvalues                          1.77341e+06 573091.8872 339373.5875
+Eigenvalues as percentages           4.26300e-01      0.1378      0.0816
+Cumulative percentage of eigenvalues 4.26300e-01      0.5641      0.6457
+                                            PCo4
+Eigenvalues                          204573.0378
+Eigenvalues as percentages                0.0492
+Cumulative percentage of eigenvalues      0.6948
+> 
+> plotPoints(pcoRes, axes = c(1,2), col = c("red", "green", "blue", "black"),
++   pch = c(20,17,8,21), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
+> 
+> # using Gower's method
+> data = list(
++     ID = as.factor(c("id1","id2","id3","id4","id5","id6")),
++     Population = as.factor(c("Pop1", "Pop1", "Pop2", "Pop2", "Pop3", "Pop3")),
++     Taxon = as.factor(c("TaxA", "TaxA", "TaxA", "TaxB", "TaxB", "TaxB")),
++     data = data.frame(
++      stemBranching = c(1, 1, 1, 0, 0, 0),  # binaryChs
++      petalColour = c(1, 1, 2, 3, 3, 3),  # nominalChs; 1=white, 2=red, 3=blue
++      leaves = c(1,1,1,2,2,3), # nominalChs; 1=simple, 2=palmately compound, 3=pinnately compound
++      taste = c(2, 2, 2, 3, 1, 1),   # ordinal; 1=hot, 2=hotter, 3=hottest
++      stemHeight = c(10, 11, 14, 22, 23, 21),         # quantitative
++      leafLength = c(8, 7.1, 9.4, 1.2, 2.3, 2.1)  )   # quantitative
++ )
+> attr(data, "class") = "morphodata"
+> 
+> pcoaGower = pcoa.calc(data, distMethod = "Gower", binaryChs = c("stemBranching"),
++                       nominalChs = c("petalColour", "leaves"), ordinalChs = c("taste"))
+> 
+> plotPoints(pcoaGower, axes = c(1,2), col = c("red","green"),
++            pch = c(20,17), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plot3Dpoints")
+> ### * plot3Dpoints
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot3Dpoints
+> ### Title: The Default Scatterplot 3D Function
+> ### Aliases: plot3Dpoints
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> 
+> pcaRes = pca.calc(centaurea)
+> 
+> plot3Dpoints(pcaRes, col = c("red", "green", "blue", "black"), pch = c(20,17,8,21),
++                  pt.bg = "orange")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotAddEllipses")
+> ### * plotAddEllipses
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotAddEllipses
+> ### Title: Add Prediction Ellipses to a Plot
+> ### Aliases: plotAddEllipses
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> 
+> pcaRes = pca.calc(centaurea)
+> 
+> plotPoints(pcaRes, col = c(rgb(255, 0, 0, max = 255, alpha = 150), # red
++                            rgb(0, 255, 0, max = 255, alpha = 150), # green
++                            rgb(0, 0, 255, max = 255, alpha = 150), # blue
++                            rgb(0, 0, 0, max = 255, alpha = 150)), # black
++             legend = FALSE, xlim = c(-5, 7.5), ylim = c(-5, 5.5))
+> 
+> plotAddLegend(pcaRes, col = c("red", "green", "blue", "black"), ncol = 2)
+> 
+> plotAddEllipses(pcaRes, col = c("red", "green", "blue", "black"), lwd = 3)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotAddLabels.characters")
+> ### * plotAddLabels.characters
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotAddLabels.characters
+> ### Title: Add Labels to a Plot
+> ### Aliases: plotAddLabels.characters
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> 
+> 
+> pcaRes = pca.calc(centaurea)
+> 
+> plotCharacters(pcaRes, labels = FALSE)
+> plotAddLabels.characters(pcaRes, labels = c("MW", "IW", "SFT", "SF", "LW"), pos = 2, cex = 1)
+> plotAddLabels.characters(pcaRes, labels = c("LLW", "ILW", "LBA"), pos = 4, cex = 1)
+> plotAddLabels.characters(pcaRes, labels = c("ML", "IV", "MLW"), pos = 1, cex = 1)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotAddLabels.points")
+> ### * plotAddLabels.points
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotAddLabels.points
+> ### Title: Add Labels to a Plot
+> ### Aliases: plotAddLabels.points
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> pops = populOTU(centaurea)
+> 
+> 
+> pcaRes = pca.calc(pops)
+> plotPoints(pcaRes, col = c("red", "green", "blue", "red"),
++             pch = c(20, 17, 8, 21), pt.bg = "orange", legend = FALSE)
+> 
+> plotAddLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = TRUE)
+> 
+> plotPoints(pcaRes, col = c("red", "green", "blue", "red"),
++             pch = c(20, 17, 8, 21), pt.bg = "orange", legend = FALSE)
+> 
+> plotAddLabels.points(pcaRes, labels = c("LES", "BUK", "VOL", "OLE1"), include = FALSE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotAddLegend")
+> ### * plotAddLegend
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotAddLegend
+> ### Title: Add Legend to a Plot
+> ### Aliases: plotAddLegend
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> 
+> pcaRes = pca.calc(centaurea)
+> 
+> plotPoints(pcaRes, col = c("red", "green", "blue", "red"),
++             pch = c(20, 17, 8, 21), pt.bg = "orange", legend = FALSE)
+> 
+> plotAddLegend(pcaRes, x = "bottomright", col = c("red", "green", "blue", "red"),
++                pch = c(20, 17, 8, 21), pt.bg = "orange", ncol = 2)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotAddSpiders")
+> ### * plotAddSpiders
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotAddSpiders
+> ### Title: Add Spiders to a Plot
+> ### Aliases: plotAddSpiders
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> 
+> pcaRes = pca.calc(centaurea)
+> 
+> plotPoints(pcaRes, col = c(rgb(255, 0, 0, max = 255, alpha = 150), # red
++                            rgb(0, 255, 0, max = 255, alpha = 150), # green
++                            rgb(0, 0, 255, max = 255, alpha = 150), # blue
++                            rgb(0, 0, 0, max = 255, alpha = 150)), # black
++             legend = FALSE, xlim = c(-5, 7.5), ylim = c(-5, 5.5))
+> 
+> plotAddLegend(pcaRes, col = c("red", "green", "blue", "black"), ncol = 2)
+> 
+> plotAddSpiders(pcaRes, col = c("red", "green", "blue", "black"))
+> 
+> 
+> plotPoints(pcaRes, col = c("red", "green", "blue","black"), legend = TRUE, cex = 0.4)
+> 
+> plotAddSpiders(pcaRes, col = c(rgb(255, 0, 0, max = 255, alpha = 150), # red
++                                rgb(0, 255, 0, max = 255, alpha = 150), # green
++                                rgb(0, 0, 255, max = 255, alpha = 150), # blue
++                                rgb(0, 0, 0, max = 255, alpha = 150))) # black
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotCharacters")
+> ### * plotCharacters
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotCharacters
+> ### Title: Draws Character's Contribution as Arrows
+> ### Aliases: plotCharacters
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> 
+> pcaRes = pca.calc(centaurea)
+> 
+> plotCharacters(pcaRes)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("plotPoints")
+> ### * plotPoints
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plotPoints
+> ### Title: The Default Scatterplot Function
+> ### Aliases: plotPoints
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> 
+> pcaRes = pca.calc(centaurea)
+> 
+> plotPoints(pcaRes, axes = c(1,2), col = c("red", "green", "blue", "red"),
++   pch = c(20, 17, 8, 21), pt.bg = "orange", legend = TRUE, legend.pos = "bottomright")
+> 
+> plotPoints(pcaRes, main = "My PCA plot", frame.plot = FALSE, cex = 0.8)
+> 
+> cdaRes = cda.calc(centaurea)
+> 
+> plotPoints(cdaRes, col = c("red", "green", "blue", "red"),
++   pch = c(20, 17, 8, 21), pt.bg = "orange", legend = TRUE)
+> 
+> 
+> 
+> cleanEx()
+> nameEx("populOTU")
+> ### * populOTU
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: populOTU
+> ### Title: Population Means
+> ### Aliases: populOTU
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> pops = populOTU(centaurea)
+Warning: Unable to calculate the means of characters AL AW ALW AP in populations LIP PREL. Values are NA.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("qqnormCharacter")
+> ### * qqnormCharacter
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: qqnormCharacter
+> ### Title: Quantile-Quantile Plots
+> ### Aliases: qqnormCharacter qqnormAll
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> qqnormCharacter(centaurea, character = "SF")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("read.morphodata")
+> ### * read.morphodata
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: read.morphodata
+> ### Title: Data Input and Description
+> ### Aliases: read.morphodata samples populations taxa
+> 
+> ### ** Examples
+> 
+> data = read.morphodata(file = system.file("extdata", "centaurea.txt",
++     package = "MorphoTools2"), dec = ".", sep = "\t")
+> 
+> 
+> 
+> summary(data)
+Object of class 'morphodata'
+ - contains 33 populations
+ - contains 4 taxa (defined groups)
+
+Populations: BABL, BABU, BOL, BRT, BUK, CERM, CERV, CZLE, DEB, DOM, DUB, HVLT, KASH, KOT, KOZH, KRO, LES, LIP, MIL, NEJ, NSED, OLE1, OLE2, PREL, PRIS, PROS, RTE, RUS, SOK, STCV, STGH, VIT, VOL
+Taxa (defined groups): hybr, ph, ps, st
+> samples(data)
+  [1] "BABL1146" "BABL1147" "BABL1148" "BABL1149" "BABL1150" "BABL1151"
+  [7] "BABL1152" "BABL1153" "BABL1154" "BABL1155" "BABL1156" "BABL1157"
+ [13] "BABL1158" "BABL1159" "BABL1164" "BABL1165" "BABL1166" "BABL1170"
+ [19] "BABL1171" "BABL1174" "BABU834"  "BABU835"  "BABU836"  "BABU837" 
+ [25] "BABU838"  "BABU839"  "BABU840"  "BABU841"  "BABU842"  "BABU843" 
+ [31] "BABU845"  "BABU848"  "BABU851"  "BABU852"  "BABU854"  "BABU855" 
+ [37] "BABU856"  "BABU857"  "BABU859"  "BABU860"  "BOL1176"  "BOL1177" 
+ [43] "BOL1178"  "BOL1179"  "BOL1180"  "BOL1181"  "BOL1182"  "BOL1183" 
+ [49] "BOL1184"  "BOL1185"  "BOL1186"  "BOL1187"  "BOL1188"  "BOL1189" 
+ [55] "BOL1190"  "BOL1191"  "BOL1192"  "BOL1193"  "BOL1194"  "BOL1200" 
+ [61] "BRT1773"  "BRT1774"  "BRT1775"  "BRT1778"  "BRT1779"  "BRT1780" 
+ [67] "BRT1781"  "BRT1782"  "BRT1783"  "BRT1784"  "BRT1785"  "BRT1788" 
+ [73] "BRT1792"  "BRT1794"  "BRT1795"  "BRT1797"  "BRT1798"  "BRT1799" 
+ [79] "BRT1800"  "BRT1802"  "BUK2087"  "BUK2088"  "BUK2089"  "BUK2090" 
+ [85] "BUK2093"  "BUK2094"  "BUK2095"  "BUK2096"  "BUK2097"  "BUK2098" 
+ [91] "BUK2101"  "BUK2102"  "BUK2103"  "BUK2104"  "BUK2105"  "BUK2106" 
+ [97] "BUK2111"  "BUK2112"  "BUK2113"  "BUK2116"  "CERM1206" "CERM1207"
+[103] "CERM1208" "CERM1209" "CERM1210" "CERM1211" "CERM1212" "CERM1213"
+[109] "CERM1214" "CERM1215" "CERM1219" "CERM1220" "CERM1222" "CERM1224"
+[115] "CERM1225" "CERM1227" "CERM1229" "CERM1232" "CERM1233" "CERM1234"
+[121] "CERV1056" "CERV1057" "CERV1058" "CERV1059" "CERV1060" "CERV1061"
+[127] "CERV1062" "CERV1063" "CERV1064" "CERV1065" "CERV1066" "CERV1067"
+[133] "CERV1068" "CERV1069" "CERV1070" "CERV1071" "CERV1076" "CERV1077"
+[139] "CERV1079" "CERV1084" "CZLE538"  "CZLE539"  "CZLE540"  "CZLE541" 
+[145] "CZLE542"  "CZLE543"  "CZLE544"  "CZLE545"  "CZLE546"  "CZLE547" 
+[151] "CZLE548"  "CZLE549"  "CZLE550"  "CZLE551"  "CZLE552"  "CZLE553" 
+[157] "CZLE555"  "CZLE558"  "CZLE560"  "CZLE563"  "DEB1236"  "DEB1237" 
+[163] "DEB1238"  "DEB1239"  "DEB1240"  "DEB1242"  "DEB1243"  "DEB1244" 
+[169] "DEB1250"  "DEB1251"  "DEB1254"  "DEB1255"  "DEB1256"  "DEB1257" 
+[175] "DEB1259"  "DEB1260"  "DEB1261"  "DEB1262"  "DEB1263"  "DEB1265" 
+[181] "DOM924"   "DOM925"   "DOM926"   "DOM927"   "DOM928"   "DOM929"  
+[187] "DOM930"   "DOM931"   "DOM932"   "DOM933"   "DOM934"   "DOM935"  
+[193] "DUB936"   "DUB937"   "DUB938"   "DUB939"   "DUB940"   "DUB941"  
+[199] "DUB942"   "DUB943"   "DUB944"   "DUB945"   "DUB946"   "DUB947"  
+[205] "DUB948"   "DUB950"   "DUB951"   "DUB954"   "DUB955"   "DUB956"  
+[211] "DUB958"   "DUB965"   "HVLT449"  "HVLT450"  "HVLT452"  "HVLT454" 
+[217] "HVLT455"  "HVLT457"  "HVLT458"  "HVLT460"  "HVLT461"  "HVLT463" 
+[223] "HVLT465"  "HVLT466"  "HVLT467"  "HVLT469"  "HVLT470"  "HVLT472" 
+[229] "HVLT473"  "HVLT474"  "HVLT475"  "HVLT477"  "KASH508"  "KASH509" 
+[235] "KASH510"  "KASH511"  "KASH512"  "KASH513"  "KASH514"  "KASH515" 
+[241] "KASH517"  "KASH519"  "KASH523"  "KASH524"  "KASH525"  "KASH526" 
+[247] "KASH527"  "KASH528"  "KASH531"  "KASH532"  "KASH533"  "KASH537" 
+[253] "KOT2267"  "KOT2268"  "KOT2269"  "KOT2271"  "KOT2272"  "KOT2273" 
+[259] "KOT2275"  "KOT2276"  "KOT2277"  "KOT2278"  "KOT2279"  "KOT2280" 
+[265] "KOT2281"  "KOT2282"  "KOT2283"  "KOT2289"  "KOT2290"  "KOT2292" 
+[271] "KOT2294"  "KOT2295"  "KOZH478"  "KOZH479"  "KOZH480"  "KOZH481" 
+[277] "KOZH482"  "KOZH483"  "KOZH484"  "KOZH485"  "KOZH486"  "KOZH487" 
+[283] "KOZH488"  "KOZH489"  "KOZH490"  "KOZH491"  "KOZH492"  "KOZH493" 
+[289] "KOZH494"  "KOZH495"  "KOZH496"  "KOZH498"  "KRO2238"  "KRO2239" 
+[295] "KRO2240"  "KRO2241"  "KRO2242"  "KRO2243"  "KRO2244"  "KRO2245" 
+[301] "KRO2246"  "KRO2247"  "KRO2248"  "KRO2250"  "KRO2251"  "KRO2252" 
+[307] "KRO2254"  "KRO2255"  "KRO2256"  "KRO2257"  "KRO2259"  "KRO2260" 
+[313] "LES1116"  "LES1119"  "LES1120"  "LES1121"  "LES1123"  "LES1124" 
+[319] "LES1127"  "LES1130"  "LES1132"  "LES1133"  "LES1135"  "LES1136" 
+[325] "LES1137"  "LES1138"  "LES1139"  "LES1141"  "LES1142"  "LES1143" 
+[331] "LES1144"  "LES1145"  "LIP120"   "LIP121"   "LIP122"   "LIP123"  
+[337] "LIP124"   "LIP125"   "LIP126"   "LIP127"   "LIP128"   "LIP129"  
+[343] "LIP130"   "LIP131"   "LIP132"   "LIP133"   "LIP134"   "LIP135"  
+[349] "LIP136"   "LIP137"   "LIP138"   "LIP139"   "MIL1000"  "MIL1003" 
+[355] "MIL1005"  "MIL1006"  "MIL1008"  "MIL1010"  "MIL1011"  "MIL1014" 
+[361] "MIL1015"  "MIL1016"  "MIL1018"  "MIL1019"  "MIL1020"  "MIL1021" 
+[367] "MIL1022"  "MIL1024"  "MIL1025"  "MIL996"   "MIL997"   "MIL998"  
+[373] "NEJ1026"  "NEJ1027"  "NEJ1029"  "NEJ1031"  "NEJ1033"  "NEJ1034" 
+[379] "NEJ1035"  "NEJ1037"  "NEJ1038"  "NEJ1039"  "NEJ1040"  "NEJ1041" 
+[385] "NEJ1042"  "NEJ1045"  "NEJ1046"  "NEJ1047"  "NEJ1048"  "NEJ1052" 
+[391] "NEJ1053"  "NEJ1055"  "NSED2117" "NSED2118" "NSED2119" "NSED2120"
+[397] "NSED2121" "NSED2122" "NSED2123" "NSED2124" "NSED2125" "NSED2126"
+[403] "NSED2128" "NSED2129" "NSED2132" "NSED2133" "NSED2134" "NSED2136"
+[409] "NSED2137" "NSED2138" "NSED2140" "NSED2142" "OLE1269"  "OLE1270" 
+[415] "OLE1271"  "OLE1272"  "OLE1273"  "OLE1274"  "OLE1275"  "OLE1278" 
+[421] "OLE1279"  "OLE1283"  "OLE1284"  "OLE1285"  "OLE1286"  "OLE1288" 
+[427] "OLE1290"  "OLE1291"  "OLE1292"  "OLE1295"  "OLE1296"  "OLE1297" 
+[433] "OLE2568"  "OLE2569"  "OLE2570"  "OLE2571"  "OLE2572"  "OLE2573" 
+[439] "OLE2574"  "OLE2575"  "OLE2576"  "OLE2578"  "OLE2580"  "OLE2581" 
+[445] "OLE2582"  "OLE2584"  "OLE2585"  "OLE2586"  "OLE2587"  "OLE2592" 
+[451] "OLE2595"  "OLE2597"  "PREL31"   "PREL32"   "PREL33"   "PREL34"  
+[457] "PREL35"   "PREL36"   "PREL37"   "PREL38"   "PREL39"   "PREL40"  
+[463] "PREL41"   "PREL42"   "PREL43"   "PREL44"   "PREL45"   "PREL46"  
+[469] "PREL47"   "PREL48"   "PREL49"   "PREL50"   "PRIS418"  "PRIS419" 
+[475] "PRIS420"  "PRIS421"  "PRIS422"  "PRIS423"  "PRIS424"  "PRIS425" 
+[481] "PRIS429"  "PRIS432"  "PRIS433"  "PRIS436"  "PRIS438"  "PRIS441" 
+[487] "PRIS442"  "PRIS443"  "PRIS444"  "PRIS445"  "PRIS446"  "PRIS447" 
+[493] "PROS179"  "PROS180"  "PROS181"  "PROS182"  "PROS183"  "PROS184" 
+[499] "PROS185"  "PROS186"  "PROS187"  "PROS188"  "PROS189"  "PROS190" 
+[505] "PROS191"  "PROS192"  "PROS193"  "PROS194"  "PROS198"  "PROS200" 
+[511] "PROS201"  "PROS203"  "RTE1"     "RTE10"    "RTE11"    "RTE12"   
+[517] "RTE13"    "RTE14"    "RTE15"    "RTE16"    "RTE17"    "RTE2"    
+[523] "RTE20"    "RTE28"    "RTE29"    "RTE3"     "RTE4"     "RTE5"    
+[529] "RTE6"     "RTE7"     "RTE8"     "RTE9"     "RUS100"   "RUS101"  
+[535] "RUS103"   "RUS104"   "RUS105"   "RUS106"   "RUS107"   "RUS110"  
+[541] "RUS111"   "RUS112"   "RUS113"   "RUS114"   "RUS116"   "RUS119"  
+[547] "RUS90"    "RUS92"    "RUS93"    "RUS94"    "RUS96"    "RUS99"   
+[553] "SOK388"   "SOK389"   "SOK390"   "SOK391"   "SOK392"   "SOK393"  
+[559] "SOK394"   "SOK395"   "SOK396"   "SOK397"   "SOK398"   "SOK399"  
+[565] "SOK402"   "SOK403"   "SOK406"   "SOK409"   "SOK414"   "SOK415"  
+[571] "SOK416"   "SOK417"   "STCV966"  "STCV967"  "STCV968"  "STCV969" 
+[577] "STCV970"  "STCV971"  "STCV972"  "STCV973"  "STCV974"  "STCV975" 
+[583] "STCV976"  "STCV977"  "STCV978"  "STCV979"  "STCV980"  "STCV981" 
+[589] "STCV982"  "STCV983"  "STCV984"  "STCV991"  "STGH298"  "STGH299" 
+[595] "STGH300"  "STGH301"  "STGH303"  "STGH305"  "STGH306"  "STGH309" 
+[601] "STGH310"  "STGH311"  "STGH312"  "STGH313"  "STGH316"  "STGH318" 
+[607] "STGH321"  "STGH323"  "STGH324"  "STGH325"  "STGH326"  "STGH327" 
+[613] "VIT894"   "VIT895"   "VIT896"   "VIT897"   "VIT898"   "VIT899"  
+[619] "VIT900"   "VIT901"   "VIT902"   "VIT903"   "VIT905"   "VIT908"  
+[625] "VIT910"   "VIT912"   "VIT913"   "VIT917"   "VIT918"   "VIT919"  
+[631] "VIT920"   "VIT922"   "VOL1086"  "VOL1087"  "VOL1088"  "VOL1089" 
+[637] "VOL1090"  "VOL1091"  "VOL1092"  "VOL1093"  "VOL1095"  "VOL1096" 
+[643] "VOL1097"  "VOL1099"  "VOL1101"  "VOL1103"  "VOL1105"  "VOL1106" 
+[649] "VOL1107"  "VOL1108"  "VOL1112"  "VOL1113" 
+> populations(data)
+ [1] "BABL" "BABU" "BOL"  "BRT"  "BUK"  "CERM" "CERV" "CZLE" "DEB"  "DOM" 
+[11] "DUB"  "HVLT" "KASH" "KOT"  "KOZH" "KRO"  "LES"  "LIP"  "MIL"  "NEJ" 
+[21] "NSED" "OLE1" "OLE2" "PREL" "PRIS" "PROS" "RTE"  "RUS"  "SOK"  "STCV"
+[31] "STGH" "VIT"  "VOL" 
+> taxa(data)
+[1] "hybr" "ph"   "ps"   "st"  
+> 
+> 
+> 
+> cleanEx()
+> nameEx("removeTaxon")
+> ### * removeTaxon
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: removeTaxon
+> ### Title: Remove Items (Taxa, Populations, Morphological Characters) from
+> ###   Morphodata Object
+> ### Aliases: removeTaxon removePopulation removeSample removeCharacter
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> centaurea.3tax = removeTaxon(centaurea, "hybr")
+> centaurea.PsSt = removeTaxon(centaurea, c("ph", "hybr"))
+> 
+> centaurea.short = removePopulation(centaurea, c("LIP", "PREL"))
+> 
+> centaurea.NA_0.1 = removeSample(centaurea, missingPercentage = 0.1)
+> 
+> centaurea.short = removeCharacter(centaurea, "LL")
+> 
+> 
+> 
+> cleanEx()
+> nameEx("shapiroWilkTest")
+> ### * shapiroWilkTest
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: shapiroWilkTest
+> ### Title: Shapiro-Wilk Normality Test
+> ### Aliases: shapiroWilkTest
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> sW = shapiroWilkTest(centaurea)
+> 
+> 
+> sW = shapiroWilkTest(centaurea, p.value = NA)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("stepdisc.calc")
+> ### * stepdisc.calc
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: stepdisc.calc
+> ### Title: Stepwise Discriminant Analysis
+> ### Aliases: stepdisc.calc
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> centaurea = naMeanSubst(centaurea)
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population LIP. Probably all values of that character are NA.
+Warning: Unable to replace NAs in characters AL, AW, ALW, AP in population PREL. Probably all values of that character are NA.
+> centaurea = removePopulation(centaurea, populationName = c("LIP", "PREL"))
+> 
+> stepdisc.calc(centaurea)
+   Entered Removed Partial R-square    F-value        Pr > F
+1      MLW              0.667335064 406.554939 7.890234e-145
+2       ML              0.506437108 207.611046  1.192547e-92
+3       IW              0.200252478  50.579714  3.483830e-29
+4       LS              0.157685396  37.752982  2.249101e-22
+5       IV              0.146472637  34.550532  1.281334e-20
+6       MW              0.115246110  26.181821  6.249414e-16
+7       MF              0.091473201  20.203721  1.736040e-12
+8       AP              0.070455039  15.184304  1.550026e-09
+9       IS              0.056738406  12.030259  1.174018e-07
+10     LBA              0.056209421  11.891566  1.422384e-07
+11      LW              0.054420588  11.472159  2.538006e-07
+12      AL              0.047197814   9.857623  2.364358e-06
+13     ILW              0.038600447   7.976519  3.205143e-05
+14     LBS              0.033553832   6.885891  1.454076e-04
+15     SFT              0.026130580   5.312678  1.281299e-03
+16      CG              0.028448848   5.788052  6.647989e-04
+17      IL              0.020554879   4.141286  6.406217e-03
+18      LM              0.012787149   2.551697  5.474060e-02
+19     ALW              0.011851686   2.358787  7.062704e-02
+20      AW              0.013462436   2.679193  4.621888e-02
+21              AL      0.005503766   1.086553  3.541773e-01
+22      SF              0.011227184   2.229299  8.371473e-02
+
+Selected characters:
+MLW, ML, IW, LS, IV, MW, MF, AP, IS, LBA, LW, AL, ILW, LBS, SFT, CG, IL, LM, ALW, AW, SF
+> 
+> 
+> 
+> cleanEx()
+> nameEx("transformCharacter")
+> ### * transformCharacter
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: transformCharacter
+> ### Title: Transformation of Character
+> ### Aliases: transformCharacter
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> # For a right-skewed (positive) distribution can be used:
+> # Logarithmic transformation
+> cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) log(x+1))
+> cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) log10(x+1))
+> # Square root transformation
+> cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) sqrt(x))
+> # Cube root transformation
+> cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) x^(1/3))
+> # Arcsine transformation
+> cTransf = transformCharacter(centaurea, character = "SF", FUN = function(x) asin(sqrt(x)))
+Warning in FUN(X[[i]], ...) : NaNs produced
+> 
+> # For a left-skewed (negative) distribution can be used:
+> # Logarithmic transformation
+> cTransf = transformCharacter(centaurea, character="SF", FUN=function(x) log((max(x)+1)-x))
+> cTransf = transformCharacter(centaurea, character="SF", FUN=function(x) log10((max(x)+1)-x))
+> # Square root transformation
+> cTransf = transformCharacter(centaurea, character="SF", FUN=function(x) sqrt((max(x)+1)-x))
+> # Cube root transformation
+> cTransf = transformCharacter(centaurea, character="SF", FUN=function(x) ((max(x)+1)-x)^(1/3))
+> # Arcsine transformation
+> cTransf = transformCharacter(centaurea, character="SF", FUN=function(x) asin(sqrt((max(x))-x)))
+Warning in FUN(X[[i]], ...) : NaNs produced
+> 
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("viewMorphodata")
+> ### * viewMorphodata
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: viewMorphodata
+> ### Title: Invoke a Data Viewer
+> ### Aliases: viewMorphodata
+> 
+> ### ** Examples
+> 
+> data(centaurea)
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  4.83 0.59 5.42 NA NA 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
