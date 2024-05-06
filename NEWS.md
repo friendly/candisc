@@ -1,6 +1,6 @@
 ## Version 0.9.0 (2024-05-05)
 
-* Created `pkgdown` site, 
+* Created `pkgdown` site, https://friendly.github.io/candisc/
 * Convert documentation to roxygen
 * Extend description of candisc/cancor methods
 * Added `diabetes` vignette giving more discursive examples 

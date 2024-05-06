@@ -42,6 +42,6 @@ Description: Functions for computing and visualizing
 License: GPL (>= 2)
 Encoding: UTF-8
 VignetteBuilder: knitr
-Url: https://github.com/friendly/candisc/, https://friendly.github.io/candisc/
+URL: https://github.com/friendly/candisc/, https://friendly.github.io/candisc/
 BugReports: https://github.com/friendly/candisc/issues
 RoxygenNote: 7.3.1
