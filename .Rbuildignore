@@ -14,3 +14,4 @@ README.md
 man-old/
 NAMESPACE-old
 .build-steps.R
+^CRAN-SUBMISSION$
