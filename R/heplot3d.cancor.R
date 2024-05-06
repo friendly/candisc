@@ -1,5 +1,6 @@
 # HE plot for a cancor object
 
+#' @export
 heplot3d.cancor <- function (
 	mod,		         # output object from cancor
 	which=1:3,       # canonical dimensions to plot

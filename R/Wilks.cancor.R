@@ -1,7 +1,42 @@
+#' Wilks Lambda Tests for Canonical Correlations
+#' 
+#' Tests the sequential hypotheses that the \eqn{i}th canonical correlation and
+#' all that follow it are zero, \deqn{\rho_i = \rho_{i+1} = \cdots = 0}
+#' 
+#' Wilks' Lambda values are calculated from the eigenvalues and converted to F
+#' statistics using Rao's approximation.
+#' 
+#' @aliases Wilks Wilks.cancor Wilks.candisc
+#' @param object An object of class \code{"cancor""} or \code{"candisc""}
+#' @param \dots Other arguments passed to methods (not used)
+#' @return A data.frame (of class \code{"anova"}) containing the test
+#' statistics 
+#' @author Michael Friendly
+#' @seealso \code{\link{cancor}}, ~~~
+#' @references Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979).
+#' \emph{Multivariate Analysis}. London: Academic Press.
+#' @keywords htest
+#' @examples
+#' 
+#' data(Rohwer, package="heplots")
+#' X <- as.matrix(Rohwer[,6:10])  # the PA tests
+#' Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
+#' 
+#' cc <- cancor(X, Y, set.names=c("PA", "Ability"))
+#' Wilks(cc)
+#' 
+#' iris.mod <- lm(cbind(Petal.Length, Sepal.Length, Petal.Width, Sepal.Width) ~ Species, data=iris)
+#' iris.can <- candisc(iris.mod, data=iris)
+#' Wilks(iris.can)
+#' 
+#' 
+#' @export Wilks
 Wilks <- function (object, ...) {
 	UseMethod("Wilks")
 }
 
+#' @describeIn Wilks \code{"cancor"} method.
+#' @export
 Wilks.cancor <- function(object, ...) {
 # tests of canonical dimensions
 
@@ -45,6 +80,8 @@ tests
 # Rao's F approximation for canonical discriminant analysis
 # using code from Martina Vandebroek <martina.vandebroek@kuleuven.be>
 
+#' @describeIn Wilks \code{print()} method for \code{"candisc"} objects.
+#' @export
 Wilks.candisc <- function(object, ...) {
   
   ev <- object$eigenvalues

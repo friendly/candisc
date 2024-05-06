@@ -39,6 +39,7 @@ reference:
   - title: Graphics
     desc: Graphic utilities
     contents:
+      - predictor.names
       - varOrder
       - vectors
       - vectors3d

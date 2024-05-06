@@ -10,7 +10,8 @@ vignette: >
 ---
 
 ```{r echo=FALSE}
-knitr::opts_chunk$set(warning=FALSE, message=FALSE, collapse=TRUE, R.options=list(digits=4))
+knitr::opts_chunk$set(warning=FALSE, message=FALSE, 
+                      collapse=TRUE, R.options=list(digits=4))
 ```
 
 ## Background
@@ -134,7 +135,7 @@ It can be seen here that the points differ substantially from the red line
 of equality.  There are far too many points with large $D^2$ values.
 
 ```{r cqplot, fig.width=6, fig.height=5}
-cqplot(diab.mlm)
+cqplot(diab.mlm, id.n = 3)
 ```
 
 ## HE plots

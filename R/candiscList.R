@@ -7,10 +7,66 @@
 # Last modified: 31 August 2007 by J. Fox
 
 
+
+
+#' Canonical discriminant analyses
+#' 
+#' \code{candiscList} performs a generalized canonical discriminant analysis
+#' for all terms in a multivariate linear model (i.e., an \code{mlm} object),
+#' computing canonical scores and vectors.
+#' 
+#' 
+#' @aliases candiscList candiscList.mlm plot.candiscList print.candiscList
+#'          summary.candiscList
+#' @param mod An mlm object, such as computed by lm() with a multivariate
+#'          response
+#' @param type type of test for the model \code{term}, one of: "II", "III",
+#'          "2", or "3"
+#' @param manova the \code{Anova.mlm} object corresponding to \code{mod}.
+#'       Normally, this is computed internally by \code{Anova(mod)}
+#' @param ndim Number of dimensions to store in the \code{means},
+#'       \code{structure}, \code{scores} and \code{coeffs.*} components.  
+#'       The default is the rank of the H matrix for the hypothesis term.
+#' @param object,x A candiscList object
+#' @param term The name of one term to be plotted for the \code{plot} method.
+#'       If not specified, one candisc plot is produced for each term in the
+#'       \code{mlm} object.
+#' @param ask If \code{TRUE} (the default, when running interactively), a menu
+#'       of terms is presented; if ask is FALSE, canonical plots for all terms are
+#'       produced.
+#' @param graphics if \code{TRUE} (the default, when running interactively),
+#'       then the menu of terms to plot is presented in a dialog box rather than as a
+#'       text menu.
+#' @param \dots arguments to be passed down.
+#' @return An object of class \code{candiscList} which is a list of
+#'       \code{"candisc"} objects for the terms in the mlm.
+#' @author Michael Friendly and John Fox
+#' @seealso \code{\link{candisc}}, \code{\link[heplots]{heplot}},
+#'       \code{\link[heplots]{heplot3d}}
+#' @keywords multivariate hplot
+#' @examples
+#' 
+#' grass.mod <- lm(cbind(N1,N9,N27,N81,N243) ~ Block + Species, data=Grass)
+#' 
+#' grass.canL <-candiscList(grass.mod)
+#' names(grass.canL)
+#' names(grass.canL$Species)
+#' 
+#' \dontrun{
+#' print(grass.canL)
+#' }
+#' plot(grass.canL, type="n", ask=FALSE)
+#' heplot(grass.canL$Species, scale=6)
+#' heplot(grass.canL$Block, scale=2)
+#' 
+#' 
+#' @export candiscList
 candiscList <- function(mod, ...){
     UseMethod("candiscList")
     }
     
+#' @describeIn candiscList \code{"mlm"} method.
+#' @export
 candiscList.mlm <- function(mod, type="2", manova, ndim, ...){
     if (missing(manova)) manova <- Anova(mod, type=type)
     result <- as.list(1:length(manova$terms))
@@ -28,6 +84,8 @@ candiscList.mlm <- function(mod, type="2", manova, ndim, ...){
     result
     }
 
+#' @describeIn candiscList \code{print()} method for \code{"candiscList"} objects.
+#' @export
 print.candiscList <- function(x, ...){
     terms <- names(x)
     for (term in terms){
@@ -37,6 +95,8 @@ print.candiscList <- function(x, ...){
         }
     }
 
+#' @describeIn candiscList \code{summary()} method for \code{"candiscList"} objects.
+#' @export
 summary.candiscList <- function(object, ...){
     terms <- names(object)
     for (term in terms){
@@ -46,6 +106,8 @@ summary.candiscList <- function(object, ...){
         }
     }
 
+#' @describeIn candiscList \code{plot()} method for \code{"candiscList"} objects.
+#' @export
 plot.candiscList <- function(x, term, ask=interactive(), graphics = TRUE, ...) {
     if (!missing(term)){
         if (is.character(term)) term <- gsub(" ", "", term)
