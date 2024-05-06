@@ -60,8 +60,8 @@
 #' \code{\link{candisc}}, \code{\link{cancor}} for details about canonical
 #' discriminant analysis and canonical correlation analysis.
 #' @references 
-#' Friendly, M. (2007).  HE plots for Multivariate General Linear
-#' Models.  \emph{Journal of Computational and Graphical Statistics},
+#' Friendly, M. (2007).  HE plots for Multivariate General Linear Models.  
+#' \emph{Journal of Computational and Graphical Statistics},
 #' \bold{16}(2) 421--444.  \url{http://datavis.ca/papers/jcgs-heplots.pdf},
 #' \doi{10.1198/106186007X208407}.
 #' 

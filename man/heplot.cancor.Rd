@@ -71,6 +71,11 @@ Returns invisibly an object of class \code{"heplot"}, with
       the limits of the horizontal and vertical axes.
 }
 \description{
+Hypothesis - Error (HE) plots for canonical correlation analysis provide a new graphical method
+for understanding the relations between two sets of variables, \eqn{\mathbf{X}} and \eqn{\mathbf{Y}}.
+They are similar to HE plots for multivariate multiple regression (MMRA) problems,
+except that ...
+
 These functions plot ellipses (or ellipsoids in 3D) in canonical space
 representing the hypothesis and error sums-of-squares-and-products matrices
 for terms in a multivariate linear model representing the result of a

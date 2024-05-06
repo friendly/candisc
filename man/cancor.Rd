@@ -161,7 +161,9 @@ The package provides the following display, extractor and plotting methods for \
 Canonical correlation analysis (CCA), as traditionally presented is used to
 identify and measure the associations between two sets of quantitative
 variables, X and Y.  It is often used in the same situations for which a
-multivariate multiple regression analysis (MMRA) would be used.  However,
+multivariate multiple regression analysis (MMRA) would be used.  
+
+However,
 CCA is is \dQuote{symmetric} in that the sets X and Y have equivalent
 status, and the goal is to find orthogonal linear combinations of each
 having maximal (canonical) correlations. On the other hand, MMRA is
@@ -178,13 +180,7 @@ each pair \eqn{r_i = \text{cor}(\mathbf{u}_i, \mathbf{v}_i), i=1, 2, \dots , k}
 are maximized and all other pairs are uncorrelated,
 \eqn{r_{ij} = \text{cor}(\mathbf{u}_i, \mathbf{v}_j) = 0,  i \ne j}
 
-This implementation of \code{cancor} provides the basic computations for
-CCA, together with some extractor functions and methods 
-(\code{scores()}, \code{})
-for working with the
-results in a convenient fashion.
-
-However, for visualization using HE plots, it is most natural to consider
+For visualization using HE plots, it is most natural to consider
 plots representing the relations among the canonical variables for the Y
 variables in terms of a multivariate linear model predicting the Y canonical
 scores, using either the X variables or the X canonical scores as
