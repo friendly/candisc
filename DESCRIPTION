@@ -16,9 +16,16 @@ Suggests:
     rpart.plot
 LazyLoad: yes
 LazyData: yes
-Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),
-             person(given = "John", family = "Fox", role="aut"))
-Author: Michael Friendly [aut, cre], John Fox [aut]
+Authors@R: c(
+            person(given = "Michael", 
+                   family = "Friendly", 
+                   role=c("aut", "cre"), 
+                   email="friendly@yorku.ca",
+                   comment = c(ORCID = "0000-0002-3237-0941")),
+            person(given = "John", 
+                   family = "Fox", role="aut",
+                   comment = c(ORCID = "0000-0002-1196-8012"))
+            )
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Language: en-US
 Description: Functions for computing and visualizing 
@@ -34,7 +41,7 @@ Description: Functions for computing and visualizing
 	now provided for canonical correlation analysis when all predictors are quantitative.
 License: GPL (>= 2)
 Encoding: UTF-8
-Packaged: 10/9/2008 6:12PM; Michael Friendly
 VignetteBuilder: knitr
+Url: https://github.com/friendly/candisc/, https://friendly.github.io/candisc/
 BugReports: https://github.com/friendly/candisc/issues
 RoxygenNote: 7.3.1

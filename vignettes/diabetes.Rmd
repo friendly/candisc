@@ -10,7 +10,8 @@ vignette: >
 ---
 
 ```{r echo=FALSE}
-knitr::opts_chunk$set(warning=FALSE, message=FALSE, collapse=TRUE, R.options=list(digits=4))
+knitr::opts_chunk$set(warning=FALSE, message=FALSE, 
+                      collapse=TRUE, R.options=list(digits=4))
 ```
 
 ## Background
