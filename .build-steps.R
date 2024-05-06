@@ -12,7 +12,10 @@ devtools::revdep()
 # [5] "MultivariateAnalysis" "smacof"               "SurveyCC"
 
 # revdep
-#remotes::install_github("r-lib/revdepcheck")
+# > packageVersion("revdepcheck")
+# [1] ‘1.0.0.9001’
+remotes::install_github("r-lib/revdepcheck")
+
 #library(revdepcheck)
 # need to set the env variable R_BIOC_VERSION env var to 3.18.
 # per: https://github.com/r-lib/revdepcheck/issues/376
