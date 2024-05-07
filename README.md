@@ -1,8 +1,11 @@
 <!-- badges: start -->
 
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/candisc)](https://cran.r-project.org/package=candisc)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/candisc)](https://cran.r-project.org/package=candisc)
 [![](https://img.shields.io/badge/documentation-blue)](https://friendly.github.io/candisc)
+[![](https://friendly.r-universe.dev/badges/candisc)](https://friendly.r-universe.dev) 
+
 <!-- badges: end -->
 
 
