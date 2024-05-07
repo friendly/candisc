@@ -60,7 +60,11 @@ implements a collection of these methods.
 | CRAN version        | `install.packages("candisc")`                 |
 | Development version | `remotes::install_github("friendly/candisc")` |
 
+Or, install from r-universe
 
+```r
+install.packages('candisc', repos = c('https://friendly.r-universe.dev')
+```
 
 ## Vignettes
 
