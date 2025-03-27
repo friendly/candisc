@@ -1,0 +1,61 @@
+ Cereal data set
+Description
+
+This dataset contains nutrition information for 7777 breakfast cereals and includes 1616 variables. The "rating" column is our target as a rating of the cereals (Possibly from Consumer Reports?).
+Usage
+
+ data( cereal ) 
+
+Format
+
+The cereal dataset, as a data frame, contains 7777 rows (breakfast cereals) and 1616 columns (variables/features). The 1616 variables are:
+
+    name: Name of cereal.
+
+    manuf: Manufacturer of cereal:
+
+        A: American Home Food Products;
+
+        G: General Mills;
+
+        K: Kelloggs;
+
+        N: Nabisco;
+
+        P: Post;
+
+        Q: Quaker Oats;
+
+        R: Ralston Purina;
+
+    type: cold or hot.
+
+    calories: calories per serving.
+
+    protein: grams of protein.
+
+    fat: grams of fat.
+
+    sodium: milligrams of sodium.
+
+    fiber: grams of dietary fiber.
+
+    carbo: grams of complex carbohydrates.
+
+    sugars: grams of sugars.
+
+    potass: milligrams of potassium.
+
+    vitamins: vitamins and minerals - 0, 25, or 100, indicating the typical percentage of FDA recommended.
+
+    shelf: display shelf (1, 2, or 3, counting from the floor).
+
+    weight: weight in ounces of one serving.
+
+    cups: number of cups in one serving.
+
+    rating: a rating of the cereals (Possibly from Consumer Reports?).
+
+Details
+
+The original source can be found: https://perso.telecom-paristech.fr/eagan/class/igr204/datasets 
