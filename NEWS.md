@@ -1,3 +1,7 @@
+## Version 0.9.1
+
+* `heplot.candisc()` gains a `var.labels` argument
+
 ## Version 0.9.0 (2024-05-05)
 
 This is a semi-major release, largely of the documentation of the package.

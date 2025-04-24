@@ -11,6 +11,7 @@
   scale,
   asp = 1,
   var.col = "blue",
+  var.labels,
   var.lwd = par("lwd"),
   var.cex = par("cex"),
   var.pos,
@@ -40,6 +41,9 @@ plot as a circle (sphere) in canonical space.  For \code{heplot3d.candisc},
 use \code{asp=NULL} to suppress this transformation to iso-scaled axes.}
 
 \item{var.col}{Color for variable vectors and labels}
+
+\item{var.labels}{Labels for the variable vectors. The default is the rownames of the 
+canonical structure coefficients.}
 
 \item{var.lwd}{Line width for variable vectors}
 

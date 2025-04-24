@@ -55,18 +55,20 @@
 #' @aliases heplot.candisc heplot3d.candisc
 #' @param mod A \code{candisc} object for one term in a \code{mlm}
 #' @param which A numeric vector containing the indices of the canonical
-#' dimensions to plot.
+#'        dimensions to plot.
 #' @param scale Scale factor for the variable vectors in canonical space.  If
-#' not specified, the function calculates one to make the variable vectors
-#' approximately fill the plot window.
+#'        not specified, the function calculates one to make the variable vectors
+#'        approximately fill the plot window.
 #' @param asp Aspect ratio for the horizontal and vertical dimensions. The
-#' defaults, \code{asp=1} for \code{heplot.candisc} and \code{asp="iso"} for
-#' \code{heplot3d.candisc} ensure equal units on all axes, so that angles and
-#' lengths of variable vectors are interpretable. As well, the standardized
-#' canonical scores are uncorrelated, so the Error ellipse (ellipsoid) should
-#' plot as a circle (sphere) in canonical space.  For \code{heplot3d.candisc},
-#' use \code{asp=NULL} to suppress this transformation to iso-scaled axes.
+#'        defaults, \code{asp=1} for \code{heplot.candisc} and \code{asp="iso"} for
+#'        \code{heplot3d.candisc} ensure equal units on all axes, so that angles and
+#'        lengths of variable vectors are interpretable. As well, the standardized
+#'        canonical scores are uncorrelated, so the Error ellipse (ellipsoid) should
+#'        plot as a circle (sphere) in canonical space.  For \code{heplot3d.candisc},
+#'        use \code{asp=NULL} to suppress this transformation to iso-scaled axes.
 #' @param var.col Color for variable vectors and labels
+#' @param var.labels Labels for the variable vectors. The default is the rownames of the 
+#'        canonical structure coefficients.
 #' @param var.lwd Line width for variable vectors
 #' @param var.cex Text size for variable vector labels
 #' @param var.pos Position(s) of variable vector labels wrt. the end point.  If
@@ -165,6 +167,7 @@ heplot.candisc <- function (
 	scale,           # scale factor for variable vectors in can space
 	asp=1,           # aspect ratio, to ensure equal units
 	var.col="blue",  # color for variable vectors and labels
+	var.labels,
 	var.lwd=par("lwd"),
 	var.cex=par("cex"),
 	var.pos,
@@ -241,6 +244,7 @@ heplot.candisc <- function (
 
   # DONE: replaced with a call to vectors(); but NB: can't pass ... to vectors()
   cs <- scale * structure
+  if(!missing(var.labels)) rownames(cs) <- var.labels
   vectors(cs, col=var.col, cex=var.cex, lwd=var.lwd, pos=var.pos, xpd=TRUE)
   
   invisible(ellipses)
