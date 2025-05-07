@@ -1,6 +1,7 @@
 ## Version 0.9.1
 
 * `heplot.candisc()` gains a `var.labels` argument
+* add extra/mmreg.R example
 
 ## Version 0.9.0 (2024-05-05)
 
