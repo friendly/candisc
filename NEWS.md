@@ -2,6 +2,9 @@
 
 * `heplot.candisc()` gains a `var.labels` argument
 * add extra/mmreg.R example
+* add `scores.candisc()` method to extract canonical discriminant scores
+* added `cereal` dataset
+* added `PsyAcad` dataset
 
 ## Version 0.9.0 (2024-05-05)
 

@@ -7,36 +7,38 @@
 # understand the association between the two sets of variables
 
 library(candisc)
-mmreg <- read.csv("https://stats.idre.ucla.edu/stat/data/mmreg.csv")
+PsyAcad <- read.csv("https://stats.idre.ucla.edu/stat/data/mmreg.csv")
 
-colnames(mmreg) <- c("Control", "Concept", "Motivation", "Read", "Write", "Math", 
+colnames(PsyAcad) <- c("Control", "Concept", "Motivation", "Read", "Write", "Math", 
                   "Science", "Sex")
-summary(mmreg)
+summary(PsyAcad)
 
 # variable sets
-psych <- mmreg[, 1:3]
-acad <- mmreg[, 4:8]
+psych <- PsyAcad[, 1:3]
+acad <- PsyAcad[, 4:8]
 
-mmreg.can <- cancor(cbind(Control, Concept, Motivation) ~ 
+
+
+PsyAcad.can <- cancor(cbind(Control, Concept, Motivation) ~ 
                       Read + Write + Math + Science + Sex,
-                    data = mmreg)
+                    data = PsyAcad)
 
-mmreg.can
+PsyAcad.can
 
-redundancy(mmreg.can)
+redundancy(PsyAcad.can)
 
 # coef
-mmreg.can$coef$X |> round(3)
+PsyAcad.can$coef$X |> round(3)
 
-mmreg.can$coef$Y |> round(3)
+PsyAcad.can$coef$Y |> round(3)
 
 # plots
 
 # plot canonical scores
-plot(mmreg.can, pch=16, id.n = 3)
-text(-2, 3, paste("Can R =", round(mmreg.can$cancor[1], 3)), pos = 3)
+plot(PsyAcad.can, pch=16, id.n = 3)
+text(-2, 3, paste("Can R =", round(PsyAcad.can$cancor[1], 3)), pos = 3)
 
-plot(mmreg.can, which = 2, pch=16, id.n = 3)
-text(-2, 3.5, paste("Can R =", round(mmreg.can$cancor[2], 3)), pos = 3)
+plot(PsyAcad.can, which = 2, pch=16, id.n = 3)
+text(-2, 3.5, paste("Can R =", round(PsyAcad.can$cancor[2], 3)), pos = 3)
 
 

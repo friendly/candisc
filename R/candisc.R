@@ -460,3 +460,8 @@ predictor.names.default <- function(model, ...) {
   as.character(predictors[3:length(predictors)])
 }
 
+#' @describeIn candisc \code{scores()} method for \code{"candisc"} objects.
+#' @export
+scores.candisc <- function(x, ...) {
+  x$scores
+}

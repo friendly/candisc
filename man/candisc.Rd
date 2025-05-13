@@ -7,6 +7,7 @@
 \alias{plot.candisc}
 \alias{print.candisc}
 \alias{summary.candisc}
+\alias{scores.candisc}
 \title{Canonical discriminant analysis}
 \usage{
 candisc(mod, ...)
@@ -26,6 +27,8 @@ candisc(mod, ...)
 )
 
 \method{coef}{candisc}(object, type = c("std", "raw", "structure"), ...)
+
+\method{scores}{candisc}(x, ...)
 
 \method{plot}{candisc}(
   x,
@@ -236,6 +239,8 @@ structure coefficients.
 \item \code{summary(candisc)}: \code{summary()} method for \code{"candisc"} objects.
 
 \item \code{coef(candisc)}: \code{coef()} method for \code{"candisc"} objects.
+
+\item \code{scores(candisc)}: \code{scores()} method for \code{"candisc"} objects.
 
 \item \code{plot(candisc)}: \code{"plot"} method.
 

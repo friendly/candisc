@@ -22,6 +22,8 @@
 #' For consistency with \code{\link{heplot.candisc}}, the plots show effects in
 #' the space of the canonical Y variables selected by \code{which}.
 #' 
+#' @details
+#' 
 #' The interpretation of variable vectors in these plots is different from that
 #' of the \code{terms} plotted as H "ellipses," which appear as degenerate
 #' lines in the plot (because they correspond to 1 df tests of rank(H)=1).
@@ -46,7 +48,7 @@
 #' Setting the aspect ratio of these plots is important for the proper
 #' interpretation of angles between the variable vectors and the coordinate
 #' axes.  However, this then makes it impossible to change the aspect ratio of
-#' the plot by re-sizing manually.
+#' the plot by re-sizing manually. You can override this using \code{asp=NA} in 2D plots
 #' 
 #' @aliases heplot.cancor heplot3d.cancor
 #' @param mod A \code{cancor} object
