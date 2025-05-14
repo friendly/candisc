@@ -65,4 +65,5 @@ plot(wolf.can2)
 Jolicoeur, P. ``Multivariate geographical variation in the wolf
 \emph{Canis lupis L.}'', \emph{Evolution}, XIII, 283--299.
 }
+\concept{candisc}
 \keyword{datasets}
