@@ -48,6 +48,7 @@ reference:
   - title: Data
     desc: Datasets
     contents:
+      - cereal
       - Grass
       - HSB
       - PsyAcad
