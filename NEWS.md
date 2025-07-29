@@ -1,6 +1,7 @@
 ## Version 0.9.2
 
 o correct buglet with `var.labels` in `heplot.candisc`
+o Added cereal data
 
 ## Version 0.9.1
 
