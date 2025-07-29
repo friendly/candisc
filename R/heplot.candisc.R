@@ -193,6 +193,7 @@ heplot.candisc <- function (
 	scores <- mod$scores
 	structure <- mod$structure
   structure <- mod$structure[,which]
+  vars <- if(missing(var.labels)) rownames(structure) else var.labels
 
 
   rev.axes <- rep(rev.axes, length.out=2)
@@ -244,9 +245,9 @@ heplot.candisc <- function (
 
   # DONE: replaced with a call to vectors(); but NB: can't pass ... to vectors()
   cs <- scale * structure
-  if(!missing(var.labels)) rownames(cs) <- var.labels
+  rownames(cs) <- vars
   vectors(cs, col=var.col,
-          labels = var.labels,
+          labels = vars,
           cex=var.cex, 
           lwd=var.lwd, 
           pos=var.pos, 
