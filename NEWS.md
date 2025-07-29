@@ -1,3 +1,7 @@
+## Version 0.9.2
+
+o correct buglet with `var.labels` in `heplot.candisc`
+
 ## Version 0.9.1
 
 * `heplot.candisc()` gains a `var.labels` argument

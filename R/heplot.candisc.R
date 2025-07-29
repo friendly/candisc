@@ -245,7 +245,12 @@ heplot.candisc <- function (
   # DONE: replaced with a call to vectors(); but NB: can't pass ... to vectors()
   cs <- scale * structure
   if(!missing(var.labels)) rownames(cs) <- var.labels
-  vectors(cs, col=var.col, cex=var.cex, lwd=var.lwd, pos=var.pos, xpd=TRUE)
+  vectors(cs, col=var.col,
+          labels = var.labels,
+          cex=var.cex, 
+          lwd=var.lwd, 
+          pos=var.pos, 
+          xpd=TRUE)
   
   invisible(ellipses)
 }

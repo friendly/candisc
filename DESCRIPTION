@@ -1,8 +1,8 @@
 Package: candisc
 Type: Package
 Title: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis
-Version: 0.9.1
-Date: 2025-04-24
+Version: 0.9.2
+Date: 2025-07-29
 Depends: R (>= 3.5.0), heplots (>= 0.8-6)
 Imports: car, graphics, stats
 Suggests: 
