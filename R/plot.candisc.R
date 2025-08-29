@@ -21,6 +21,8 @@
 # --- fixed bug in use of pch and col (thx: dcarlson@tamu.edu)
 # last revised: 05/06/20
 # --- add points.1d option
+# revised: 08/29/2025
+# --- use `col` to label the group ellipses
 
 #' @describeIn candisc \code{"plot"} method.
 #' @export
@@ -30,6 +32,7 @@ plot.candisc <- function (
 		conf=0.95,   # confidence coverage of circles for class means
 		col,         # vector of unique colors used for plotting the canonical scores
 		pch,         # vector of unique point symbols
+#		pt.cex = par("lwd"),  # size of point symbols
 		scale,       # scale factor for variable vectors in can space
 		asp=1,       # aspect ratio, to ensure equal units
 		var.col="blue",
@@ -56,7 +59,8 @@ plot.candisc <- function (
 	if (missing(col)) col <- rep(palette()[-1], length.out=nlev)
 	fill.col <- heplots::trans.colors(col, fill.alpha)
 	if (missing(pch)) pch <- rep(1:18, length.out=nlev)
-	
+
+	# ----------- 1D plot -------------	
 	if (x$ndim < 2 || length(which)==1) {
 		which <- which[1]
 		### is there a better way to show the 1D distributions of canonical scores?
@@ -113,6 +117,7 @@ plot.candisc <- function (
 		return(invisible())
 	}
 	
+	# ----------- 12D plot -------------	
 	canvar <- paste('Can', which, sep="")   # names of canonical variables to plot
 	if (is.logical(suffix) & suffix)
 		suffix <- paste( " (", round(x$pct[which],1), "%)", sep="" ) else suffix <- NULL
@@ -143,8 +148,11 @@ plot.candisc <- function (
 	Ind <- if(length(factors)==1) 
 	    match(x$scores[,term], levels(x$scores[,term]))
 	      else dataIndex(x$scores, term)
-	plot(scores, asp=asp, xlab=canlab[1], ylab=canlab[2], col=col[Ind], pch=pch[Ind], ...) 
-	abline(h=0, v=0, lty=2, col="grey")
+	plot(scores, asp=asp, 
+	     xlab=canlab[1], ylab=canlab[2], 
+	     col=col[Ind], pch=pch[Ind], ...) 
+	abline(h=0, v=0, 
+	       lty=2, col="grey")
 	
   if(ellipse) {
     fill.col <- heplots::trans.colors(col, fill.alpha)
@@ -167,7 +175,9 @@ plot.candisc <- function (
 
 	points(means[,1], means[,2], col=col, pch="+", cex=2)
 	pos <- ifelse(means[,2]>0, 3, 1)
-	text(means[,1], means[,2], labels=labels, pos=pos)
+	text(means[,1], means[,2], 
+	     col = col,
+	     labels=labels, pos=pos)
 	
 	# plot variable vectors
 	# DONE: replaced previous scaling with vecscale()

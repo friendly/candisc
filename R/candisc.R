@@ -180,7 +180,9 @@
 #' car::Anova(grass.mod, test="Wilks")
 #' 
 #' grass.can1 <-candisc(grass.mod, term="Species")
-#' plot(grass.can1)
+#' print(grass.can1)
+#' 
+#' plot(grass.can1, var.lwd = 2)
 #' 
 #' # library(heplots)
 #' heplot(grass.can1, scale=6, fill=TRUE)
