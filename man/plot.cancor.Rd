@@ -59,8 +59,8 @@ should be consulted for details and defaults.}
 
 \item{col.smooth}{Color for the smoothed curve.}
 
-\item{abline}{logical. Draw the linear regression line for Ycan[,which] on
-Xcan[,which]?}
+\item{abline}{logical. Draw the linear regression line for \code{Ycan[, which]} on
+\code{Xcan[, which]}?}
 
 \item{col.lines}{Color for the linear regression line}
 
@@ -70,8 +70,8 @@ Xcan[,which]?}
 argument.}
 
 \item{id.method}{Method used to identify individual points. See
-\code{\link[car]{showLabels}} for details.  The default, 
-\code{id.method = "mahal"} identifies the \code{id.n} points furthest 
+\code{\link[car]{showLabels}} for details.  The default,
+\code{id.method = "mahal"} identifies the \code{id.n} points furthest
 from the centroid.}
 
 \item{id.n}{Number of points to identify}
@@ -82,8 +82,8 @@ from the centroid.}
 \code{points(\dots)}}
 }
 \value{
-None.  Used for its side effect of producing a plot. %% ~Describe
-       the value returned
+None.  Used for its side effect of producing a plot. \%\% ~Describe
+the value returned
 }
 \description{
 This function produces plots to help visualize X, Y data in canonical space.

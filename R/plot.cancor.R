@@ -42,8 +42,8 @@ default.arg <- function(args.list, arg, default){
 #' @param smoother.args Arguments passed to \code{\link[car]{loessLine}}, which
 #'        should be consulted for details and defaults.
 #' @param col.smooth Color for the smoothed curve.
-#' @param abline logical. Draw the linear regression line for Ycan[,which] on
-#'        Xcan[,which]?
+#' @param abline logical. Draw the linear regression line for `Ycan[, which]` on
+#'        `Xcan[, which]`?
 #' @param col.lines Color for the linear regression line
 #' @param lwd Line widths
 #' @param labels Point labels for point identification via the \code{id.method}

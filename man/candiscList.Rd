@@ -31,7 +31,7 @@ response}
 Normally, this is computed internally by \code{Anova(mod)}}
 
 \item{ndim}{Number of dimensions to store in the \code{means},
-\code{structure}, \code{scores} and \code{coeffs.*} components.  
+\code{structure}, \code{scores} and \code{coeffs.*} components.
 The default is the rank of the H matrix for the hypothesis term.}
 
 \item{object, x}{A candiscList object}
@@ -50,7 +50,7 @@ text menu.}
 }
 \value{
 An object of class \code{candiscList} which is a list of
-      \code{"candisc"} objects for the terms in the mlm.
+\code{"candisc"} objects for the terms in the mlm.
 }
 \description{
 \code{candiscList} performs a generalized canonical discriminant analysis
@@ -90,7 +90,7 @@ heplot(grass.canL$Block, scale=2)
 }
 \seealso{
 \code{\link{candisc}}, \code{\link[heplots]{heplot}},
-      \code{\link[heplots]{heplot3d}}
+\code{\link[heplots]{heplot3d}}
 }
 \author{
 Michael Friendly and John Fox

@@ -15,3 +15,5 @@ man-old/
 NAMESPACE-old
 .build-steps.R
 ^CRAN-SUBMISSION$
+data-raw/
+extra/

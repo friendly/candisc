@@ -1,3 +1,9 @@
+## Version 0.9.3
+
+* Added `predict_discrim` as a wrapper to `MASS::predict.lda()` returning a data.frame
+* Now use `Roxygen: list(markdown = TRUE)` in DESCRIPTION
+
+
 ## Version 0.9.2
 
 o correct buglet with `var.labels` in `heplot.candisc`

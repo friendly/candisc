@@ -91,7 +91,7 @@
 #'        used in the calculations.
 #' @param weights Observation weights. If supplied, this must be a vector of
 #'        length equal to the number of observations in X and Y, typically within
-#'        [0,1].  In that case, the variance-covariance matrices are computed using
+#'        (0,1).  In that case, the variance-covariance matrices are computed using
 #'        \code{\link[stats]{cov.wt}}, and the number of observations is taken as the
 #'        number of non-zero weights.
 #' @param na.rm logical, determining whether observations with missing cases
@@ -105,8 +105,8 @@
 #'        columns contain the Y variables
 #' @param X.names,Y.names Character vectors of names for the X and Y variables.
 #' @param row.names Observation names in \code{x}, \code{y}
-#' @param xcenter,ycenter logical. Center the X, Y variables? [not yet implemented]
-#' @param xscale,yscale logical. Scale the X, Y variables to unit variance? [not yet implemented]
+#' @param xcenter,ycenter logical. Center the X, Y variables? (not yet implemented)
+#' @param xscale,yscale logical. Scale the X, Y variables to unit variance? (not yet implemented)
 #' @param ndim Number of canonical dimensions to retain in the result, for
 #'        scores, coefficients, etc.
 #' @param set.names A vector of two character strings, giving names for the

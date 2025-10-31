@@ -416,7 +416,7 @@ NULL
 #'    \item{\code{sugars}}{sugars(g), a numeric vector}
 #'    \item{\code{potass}}{potassium(mg), a numeric vector}
 #'    \item{\code{vitamins}}{vitamins & minerals (0, 25, or 100, respectively indicating "none added"; 
-#'          "enriched, often to 25\% FDA recommended"; "100\% of FDA recommended"), a numeric vector}
+#'          "enriched"; "FDA recommended"), a numeric vector}
 #'    \item{\code{shelf}}{display shelf (1, 2, or 3, counting from the floor), a numeric vector}
 #'    \item{\code{weight}}{weight (in ounces) of one serving (serving size), a numeric vector}
 #'    \item{\code{cups}}{cups per serving, a numeric vector}
@@ -437,18 +437,33 @@ NULL
 #' Further details on the variables and suggested analyses are available at
 #' \url{https://community.amstat.org/jointscsg-section/dataexpo/dataexpo1993}
 #' 
+#' The abbreviations for manufacturer, \code{mfr}, stand for:
+#' \describe{
+#'    \item{\code{A}}{American Home Food Products}
+#'    \item{\code{G}}{General Mills}
+#'    \item{\code{K}}{Kellog}
+#'    \item{\code{N}}{Nabisco}
+#'    \item{\code{P}}{Post}
+#'    \item{\code{Q}}{Quaker Oats}
+#'    \item{\code{R}}{Ralston Purina}
+#'  }
+#'
+#' 
 #' @source From the American Statistical Association 1993 Statistical Graphics Exposition, 'Serial Correlation or Cereal Correlation ??',
 #' \url{https://community.amstat.org/jointscsg-section/dataexpo/dataexpo1993}.
-#' %% @references
-#' %%  ~~ possibly secondary sources and usages ~~
-#' @seealso \code{\link[MASS]{UScereal}} has a similar dataset with fewer observations and variables.
+#' @seealso 
+#' \code{\link[MASS]{UScereal}} has a similar dataset with fewer observations and variables, but with the variables normalized to a portion of one US cup.
+#' 
+#' @references 
+#' Jean Dos Santos, Breakfast Cereals: Data Analysis and Clustering, 
+#' \url{https://www.kaggle.com/code/jeandsantos/breakfast-cereals-data-analysis-and-clustering}. Does a bunch of data cleaning
+#' and exploratory data analysis in R.
 #'
 #' @concept MMRA
 #' @concept cancor
 #' @examples
 #' data(cereal)
-#' ## None yet
-#' ## maybe str(cereal) ; plot(cereal) ...
+#' str(cereal)
 #'
 #' @keywords datasets
 NULL

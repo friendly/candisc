@@ -6,37 +6,35 @@
 \title{Breakfast Cereal Dataset}
 \format{
 A data frame with 77 observations on the following 16 variables.
- \describe{
-   \item{\code{name}}{cereal name, a character vector}
-   \item{\code{mfr}}{manufacturer (A  G  K  N  P  Q  R), a character vector}
-   \item{\code{type}}{type (cold/hot), a character vector}
-   \item{\code{calories}}{calories (number), a numeric vector}
-   \item{\code{protein}}{protein(g), a numeric vector}
-   \item{\code{fat}}{fat(g), a numeric vector}
-   \item{\code{sodium}}{sodium(mg), a numeric vector}
-   \item{\code{fiber}}{dietary fiber(g), a numeric vector}
-   \item{\code{carbo}}{complex carbohydrates(g), a numeric vector}
-   \item{\code{sugars}}{sugars(g), a numeric vector}
-   \item{\code{potass}}{potassium(mg), a numeric vector}
-   \item{\code{vitamins}}{vitamins & minerals (0, 25, or 100, respectively indicating "none added"; 
-         "enriched, often to 25\% FDA recommended"; "100\% of FDA recommended"), a numeric vector}
-   \item{\code{shelf}}{display shelf (1, 2, or 3, counting from the floor), a numeric vector}
-   \item{\code{weight}}{weight (in ounces) of one serving (serving size), a numeric vector}
-   \item{\code{cups}}{cups per serving, a numeric vector}
-   \item{\code{rating}}{health rating of the cereal (unknown calculation method), a numeric vector}
- }
+\describe{
+\item{\code{name}}{cereal name, a character vector}
+\item{\code{mfr}}{manufacturer (A  G  K  N  P  Q  R), a character vector}
+\item{\code{type}}{type (cold/hot), a character vector}
+\item{\code{calories}}{calories (number), a numeric vector}
+\item{\code{protein}}{protein(g), a numeric vector}
+\item{\code{fat}}{fat(g), a numeric vector}
+\item{\code{sodium}}{sodium(mg), a numeric vector}
+\item{\code{fiber}}{dietary fiber(g), a numeric vector}
+\item{\code{carbo}}{complex carbohydrates(g), a numeric vector}
+\item{\code{sugars}}{sugars(g), a numeric vector}
+\item{\code{potass}}{potassium(mg), a numeric vector}
+\item{\code{vitamins}}{vitamins & minerals (0, 25, or 100, respectively indicating "none added";
+"enriched"; "FDA recommended"), a numeric vector}
+\item{\code{shelf}}{display shelf (1, 2, or 3, counting from the floor), a numeric vector}
+\item{\code{weight}}{weight (in ounces) of one serving (serving size), a numeric vector}
+\item{\code{cups}}{cups per serving, a numeric vector}
+\item{\code{rating}}{health rating of the cereal (unknown calculation method), a numeric vector}
+}
 }
 \source{
 From the American Statistical Association 1993 Statistical Graphics Exposition, 'Serial Correlation or Cereal Correlation ??',
 \url{https://community.amstat.org/jointscsg-section/dataexpo/dataexpo1993}.
-%% @references
-%%  ~~ possibly secondary sources and usages ~~
 }
 \usage{
 data("cereal")
 }
 \description{
-A multivariate dataset describing seventy-seven commonly available breakfast cereals, based on the information 
+A multivariate dataset describing seventy-seven commonly available breakfast cereals, based on the information
 now available on the FDA food label. The variable \code{rating} is a likely response variable in
 statistical models.
 }
@@ -44,24 +42,39 @@ statistical models.
 This dataset was used in the poster competition for the American Statistical association 1993 Statistical Graphics Exposition,
 titled \emph{Serial Correlation or Cereal Correlation ??}.
 
-The call for participation reads: 
+The call for participation reads:
 "A multivariate dataset describing seventy-seven commonly available breakfast cereals, based on the information now available on
-the newly-mandated F&DA food label.  What are you getting when you eat a bowl of cereal?  Can you get a lot of fiber without 
-a lot of calories?  Can you describe what cereals are displayed on high, low, and middle shelves?  The good news is that none 
+the newly-mandated F&DA food label.  What are you getting when you eat a bowl of cereal?  Can you get a lot of fiber without
+a lot of calories?  Can you describe what cereals are displayed on high, low, and middle shelves?  The good news is that none
 of the cereals for which we collected data had any cholesterol, and manufacturers rarely use artificial sweeteners and colors,
-nowadays.  However, there is still a lot of data for the consumer to understand while choosing a good breakfast cereal." 
+nowadays.  However, there is still a lot of data for the consumer to understand while choosing a good breakfast cereal."
 
 Further details on the variables and suggested analyses are available at
 \url{https://community.amstat.org/jointscsg-section/dataexpo/dataexpo1993}
+
+The abbreviations for manufacturer, \code{mfr}, stand for:
+\describe{
+\item{\code{A}}{American Home Food Products}
+\item{\code{G}}{General Mills}
+\item{\code{K}}{Kellog}
+\item{\code{N}}{Nabisco}
+\item{\code{P}}{Post}
+\item{\code{Q}}{Quaker Oats}
+\item{\code{R}}{Ralston Purina}
+}
 }
 \examples{
 data(cereal)
-## None yet
-## maybe str(cereal) ; plot(cereal) ...
+str(cereal)
 
 }
+\references{
+Jean Dos Santos, Breakfast Cereals: Data Analysis and Clustering,
+\url{https://www.kaggle.com/code/jeandsantos/breakfast-cereals-data-analysis-and-clustering}. Does a bunch of data cleaning
+and exploratory data analysis in R.
+}
 \seealso{
-\code{\link[MASS]{UScereal}} has a similar dataset with fewer observations and variables.
+\code{\link[MASS]{UScereal}} has a similar dataset with fewer observations and variables, but with the variables normalized to a portion of one US cup.
 }
 \concept{MMRA}
 \concept{cancor}

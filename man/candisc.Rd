@@ -72,7 +72,7 @@ Normally, this is computed internally by \code{Anova(mod)}}
 
 \item{ndim}{Number of dimensions to store in (or retrieve from, for the
 \code{summary} method) the \code{means}, \code{structure}, \code{scores} and
-\code{coeffs.*} components.  
+\code{coeffs.*} components.
 The default is the rank of the H matrix for the hypothesis term.}
 
 \item{digits}{significant digits to print.}
@@ -155,30 +155,30 @@ canonical dimension.}
 }
 \value{
 An object of class \code{candisc} with the following components:
-\item{dfh }{hypothesis degrees of freedom for \code{term}} 
-\item{dfe }{error degrees of freedom for the \code{mlm}} 
-\item{rank }{number of non-zero eigenvalues of \eqn{HE^{-1}}} 
-\item{eigenvalues }{eigenvalues of \eqn{HE^{-1}}} 
-\item{canrsq }{squared canonical correlations} 
+\item{dfh }{hypothesis degrees of freedom for \code{term}}
+\item{dfe }{error degrees of freedom for the \code{mlm}}
+\item{rank }{number of non-zero eigenvalues of \eqn{HE^{-1}}}
+\item{eigenvalues }{eigenvalues of \eqn{HE^{-1}}}
+\item{canrsq }{squared canonical correlations}
 \item{pct }{A vector containing the percentages of the \code{canrsq} of their total.}
 \item{ndim }{Number of canonical dimensions stored in the \code{means},
-     \code{structure} and \code{coeffs.*} components} 
-\item{means }{A data.frame containing the class means for the levels of the 
-     factor(s) in the term}
-\item{factors }{A data frame containing the levels of the factor(s) in the \code{term}} 
-\item{term }{name of the \code{term}} 
+\code{structure} and \code{coeffs.*} components}
+\item{means }{A data.frame containing the class means for the levels of the
+factor(s) in the term}
+\item{factors }{A data frame containing the levels of the factor(s) in the \code{term}}
+\item{term }{name of the \code{term}}
 \item{terms }{A character vector containing the names of the terms in the
-     \code{mlm} object}
+\code{mlm} object}
 \item{coeffs.raw }{A matrix containing the raw canonical coefficients}
-\item{coeffs.std }{A matrix containing the standardized canonical coefficients} 
+\item{coeffs.std }{A matrix containing the standardized canonical coefficients}
 \item{structure }{A matrix containing the canonical structure
-    coefficients on \code{ndim} dimensions, i.e., the correlations between the
-    original variates and the canonical scores.  These are sometimes referred to
-    as Total Structure Coefficients.} 
+coefficients on \code{ndim} dimensions, i.e., the correlations between the
+original variates and the canonical scores.  These are sometimes referred to
+as Total Structure Coefficients.}
 \item{scores }{A data frame containing the
-    predictors in the \code{mlm} model and the canonical scores on \code{ndim}
-    dimensions.  These are calculated as \code{Y \%*\% coeffs.raw}, where \code{Y}
-    contains the standardized response variables.}
+predictors in the \code{mlm} model and the canonical scores on \code{ndim}
+dimensions.  These are calculated as \code{Y \%*\% coeffs.raw}, where \code{Y}
+contains the standardized response variables.}
 }
 \description{
 \code{candisc} performs a generalized canonical discriminant analysis for

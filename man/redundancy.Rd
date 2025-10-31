@@ -19,15 +19,15 @@ redundancy(object, ...)
 \item{digits}{Number of digits to print}
 }
 \value{
-An object of class \code{"cancor.redundancy"}, a list with the 
+An object of class \code{"cancor.redundancy"}, a list with the
 following 5 components:
-   \item{Xcan.redun}{Canonical redundancies for the X variables, i.e., the
-      total fraction of X variance accounted for by the Y variables through each
-      canonical variate.} 
-\item{Ycan.redun}{Canonical redundancies for the Y variables} 
+\item{Xcan.redun}{Canonical redundancies for the X variables, i.e., the
+total fraction of X variance accounted for by the Y variables through each
+canonical variate.}
+\item{Ycan.redun}{Canonical redundancies for the Y variables}
 \item{X.redun}{Total canonical redundancy for the X variables,
-      i.e., the sum of \code{Xcan.redun}.} 
-\item{Y.redun}{Total canonical redundancy for the Y variables} 
+i.e., the sum of \code{Xcan.redun}.}
+\item{Y.redun}{Total canonical redundancy for the Y variables}
 \item{set.names}{names for the X and Y sets of variables}
 }
 \description{
@@ -41,7 +41,7 @@ The term "redundancy analysis" has a different interpretation and implementation
 environmental ecology literature, such as the \pkg{vegan}.
 In that context, each \eqn{Y_i} variable is regressed separately on the predictors in \eqn{X},
 to give fitted values \eqn{\widehat{Y} = [\widehat{Y}_1, \widehat{Y}_2, \dots}.
-Then a PCA of \eqn{\widehat{Y}} is carried out to determine a reduced-rank structure of 
+Then a PCA of \eqn{\widehat{Y}} is carried out to determine a reduced-rank structure of
 the predictions.
 }
 \section{Functions}{
@@ -73,13 +73,13 @@ redundancy(cc)
 }
 \references{
 Muller K. E. (1981).
-Relationships between redundancy analysis, canonical correlation, and multivariate regression. 
+Relationships between redundancy analysis, canonical correlation, and multivariate regression.
 \emph{Psychometrika}, \bold{46}(2), 139-42.
 
 Stewart, D. and Love, W. (1968). A general canonical correlation
 index.  \emph{Psychological Bulletin}, 70, 160-163.
 
-Brainder, "Redundancy in canonical correlation analysis", 
+Brainder, "Redundancy in canonical correlation analysis",
 \url{https://brainder.org/2019/12/27/redundancy-in-canonical-correlation-analysis/}
 }
 \seealso{

@@ -47,18 +47,18 @@ coefficients for the given \code{term}; \code{type="pc"} uses the principal
 component variable eigenvectors.}
 
 \item{method}{One of \code{c("angles", "dim1", "dim2", "alphabet", "data",
-      "colmean")} giving the effect ordering method.  
+       "colmean")} giving the effect ordering method.
 \describe{
-   \item{"angles"}{Orders variables according to the angles their vectors make
-   with dimensions 1 and 2, counter-clockwise starting from the lower-left
-   quadrant in a 2D biplot or candisc display.} \item{"dim1"}{Orders variables
-   in increasing order of their coordinates on dimension 1}
-   \item{"dim2"}{Orders variables in increasing order of their coordinates on
-   dimension 2} \item{"alphabet"}{Orders variables alphabetically}
-   \item{"data"}{Uses the order of the variables in the data frame or the list
-   of responses in the MLM} \item{"colmean"}{Uses the order of the column means
-   of the variables in the data frame or the list of responses in the MLM} 
-   }}
+\item{"angles"}{Orders variables according to the angles their vectors make
+with dimensions 1 and 2, counter-clockwise starting from the lower-left
+quadrant in a 2D biplot or candisc display.} \item{"dim1"}{Orders variables
+in increasing order of their coordinates on dimension 1}
+\item{"dim2"}{Orders variables in increasing order of their coordinates on
+dimension 2} \item{"alphabet"}{Orders variables alphabetically}
+\item{"data"}{Uses the order of the variables in the data frame or the list
+of responses in the MLM} \item{"colmean"}{Uses the order of the column means
+of the variables in the data frame or the list of responses in the MLM}
+}}
 
 \item{names}{logical; if \code{TRUE} the effect ordered names of the
 variables are returned; otherwise, their indices in \code{variables} are
@@ -69,7 +69,7 @@ descending order.}
 }
 \value{
 A vector of integer indices of the variables or a character vector
-    of their names.
+of their names.
 }
 \description{
 The \code{varOrder} function implements some features of \dQuote{effect
@@ -110,8 +110,8 @@ pairs(Wine.mod, variables=order, fill=TRUE, fill.alpha=.1, var.cex=1.5)
 }
 \references{
 Friendly, M. & Kwan, E. (2003). Effect Ordering for Data
-    Displays, \emph{Computational Statistics and Data Analysis}, \bold{43},
-    509-539. \doi{10.1016/S0167-9473(02)00290-6}
+Displays, \emph{Computational Statistics and Data Analysis}, \bold{43},
+509-539. \doi{10.1016/S0167-9473(02)00290-6}
 }
 \author{
 Michael Friendly
