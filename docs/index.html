@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,26 +69,30 @@
 </h1>
 </div>
 <p><strong>Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis</strong></p>
-<p>Version 0.9.2</p>
-<p>This package includes functions for computing and visualizing generalized canonical discriminant analyses and canonical correlation analysis for a multivariate linear model. The goal is to provide ways of visualizing such models in a low-dimensional space corresponding to dimensions (linear combinations of the response variables) of maximal relationship to the predictor variables.</p>
+<p>Version 0.9.3</p>
+<!-- when in Rmd format, can use
+Version `r getNamespaceVersion("candisc")`
+-->
+<p>This package includes functions for computing and visualizing generalized canonical discriminant analyses and canonical correlation analysis for a multivariate linear model (MLM). The goal is to provide ways of visualizing such models in a low-dimensional space corresponding to dimensions (linear combinations of the response variables) of maximal relationship to the predictor variables.</p>
 <p>Traditional canonical discriminant analysis is restricted to a one-way MANOVA design and is equivalent to canonical correlation analysis between a set of quantitative response variables and a set of dummy variables coded from the factor variable. The <code>candisc</code> package generalizes this to multi-way MANOVA designs for all terms in a multivariate linear model (i.e., an <code>mlm</code> object), computing canonical scores and vectors for each term (giving a <code>"candiscList"</code> object).</p>
 <p>The graphic functions are designed to provide low-rank (1D, 2D, 3D) visualizations of terms in a <code>mlm</code> via the <code>plot.candisc</code> method, and the HE plot <code><a href="reference/heplot.candisc.html">heplot.candisc()</a></code> and <code><a href="reference/heplot.candisc.html">heplot3d.candisc()</a></code> methods. For <code>mlm</code>s with more than a few response variables, these methods often provide a much simpler interpretation of the nature of effects in canonical space than heplots for pairs of responses or an HE plot matrix of all responses in variable space.</p>
 <p>Analogously, a multivariate linear (regression) model with quantitative predictors can also be represented in a reduced-rank space by means of a canonical correlation transformation of the Y and X variables to uncorrelated canonical variates, Ycan and Xcan. Computation for this analysis is provided by <code>cancor</code> and related methods. Visualization of these results in canonical space are provided by the <code><a href="reference/plot.cancor.html">plot.cancor()</a></code>, <code><a href="reference/heplot.cancor.html">heplot.cancor()</a></code> and <code><a href="reference/heplot.cancor.html">heplot3d.cancor()</a></code> methods.</p>
 <p>These relations among response variables in linear models can also be useful for “effect ordering” (Friendly &amp; Kwan (2003) for <em>variables</em> in other multivariate data displays to make the displayed relationships more coherent. The function <code><a href="reference/varOrder.html">varOrder()</a></code> implements a collection of these methods.</p>
+<p>A start has been made on extending these graphical methods to discriminant analysis, for example from <code>MASS:lda()</code> beginning with a simplified interface to prediction, in <code><a href="reference/predict_discrim.html">predict_discrim()</a></code>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <table class="table"><tbody>
-<tr class="odd">
+<tr>
 <td>CRAN version</td>
 <td><code>install.packages("candisc")</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td>Development version</td>
 <td><code>remotes::install_github("friendly/candisc")</code></td>
 </tr>
 </tbody></table>
-<p>Or, install from r-universe</p>
+<p>Or, install from r-universe:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'candisc'</span>, <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">'https://friendly.r-universe.dev'</span>)</span></code></pre></div>
 </div>
 <div class="section level2">
@@ -96,7 +100,7 @@
 </h2>
 <ul>
 <li><p>A new vignette, <code><a href="articles/diabetes.html">vignette("diabetes", package="candisc")</a></code>, illustrates some of these methods.</p></li>
-<li><p>A more comprehensive collection of examples is contained in the vignette for the <code>heplots</code> package, <code>browseVignettes(package = "heplots")</code>.</p></li>
+<li><p>A more comprehensive collection of examples is contained in the vignettes for the <code>heplots</code> package, <code>browseVignettes(package = "heplots")</code>.</p></li>
 </ul>
 </div>
 </div>
@@ -138,9 +142,9 @@
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 <li><a href="https://cran.r-project.org/package=candisc" class="external-link"><img src="http://www.r-pkg.org/badges/version/candisc" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://friendly.r-universe.dev" class="external-link"><img src="https://friendly.r-universe.dev/badges/candisc"></a></li>
-<li><a href="https://cran.r-project.org/package=candisc" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/candisc"></a></li>
-<li><a href="https://friendly.github.io/candisc"><img src="https://img.shields.io/badge/documentation-blue"></a></li>
+<li><a href="https://friendly.r-universe.dev" class="external-link"><img src="https://friendly.r-universe.dev/badges/candisc" alt="R_universe"></a></li>
+<li><a href="https://cran.r-project.org/package=candisc" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/candisc" alt="downloads"></a></li>
+<li><a href="https://friendly.github.io/candisc"><img src="https://img.shields.io/badge/documentation-blue" alt="documentation"></a></li>
 </ul>
 </div>
 

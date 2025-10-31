@@ -3,26 +3,26 @@
 canonical correlation analysis in a way conducive to visualization using
 methods in the heplots package.
 The package provides the following display, extractor and plotting methods for "cancor" objects
-   print(), summary()
+print(), summary()
 Print and summarise the CCA
 
-   coef()
+coef()
 Extract coefficients for X, Y, or both
 
-   scores()
+scores()
 Extract observation scores on the canonical variables
 
-   redundancy()
+redundancy()
 Redundancy analysis: proportion of variances of the
 variables in each set (X and Y) accounted for by the variables in
 the other set through the canonical variates
 
-   plot()
+plot()
 Plot pairs of canonical scores with a data ellipse and regression line
 
-   heplot()
+heplot()
 HE plot of the Y canonical variables showing effects of the X variables and projections
-         of the Y variables in this space.
+of the Y variables in this space.
 
 
 
@@ -32,26 +32,26 @@ as providing a basis for robust methods in which potential outliers can be down-
 canonical correlation analysis in a way conducive to visualization using
 methods in the heplots package.
 The package provides the following display, extractor and plotting methods for "cancor" objects
-   print(), summary()
+print(), summary()
 Print and summarise the CCA
 
-   coef()
+coef()
 Extract coefficients for X, Y, or both
 
-   scores()
+scores()
 Extract observation scores on the canonical variables
 
-   redundancy()
+redundancy()
 Redundancy analysis: proportion of variances of the
 variables in each set (X and Y) accounted for by the variables in
 the other set through the canonical variates
 
-   plot()
+plot()
 Plot pairs of canonical scores with a data ellipse and regression line
 
-   heplot()
+heplot()
 HE plot of the Y canonical variables showing effects of the X variables and projections
-         of the Y variables in this space.
+of the Y variables in this space.
 
 
 
@@ -65,7 +65,7 @@ as providing a basis for robust methods in which potential outliers can be down-
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,23 +101,23 @@ methods in the <code><a href="https://friendly.github.io/heplots/reference/heplo
 <p>The package provides the following display, extractor and plotting methods for <code>"cancor"</code> objects</p><dl><dt><code>print(), summary()</code></dt>
 <dd><p>Print and summarise the CCA</p></dd>
 
-   <dt><code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef()</a></code></dt>
+<dt><code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef()</a></code></dt>
 <dd><p>Extract coefficients for X, Y, or both</p></dd>
 
-   <dt><code>scores()</code></dt>
+<dt><code>scores()</code></dt>
 <dd><p>Extract observation scores on the canonical variables</p></dd>
 
-   <dt><code><a href="redundancy.html">redundancy()</a></code></dt>
+<dt><code><a href="redundancy.html">redundancy()</a></code></dt>
 <dd><p>Redundancy analysis: proportion of variances of the
 variables in each set (X and Y) accounted for by the variables in
 the other set through the canonical variates</p></dd>
 
-   <dt><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code></dt>
+<dt><code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code></dt>
 <dd><p>Plot pairs of canonical scores with a data ellipse and regression line</p></dd>
 
-   <dt><code>heplot()</code></dt>
+<dt><code>heplot()</code></dt>
 <dd><p>HE plot of the Y canonical variables showing effects of the X variables and projections
-         of the Y variables in this space.</p></dd>
+of the Y variables in this space.</p></dd>
 
 
 </dl><p>As well, the function provides for observation weights, which may be useful in some situations, as well
@@ -194,7 +194,7 @@ used in the calculations.</p></dd>
 <dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
 <dd><p>Observation weights. If supplied, this must be a vector of
 length equal to the number of observations in X and Y, typically within
-[0,1].  In that case, the variance-covariance matrices are computed using
+(0,1).  In that case, the variance-covariance matrices are computed using
 <code><a href="https://rdrr.io/r/stats/cov.wt.html" class="external-link">cov.wt</a></code>, and the number of observations is taken as the
 number of non-zero weights.</p></dd>
 
@@ -224,11 +224,11 @@ columns contain the Y variables</p></dd>
 
 
 <dt id="arg-xcenter-ycenter">xcenter, ycenter<a class="anchor" aria-label="anchor" href="#arg-xcenter-ycenter"></a></dt>
-<dd><p>logical. Center the X, Y variables? [not yet implemented]</p></dd>
+<dd><p>logical. Center the X, Y variables? (not yet implemented)</p></dd>
 
 
 <dt id="arg-xscale-yscale">xscale, yscale<a class="anchor" aria-label="anchor" href="#arg-xscale-yscale"></a></dt>
-<dd><p>logical. Scale the X, Y variables to unit variance? [not yet implemented]</p></dd>
+<dd><p>logical. Scale the X, Y variables to unit variance? (not yet implemented)</p></dd>
 
 
 <dt id="arg-ndim">ndim<a class="anchor" aria-label="anchor" href="#arg-ndim"></a></dt>
@@ -276,44 +276,44 @@ variables.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>An object of class <code>cancorr</code>, a list with the following
-       components:</p>
+components:</p>
 <dl><dt>cancor</dt>
 <dd><p>Canonical correlations, i.e., the correlations
-       between each canonical variate for the Y variables with the corresponding
-       canonical variate for the X variables.</p></dd>
+between each canonical variate for the Y variables with the corresponding
+canonical variate for the X variables.</p></dd>
 
-   <dt>names</dt>
+<dt>names</dt>
 <dd><p>Names for various
-       items, a list of 4 components: <code>X</code>, <code>Y</code>, <code>row.names</code>, <code>set.names</code></p></dd>
+items, a list of 4 components: <code>X</code>, <code>Y</code>, <code>row.names</code>, <code>set.names</code></p></dd>
 
-   <dt>ndim</dt>
+<dt>ndim</dt>
 <dd><p>Number of canonical dimensions extracted, <code>&lt;= min(p,q)</code></p></dd>
 
-   <dt>dim</dt>
+<dt>dim</dt>
 <dd><p>Problem dimensions, a list of 3 components:
-         <code>p</code> (number of X variables),
-         <code>q</code> (number of Y variables),
-         <code>n</code> (sample size)</p></dd>
+<code>p</code> (number of X variables),
+<code>q</code> (number of Y variables),
+<code>n</code> (sample size)</p></dd>
 
-    <dt>coef</dt>
+<dt>coef</dt>
 <dd><p>Canonical coefficients, a list of 2 components: <code>X</code>, <code>Y</code></p></dd>
 
-    <dt>scores</dt>
+<dt>scores</dt>
 <dd><p>Canonical variate scores, a list of 2 components: <code>X</code>, <code>Y</code></p></dd>
 
-    <dt>scores</dt>
+<dt>scores</dt>
 <dd><p>Canonical variate scores, a list of 2 components:</p><dl><dt><code>X</code></dt>
 <dd><p>Canonical variate scores for the X variables</p></dd>
 
-        <dt><code>Y</code></dt>
+<dt><code>Y</code></dt>
 <dd><p>Canonical variate scores for the Y variables</p></dd>
 
-</dl><p></p></dd>
+</dl></dd>
 
-    <dt>X</dt>
+<dt>X</dt>
 <dd><p>The matrix X</p></dd>
 
-    <dt>Y</dt>
+<dt>Y</dt>
 <dd><p>The matrix Y</p></dd>
 
 <dt>weights</dt>
@@ -321,10 +321,10 @@ variables.</p></dd>
 
 <dt>structure</dt>
 <dd><p>Structure correlations, a list of 4 components:
-    <code>X.xscores</code>,
-    <code>Y.xscores</code>,
-    <code>X.yscores</code>,
-    <code>Y.yscores</code></p></dd>
+<code>X.xscores</code>,
+<code>Y.xscores</code>,
+<code>X.yscores</code>,
+<code>Y.yscores</code></p></dd>
 
 
 <dt>structure</dt>
@@ -332,13 +332,13 @@ variables.</p></dd>
 components:</p><dl><dt>X.xscores</dt>
 <dd><p>Structure correlations of the X variables with the Xcan canonical scores</p></dd>
 
-     <dt>Y.xscores</dt>
+<dt>Y.xscores</dt>
 <dd><p>Structure correlations of the Y variables with the Xcan canonical scores</p></dd>
 
-     <dt>X.yscores</dt>
+<dt>X.yscores</dt>
 <dd><p>Structure correlations of the X variables with the Ycan canonical scores</p></dd>
 
-     <dt>Y.yscores</dt>
+<dt>Y.yscores</dt>
 <dd><p>Structure correlations of the Y variables with the Ycan canonical scores</p></dd>
 
 

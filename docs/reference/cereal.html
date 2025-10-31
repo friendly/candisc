@@ -11,7 +11,7 @@ statistical models."><meta property="og:image" content="https://friendly.github.
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,50 +56,50 @@ statistical models.</p>
     <p>A data frame with 77 observations on the following 16 variables.</p><dl><dt><code>name</code></dt>
 <dd><p>cereal name, a character vector</p></dd>
 
-   <dt><code>mfr</code></dt>
+<dt><code>mfr</code></dt>
 <dd><p>manufacturer (A  G  K  N  P  Q  R), a character vector</p></dd>
 
-   <dt><code>type</code></dt>
+<dt><code>type</code></dt>
 <dd><p>type (cold/hot), a character vector</p></dd>
 
-   <dt><code>calories</code></dt>
+<dt><code>calories</code></dt>
 <dd><p>calories (number), a numeric vector</p></dd>
 
-   <dt><code>protein</code></dt>
+<dt><code>protein</code></dt>
 <dd><p>protein(g), a numeric vector</p></dd>
 
-   <dt><code>fat</code></dt>
+<dt><code>fat</code></dt>
 <dd><p>fat(g), a numeric vector</p></dd>
 
-   <dt><code>sodium</code></dt>
+<dt><code>sodium</code></dt>
 <dd><p>sodium(mg), a numeric vector</p></dd>
 
-   <dt><code>fiber</code></dt>
+<dt><code>fiber</code></dt>
 <dd><p>dietary fiber(g), a numeric vector</p></dd>
 
-   <dt><code>carbo</code></dt>
+<dt><code>carbo</code></dt>
 <dd><p>complex carbohydrates(g), a numeric vector</p></dd>
 
-   <dt><code>sugars</code></dt>
+<dt><code>sugars</code></dt>
 <dd><p>sugars(g), a numeric vector</p></dd>
 
-   <dt><code>potass</code></dt>
+<dt><code>potass</code></dt>
 <dd><p>potassium(mg), a numeric vector</p></dd>
 
-   <dt><code>vitamins</code></dt>
+<dt><code>vitamins</code></dt>
 <dd><p>vitamins &amp; minerals (0, 25, or 100, respectively indicating "none added";
-         "enriched, often to 25% FDA recommended"; "100% of FDA recommended"), a numeric vector</p></dd>
+"enriched"; "FDA recommended"), a numeric vector</p></dd>
 
-   <dt><code>shelf</code></dt>
+<dt><code>shelf</code></dt>
 <dd><p>display shelf (1, 2, or 3, counting from the floor), a numeric vector</p></dd>
 
-   <dt><code>weight</code></dt>
+<dt><code>weight</code></dt>
 <dd><p>weight (in ounces) of one serving (serving size), a numeric vector</p></dd>
 
-   <dt><code>cups</code></dt>
+<dt><code>cups</code></dt>
 <dd><p>cups per serving, a numeric vector</p></dd>
 
-   <dt><code>rating</code></dt>
+<dt><code>rating</code></dt>
 <dd><p>health rating of the cereal (unknown calculation method), a numeric vector</p></dd>
 
 
@@ -107,9 +107,7 @@ statistical models.</p>
     <div class="section level2">
     <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
     <p>From the American Statistical Association 1993 Statistical Graphics Exposition, 'Serial Correlation or Cereal Correlation ??',
-<a href="https://community.amstat.org/jointscsg-section/dataexpo/dataexpo1993" class="external-link">https://community.amstat.org/jointscsg-section/dataexpo/dataexpo1993</a>.
-<!-- %% @references -->
-<!-- %%  ~~ possibly secondary sources and usages ~~ --></p>
+<a href="https://community.amstat.org/jointscsg-section/dataexpo/dataexpo1993" class="external-link">https://community.amstat.org/jointscsg-section/dataexpo/dataexpo1993</a>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -123,17 +121,61 @@ of the cereals for which we collected data had any cholesterol, and manufacturer
 nowadays.  However, there is still a lot of data for the consumer to understand while choosing a good breakfast cereal."</p>
 <p>Further details on the variables and suggested analyses are available at
 <a href="https://community.amstat.org/jointscsg-section/dataexpo/dataexpo1993" class="external-link">https://community.amstat.org/jointscsg-section/dataexpo/dataexpo1993</a></p>
+<p>The abbreviations for manufacturer, <code>mfr</code>, stand for:</p><dl><dt><code>A</code></dt>
+<dd><p>American Home Food Products</p></dd>
+
+<dt><code>G</code></dt>
+<dd><p>General Mills</p></dd>
+
+<dt><code>K</code></dt>
+<dd><p>Kellog</p></dd>
+
+<dt><code>N</code></dt>
+<dd><p>Nabisco</p></dd>
+
+<dt><code>P</code></dt>
+<dd><p>Post</p></dd>
+
+<dt><code>Q</code></dt>
+<dd><p>Quaker Oats</p></dd>
+
+<dt><code>R</code></dt>
+<dd><p>Ralston Purina</p></dd>
+
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Jean Dos Santos, Breakfast Cereals: Data Analysis and Clustering,
+<a href="https://www.kaggle.com/code/jeandsantos/breakfast-cereals-data-analysis-and-clustering" class="external-link">https://www.kaggle.com/code/jeandsantos/breakfast-cereals-data-analysis-and-clustering</a>. Does a bunch of data cleaning
+and exploratory data analysis in R.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/MASS/man/UScereal.html" class="external-link">UScereal</a></code> has a similar dataset with fewer observations and variables.</p></div>
+    <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/MASS/man/UScereal.html" class="external-link">UScereal</a></code> has a similar dataset with fewer observations and variables, but with the variables normalized to a portion of one US cup.</p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">cereal</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co">## None yet</span></span></span>
-<span class="r-in"><span><span class="co">## maybe str(cereal) ; plot(cereal) ...</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">cereal</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tibble [77 × 16] (S3: tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ name    : chr [1:77] "100% Bran" "100% Natural Bran" "All-Bran" "All-Bran with Extra Fiber" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ mfr     : chr [1:77] "N" "Q" "K" "K" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ type    : chr [1:77] "C" "C" "C" "C" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ calories: num [1:77] 70 120 70 50 110 110 110 130 90 90 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ protein : num [1:77] 4 3 4 4 2 2 2 3 2 3 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fat     : num [1:77] 1 5 1 0 2 2 0 2 1 0 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sodium  : num [1:77] 130 15 260 140 200 180 125 210 200 210 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fiber   : num [1:77] 10 2 9 14 1 1.5 1 2 4 5 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ carbo   : num [1:77] 5 8 7 8 14 10.5 11 18 15 13 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sugars  : num [1:77] 6 8 5 0 8 10 14 8 6 5 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ potass  : num [1:77] 280 135 320 330 NA 70 30 100 125 190 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ vitamins: num [1:77] 25 0 25 25 25 25 25 25 25 25 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ shelf   : num [1:77] 3 3 3 3 3 1 2 3 1 3 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ weight  : num [1:77] 1 1 1 1 1 1 1 1.33 1 1 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ cups    : num [1:77] 0.33 1 0.33 0.5 0.75 0.75 1 0.75 0.67 0.67 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ rating  : num [1:77] 68.4 34 59.4 93.7 34.4 ...</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

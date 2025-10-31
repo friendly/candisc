@@ -36,6 +36,11 @@ reference:
       - scores
       - Wilks
 
+  - title: discrim
+    desc: Discriminant analysis
+    contents:
+      predict_discrim
+
   - title: Graphics
     desc: Graphic utilities
     contents:

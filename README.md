@@ -2,9 +2,9 @@
 
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/candisc)](https://cran.r-project.org/package=candisc)
-[![](https://friendly.r-universe.dev/badges/candisc)](https://friendly.r-universe.dev) 
-[![](https://cranlogs.r-pkg.org/badges/grand-total/candisc)](https://cran.r-project.org/package=candisc)
-[![](https://img.shields.io/badge/documentation-blue)](https://friendly.github.io/candisc)
+[![R_universe](https://friendly.r-universe.dev/badges/candisc)](https://friendly.r-universe.dev) 
+[![downloads](https://cranlogs.r-pkg.org/badges/grand-total/candisc)](https://cran.r-project.org/package=candisc)
+[![documentation](https://img.shields.io/badge/documentation-blue)](https://friendly.github.io/candisc)
 
 <!-- badges: end -->
 
@@ -12,12 +12,16 @@
 # candisc  <img src="man/figures/logo.png" align="right" height="160px" />
 **Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis**
 
-Version 0.9.2
+Version 0.9.3
+
+<!-- when in Rmd format, can use
+Version `r getNamespaceVersion("candisc")`
+-->
 
 This package includes functions for computing and visualizing 
 generalized canonical discriminant analyses 
 and canonical correlation analysis
-for a multivariate linear model.  The goal is to provide ways of visualizing
+for a multivariate linear model (MLM).  The goal is to provide ways of visualizing
 such models in a low-dimensional space corresponding to dimensions
 (linear combinations of the response variables) of maximal relationship
 to the predictor variables. 
@@ -52,6 +56,10 @@ for *variables* in other multivariate data displays to make the
 displayed relationships more coherent.  The function `varOrder()`
 implements a collection of these methods.
 
+A start has been made on extending these graphical methods to discriminant analysis,
+for example from `MASS:lda()` beginning with a simplified interface to 
+prediction, in `predict_discrim()`.
+
 
 ## Installation
 
@@ -60,7 +68,7 @@ implements a collection of these methods.
 | CRAN version        | `install.packages("candisc")`                 |
 | Development version | `remotes::install_github("friendly/candisc")` |
 
-Or, install from r-universe
+Or, install from r-universe:
 
 ```r
 install.packages('candisc', repos = c('https://friendly.r-universe.dev')
@@ -71,7 +79,7 @@ install.packages('candisc', repos = c('https://friendly.r-universe.dev')
 * A new vignette, `vignette("diabetes", package="candisc")`,
 illustrates some of these methods.
 
-* A more comprehensive collection of examples is contained in the vignette for the `heplots` package,
+* A more comprehensive collection of examples is contained in the vignettes for the `heplots` package,
 `browseVignettes(package = "heplots")`.
 
 
