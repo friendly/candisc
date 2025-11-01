@@ -39,7 +39,8 @@ reference:
   - title: discrim
     desc: Discriminant analysis
     contents:
-      predict_discrim
+      - predict_discrim
+      - plot_discrim
 
   - title: Graphics
     desc: Graphic utilities

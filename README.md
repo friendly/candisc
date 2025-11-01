@@ -58,7 +58,7 @@ implements a collection of these methods.
 
 A start has been made on extending these graphical methods to discriminant analysis,
 for example from `MASS:lda()` beginning with a simplified interface to 
-prediction, in `predict_discrim()`.
+prediction, in `predict_discrim()` and a plotting method, `plot_discrim()`.
 
 
 ## Installation
