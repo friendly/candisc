@@ -9,7 +9,8 @@ Imports:
   graphics, 
   stats, 
   insight,
-  dplyr
+  dplyr,
+  ggplot2
 Suggests: 
     rgl,
     carData,
@@ -18,7 +19,8 @@ Suggests:
     rmarkdown,
     MASS, 
     rpart, 
-    rpart.plot
+    rpart.plot,
+    klaR
 LazyLoad: yes
 LazyData: yes
 Authors@R: c(

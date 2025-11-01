@@ -2,6 +2,7 @@
 
 * Added `predict_discrim` as a wrapper to `MASS::predict.lda()` returning a data.frame
 * Now use `Roxygen: list(markdown = TRUE)` in DESCRIPTION
+* Added `plot_discrim` to plot decision regions for discriminant analysis using contours or background tiles
 
 
 ## Version 0.9.2

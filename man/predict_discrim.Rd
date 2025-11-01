@@ -54,5 +54,5 @@ library(MASS)
 peng.lda <- lda(species ~ bill_length + bill_depth + flipper_length + body_mass, 
                 data = peng)
 peng_pred <- predict(peng.lda)
-str(pend_pred)
+str(peng_pred)
 }
