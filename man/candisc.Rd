@@ -72,7 +72,7 @@ Normally, this is computed internally by \code{Anova(mod)}}
 
 \item{ndim}{Number of dimensions to store in (or retrieve from, for the
 \code{summary} method) the \code{means}, \code{structure}, \code{scores} and
-\code{coeffs.*} components.
+\verb{coeffs.*} components.
 The default is the rank of the H matrix for the hypothesis term.}
 
 \item{digits}{significant digits to print.}
@@ -162,7 +162,7 @@ An object of class \code{candisc} with the following components:
 \item{canrsq }{squared canonical correlations}
 \item{pct }{A vector containing the percentages of the \code{canrsq} of their total.}
 \item{ndim }{Number of canonical dimensions stored in the \code{means},
-\code{structure} and \code{coeffs.*} components}
+\code{structure} and \verb{coeffs.*} components}
 \item{means }{A data.frame containing the class means for the levels of the
 factor(s) in the term}
 \item{factors }{A data frame containing the levels of the factor(s) in the \code{term}}
@@ -177,7 +177,7 @@ original variates and the canonical scores.  These are sometimes referred to
 as Total Structure Coefficients.}
 \item{scores }{A data frame containing the
 predictors in the \code{mlm} model and the canonical scores on \code{ndim}
-dimensions.  These are calculated as \code{Y \%*\% coeffs.raw}, where \code{Y}
+dimensions.  These are calculated as \verb{Y \\\%*\\\% coeffs.raw}, where \code{Y}
 contains the standardized response variables.}
 }
 \description{
@@ -276,7 +276,7 @@ plot(iris.can1)
 }
 \references{
 Bartlett, M. S. (1938). Further aspects of the theory of
-multiple regression. Proc. Cambridge Philosophical Society \bold{34}, 33-34.
+multiple regression. Proc. Cambridge Philosophical Society \strong{34}, 33-34.
 
 Cooley, W.W. & Lohnes, P.R. (1971). Multivariate Data Analysis, New York:
 Wiley.

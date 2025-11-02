@@ -2,8 +2,8 @@
 #' Order variables according to canonical structure or other criteria
 #' 
 #' @description
-#' The \code{varOrder} function implements some features of \dQuote{effect
-#' ordering} (Friendly & Kwan (2003) for \emph{variables} in a multivariate
+#' The `varOrder` function implements some features of \dQuote{effect
+#' ordering} (Friendly & Kwan (2003) for *variables* in a multivariate
 #' data display to make the displayed relationships more coherent.
 #' 
 #' This can be used in pairwise HE plots, scatterplot matrices, parallel
@@ -17,15 +17,15 @@
 #' 
 #' @aliases varOrder varOrder.mlm varOrder.data.frame
 #' @param x A multivariate linear model or a numeric data frame
-#' @param term For the \code{mlm} method, one term in the model for which the
+#' @param term For the `mlm` method, one term in the model for which the
 #'        canonical structure coefficients are found.
 #' @param variables indices or names of the variables to be ordered; defaults
 #'        to all response variables an MLM or all numeric variables in a data frame.
-#' @param type For an MLM, \code{type="can"} uses the canonical structure
-#'        coefficients for the given \code{term}; \code{type="pc"} uses the principal
+#' @param type For an MLM, `type="can"` uses the canonical structure
+#'        coefficients for the given `term`; `type="pc"` uses the principal
 #'        component variable eigenvectors.
-#' @param method One of \code{c("angles", "dim1", "dim2", "alphabet", "data",
-#'        "colmean")} giving the effect ordering method.  
+#' @param method One of `c("angles", "dim1", "dim2", "alphabet", "data",
+#'        "colmean")` giving the effect ordering method.  
 #'  \describe{
 #'     \item{"angles"}{Orders variables according to the angles their vectors make
 #'     with dimensions 1 and 2, counter-clockwise starting from the lower-left
@@ -37,17 +37,17 @@
 #'     of responses in the MLM} \item{"colmean"}{Uses the order of the column means
 #'     of the variables in the data frame or the list of responses in the MLM} 
 #'     }
-#' @param names logical; if \code{TRUE} the effect ordered names of the
-#'     variables are returned; otherwise, their indices in \code{variables} are
+#' @param names logical; if `TRUE` the effect ordered names of the
+#'     variables are returned; otherwise, their indices in `variables` are
 #'     returned.
-#' @param descending If \code{TRUE}, the ordered result is reversed to a
+#' @param descending If `TRUE`, the ordered result is reversed to a
 #'     descending order.
 #' @param \dots Arguments passed to methods
 #' @return A vector of integer indices of the variables or a character vector
 #'     of their names. 
 #' @author Michael Friendly
 #' @references Friendly, M. & Kwan, E. (2003). Effect Ordering for Data
-#'     Displays, \emph{Computational Statistics and Data Analysis}, \bold{43},
+#'     Displays, *Computational Statistics and Data Analysis*, **43**,
 #'     509-539. \doi{10.1016/S0167-9473(02)00290-6}
 #' @keywords manip multivariate
 #' @examples
@@ -69,7 +69,7 @@ varOrder <- function(x, ...) {
 	UseMethod("varOrder")
 }
 
-#' @describeIn varOrder \code{"mlm"} method.
+#' @describeIn varOrder `"mlm"` method.
 #' @export
 varOrder.mlm <- function(x,
                      term,
@@ -121,7 +121,7 @@ varOrder.mlm <- function(x,
 	if (names) vars[order] else order
 }
 
-#' @describeIn varOrder \code{"data.frame"} method.
+#' @describeIn varOrder `"data.frame"` method.
 #' @export
 varOrder.data.frame <- 
 	function(x, 
@@ -165,7 +165,7 @@ varOrder.data.frame <-
 
 }
 
-#' @describeIn varOrder \code{"default"} method.
+#' @describeIn varOrder `"default"` method.
 #' @export
 varOrder.default <- function(x, ...) {
 	stop("no methods are yet available for objects of class ", class(x))

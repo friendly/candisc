@@ -18,18 +18,18 @@
 #' 
 #' 
 #' @aliases redundancy print.cancor.redundancy
-#' @param object A \code{"cancor"} object
-#' @param x A \code{"cancor.redundancy"} for the \code{print} method.
+#' @param object A `"cancor"` object
+#' @param x A `"cancor.redundancy"` for the `print` method.
 #' @param digits Number of digits to print
 #' @param \dots Other arguments
-#' @return An object of class \code{"cancor.redundancy"}, a list with the 
+#' @return An object of class `"cancor.redundancy"`, a list with the 
 #' following 5 components:
 #'    \item{Xcan.redun}{Canonical redundancies for the X variables, i.e., the
 #'       total fraction of X variance accounted for by the Y variables through each
 #'       canonical variate.} 
 #' \item{Ycan.redun}{Canonical redundancies for the Y variables} 
 #' \item{X.redun}{Total canonical redundancy for the X variables,
-#'       i.e., the sum of \code{Xcan.redun}.} 
+#'       i.e., the sum of `Xcan.redun`.} 
 #' \item{Y.redun}{Total canonical redundancy for the Y variables} 
 #' \item{set.names}{names for the X and Y sets of variables}
 #' @author Michael Friendly
@@ -37,13 +37,13 @@
 #' @references 
 #' Muller K. E. (1981).
 #'Relationships between redundancy analysis, canonical correlation, and multivariate regression. 
-#' \emph{Psychometrika}, \bold{46}(2), 139-42.
+#' *Psychometrika*, **46**(2), 139-42.
 #' 
 #' Stewart, D. and Love, W. (1968). A general canonical correlation
-#' index.  \emph{Psychological Bulletin}, 70, 160-163.
+#' index.  *Psychological Bulletin*, 70, 160-163.
 #'
 #' Brainder, "Redundancy in canonical correlation analysis", 
-#' \url{https://brainder.org/2019/12/27/redundancy-in-canonical-correlation-analysis/}
+#' <https://brainder.org/2019/12/27/redundancy-in-canonical-correlation-analysis/>
 #' 
 #' @keywords multivariate
 #' @examples
@@ -94,7 +94,7 @@ redundancy <- function(object, ...) {
     result
 } 
 
-#' @describeIn redundancy \code{print()} method for \code{"cancor.redundancy"} objects.
+#' @describeIn redundancy `print()` method for `"cancor.redundancy"` objects.
 #' @export
 print.cancor.redundancy <- function(x, digits=max(getOption("digits") - 3, 3), ...) {
 	Xname <- x$set.names[1]

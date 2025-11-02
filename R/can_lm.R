@@ -6,15 +6,15 @@
 #' multivariate linear model to scores on canonical variables for a given term and then uses
 #' those scores as responses in a linear (lm) or multivariate linear model (mlm).
 #'
-#' The function constructs a model formula of the form \code{Can ~ terms} where
+#' The function constructs a model formula of the form `Can ~ terms` where
 #' Can is the canonical score(s) and terms are the terms in the original mlm,
 #' then runs lm() with that formula.
 #' 
 #' 
-#' @param mod A \code{mlm} object
+#' @param mod A `mlm` object
 #' @param term One term in that model
 #' @param \dots Arguments passed to \code{\link{candisc}}
-#' @return A \code{lm} object if \code{term} is a rank 1 hypothesis, otherwise a \code{mlm} object
+#' @return A `lm` object if `term` is a rank 1 hypothesis, otherwise a `mlm` object
 #' @author Michael Friendly
 #' @seealso \code{\link{candisc}}, \code{\link{cancor}}
 #' @examples

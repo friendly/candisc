@@ -24,7 +24,7 @@
 # revised: 08/29/2025
 # --- use `col` to label the group ellipses
 
-#' @describeIn candisc \code{"plot"} method.
+#' @describeIn candisc `"plot"` method.
 #' @export
 plot.candisc <- function (
 		x,		     # output object from candisc

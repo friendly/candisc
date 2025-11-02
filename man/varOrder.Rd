@@ -46,8 +46,7 @@ to all response variables an MLM or all numeric variables in a data frame.}
 coefficients for the given \code{term}; \code{type="pc"} uses the principal
 component variable eigenvectors.}
 
-\item{method}{One of \code{c("angles", "dim1", "dim2", "alphabet", "data",
-       "colmean")} giving the effect ordering method.
+\item{method}{One of \code{c("angles", "dim1", "dim2", "alphabet", "data", "colmean")} giving the effect ordering method.
 \describe{
 \item{"angles"}{Orders variables according to the angles their vectors make
 with dimensions 1 and 2, counter-clockwise starting from the lower-left
@@ -110,7 +109,7 @@ pairs(Wine.mod, variables=order, fill=TRUE, fill.alpha=.1, var.cex=1.5)
 }
 \references{
 Friendly, M. & Kwan, E. (2003). Effect Ordering for Data
-Displays, \emph{Computational Statistics and Data Analysis}, \bold{43},
+Displays, \emph{Computational Statistics and Data Analysis}, \strong{43},
 509-539. \doi{10.1016/S0167-9473(02)00290-6}
 }
 \author{

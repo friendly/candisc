@@ -20,17 +20,17 @@
 #' canonical dimensions.
 #' 
 #' For consistency with \code{\link{heplot.candisc}}, the plots show effects in
-#' the space of the canonical Y variables selected by \code{which}.
+#' the space of the canonical Y variables selected by `which`.
 #' 
 #' @details
 #' 
 #' The interpretation of variable vectors in these plots is different from that
-#' of the \code{terms} plotted as H "ellipses," which appear as degenerate
+#' of the `terms` plotted as H "ellipses," which appear as degenerate
 #' lines in the plot (because they correspond to 1 df tests of rank(H)=1).
 #' 
 #' In canonical space, the interpretation of the H ellipses for the
-#' \code{terms} is the same as in ordinary HE plots: a term is significant
-#' \emph{iff} its H ellipse projects outside the (orthogonalized) E ellipsoid
+#' `terms` is the same as in ordinary HE plots: a term is significant
+#' *iff* its H ellipse projects outside the (orthogonalized) E ellipsoid
 #' somewhere in the space of the Y canonical dimensions. The orientation of
 #' each H ellipse with respect to the Y canonical dimensions indicates which
 #' dimensions that X variate contributes to.
@@ -42,27 +42,27 @@
 #' variance accounted for in the Y canonical dimensions plotted; angles between
 #' the variable vectors and the canonical axes correspond to the structure
 #' correlations.  The absolute lengths of these vectors are typically
-#' manipulated by the \code{scale} argument to provide better visual resolution
+#' manipulated by the `scale` argument to provide better visual resolution
 #' and labeling for the variables.
 #' 
 #' Setting the aspect ratio of these plots is important for the proper
 #' interpretation of angles between the variable vectors and the coordinate
 #' axes.  However, this then makes it impossible to change the aspect ratio of
-#' the plot by re-sizing manually. You can override this using \code{asp=NA} in 2D plots
+#' the plot by re-sizing manually. You can override this using `asp=NA` in 2D plots
 #' 
 #' @aliases heplot.cancor heplot3d.cancor
-#' @param mod A \code{cancor} object
+#' @param mod A `cancor` object
 #' @param which A numeric vector containing the indices of the Y canonical
 #'        dimensions to plot.
 #' @param scale Scale factor for the variable vectors in canonical space.  If
 #'        not specified, the function calculates one to make the variable vectors
 #'        approximately fill the plot window.
-#' @param asp aspect ratio setting. Use \code{asp=1} in 2D plots and
-#'        \code{asp="iso"} in 3D plots to ensure equal units on the axes. Use
-#'        \code{asp=NA} in 2D plots and \code{asp=NULL} in 3D plots to 
+#' @param asp aspect ratio setting. Use `asp=1` in 2D plots and
+#'        `asp="iso"` in 3D plots to ensure equal units on the axes. Use
+#'        `asp=NA` in 2D plots and `asp=NULL` in 3D plots to 
 #'        allow separate scaling for the axes. See Details below.
 #' @param var.vectors Which variable vectors to plot?  A character vector
-#'        containing one or more of \code{"X"} and \code{"Y"}.
+#'        containing one or more of `"X"` and `"Y"`.
 #' @param var.col Color(s) for variable vectors and labels, a vector of length
 #'        1 or 2.  The first color is used for Y vectors and the second for X vectors,
 #'        if these are plotted.
@@ -72,16 +72,16 @@
 #'        apply to 3D plots.
 #' @param prefix Prefix for labels of the Y canonical dimensions.
 #' @param suffix Suffix for labels of canonical dimensions. If
-#'        \code{suffix=TRUE} the percent of hypothesis (H) variance accounted for by
+#'        `suffix=TRUE` the percent of hypothesis (H) variance accounted for by
 #'        each canonical dimension is added to the axis label.
 #' @param terms Terms for the X variables to be plotted in canonical space. The
-#'        default, \code{terms=TRUE} or \code{terms="X"} plots H ellipses for all of
-#'       the X variables. \code{terms="Xcan"} plots H ellipses for all of the X
-#'       canonical variables, \code{Xcan1}, \code{Xcan2}, \dots.
+#'        default, `terms=TRUE` or `terms="X"` plots H ellipses for all of
+#'       the X variables. `terms="Xcan"` plots H ellipses for all of the X
+#'       canonical variables, `Xcan1`, `Xcan2`, \dots.
 #' @param \dots Other arguments passed to \code{link[heplots]{heplot}}. In
 #'       particular, you can pass linear hypotheses among the term variables via
-#'       \code{hypotheses}.
-#' @return Returns invisibly an object of class \code{"heplot"}, with
+#'       `hypotheses`.
+#' @return Returns invisibly an object of class `"heplot"`, with
 #'       coordinates for the various hypothesis ellipses and the error ellipse, and
 #'       the limits of the horizontal and vertical axes. 
 #' @author Michael Friendly
@@ -92,11 +92,11 @@
 #'       variable scores.
 #'       \code{\link{heplot.candisc}}, \code{\link[heplots]{heplot}},
 #'       \code{\link[car]{linearHypothesis}}
-#' @references Gittins, R. (1985). \emph{Canonical Analysis: A Review with
-#' Applications in Ecology}, Berlin: Springer.
+#' @references Gittins, R. (1985). *Canonical Analysis: A Review with
+#' Applications in Ecology*, Berlin: Springer.
 #' 
-#' Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979). \emph{Multivariate
-#' Analysis}. London: Academic Press.
+#' Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979). *Multivariate
+#' Analysis*. London: Academic Press.
 #' @keywords hplot multivariate
 #' @export
 #' @examples

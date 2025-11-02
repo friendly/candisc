@@ -11,20 +11,20 @@
 #' Canonical Correlation Analysis
 #'
 #'@description 
-#' The function \code{cancor} generalizes and regularizes computation for
+#' The function `cancor` generalizes and regularizes computation for
 #' canonical correlation analysis in a way conducive to visualization using
 #' methods in the \code{\link[heplots]{heplots}} package.
 #' 
-#' The package provides the following display, extractor and plotting methods for \code{"cancor"} objects
+#' The package provides the following display, extractor and plotting methods for `"cancor"` objects
 #' \describe{
-#'    \item{\code{print(), summary()}}{Print and summarise the CCA}
-#'    \item{\code{coef()}}{Extract coefficients for X, Y, or both }
-#'    \item{\code{scores()}}{Extract observation scores on the canonical variables}
-#'    \item{\code{redundancy()}}{Redundancy analysis: proportion of variances of the
+#'    \item{`print(), summary()`}{Print and summarise the CCA}
+#'    \item{`coef()`}{Extract coefficients for X, Y, or both }
+#'    \item{`scores()`}{Extract observation scores on the canonical variables}
+#'    \item{`redundancy()`}{Redundancy analysis: proportion of variances of the
 #' variables in each set (X and Y) accounted for by the variables in
 #' the other set through the canonical variates}
-#'    \item{\code{plot()}}{Plot pairs of canonical scores with a data ellipse and regression line}
-#'    \item{\code{heplot()}}{HE plot of the Y canonical variables showing effects of the X variables and projections
+#'    \item{`plot()`}{Plot pairs of canonical scores with a data ellipse and regression line}
+#'    \item{`heplot()`}{HE plot of the Y canonical variables showing effects of the X variables and projections
 #'          of the Y variables in this space.}
 #' }
 #' 
@@ -42,7 +42,7 @@
 #' status, and the goal is to find orthogonal linear combinations of each
 #' having maximal (canonical) correlations. On the other hand, MMRA is
 #' \dQuote{asymmetric}, in that the Y set is considered as responses,
-#' \emph{each one} to be explained by \emph{separate} linear combinations of
+#' *each one* to be explained by *separate* linear combinations of
 #' the Xs.
 #' 
 #' Let \eqn{\mathbf{Y}_{n \times p}} and \eqn{\mathbf{X}_{n \times q}} be two sets of variables over which 
@@ -81,11 +81,11 @@
 #' transformation to the predicted values to yield, say, \eqn{Z = \hat{Y} Q}.
 #' Then, a principal component analysis on the covariance matrix of Z gives
 #' eigenvalues of \eqn{E^{-1} H}, and so is equivalent to the MMRA analysis of
-#' \code{lm(Y ~ X)} statistically, but visualized here in canonical space.
+#' `lm(Y ~ X)` statistically, but visualized here in canonical space.
 #' 
 #' @aliases cancor cancor.default cancor.formula print.cancor summary.cancor
 #'          coef.cancor scores scores.cancor
-#' @param formula A two-sided formula of the form \code{cbind(y1, y2, y3, \dots) ~ x1 + x2 + x3 + \dots}
+#' @param formula A two-sided formula of the form `cbind(y1, y2, y3, \dots) ~ x1 + x2 + x3 + \dots`
 #' @param data The data.frame within which the formula is evaluated
 #' @param subset an optional vector specifying a subset of observations to be
 #'        used in the calculations.
@@ -98,13 +98,13 @@
 #'        are excluded in the computation of the variance matrix of (X,Y).  See Notes
 #'        for details on missing data.
 #' @param method the method to be used for calculation; currently only
-#'        \code{method = "gensvd"} is supported;
-#' @param x Varies depending on method. For the \code{cancor.default} method,
+#'        `method = "gensvd"` is supported;
+#' @param x Varies depending on method. For the `cancor.default` method,
 #'        this should be a matrix or data.frame whose columns contain the X variables
-#' @param y For the \code{cancor.default} method, a matrix or data.frame whose
+#' @param y For the `cancor.default` method, a matrix or data.frame whose
 #'        columns contain the Y variables
 #' @param X.names,Y.names Character vectors of names for the X and Y variables.
-#' @param row.names Observation names in \code{x}, \code{y}
+#' @param row.names Observation names in `x`, `y`
 #' @param xcenter,ycenter logical. Center the X, Y variables? (not yet implemented)
 #' @param xscale,yscale logical. Scale the X, Y variables to unit variance? (not yet implemented)
 #' @param ndim Number of canonical dimensions to retain in the result, for
@@ -113,46 +113,46 @@
 #'        collections of the X, Y variables.
 #' @param prefix A vector of two character strings, giving prefixes used to
 #'        name the X and Y canonical variables, respectively.
-#' @param use argument passed to \code{var} determining how missing data are
-#'        handled.  Only the default, \code{use="complete"} is allowed when
+#' @param use argument passed to `var` determining how missing data are
+#'        handled.  Only the default, `use="complete"` is allowed when
 #'        observation weights are supplied.
-#' @param object A \code{cancor} object for related methods.
-#' @param digits Number of digits passed to \code{print} and \code{summary} methods
+#' @param object A `cancor` object for related methods.
+#' @param digits Number of digits passed to `print` and `summary` methods
 #' @param \dots Other arguments, passed to methods
-#' @param type For the \code{coef} method, the type of coefficients returned,
-#'        one of \code{"x"}, \code{"y"}, \code{"both"}. For the \code{scores} method,
-#'        the same list, or \code{"data.frame"}, which returns a data.frame containing
+#' @param type For the `coef` method, the type of coefficients returned,
+#'        one of `"x"`, `"y"`, `"both"`. For the `scores` method,
+#'        the same list, or `"data.frame"`, which returns a data.frame containing
 #'        the X and Y canonical scores.
-#' @param standardize For the \code{coef} method, whether coefficients should
+#' @param standardize For the `coef` method, whether coefficients should
 #'        be standardized by dividing by the standard deviations of the X and Y
 #'        variables.
-#' @return An object of class \code{cancorr}, a list with the following
+#' @return An object of class `cancorr`, a list with the following
 #'        components: 
 #'    \item{cancor}{Canonical correlations, i.e., the correlations
 #'        between each canonical variate for the Y variables with the corresponding
 #'        canonical variate for the X variables.} 
 #'    \item{names}{Names for various
-#'        items, a list of 4 components: \code{X}, \code{Y}, \code{row.names}, \code{set.names}} 
-#'    \item{ndim}{Number of canonical dimensions extracted, \code{<= min(p,q)}} 
+#'        items, a list of 4 components: `X`, `Y`, `row.names`, `set.names`} 
+#'    \item{ndim}{Number of canonical dimensions extracted, `<= min(p,q)`} 
 #'    \item{dim}{Problem dimensions, a list of 3 components:
-#'          \code{p} (number of X variables), 
-#'          \code{q} (number of Y variables), 
-#'          \code{n} (sample size)} 
-#'     \item{coef}{Canonical coefficients, a list of 2 components: \code{X}, \code{Y}} 
-#'     \item{scores}{Canonical variate scores, a list of 2 components: \code{X}, \code{Y}} 
+#'          `p` (number of X variables), 
+#'          `q` (number of Y variables), 
+#'          `n` (sample size)} 
+#'     \item{coef}{Canonical coefficients, a list of 2 components: `X`, `Y`} 
+#'     \item{scores}{Canonical variate scores, a list of 2 components: `X`, `Y`} 
 #'     \item{scores}{Canonical variate scores, a list of 2 components: 
 #'      \describe{ 
-#'         \item{\code{X}}{Canonical variate scores for the X variables} 
-#'         \item{\code{Y}}{Canonical variate scores for the Y variables} } 
+#'         \item{`X`}{Canonical variate scores for the X variables} 
+#'         \item{`Y`}{Canonical variate scores for the Y variables} } 
 #'         } 
 #'     \item{X}{The matrix X} 
 #'     \item{Y}{The matrix Y}
-#' \item{weights}{Observation weights, if supplied, else \code{NULL}}
+#' \item{weights}{Observation weights, if supplied, else `NULL`}
 #' \item{structure}{Structure correlations, a list of 4 components:
-#'     \code{X.xscores}, 
-#'     \code{Y.xscores}, 
-#'     \code{X.yscores}, 
-#'     \code{Y.yscores}}
+#'     `X.xscores`, 
+#'     `Y.xscores`, 
+#'     `X.yscores`, 
+#'     `Y.yscores`}
 #' 
 #' \item{structure}{Structure correlations ("loadings"), a list of 4
 #' components: 
@@ -163,7 +163,7 @@
 #'      \item{Y.yscores}{Structure correlations of the Y variables with the Ycan canonical scores} 
 #'  }
 #' 
-#' The formula method also returns components \code{call} and \code{terms} }
+#' The formula method also returns components `call` and `terms` }
 #' @note Not all features of CCA are presently implemented: standardized vs.
 #' raw scores, more flexible handling of missing data, other plot methods, ...
 #' @author Michael Friendly
@@ -181,11 +181,11 @@
 #' 
 #' \code{\link{candisc}} for related methods focused on multivariate linear
 #' models with one or more factors among the X variables.
-#' @references Gittins, R. (1985). \emph{Canonical Analysis: A Review with
-#' Applications in Ecology}, Berlin: Springer.
+#' @references Gittins, R. (1985). *Canonical Analysis: A Review with
+#' Applications in Ecology*, Berlin: Springer.
 #' 
-#' Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979). \emph{Multivariate
-#' Analysis}. London: Academic Press.
+#' Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979). *Multivariate
+#' Analysis*. London: Academic Press.
 #' @keywords multivariate
 #' @examples
 #' 
@@ -265,7 +265,7 @@ cancor <- function(x, ...) {
   UseMethod("cancor", x)
 }
 
-#' @describeIn cancor \code{"formula"} method.
+#' @describeIn cancor `"formula"` method.
 #' @export
 cancor.formula <- function(formula, data, subset, weights,
                            na.rm = TRUE,           # DONE: now just use na.rm
@@ -327,7 +327,7 @@ Var <- function(x, na.rm = TRUE, use, weights) {
 # DONE:  allow weights, by use of cov.wt() as in dataEllipse()
 # FIXED: row.names should refer to original x, because as.matrix() strips them
 
-#' @describeIn cancor \code{"default"} method.
+#' @describeIn cancor `"default"` method.
 #' @export
 cancor.default <- function(x, y,
                            weights,
@@ -464,7 +464,7 @@ stars <- function(p, width = 30) {
 }
 
 # DONE: move the printout of coefficients to a summary method
-#' @describeIn cancor \code{print()} method for \code{"cancor"} objects.
+#' @describeIn cancor `print()` method for `"cancor"` objects.
 #' @export
 print.cancor <- function(x, digits = max(getOption("digits") - 2, 3), ...) {
   names <- x$names
@@ -494,7 +494,7 @@ print.cancor <- function(x, digits = max(getOption("digits") - 2, 3), ...) {
 }
 
 # moved printout of coefficients here
-#' @describeIn cancor \code{summary()} method for \code{"cancor"} objects.
+#' @describeIn cancor `summary()` method for `"cancor"` objects.
 #' @export
 summary.cancor <- function(object, digits = max(getOption("digits") - 2, 3), ...) {
   names <- object$names
@@ -516,7 +516,7 @@ scores <- function(x, ...) {
 }
 
 # TODO: check rownames
-#' @describeIn cancor \code{scores()} method for \code{"cancor"} objects.
+#' @describeIn cancor `scores()` method for `"cancor"` objects.
 #' @export
 scores.cancor <- function(x, 
                           type = c("x", "y", "both", "list", "data.frame"), ...) {
@@ -530,7 +530,7 @@ scores.cancor <- function(x,
   )
 }
 
-#' @describeIn cancor \code{coef()} method for \code{"cancor"} objects.
+#' @describeIn cancor `coef()` method for `"cancor"` objects.
 #' @export
 coef.cancor <- function(object, 
                         type = c("x", "y", "both", "list"), 

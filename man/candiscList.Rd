@@ -31,7 +31,7 @@ response}
 Normally, this is computed internally by \code{Anova(mod)}}
 
 \item{ndim}{Number of dimensions to store in the \code{means},
-\code{structure}, \code{scores} and \code{coeffs.*} components.
+\code{structure}, \code{scores} and \verb{coeffs.*} components.
 The default is the rank of the H matrix for the hypothesis term.}
 
 \item{object, x}{A candiscList object}

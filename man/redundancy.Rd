@@ -74,7 +74,7 @@ redundancy(cc)
 \references{
 Muller K. E. (1981).
 Relationships between redundancy analysis, canonical correlation, and multivariate regression.
-\emph{Psychometrika}, \bold{46}(2), 139-42.
+\emph{Psychometrika}, \strong{46}(2), 139-42.
 
 Stewart, D. and Love, W. (1968). A general canonical correlation
 index.  \emph{Psychological Bulletin}, 70, 160-163.

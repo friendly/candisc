@@ -23,7 +23,7 @@ There is no missing data.
 \code{craftsman} \code{farmer} \code{homemaker} \code{laborer}
 \code{manager} \code{military} \code{operative} \code{prof1} \code{prof2}
 \code{proprietor} \code{protective} \code{sales} \code{school}
-\code{service} \code{technical} \code{not working}}
+\code{service} \code{technical} \verb{not working}}
 \item{\code{read}}{Standardized reading score: a numeric vector}
 \item{\code{write}}{Standardized writing score: a numeric vector}
 \item{\code{math}}{Standardized math score: a numeric vector}

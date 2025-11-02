@@ -49,7 +49,7 @@ this should be a matrix or data.frame whose columns contain the X variables}
 
 \item{\dots}{Other arguments, passed to methods}
 
-\item{formula}{A two-sided formula of the form \code{cbind(y1, y2, y3, \dots) ~ x1 + x2 + x3 + \dots}}
+\item{formula}{A two-sided formula of the form \verb{cbind(y1, y2, y3, \\dots) ~ x1 + x2 + x3 + \\dots}}
 
 \item{data}{The data.frame within which the formula is evaluated}
 
@@ -114,7 +114,7 @@ between each canonical variate for the Y variables with the corresponding
 canonical variate for the X variables.}
 \item{names}{Names for various
 items, a list of 4 components: \code{X}, \code{Y}, \code{row.names}, \code{set.names}}
-\item{ndim}{Number of canonical dimensions extracted, \code{<= min(p,q)}}
+\item{ndim}{Number of canonical dimensions extracted, \verb{<= min(p,q)}}
 \item{dim}{Problem dimensions, a list of 3 components:
 \code{p} (number of X variables),
 \code{q} (number of Y variables),
@@ -153,7 +153,7 @@ methods in the \code{\link[heplots]{heplots}} package.
 
 The package provides the following display, extractor and plotting methods for \code{"cancor"} objects
 \describe{
-\item{\code{print(), summary()}}{Print and summarise the CCA}
+\item{\verb{print(), summary()}}{Print and summarise the CCA}
 \item{\code{coef()}}{Extract coefficients for X, Y, or both }
 \item{\code{scores()}}{Extract observation scores on the canonical variables}
 \item{\code{redundancy()}}{Redundancy analysis: proportion of variances of the

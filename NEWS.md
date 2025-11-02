@@ -4,6 +4,8 @@
 * Now use `Roxygen: list(markdown = TRUE)` in DESCRIPTION
 * Added `plot_discrim` to plot decision regions for discriminant analysis using contours or background tiles
 * Added `reflect()` generic to allow axis reversal for candisc and cancor object
+* Added additional plots to dataset documentation
+* Ran `roxygen2md(scope = "simple")` for first pass of roxygen conversion to markdown
 
 
 ## Version 0.9.2

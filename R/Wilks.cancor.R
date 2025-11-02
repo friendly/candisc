@@ -7,14 +7,14 @@
 #' statistics using Rao's approximation.
 #' 
 #' @aliases Wilks Wilks.cancor Wilks.candisc
-#' @param object An object of class \code{"cancor""} or \code{"candisc""}
+#' @param object An object of class `"cancor""` or `"candisc""`
 #' @param \dots Other arguments passed to methods (not used)
-#' @return A data.frame (of class \code{"anova"}) containing the test
+#' @return A data.frame (of class `"anova"`) containing the test
 #' statistics 
 #' @author Michael Friendly
 #' @seealso \code{\link{cancor}}, ~~~
 #' @references Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979).
-#' \emph{Multivariate Analysis}. London: Academic Press.
+#' *Multivariate Analysis*. London: Academic Press.
 #' @keywords htest
 #' @examples
 #' 
@@ -35,7 +35,7 @@ Wilks <- function (object, ...) {
 	UseMethod("Wilks")
 }
 
-#' @describeIn Wilks \code{"cancor"} method.
+#' @describeIn Wilks `"cancor"` method.
 #' @export
 Wilks.cancor <- function(object, ...) {
 # tests of canonical dimensions
@@ -80,7 +80,7 @@ tests
 # Rao's F approximation for canonical discriminant analysis
 # using code from Martina Vandebroek <martina.vandebroek@kuleuven.be>
 
-#' @describeIn Wilks \code{print()} method for \code{"candisc"} objects.
+#' @describeIn Wilks `print()` method for `"candisc"` objects.
 #' @export
 Wilks.candisc <- function(object, ...) {
   

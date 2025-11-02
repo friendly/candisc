@@ -12,7 +12,7 @@
 #' \code{\link[rgl]{lines3d}} in 3D) with labels for each (using
 #' \code{\link[graphics]{text}} or \code{\link[rgl]{texts3d}}).
 #' 
-#' The graphical parameters \code{col}, \code{lty} and \code{lwd} can be
+#' The graphical parameters `col`, `lty` and `lwd` can be
 #' vectors of length greater than one and will be recycled if necessary
 #' 
 #' @aliases vectors vectors3d
@@ -24,14 +24,14 @@
 #' @param col color(s) for the vectors.
 #' @param lwd line width(s) for the vectors.
 #' @param cex color(s) for the vectors.
-#' @param length For \code{vectors}, length of the edges of the arrow head (in
+#' @param length For `vectors`, length of the edges of the arrow head (in
 #'        inches).
-#' @param angle For \code{vectors}, angle from the shaft of the arrow to the
+#' @param angle For `vectors`, angle from the shaft of the arrow to the
 #'        edge of the arrow head.
-#' @param pos For \code{vectors}, position of the text label relative to the
-#'        vector head. If \code{pos==NULL}, labels are positioned labels outside,
+#' @param pos For `vectors`, position of the text label relative to the
+#'        vector head. If `pos==NULL`, labels are positioned labels outside,
 #'        relative to arrow ends.
-#' @param \dots other graphical parameters, such as \code{lty}, \code{xpd}, ...
+#' @param \dots other graphical parameters, such as `lty`, `xpd`, ...
 #' @return None
 #' @author Michael Friendly
 #' @seealso \code{\link[graphics]{arrows}}, \code{\link[graphics]{text}},

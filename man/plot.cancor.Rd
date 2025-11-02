@@ -78,8 +78,8 @@ from the centroid.}
 
 \item{id.cex, id.col}{Character size and color for labeled points}
 
-\item{\dots}{Other arguments passed down to \code{plot(\dots)} and
-\code{points(\dots)}}
+\item{\dots}{Other arguments passed down to \verb{plot(\\dots)} and
+\verb{points(\\dots)}}
 }
 \value{
 None.  Used for its side effect of producing a plot. \%\% ~Describe

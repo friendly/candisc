@@ -21,13 +21,13 @@
 
 #' Canonical discriminant analysis
 #' 
-#' \code{candisc} performs a generalized canonical discriminant analysis for
-#' one term in a multivariate linear model (i.e., an \code{mlm} object),
+#' `candisc` performs a generalized canonical discriminant analysis for
+#' one term in a multivariate linear model (i.e., an `mlm` object),
 #' computing canonical scores and vectors.  It represents a transformation of
 #' the original variables into a canonical space of maximal differences for the
 #' term, controlling for other model terms.
 #' 
-#' In typical usage, the \code{term} should be a factor or interaction
+#' In typical usage, the `term` should be a factor or interaction
 #' corresponding to a multivariate test with 2 or more degrees of freedom for
 #' the null hypothesis.
 #' 
@@ -37,67 +37,67 @@
 #' canonical variate produces maximal separation among the groups (e.g.,
 #' maximum univariate F statistics), and (b) all canonical variates are
 #' mutually uncorrelated.  For a one-way MANOVA with g groups and p responses,
-#' there are \code{dfh} = min( g-1, p) such canonical dimensions, and tests,
+#' there are `dfh` = min( g-1, p) such canonical dimensions, and tests,
 #' initially stated by Bartlett (1938) allow one to determine the number of
 #' significant canonical dimensions.
 #' 
 #' Computational details for the one-way case are described in Cooley & Lohnes
-#' (1971), and in the \emph{SAS/STAT User's Guide}, "The CANDISC procedure:
+#' (1971), and in the *SAS/STAT User's Guide*, "The CANDISC procedure:
 #' Computational Details,"
-#' \url{http://support.sas.com/documentation/cdl/en/statug/63962/HTML/default/viewer.htm#statug_candisc_sect012.htm}.
+#' <http://support.sas.com/documentation/cdl/en/statug/63962/HTML/default/viewer.htm#statug_candisc_sect012.htm>.
 #' 
 #' A generalized canonical discriminant analysis extends this idea to a general
-#' multivariate linear model.  Analysis of each term in the \code{mlm} produces
+#' multivariate linear model.  Analysis of each term in the `mlm` produces
 #' a rank \eqn{df_h}{dfh} H matrix sum of squares and crossproducts matrix that
 #' is tested against the rank \eqn{df_e}{dfe} E matrix by the standard
 #' multivariate tests (Wilks' Lambda, Hotelling-Lawley trace, Pillai trace,
-#' Roy's maximum root test).  For any given term in the \code{mlm}, the
+#' Roy's maximum root test).  For any given term in the `mlm`, the
 #' generalized canonical discriminant analysis amounts to a standard
 #' discriminant analysis based on the H matrix for that term in relation to the
 #' full-model E matrix.
 #' 
 #' The plot method for candisc objects is typically a 2D plot, similar to a
 #' biplot. It shows the canonical scores for the groups defined by the
-#' \code{term} as points and the canonical structure coefficients as vectors
+#' `term` as points and the canonical structure coefficients as vectors
 #' from the origin.
 #' 
-#' If the canonical structure for a \code{term} has \code{ndim==1}, or
-#' \code{length(which)==1}, the 1D representation consists of a boxplot of
+#' If the canonical structure for a `term` has `ndim==1`, or
+#' `length(which)==1`, the 1D representation consists of a boxplot of
 #' canonical scores and a vector diagram showing the magnitudes of the
 #' structure coefficients.
 #' 
 #' @aliases candisc candisc.mlm coef.candisc plot.candisc print.candisc
 #'          summary.candisc
-#' @param mod An mlm object, such as computed by \code{lm()} with a
+#' @param mod An mlm object, such as computed by `lm()` with a
 #'        multivariate response
-#' @param term the name of one term from \code{mod} for which the canonical
+#' @param term the name of one term from `mod` for which the canonical
 #'        analysis is performed.
-#' @param type type of test for the model \code{term}, one of: "II", "III", "2", or "3"
-#' @param manova the \code{Anova.mlm} object corresponding to \code{mod}.
-#'        Normally, this is computed internally by \code{Anova(mod)}
+#' @param type type of test for the model `term`, one of: "II", "III", "2", or "3"
+#' @param manova the `Anova.mlm` object corresponding to `mod`.
+#'        Normally, this is computed internally by `Anova(mod)`
 #' @param ndim Number of dimensions to store in (or retrieve from, for the
-#'        \code{summary} method) the \code{means}, \code{structure}, \code{scores} and
-#'        \code{coeffs.*} components.  
+#'        `summary` method) the `means`, `structure`, `scores` and
+#'        `coeffs.*` components.  
 #'        The default is the rank of the H matrix for the hypothesis term.
 #' @param object,x A candisc object
 #' @param which A vector of one or two integers, selecting the canonical
-#'        dimension(s) to plot. If the canonical structure for a \code{term} has
-#'        \code{ndim==1}, or \code{length(which)==1}, a 1D representation of canonical
-#'        scores and structure coefficients is produced by the \code{plot} method.
+#'        dimension(s) to plot. If the canonical structure for a `term` has
+#'        `ndim==1`, or `length(which)==1`, a 1D representation of canonical
+#'        scores and structure coefficients is produced by the `plot` method.
 #'        Otherwise, a 2D plot is produced.
 #' @param conf Confidence coefficient for the confidence circles around
-#'        canonical means plotted in the \code{plot} method
+#'        canonical means plotted in the `plot` method
 #' @param col A vector of the unique colors to be used for the levels of the
-#'        term in the \code{plot} method, one for each level of the \code{term}.  In
+#'        term in the `plot` method, one for each level of the `term`.  In
 #'        this version, you should assign colors and point symbols explicitly, rather
 #'        than relying on the somewhat arbitrary defaults, based on
 #'        \code{\link[grDevices]{palette}}
 #' @param pch A vector of the unique point symbols to be used for the levels of
-#'        the term in the \code{plot} method
+#'        the term in the `plot` method
 #' @param scale Scale factor for the variable vectors in canonical space.  If
 #'        not specified, a scale factor is calculated to make the variable vectors
 #'        approximately fill the plot space.
-#' @param asp Aspect ratio for the \code{plot} method.  The \code{asp=1} (the
+#' @param asp Aspect ratio for the `plot` method.  The `asp=1` (the
 #'        default) assures that the units on the horizontal and vertical axes are the
 #'        same, so that lengths and angles of the variable vectors are interpretable.
 #' @param var.col Color used to plot variable vectors
@@ -108,63 +108,63 @@
 #' @param var.pos Position(s) of variable vector labels wrt. the end point.  If
 #'        not specified, the labels are out-justified left and right with respect to
 #'        the end points.
-#' @param rev.axes Logical, a vector of \code{length(which)}. \code{TRUE}
+#' @param rev.axes Logical, a vector of `length(which)`. `TRUE`
 #'        causes the orientation of the canonical scores and structure coefficients to
 #'        be reversed along a given axis.
 #' @param ellipse Draw data ellipses for canonical scores?
 #' @param ellipse.prob Coverage probability for the data ellipses
 #' @param fill.alpha Transparency value for the color used to fill the
-#'        ellipses.  Use \code{fill.alpha} to draw the ellipses unfilled.
+#'        ellipses.  Use `fill.alpha` to draw the ellipses unfilled.
 #' @param prefix Prefix used to label the canonical dimensions plotted
 #' @param suffix Suffix for labels of canonical dimensions. If
-#'        \code{suffix=TRUE} the percent of hypothesis (H) variance accounted for by
+#'        `suffix=TRUE` the percent of hypothesis (H) variance accounted for by
 #'        each canonical dimension is added to the axis label.
 #' @param titles.1d A character vector of length 2, containing titles for the
 #'        panels used to plot the canonical scores and structure vectors, for the case
 #'        in which there is only one canonical dimension.
-#' @param points.1d Logical value for \code{plot.candisc} when only one
+#' @param points.1d Logical value for `plot.candisc` when only one
 #'        canonical dimension.
 #' @param means Logical value used to determine if canonical means are printed
 #' @param scores Logical value used to determine if canonical scores are
 #'        printed
 #' @param coef Type of coefficients printed by the summary method. Any one or
-#'        more of \code{"std"}, \code{"raw"}, or \code{"structure"}
+#'        more of `"std"`, `"raw"`, or `"structure"`
 #' @param digits significant digits to print.
 #' @param LRtests logical; should likelihood ratio tests for the canonical
 #'        dimensions be printed?
-#' @param \dots arguments to be passed down.  In particular, \code{type="n"}
-#'        can be used with the \code{plot} method to suppress the display of canonical
+#' @param \dots arguments to be passed down.  In particular, `type="n"`
+#'        can be used with the `plot` method to suppress the display of canonical
 #'        scores.
-#' @return An object of class \code{candisc} with the following components:
-#' \item{dfh }{hypothesis degrees of freedom for \code{term}} 
-#' \item{dfe }{error degrees of freedom for the \code{mlm}} 
+#' @return An object of class `candisc` with the following components:
+#' \item{dfh }{hypothesis degrees of freedom for `term`} 
+#' \item{dfe }{error degrees of freedom for the `mlm`} 
 #' \item{rank }{number of non-zero eigenvalues of \eqn{HE^{-1}}} 
 #' \item{eigenvalues }{eigenvalues of \eqn{HE^{-1}}} 
 #' \item{canrsq }{squared canonical correlations} 
-#' \item{pct }{A vector containing the percentages of the \code{canrsq} of their total.}
-#' \item{ndim }{Number of canonical dimensions stored in the \code{means},
-#'      \code{structure} and \code{coeffs.*} components} 
+#' \item{pct }{A vector containing the percentages of the `canrsq` of their total.}
+#' \item{ndim }{Number of canonical dimensions stored in the `means`,
+#'      `structure` and `coeffs.*` components} 
 #' \item{means }{A data.frame containing the class means for the levels of the 
 #'      factor(s) in the term}
-#' \item{factors }{A data frame containing the levels of the factor(s) in the \code{term}} 
-#' \item{term }{name of the \code{term}} 
+#' \item{factors }{A data frame containing the levels of the factor(s) in the `term`} 
+#' \item{term }{name of the `term`} 
 #' \item{terms }{A character vector containing the names of the terms in the
-#'      \code{mlm} object}
+#'      `mlm` object}
 #' \item{coeffs.raw }{A matrix containing the raw canonical coefficients}
 #' \item{coeffs.std }{A matrix containing the standardized canonical coefficients} 
 #' \item{structure }{A matrix containing the canonical structure
-#'     coefficients on \code{ndim} dimensions, i.e., the correlations between the
+#'     coefficients on `ndim` dimensions, i.e., the correlations between the
 #'     original variates and the canonical scores.  These are sometimes referred to
 #'     as Total Structure Coefficients.} 
 #' \item{scores }{A data frame containing the
-#'     predictors in the \code{mlm} model and the canonical scores on \code{ndim}
-#'     dimensions.  These are calculated as \code{Y \%*\% coeffs.raw}, where \code{Y}
+#'     predictors in the `mlm` model and the canonical scores on `ndim`
+#'     dimensions.  These are calculated as `Y \%*\% coeffs.raw`, where `Y`
 #'     contains the standardized response variables.}
 #' @author Michael Friendly and John Fox
 #' @seealso \code{\link{candiscList}}, \code{\link[heplots]{heplot}},
 #' \code{\link[heplots]{heplot3d}}
 #' @references Bartlett, M. S. (1938). Further aspects of the theory of
-#' multiple regression. Proc. Cambridge Philosophical Society \bold{34}, 33-34.
+#' multiple regression. Proc. Cambridge Philosophical Society **34**, 33-34.
 #' 
 #' Cooley, W.W. & Lohnes, P.R. (1971). Multivariate Data Analysis, New York:
 #' Wiley.
@@ -207,7 +207,7 @@ candisc <-
   function(mod, ...) UseMethod("candisc")
 
 
-#' @describeIn candisc \code{"mlm"} method.
+#' @describeIn candisc `"mlm"` method.
 #' @export
 candisc.mlm <- function(mod,
                         term,
@@ -300,7 +300,7 @@ candisc.mlm <- function(mod,
 
 # print method for candisc objects
 
-#' @describeIn candisc \code{print()} method for \code{"candisc"} objects.
+#' @describeIn candisc `print()` method for `"candisc"` objects.
 #' @export
 print.candisc <- function(x, digits = max(getOption("digits") - 2, 3), LRtests = TRUE, ...) {
   table <- canrsqTable(x)
@@ -378,7 +378,7 @@ seqWilks <- function(eig, p, df.h, df.e) {
 
 ## summary method for a candisc object
 
-#' @describeIn candisc \code{summary()} method for \code{"candisc"} objects.
+#' @describeIn candisc `summary()` method for `"candisc"` objects.
 #' @export
 summary.candisc <- function(object, means = TRUE, scores = FALSE,
                             coef = c("std"),
@@ -427,7 +427,7 @@ summary.candisc <- function(object, means = TRUE, scores = FALSE,
 }
 
 ## coef method for a candisc object
-#' @describeIn candisc \code{coef()} method for \code{"candisc"} objects.
+#' @describeIn candisc `coef()` method for `"candisc"` objects.
 #' @export
 coef.candisc <- function(object, type = c("std", "raw", "structure"), ...) {
   type <- match.arg(type)
@@ -441,7 +441,7 @@ coef.candisc <- function(object, type = c("std", "raw", "structure"), ...) {
 # Now refer to car:::predictor.names for car_2.0
 # Now just copy predictor.names from car to avoid namespace problem
 
-#' Get predictor names from a \code{lm}-like model
+#' Get predictor names from a `lm`-like model
 #'
 #' @param model Model object
 #' @param ...   other arguments (ignored)
@@ -455,14 +455,14 @@ predictor.names <- function(model, ...) {
   UseMethod("predictor.names")
 }
 
-#' @describeIn predictor.names \code{"default"} method.
+#' @describeIn predictor.names `"default"` method.
 #' @export
 predictor.names.default <- function(model, ...) {
   predictors <- attr(terms(model), "variables")
   as.character(predictors[3:length(predictors)])
 }
 
-#' @describeIn candisc \code{scores()} method for \code{"candisc"} objects.
+#' @describeIn candisc `scores()` method for `"candisc"` objects.
 #' @export
 scores.candisc <- function(x, ...) {
   x$scores

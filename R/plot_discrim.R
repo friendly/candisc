@@ -22,7 +22,7 @@
 #' @param point.size size of the plot symbols use to show the data observations
 #' @param ... further parameters passed to `predict()`
 #' @param modes.means levels to use for evaluating predictions using the variables **not* specified in `vars`. If not specified, the function uses the means for quantitative variables, ...
-#' @author Original code by Oliver on SO \url{https://stackoverflow.com/questions/63782598/quadratic-discriminant-analysis-qda-plot-in-r}. Generalized by Michael Friendly
+#' @author Original code by Oliver on SO <https://stackoverflow.com/questions/63782598/quadratic-discriminant-analysis-qda-plot-in-r>. Generalized by Michael Friendly
 #' @seealso [klaR::partimat()]
 #' @importFrom ggplot2 ggplot aes geom_point geom_tile geom_contour .data 
 #' @export

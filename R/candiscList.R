@@ -11,8 +11,8 @@
 
 #' Canonical discriminant analyses
 #' 
-#' \code{candiscList} performs a generalized canonical discriminant analysis
-#' for all terms in a multivariate linear model (i.e., an \code{mlm} object),
+#' `candiscList` performs a generalized canonical discriminant analysis
+#' for all terms in a multivariate linear model (i.e., an `mlm` object),
 #' computing canonical scores and vectors.
 #' 
 #' 
@@ -20,26 +20,26 @@
 #'          summary.candiscList
 #' @param mod An mlm object, such as computed by lm() with a multivariate
 #'          response
-#' @param type type of test for the model \code{term}, one of: "II", "III",
+#' @param type type of test for the model `term`, one of: "II", "III",
 #'          "2", or "3"
-#' @param manova the \code{Anova.mlm} object corresponding to \code{mod}.
-#'       Normally, this is computed internally by \code{Anova(mod)}
-#' @param ndim Number of dimensions to store in the \code{means},
-#'       \code{structure}, \code{scores} and \code{coeffs.*} components.  
+#' @param manova the `Anova.mlm` object corresponding to `mod`.
+#'       Normally, this is computed internally by `Anova(mod)`
+#' @param ndim Number of dimensions to store in the `means`,
+#'       `structure`, `scores` and `coeffs.*` components.  
 #'       The default is the rank of the H matrix for the hypothesis term.
 #' @param object,x A candiscList object
-#' @param term The name of one term to be plotted for the \code{plot} method.
+#' @param term The name of one term to be plotted for the `plot` method.
 #'       If not specified, one candisc plot is produced for each term in the
-#'       \code{mlm} object.
-#' @param ask If \code{TRUE} (the default, when running interactively), a menu
+#'       `mlm` object.
+#' @param ask If `TRUE` (the default, when running interactively), a menu
 #'       of terms is presented; if ask is FALSE, canonical plots for all terms are
 #'       produced.
-#' @param graphics if \code{TRUE} (the default, when running interactively),
+#' @param graphics if `TRUE` (the default, when running interactively),
 #'       then the menu of terms to plot is presented in a dialog box rather than as a
 #'       text menu.
 #' @param \dots arguments to be passed down.
-#' @return An object of class \code{candiscList} which is a list of
-#'       \code{"candisc"} objects for the terms in the mlm.
+#' @return An object of class `candiscList` which is a list of
+#'       `"candisc"` objects for the terms in the mlm.
 #' @author Michael Friendly and John Fox
 #' @seealso \code{\link{candisc}}, \code{\link[heplots]{heplot}},
 #'       \code{\link[heplots]{heplot3d}}
@@ -65,7 +65,7 @@ candiscList <- function(mod, ...){
     UseMethod("candiscList")
     }
     
-#' @describeIn candiscList \code{"mlm"} method.
+#' @describeIn candiscList `"mlm"` method.
 #' @export
 candiscList.mlm <- function(mod, type="2", manova, ndim, ...){
     if (missing(manova)) manova <- Anova(mod, type=type)
@@ -84,7 +84,7 @@ candiscList.mlm <- function(mod, type="2", manova, ndim, ...){
     result
     }
 
-#' @describeIn candiscList \code{print()} method for \code{"candiscList"} objects.
+#' @describeIn candiscList `print()` method for `"candiscList"` objects.
 #' @export
 print.candiscList <- function(x, ...){
     terms <- names(x)
@@ -95,7 +95,7 @@ print.candiscList <- function(x, ...){
         }
     }
 
-#' @describeIn candiscList \code{summary()} method for \code{"candiscList"} objects.
+#' @describeIn candiscList `summary()` method for `"candiscList"` objects.
 #' @export
 summary.candiscList <- function(object, ...){
     terms <- names(object)
@@ -106,7 +106,7 @@ summary.candiscList <- function(object, ...){
         }
     }
 
-#' @describeIn candiscList \code{plot()} method for \code{"candiscList"} objects.
+#' @describeIn candiscList `plot()` method for `"candiscList"` objects.
 #' @export
 plot.candiscList <- function(x, term, ask=interactive(), graphics = TRUE, ...) {
     if (!missing(term)){

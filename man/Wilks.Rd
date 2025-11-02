@@ -13,7 +13,7 @@ Wilks(object, ...)
 \method{Wilks}{candisc}(object, ...)
 }
 \arguments{
-\item{object}{An object of class \code{"cancor""} or \code{"candisc""}}
+\item{object}{An object of class \verb{"cancor""} or \verb{"candisc""}}
 
 \item{\dots}{Other arguments passed to methods (not used)}
 }

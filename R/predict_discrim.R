@@ -4,7 +4,7 @@
 #  
 #' Predicted values for discriminant analysis
 #' 
-#' \code{predict_discrim} calculates predicted class membership values for a linear or quadratic discriminant analysis,
+#' `predict_discrim` calculates predicted class membership values for a linear or quadratic discriminant analysis,
 #' returning a `data.frame` suitable for graphing or other analysis.
 #' 
 #' @details

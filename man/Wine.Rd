@@ -25,7 +25,7 @@ A data frame with 178 observations on the following 14 variables.
 }
 \source{
 This data set was obtained from the UCI Machine Learning Repository,
-\code{http://archive.ics.uci.edu/ml/datasets/Wine}. This page references a
+\verb{http://archive.ics.uci.edu/ml/datasets/Wine}. This page references a
 large number of papers that use this data set to compare different methods.
 }
 \description{
