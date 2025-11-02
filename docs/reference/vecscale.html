@@ -11,7 +11,7 @@ region."><meta property="og:image" content="https://friendly.github.io/candisc/l
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,31 +61,36 @@ region.</p>
 
 
 <dl><dt id="arg-vectors">vectors<a class="anchor" aria-label="anchor" href="#arg-vectors"></a></dt>
-<dd><p>a two-column matrix giving the end points of a collection of
-vectors</p></dd>
+<dd><p>a two-column matrix giving the end points of a collection of vectors</p></dd>
 
 
 <dt id="arg-bbox">bbox<a class="anchor" aria-label="anchor" href="#arg-bbox"></a></dt>
 <dd><p>the bounding box of the containing plot region within which the
-vectors are to be plotted</p></dd>
+vectors are to be plotted. The default is the bounding box of the current plot window,
+obtained from <code>par("usr")</code>.</p></dd>
 
 
 <dt id="arg-origin">origin<a class="anchor" aria-label="anchor" href="#arg-origin"></a></dt>
-<dd><p>origin of the vectors</p></dd>
+<dd><p>origin of the vectors. Defaults to (0, 0).</p></dd>
 
 
 <dt id="arg-factor">factor<a class="anchor" aria-label="anchor" href="#arg-factor"></a></dt>
-<dd><p>maximum length of the rescaled vectors relative to the maximum
-possible</p></dd>
+<dd><p>maximum length of the rescaled vectors relative to the maximum possible</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>scale factor, the multiplier of the vectors</p>
+    <p>scale factor, the numeric multiplier of the vectors</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>This function is used in, e.g., <code><a href="vectors.html">vectors()</a></code> to draw labeled vectors in a dimension-reduction plot.
+The scaling calculated here doesn't directly calculate space for the labels to fit within the plot regions. The <code>factor</code> argument
+can provide for that, shrinking the vectors by that factor.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="vectors.html">vectors</a></code></p></div>
+    <div class="dont-index"><p><code><a href="vectors.html">vectors()</a></code>, <code><a href="candisc.html">plot.candisc()</a></code>, <code><a href="heplot.candisc.html">heplot.candisc()</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -108,7 +113,7 @@ possible</p></dd>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bbox</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/arrows.html" class="external-link">arrows</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="va">vecs</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">vecs</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, angle<span class="op">=</span><span class="fl">10</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu">vecscale</span><span class="op">(</span><span class="va">vecs</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.336671</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.180242</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/arrows.html" class="external-link">arrows</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="va">s</span><span class="op">*</span><span class="va">vecs</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">s</span><span class="op">*</span><span class="va">vecs</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, angle<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="vecscale-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>

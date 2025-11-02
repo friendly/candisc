@@ -58,8 +58,8 @@ used in the calculations.}
 
 \item{weights}{Observation weights. If supplied, this must be a vector of
 length equal to the number of observations in X and Y, typically within
-(0,1).  In that case, the variance-covariance matrices are computed using
-\code{\link[stats]{cov.wt}}, and the number of observations is taken as the
+(0,1).  In that case, the variance-covariance matrices are computed using \link[stats:cov.wt]{stats::cov.wt},
+and the number of observations is taken as the
 number of non-zero weights.}
 
 \item{na.rm}{logical, determining whether observations with missing cases
@@ -149,7 +149,7 @@ The formula method also returns components \code{call} and \code{terms} }
 \description{
 The function \code{cancor} generalizes and regularizes computation for
 canonical correlation analysis in a way conducive to visualization using
-methods in the \code{\link[heplots]{heplots}} package.
+methods in the \pkg{heplots} package.
 
 The package provides the following display, extractor and plotting methods for \code{"cancor"} objects
 \describe{
@@ -199,7 +199,7 @@ For visualization using HE plots, it is most natural to consider
 plots representing the relations among the canonical variables for the Y
 variables in terms of a multivariate linear model predicting the Y canonical
 scores, using either the X variables or the X canonical scores as
-predictors.  Such plots, using \code{\link{heplot.cancor}} provide a
+predictors.  Such plots, using \code{\link[=heplot.cancor]{heplot.cancor()}}  provide a
 low-rank (1D, 2D, 3D) visualization of the relations between the two sets,
 and so are useful in cases when there are more than 2 or 3 variables in each
 of X and Y.
@@ -334,7 +334,7 @@ complete, very messy return structure, no longer maintained).
 \code{\link[=heplot.cancor]{heplot.cancor()}} for CCA HE plots and \code{\link[heplots:heplot]{heplots::heplot()}}
 for generic heplot methods.
 
-\code{\link{candisc}} \code{\link[=candisc]{candisc()}} for related methods focused on multivariate linear
+\code{\link[=candisc]{candisc()}} for related methods focused on multivariate linear
 models with one or more factors among the X variables.
 }
 \author{

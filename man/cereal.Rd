@@ -67,6 +67,30 @@ The abbreviations for manufacturer, \code{mfr}, stand for:
 data(cereal)
 str(cereal)
 
+# Add explicit name of manufacturer
+# names for manufacturers
+mfr_names <- c(
+  "A" = "American Home Foods",
+  "G" = "General Mills",
+  "K" = "Kellog",
+  "N" = "Nabisco",
+  "P" = "Post",
+  "Q" = "Quaker Oats",
+  "R" = "Ralston Purina"
+)
+
+# recode `mfr` as `mfr_name`
+cereal <- cereal |>
+  mutate(mfr_name = recode(mfr, !!!mfr_names))
+
+# density plot of ratings
+library(ggplot2)
+ggplot(data = cereal,
+       aes(x = rating, fill = mfr_name, color = mfr_name)) +
+  geom_density(alpha = 0.1) +
+  theme_classic(base_size = 14) + 
+  theme(legend.position = "bottom")
+
 }
 \references{
 Jean Dos Santos, Breakfast Cereals: Data Analysis and Clustering,
@@ -74,7 +98,7 @@ Jean Dos Santos, Breakfast Cereals: Data Analysis and Clustering,
 and exploratory data analysis in R.
 }
 \seealso{
-\code{\link[MASS]{UScereal}} has a similar dataset with fewer observations and variables, but with the variables normalized to a portion of one US cup.
+\link[MASS:UScereal]{MASS::UScereal} has a similar dataset with fewer observations and variables, but with the variables normalized to a portion of one US cup.
 }
 \concept{MMRA}
 \concept{cancor}

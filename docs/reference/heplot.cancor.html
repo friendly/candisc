@@ -10,7 +10,7 @@ canonical correlation analysis. They provide a low-rank 2D (or 3D) view of
 the effects in the space of maximum canonical correlations, together with
 variable vectors representing the correlations of Y variables with the
 canonical dimensions.
-For consistency with heplot.candisc, the plots show effects in
+For consistency with heplot.candisc(), the plots show effects in
 the space of the canonical Y variables selected by which."><meta property="og:description" content="Hypothesis - Error (HE) plots for canonical correlation analysis provide a new graphical method
 for understanding the relations between two sets of variables, \(\mathbf{X}\) and \(\mathbf{Y}\).
 They are similar to HE plots for multivariate multiple regression (MMRA) problems,
@@ -22,7 +22,7 @@ canonical correlation analysis. They provide a low-rank 2D (or 3D) view of
 the effects in the space of maximum canonical correlations, together with
 variable vectors representing the correlations of Y variables with the
 canonical dimensions.
-For consistency with heplot.candisc, the plots show effects in
+For consistency with heplot.candisc(), the plots show effects in
 the space of the canonical Y variables selected by which."><meta property="og:image" content="https://friendly.github.io/candisc/logo.png"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
@@ -31,7 +31,7 @@ the space of the canonical Y variables selected by which."><meta property="og:im
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +72,7 @@ canonical correlation analysis. They provide a low-rank 2D (or 3D) view of
 the effects in the space of maximum canonical correlations, together with
 variable vectors representing the correlations of Y variables with the
 canonical dimensions.</p>
-<p>For consistency with <code><a href="heplot.candisc.html">heplot.candisc</a></code>, the plots show effects in
+<p>For consistency with <code><a href="heplot.candisc.html">heplot.candisc()</a></code>, the plots show effects in
 the space of the canonical Y variables selected by <code>which</code>.</p>
     </div>
 
@@ -101,7 +101,7 @@ the space of the canonical Y variables selected by <code>which</code>.</p>
 
 
 <dl><dt id="arg-mod">mod<a class="anchor" aria-label="anchor" href="#arg-mod"></a></dt>
-<dd><p>A <code>cancor</code> object</p></dd>
+<dd><p>A <code>"cancor"</code> object, as computed by <code><a href="cancor.html">cancor()</a></code></p></dd>
 
 
 <dt id="arg-which">which<a class="anchor" aria-label="anchor" href="#arg-which"></a></dt>
@@ -209,12 +209,9 @@ Analysis</em>. London: Academic Press.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>  \code{\link{cancor}} <span class="cf">for</span> details on canonical correlation as</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  implemented here;</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  \code{\link{plot.cancor}} <span class="cf">for</span> scatterplots of canonical</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  variable scores.</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  \code{\link{heplot.candisc}}, \code{\link[heplots]{heplot}},</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  \code{\link[car]{linearHypothesis}}</span></code></pre><p></p></div></div>
+    <div class="dont-index"><p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>  [<span class="fu">cancor</span>()] <span class="cf">for</span> details on canonical correlation as implemented here;</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  [<span class="fu">plot.cancor</span>()] <span class="cf">for</span> scatterplots of canonical  variable scores.</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  [<span class="fu">heplot.candisc</span>()], [heplots<span class="sc">::</span><span class="fu">heplot</span>()], [car<span class="sc">::</span><span class="fu">linearHypothesis</span>()]</span></code></pre><p></p></div></div>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>

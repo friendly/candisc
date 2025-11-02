@@ -8,12 +8,17 @@
 #' Draw Labeled Vectors in 2D or 3D
 #' 
 #' Graphics utility functions to draw vectors from an origin to a collection of
-#' points (using \code{\link[graphics]{arrows}} in 2D or
-#' \code{\link[rgl]{lines3d}} in 3D) with labels for each (using
-#' \code{\link[graphics]{text}} or \code{\link[rgl]{texts3d}}).
+#' points (using [graphics::arrows()] in 2D or
+#' [rgl::lines3d()] in 3D) with labels for each (using [graphics::text()]
+#' or [rgl::texts3d()]
 #' 
 #' The graphical parameters `col`, `lty` and `lwd` can be
-#' vectors of length greater than one and will be recycled if necessary
+#' vectors of length > 1 and will be recycled if necessary across the rows of `x` which define the vectors.
+#' 
+#' For use in high-level plots, `vecscale()` can be used to find a value for the `scale` argument to automatically re-scale 
+#' the vectors to approximately fill the plot region.
+#' 
+#' The option `xpd = TRUE` can be passed to `vectors()` via the `...` argument to avoid labels being clipped.
 #' 
 #' @aliases vectors vectors3d
 #' @param x A two-column matrix or a three-column matrix containing the end
@@ -29,22 +34,23 @@
 #' @param angle For `vectors`, angle from the shaft of the arrow to the
 #'        edge of the arrow head.
 #' @param pos For `vectors`, position of the text label relative to the
-#'        vector head. If `pos==NULL`, labels are positioned labels outside,
-#'        relative to arrow ends.
+#'        vector head. If `pos==NULL` (the default), labels are positioned labels outside,
+#'        relative to arrow ends
 #' @param \dots other graphical parameters, such as `lty`, `xpd`, ...
 #' @return None
 #' @author Michael Friendly
-#' @seealso \code{\link[graphics]{arrows}}, \code{\link[graphics]{text}},
-#' \code{\link[graphics]{segments}}
+#' @seealso [graphics::arrows()], [graphics::text()], [graphics::segments()]
 #' 
-#' \code{\link[rgl]{lines3d}}, \code{\link[rgl]{texts3d}}
+#'         [rgl::lines3d()], [rgl::texts3d()] 
 #' @keywords aplot
 #' @examples
 #' 
-#' plot(c(-3, 3), c(-3,3), type="n")
+#' set.seed(1234)
+#' plot(c(-3, 3), c(-3,3), type="n",
+#'      xlab = "X", ylab = "Y")
 #' X <- matrix(rnorm(10), ncol=2)
 #' rownames(X) <- LETTERS[1:5]
-#' vectors(X, scale=2, col=palette())
+#' vectors(X, scale=2, col=palette(), xpd = TRUE)
 #' 
 #' 
 #' @export vectors
@@ -63,12 +69,13 @@ vectors <- function(x, origin=c(0,0), labels=rownames(x),
 	        lwd=lwd, col=col, length=length, 
 	        angle=angle, ...)
 	if (!is.null(labels)) {
-		if(missing(pos)) pos <- ifelse(x[,1]>0, 4, 2)
+		if(missing(pos)) pos <- ifelse( (x[,1] - origin[,1]) > 0, 4, 2)
 		# DONE: position labels relative to arrow ends (outside)
 		text(x[,1], x[,2], labels, pos=pos, cex=cex, col=col, ...)
 		}
 }
 
+# Draw arrows with filled heads
 # the following function isn't exported
 
 .arrows <- function(..., angle=13){

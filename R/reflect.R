@@ -3,9 +3,11 @@
 #' Reflect Columns in an Object, reversing the sign of all elements
 #' 
 #' @description
-#' `candisc` objects have coefficients for the X and Y and weighted scores for these
+#' `candisc` and `cancor`  objects have coefficients for the X and Y and weighted scores for these,
 #' whose signs are arbitrary, in the sense that a given column can be reflected (multiplied by -1) without changing the fit.
-#' This function allows one to reflect any columns of the variable coefficients (and corresponding observation scores). 
+#' But, often you will want to reverse the direction of one or more dimensions for ease of interpretation.
+#' 
+#' This function allows you to reflect any columns of the variable coefficients (and corresponding observation scores). 
 #' This is often useful for interpreting a biplot, for example when a component (often the first) has all negative signs.
 #' 
 #' @details
@@ -15,6 +17,7 @@
 #' *  `"cancor"` objects
 #' *  `"candisc"` objects
 #' 
+#' Note that [plot.candisc()] and [plot.candisc()] can handle this internally using the argument `rev.axes`.
 #' 
 #' @param object  An object whose columns are to be reflected
 #' @param columns a vector of indices of the columns to reflect
@@ -22,6 +25,7 @@
 #'
 #' @returns The object with specified columns of the variable coefficients and observation scores multiplied by -1.
 #' @author Michael Friendly
+#' @seealso [ggbiplot::reflect] has similar methods for PCA-like objects
 #' @export
 reflect <- function(object, columns = 1:2, ...) {
   UseMethod("reflect")

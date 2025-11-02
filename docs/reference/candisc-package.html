@@ -17,7 +17,7 @@ predictor variables."><meta property="og:image" content="https://friendly.github
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,12 +63,12 @@ MANOVA design and is equivalent to canonical correlation analysis between a
 set of quantitative response variables and a set of dummy variables coded
 from the factor variable. The <code>candisc</code> package generalizes this to
 multi-way MANOVA designs for all terms in a multivariate linear model (i.e.,
-an <code>mlm</code> object), computing canonical scores and vectors for each term
-(giving a <code>candiscList</code> object).</p>
+an <code>"mlm"</code> object), computing canonical scores and vectors for each term
+(giving a <code>"candiscList"</code> object).</p>
 <p>The graphic functions are designed to provide low-rank (1D, 2D, 3D)
-visualizations of terms in a <code>mlm</code> via the <code><a href="candisc.html">plot.candisc</a></code>
-method, and the HE plot <code><a href="heplot.candisc.html">heplot.candisc</a></code> and
-<code><a href="heplot.candisc.html">heplot3d.candisc</a></code> methods. For <code>mlm</code>s with more than a few
+visualizations of terms in a <code>mlm</code> via the <code><a href="candisc.html">plot.candisc()</a></code>
+method, and the HE plot <code><a href="heplot.candisc.html">heplot.candisc()</a></code>  and
+<code><a href="heplot.candisc.html">heplot3d.candisc()</a></code> methods. For <code>mlm</code>s with more than a few
 response variables, these methods often provide a much simpler
 interpretation of the nature of effects in canonical space than heplots for
 pairs of responses or an HE plot matrix of all responses in variable space.</p>
@@ -76,14 +76,13 @@ pairs of responses or an HE plot matrix of all responses in variable space.</p>
 predictors can also be represented in a reduced-rank space by means of a
 canonical correlation transformation of the Y and X variables to
 uncorrelated canonical variates, Ycan and Xcan.  Computation for this
-analysis is provided by <code><a href="cancor.html">cancor</a></code> and related methods.
+analysis is provided by <code><a href="cancor.html">cancor()</a></code> and related methods.
 Visualization of these results in canonical space are provided by the
-<code><a href="plot.cancor.html">plot.cancor</a></code>, <code><a href="heplot.cancor.html">heplot.cancor</a></code> and
-<code><a href="heplot.cancor.html">heplot3d.cancor</a></code> methods.</p>
+<code><a href="plot.cancor.html">plot.cancor()</a></code>, <code><a href="heplot.cancor.html">heplot.cancor()</a></code> and <code><a href="heplot.cancor.html">heplot3d.cancor()</a></code> methods.</p>
 <p>These relations among response variables in linear models can also be useful
 for “effect ordering” (Friendly &amp; Kwan (2003) for <em>variables</em> in
 other multivariate data displays to make the displayed relationships more
-coherent.  The function <code><a href="varOrder.html">varOrder</a></code> implements a collection of
+coherent.  The function <code><a href="varOrder.html">varOrder()</a></code> implements a collection of
 these methods.</p>
 <p>A new vignette, <code><a href="../articles/diabetes.html">vignette("diabetes", package="candisc")</a></code>, illustrates
 some of these methods. A more comprehensive collection of examples is
@@ -96,14 +95,14 @@ may change in a later version.</p>
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Friendly, M. (2007).  HE plots for Multivariate General Linear Models.
 <em>Journal of Computational and Graphical Statistics</em>,
-<b>16</b>(2) 421–444.  <a href="http://datavis.ca/papers/jcgs-heplots.pdf" class="external-link">http://datavis.ca/papers/jcgs-heplots.pdf</a>,
+<strong>16</strong>(2) 421–444.  <a href="http://datavis.ca/papers/jcgs-heplots.pdf" class="external-link">http://datavis.ca/papers/jcgs-heplots.pdf</a>,
 <a href="https://doi.org/10.1198/106186007X208407" class="external-link">doi:10.1198/106186007X208407</a>
 .</p>
 <p>Friendly, M. &amp; Kwan, E. (2003). Effect Ordering for Data Displays,
-<em>Computational Statistics and Data Analysis</em>, <b>43</b>, 509-539.
+<em>Computational Statistics and Data Analysis</em>, <strong>43</strong>, 509-539.
 <a href="https://doi.org/10.1016/S0167-9473%2802%2900290-6" class="external-link">doi:10.1016/S0167-9473(02)00290-6</a></p>
 <p>Friendly, M. &amp; Sigal, M. (2014). Recent Advances in Visualizing Multivariate
-Linear Models. <em>Revista Colombiana de Estadistica</em> , <b>37</b>(2),
+Linear Models. <em>Revista Colombiana de Estadistica</em> , <strong>37</strong>(2),
 261-283.
 <a href="https://doi.org/10.15446/rce.v37n2spe.47934" class="external-link">doi:10.15446/rce.v37n2spe.47934</a>
 .</p>
@@ -117,8 +116,8 @@ Ecology</em>, Berlin: Springer.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://friendly.github.io/heplots/reference/heplot.html" class="external-link">heplot</a></code> for details about HE plots.</p>
-<p><code><a href="candisc.html">candisc</a></code>, <code><a href="cancor.html">cancor</a></code> for details about canonical
+    <div class="dont-index"><p><code><a href="https://friendly.github.io/heplots/reference/heplot.html" class="external-link">heplots::heplot()</a></code> for details about HE plots.</p>
+<p><code><a href="candisc.html">candisc()</a></code>, <code><a href="cancor.html">cancor()</a></code> for details about canonical
 discriminant analysis and canonical correlation analysis.</p></div>
     </div>
     <div class="section level2">

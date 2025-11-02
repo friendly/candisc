@@ -13,7 +13,7 @@
 #'@description 
 #' The function `cancor` generalizes and regularizes computation for
 #' canonical correlation analysis in a way conducive to visualization using
-#' methods in the \code{\link[heplots]{heplots}} package.
+#' methods in the \pkg{heplots} package.
 #' 
 #' The package provides the following display, extractor and plotting methods for `"cancor"` objects
 #' \describe{
@@ -63,7 +63,7 @@
 #' plots representing the relations among the canonical variables for the Y
 #' variables in terms of a multivariate linear model predicting the Y canonical
 #' scores, using either the X variables or the X canonical scores as
-#' predictors.  Such plots, using \code{\link{heplot.cancor}} provide a
+#' predictors.  Such plots, using [heplot.cancor()]  provide a
 #' low-rank (1D, 2D, 3D) visualization of the relations between the two sets,
 #' and so are useful in cases when there are more than 2 or 3 variables in each
 #' of X and Y.
@@ -91,8 +91,8 @@
 #'        used in the calculations.
 #' @param weights Observation weights. If supplied, this must be a vector of
 #'        length equal to the number of observations in X and Y, typically within
-#'        (0,1).  In that case, the variance-covariance matrices are computed using
-#'        \code{\link[stats]{cov.wt}}, and the number of observations is taken as the
+#'        (0,1).  In that case, the variance-covariance matrices are computed using [stats::cov.wt],
+#'        and the number of observations is taken as the
 #'        number of non-zero weights.
 #' @param na.rm logical, determining whether observations with missing cases
 #'        are excluded in the computation of the variance matrix of (X,Y).  See Notes
@@ -178,13 +178,15 @@
 #' [heplot.cancor()] for CCA HE plots and [heplots::heplot()]
 #' for generic heplot methods.
 #' 
-#' \code{\link{candisc}} [candisc()] for related methods focused on multivariate linear
+#' [candisc()] for related methods focused on multivariate linear
 #' models with one or more factors among the X variables.
+#' 
 #' @references Gittins, R. (1985). *Canonical Analysis: A Review with
 #' Applications in Ecology*, Berlin: Springer.
 #' 
 #' Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979). *Multivariate
 #' Analysis*. London: Academic Press.
+#' @author Michael Friendly
 #' @keywords multivariate
 #' @examples
 #' 

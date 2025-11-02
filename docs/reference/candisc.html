@@ -15,7 +15,7 @@ term, controlling for other model terms."><meta property="og:image" content="htt
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -185,8 +185,7 @@ canonical means plotted in the <code>plot</code> method</p></dd>
 <dd><p>A vector of the unique colors to be used for the levels of the
 term in the <code>plot</code> method, one for each level of the <code>term</code>.  In
 this version, you should assign colors and point symbols explicitly, rather
-than relying on the somewhat arbitrary defaults, based on
-<code><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></code></p></dd>
+than relying on the somewhat arbitrary defaults, based on <code><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">grDevices::palette()</a></code>.</p></dd>
 
 
 <dt id="arg-pch">pch<a class="anchor" aria-label="anchor" href="#arg-pch"></a></dt>
@@ -323,7 +322,7 @@ as Total Structure Coefficients.</p></dd>
 <dt>scores </dt>
 <dd><p>A data frame containing the
 predictors in the <code>mlm</code> model and the canonical scores on <code>ndim</code>
-dimensions.  These are calculated as <code>Y %*% coeffs.raw</code>, where <code>Y</code>
+dimensions.  These are calculated as <code>Y \%*\% coeffs.raw</code>, where <code>Y</code>
 contains the standardized response variables.</p></dd>
 
 </dl></div>
@@ -380,7 +379,7 @@ structure coefficients.</p>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Bartlett, M. S. (1938). Further aspects of the theory of
-multiple regression. Proc. Cambridge Philosophical Society <b>34</b>, 33-34.</p>
+multiple regression. Proc. Cambridge Philosophical Society <strong>34</strong>, 33-34.</p>
 <p>Cooley, W.W. &amp; Lohnes, P.R. (1971). Multivariate Data Analysis, New York:
 Wiley.</p>
 <p>Gittins, R. (1985). Canonical Analysis: A Review with Applications in
@@ -388,8 +387,7 @@ Ecology, Berlin: Springer.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="candiscList.html">candiscList</a></code>, <code><a href="https://friendly.github.io/heplots/reference/heplot.html" class="external-link">heplot</a></code>,
-<code><a href="https://friendly.github.io/heplots/reference/heplot3d.html" class="external-link">heplot3d</a></code></p></div>
+    <div class="dont-index"><p><code><a href="candiscList.html">candiscList()</a></code>, <code><a href="https://friendly.github.io/heplots/reference/heplot.html" class="external-link">heplots::heplot()</a></code>, <code><a href="https://friendly.github.io/heplots/reference/heplot3d.html" class="external-link">heplots::heplot3d()</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>

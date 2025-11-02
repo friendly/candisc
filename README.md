@@ -12,7 +12,7 @@
 # candisc  <img src="man/figures/logo.png" align="right" height="160px" />
 **Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis**
 
-Version 0.9.3
+Version 1.0.0
 
 <!-- when in Rmd format, can use
 Version `r getNamespaceVersion("candisc")`

@@ -117,7 +117,7 @@ plot.candisc <- function (
 		return(invisible())
 	}
 	
-	# ----------- 12D plot -------------	
+	# ----------- 2D plot -------------	
 	canvar <- paste('Can', which, sep="")   # names of canonical variables to plot
 	if (is.logical(suffix) & suffix)
 		suffix <- paste( " (", round(x$pct[which],1), "%)", sep="" ) else suffix <- NULL

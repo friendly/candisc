@@ -42,8 +42,8 @@ inches).}
 edge of the arrow head.}
 
 \item{pos}{For \code{vectors}, position of the text label relative to the
-vector head. If \code{pos==NULL}, labels are positioned labels outside,
-relative to arrow ends.}
+vector head. If \code{pos==NULL} (the default), labels are positioned labels outside,
+relative to arrow ends}
 
 \item{\dots}{other graphical parameters, such as \code{lty}, \code{xpd}, ...}
 }
@@ -52,28 +52,35 @@ None
 }
 \description{
 Graphics utility functions to draw vectors from an origin to a collection of
-points (using \code{\link[graphics]{arrows}} in 2D or
-\code{\link[rgl]{lines3d}} in 3D) with labels for each (using
-\code{\link[graphics]{text}} or \code{\link[rgl]{texts3d}}).
+points (using \code{\link[graphics:arrows]{graphics::arrows()}} in 2D or
+\code{\link[rgl:primitives]{rgl::lines3d()}} in 3D) with labels for each (using \code{\link[graphics:text]{graphics::text()}}
+or \code{\link[rgl:texts]{rgl::texts3d()}}
 }
 \details{
 The graphical parameters \code{col}, \code{lty} and \code{lwd} can be
-vectors of length greater than one and will be recycled if necessary
+vectors of length > 1 and will be recycled if necessary across the rows of \code{x} which define the vectors.
+
+For use in high-level plots, \code{vecscale()} can be used to find a value for the \code{scale} argument to automatically re-scale
+the vectors to approximately fill the plot region.
+
+The option \code{xpd = TRUE} can be passed to \code{vectors()} via the \code{...} argument to avoid labels being clipped.
 }
 \examples{
 
-plot(c(-3, 3), c(-3,3), type="n")
+set.seed(1234)
+plot(c(-3, 3), c(-3,3), type="n",
+     xlab = "X", ylab = "Y")
 X <- matrix(rnorm(10), ncol=2)
 rownames(X) <- LETTERS[1:5]
-vectors(X, scale=2, col=palette())
+vectors(X, scale=2, col=palette(), xpd = TRUE)
 
 
 }
 \seealso{
-\code{\link[graphics]{arrows}}, \code{\link[graphics]{text}},
-\code{\link[graphics]{segments}}
+\code{\link[graphics:arrows]{graphics::arrows()}}, \code{\link[graphics:text]{graphics::text()}}, \code{\link[graphics:segments]{graphics::segments()}}
 
-\code{\link[rgl]{lines3d}}, \code{\link[rgl]{texts3d}}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{    [rgl::lines3d()], [rgl::texts3d()] 
+}\if{html}{\out{</div>}}
 }
 \author{
 Michael Friendly

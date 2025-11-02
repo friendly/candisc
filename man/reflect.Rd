@@ -26,9 +26,11 @@ reflect(object, columns = 1:2, ...)
 The object with specified columns of the variable coefficients and observation scores multiplied by -1.
 }
 \description{
-\code{candisc} objects have coefficients for the X and Y and weighted scores for these
+\code{candisc} and \code{cancor}  objects have coefficients for the X and Y and weighted scores for these,
 whose signs are arbitrary, in the sense that a given column can be reflected (multiplied by -1) without changing the fit.
-This function allows one to reflect any columns of the variable coefficients (and corresponding observation scores).
+But, often you will want to reverse the direction of one or more dimensions for ease of interpretation.
+
+This function allows you to reflect any columns of the variable coefficients (and corresponding observation scores).
 This is often useful for interpreting a biplot, for example when a component (often the first) has all negative signs.
 }
 \details{
@@ -38,6 +40,8 @@ This is often useful for interpreting a biplot, for example when a component (of
 \item \code{"cancor"} objects
 \item \code{"candisc"} objects
 }
+
+Note that \code{\link[=plot.candisc]{plot.candisc()}} and \code{\link[=plot.candisc]{plot.candisc()}} can handle this internally using the argument \code{rev.axes}.
 }
 \section{Methods (by class)}{
 \itemize{
@@ -48,6 +52,9 @@ This is often useful for interpreting a biplot, for example when a component (of
 \item \code{reflect(candisc)}: \code{"candisc"} method.
 
 }}
+\seealso{
+\link[ggbiplot:reflect]{ggbiplot::reflect} has similar methods for PCA-like objects
+}
 \author{
 Michael Friendly
 }

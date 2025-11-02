@@ -54,7 +54,7 @@
 #' 
 #' Maintainer: Michael Friendly <friendly@yorku.ca>
 #' @seealso 
-#' \code{\link[heplots]{heplot}} for details about HE plots.
+#' [heplots::heplot()] for details about HE plots.
 #' 
 #' [candisc()], [cancor()] for details about canonical
 #' discriminant analysis and canonical correlation analysis.

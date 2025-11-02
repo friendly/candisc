@@ -65,7 +65,7 @@ as providing a basis for robust methods in which potential outliers can be down-
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +97,7 @@ as providing a basis for robust methods in which potential outliers can be down-
     <div class="ref-description section level2">
     <p>The function <code>cancor</code> generalizes and regularizes computation for
 canonical correlation analysis in a way conducive to visualization using
-methods in the <code><a href="https://friendly.github.io/heplots/reference/heplots-package.html" class="external-link">heplots</a></code> package.</p>
+methods in the <span class="pkg">heplots</span> package.</p>
 <p>The package provides the following display, extractor and plotting methods for <code>"cancor"</code> objects</p><dl><dt><code>print(), summary()</code></dt>
 <dd><p>Print and summarise the CCA</p></dd>
 
@@ -179,7 +179,7 @@ this should be a matrix or data.frame whose columns contain the X variables</p><
 
 
 <dt id="arg-formula">formula<a class="anchor" aria-label="anchor" href="#arg-formula"></a></dt>
-<dd><p>A two-sided formula of the form <code>cbind(y1, y2, y3, ...) ~ x1 + x2 + x3 + ...</code></p></dd>
+<dd><p>A two-sided formula of the form <code>cbind(y1, y2, y3, \dots) ~ x1 + x2 + x3 + \dots</code></p></dd>
 
 
 <dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
@@ -194,8 +194,8 @@ used in the calculations.</p></dd>
 <dt id="arg-weights">weights<a class="anchor" aria-label="anchor" href="#arg-weights"></a></dt>
 <dd><p>Observation weights. If supplied, this must be a vector of
 length equal to the number of observations in X and Y, typically within
-(0,1).  In that case, the variance-covariance matrices are computed using
-<code><a href="https://rdrr.io/r/stats/cov.wt.html" class="external-link">cov.wt</a></code>, and the number of observations is taken as the
+(0,1).  In that case, the variance-covariance matrices are computed using <a href="https://rdrr.io/r/stats/cov.wt.html" class="external-link">stats::cov.wt</a>,
+and the number of observations is taken as the
 number of non-zero weights.</p></dd>
 
 
@@ -375,7 +375,7 @@ the pairs of canonical variates.</p>
 plots representing the relations among the canonical variables for the Y
 variables in terms of a multivariate linear model predicting the Y canonical
 scores, using either the X variables or the X canonical scores as
-predictors.  Such plots, using <code><a href="heplot.cancor.html">heplot.cancor</a></code> provide a
+predictors.  Such plots, using <code><a href="heplot.cancor.html">heplot.cancor()</a></code>  provide a
 low-rank (1D, 2D, 3D) visualization of the relations between the two sets,
 and so are useful in cases when there are more than 2 or 3 variables in each
 of X and Y.</p>
@@ -421,16 +421,15 @@ Analysis</em>. London: Academic Press.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other implementations of CCA: <code><a href="https://rdrr.io/r/stats/cancor.html" class="external-link">cancor</a></code> (very
-basic), <code><a href="https://rdrr.io/pkg/yacca/man/cca.html" class="external-link">cca</a></code> in the <span class="pkg">yacca</span> (fairly complete, but
-very messy return structure), <code><a href="https://rdrr.io/pkg/CCA/man/cc.html" class="external-link">cc</a></code> in <span class="pkg">CCA</span> (fairly
+    <div class="dont-index"><p>Other implementations of CCA: <code><a href="https://rdrr.io/r/stats/cancor.html" class="external-link">stats::cancor()</a></code> (very
+basic), <code><a href="https://rdrr.io/pkg/yacca/man/cca.html" class="external-link">yacca::cca()</a></code> in the <span class="pkg">yacca</span> (fairly complete, but
+very messy return structure), <code><a href="https://rdrr.io/pkg/CCA/man/cc.html" class="external-link">CCA::cc()</a></code> in <span class="pkg">CCA</span> (fairly
 complete, very messy return structure, no longer maintained).</p>
-<p><code><a href="redundancy.html">redundancy</a></code>, for redundancy analysis;
-<code><a href="plot.cancor.html">plot.cancor</a></code>, for enhanced scatterplots of the canonical
-variates.</p>
-<p><code><a href="heplot.cancor.html">heplot.cancor</a></code> for CCA HE plots and
-<code><a href="https://friendly.github.io/heplots/reference/heplots-package.html" class="external-link">heplots</a></code> for generic heplot methods.</p>
-<p><code><a href="candisc.html">candisc</a></code> for related methods focused on multivariate linear
+<p><code><a href="redundancy.html">redundancy()</a></code>, for redundancy analysis;
+<code><a href="plot.cancor.html">plot.cancor()</a></code>, for enhanced scatterplots of the canonical variates.</p>
+<p><code><a href="heplot.cancor.html">heplot.cancor()</a></code> for CCA HE plots and <code><a href="https://friendly.github.io/heplots/reference/heplot.html" class="external-link">heplots::heplot()</a></code>
+for generic heplot methods.</p>
+<p><code><a href="candisc.html">candisc()</a></code> for related methods focused on multivariate linear
 models with one or more factors among the X variables.</p></div>
     </div>
     <div class="section level2">

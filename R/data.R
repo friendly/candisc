@@ -370,7 +370,7 @@ NULL
 #' @source From the American Statistical Association 1993 Statistical Graphics Exposition, 'Serial Correlation or Cereal Correlation ??',
 #' <https://community.amstat.org/jointscsg-section/dataexpo/dataexpo1993>.
 #' @seealso 
-#' \code{\link[MASS]{UScereal}} has a similar dataset with fewer observations and variables, but with the variables normalized to a portion of one US cup.
+#' [MASS::UScereal] has a similar dataset with fewer observations and variables, but with the variables normalized to a portion of one US cup.
 #' 
 #' @references 
 #' Jean Dos Santos, Breakfast Cereals: Data Analysis and Clustering, 
@@ -382,6 +382,31 @@ NULL
 #' @examples
 #' data(cereal)
 #' str(cereal)
+#' 
+#' # Add explicit name of manufacturer
+#' # names for manufacturers
+#' mfr_names <- c(
+#'   "A" = "American Home Foods",
+#'   "G" = "General Mills",
+#'   "K" = "Kellog",
+#'   "N" = "Nabisco",
+#'   "P" = "Post",
+#'   "Q" = "Quaker Oats",
+#'   "R" = "Ralston Purina"
+#' )
+#'
+#' # recode `mfr` as `mfr_name`
+#' cereal <- cereal |>
+#'   mutate(mfr_name = recode(mfr, !!!mfr_names))
+#' 
+#' # density plot of ratings
+#' library(ggplot2)
+#' ggplot(data = cereal,
+#'        aes(x = rating, fill = mfr_name, color = mfr_name)) +
+#'   geom_density(alpha = 0.1) +
+#'   theme_classic(base_size = 14) + 
+#'   theme(legend.position = "bottom")
+
 #'
 #' @keywords datasets
 NULL

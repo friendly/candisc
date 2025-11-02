@@ -77,7 +77,7 @@ Gittins, R. (1985). \emph{Canonical Analysis: A Review with Applications in
 Ecology}, Berlin: Springer.
 }
 \seealso{
-\code{\link[heplots]{heplot}} for details about HE plots.
+\code{\link[heplots:heplot]{heplots::heplot()}} for details about HE plots.
 
 \code{\link[=candisc]{candisc()}}, \code{\link[=cancor]{cancor()}} for details about canonical
 discriminant analysis and canonical correlation analysis.
