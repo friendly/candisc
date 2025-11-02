@@ -8,6 +8,14 @@
 #' This function allows one to reflect any columns of the variable coefficients (and corresponding observation scores). 
 #' This is often useful for interpreting a biplot, for example when a component (often the first) has all negative signs.
 #' 
+#' @details
+#' `reflect` methods are available for:
+#' 
+#' * `data.frame`s
+#' *  `"cancor"` objects
+#' *  `"candisc"` objects
+#' 
+#' 
 #' @param object  An object whose columns are to be reflected
 #' @param columns a vector of indices of the columns to reflect
 #' @param ...     Unused

@@ -22,6 +22,14 @@ whose signs are arbitrary, in the sense that a given column can be reflected (mu
 This function allows one to reflect any columns of the variable coefficients (and corresponding observation scores).
 This is often useful for interpreting a biplot, for example when a component (often the first) has all negative signs.
 }
+\details{
+\code{reflect} methods are available for:
+\itemize{
+\item \code{data.frame}s
+\item \code{"cancor"} objects
+\item \code{"candisc"} objects
+}
+}
 \author{
 Michael Friendly
 }
