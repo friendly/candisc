@@ -46,6 +46,7 @@ reference:
     desc: Graphic utilities
     contents:
       - predictor.names
+      - reflect
       - varOrder
       - vectors
       - vectors3d

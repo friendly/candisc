@@ -43,6 +43,7 @@ reflect.cancor <- function(object, columns = 1:2, ...) {
   object
 }
 
+#' @export
 reflect.candisc <- function(object, columns = 1:2, ...) {
   
   object$coeffs_raw[, columns] <- -1 * object$coeffs_raw[, columns]
