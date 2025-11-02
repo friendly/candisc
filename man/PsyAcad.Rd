@@ -38,6 +38,16 @@ PsyAcad.can <- cancor(cbind(LocControl, SelfConcept, Motivation) ~
 
 PsyAcad.can
 
+# redundancy analysis
+redundancy(PsyAcad.can)
+
+# Plots
+canR <- PsyAcad.can$cancor
+plot(PsyAcad.can, pch=16, id.n = 3)
+text(-2, 3, paste("Can R =", round(canR[1], 3)), pos = 3)
+
+plot(PsyAcad.can, which = 2, pch=16, id.n = 3)
+text(-2, 3.5, paste("Can R =", round(canR[2], 3)), pos = 3)
 
 }
 \concept{cancor}

@@ -19,7 +19,7 @@ acad <- PsyAcad[, 4:8]
 
 
 
-PsyAcad.can <- cancor(cbind(Control, Concept, Motivation) ~ 
+PsyAcad.can <- cancor(cbind(LocControl, SelfConcept, Motivation) ~ 
                       Read + Write + Math + Science + Sex,
                     data = PsyAcad)
 

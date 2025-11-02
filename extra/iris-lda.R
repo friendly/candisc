@@ -1,3 +1,7 @@
+#' ---
+#' title: Plotting discriminant analysis in discriminant space
+#' ---
+
 library(MASS)
 library(car)
 
@@ -5,6 +9,7 @@ iris.lda <- lda(Species ~ ., iris)
 iris.lda
 names(iris.lda)
 
+#' Get the scores for observations on the discriminent axes
 iris.scores <- data.frame(
   Species = iris$Species,
   predict(iris.lda)$x)
@@ -25,8 +30,6 @@ abline(h=0, v=0, col = "grey")
 vecs <- iris.lda$scaling
 rownames(vecs) <- sub("\\.", "\n", rownames(vecs))
 vecs
-
-vecscale(vecs)
 
 vectors(vecs, col = "black", lwd = 2,
         scale = vecscale(vecs), xpd = TRUE)
