@@ -12,24 +12,28 @@ vecscale(
 )
 }
 \arguments{
-\item{vectors}{a two-column matrix giving the end points of a collection of
-vectors}
+\item{vectors}{a two-column matrix giving the end points of a collection of vectors}
 
 \item{bbox}{the bounding box of the containing plot region within which the
-vectors are to be plotted}
+vectors are to be plotted. The default is the bounding box of the current plot window,
+obtained from \code{par("usr")}.}
 
-\item{origin}{origin of the vectors}
+\item{origin}{origin of the vectors. Defaults to (0, 0).}
 
-\item{factor}{maximum length of the rescaled vectors relative to the maximum
-possible}
+\item{factor}{maximum length of the rescaled vectors relative to the maximum possible}
 }
 \value{
-scale factor, the multiplier of the vectors
+scale factor, the numeric multiplier of the vectors
 }
 \description{
 Calculates a scale factor so that a collection of vectors nearly fills the
 current plot, that is, the longest vector does not extend beyond the plot
 region.
+}
+\details{
+This function is used in, e.g., \code{\link[=vectors]{vectors()}} to draw labeled vectors in a dimension-reduction plot.
+The scaling calculated here doesn't directly calculate space for the labels to fit within the plot regions. The \code{factor} argument
+can provide for that, shrinking the vectors by that factor.
 }
 \examples{
 
@@ -47,7 +51,7 @@ arrows(0, 0, s*vecs[,1], s*vecs[,2], angle=10)
 
 }
 \seealso{
-\code{\link{vectors}}
+\code{\link[=vectors]{vectors()}}, \code{\link[=plot.candisc]{plot.candisc()}}, \code{\link[=heplot.candisc]{heplot.candisc()}}
 }
 \author{
 Michael Friendly

@@ -1,9 +1,11 @@
 ## Version 0.9.3
 
-* Added `predict_discrim` as a wrapper to `MASS::predict.lda()` returning a data.frame
+This is a major release, adding methods for linear/quadratic discriminant analysis
+
+* Added `predict_discrim()` as a wrapper to `MASS::predict.lda()` returning a data.frame
 * Now use `Roxygen: list(markdown = TRUE)` in DESCRIPTION
-* Added `plot_discrim` to plot decision regions for discriminant analysis using contours or background tiles
-* Added `reflect()` generic to allow axis reversal for candisc and cancor object
+* Added `plot_discrim()` to plot decision regions for discriminant analysis using contours or background tiles
+* Added `reflect()` generic to allow axis reversal for candisc and cancor objects
 * Added additional plots to dataset documentation
 * Ran `roxygen2md(scope = "simple")` for first pass of roxygen conversion to markdown
 

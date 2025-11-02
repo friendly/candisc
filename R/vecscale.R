@@ -5,17 +5,22 @@
 #' current plot, that is, the longest vector does not extend beyond the plot
 #' region.
 #' 
+#' @details
+#' This function is used in, e.g., [vectors()] to draw labeled vectors in a dimension-reduction plot.
+#' The scaling calculated here doesn't directly calculate space for the labels to fit within the plot regions. The `factor` argument
+#' can provide for that, shrinking the vectors by that factor.
 #' 
-#' @param vectors a two-column matrix giving the end points of a collection of
-#'        vectors
-#' @param bbox the bounding box of the containing plot region within which the
-#'        vectors are to be plotted
-#' @param origin origin of the vectors
-#' @param factor maximum length of the rescaled vectors relative to the maximum
-#'        possible
-#' @return scale factor, the multiplier of the vectors
+#' 
+#' 
+#' @param vectors a two-column matrix giving the end points of a collection of vectors
+#' @param bbox    the bounding box of the containing plot region within which the
+#'                vectors are to be plotted. The default is the bounding box of the current plot window, 
+#'                obtained from `par("usr")`.
+#' @param origin  origin of the vectors. Defaults to (0, 0).
+#' @param factor  maximum length of the rescaled vectors relative to the maximum possible
+#' @return scale factor, the numeric multiplier of the vectors
 #' @author Michael Friendly
-#' @seealso \code{\link{vectors}}
+#' @seealso [vectors()], [plot.candisc()], [heplot.candisc()]
 #' @keywords manip
 #' @examples
 #' 
@@ -34,7 +39,8 @@
 #' @export vecscale
 vecscale <- function(vectors, 
 		bbox=matrix(par("usr"), 2, 2),
-		origin=c(0, 0), factor=0.95) {	
+		origin=c(0, 0), 
+		factor=0.95) {	
 	scale <- c(sapply(bbox[,1] - origin[1], function(dist) dist/vectors[,1]), 
 			sapply(bbox[,2] - origin[2], function(dist) dist/vectors[,2])) 
 	scale <- factor * min(scale[scale > 0])

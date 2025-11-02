@@ -89,8 +89,7 @@ heplot(grass.canL$Block, scale=2)
 
 }
 \seealso{
-\code{\link{candisc}}, \code{\link[heplots]{heplot}},
-\code{\link[heplots]{heplot3d}}
+\code{\link[=candisc]{candisc()}}, \code{\link[heplots:heplot]{heplots::heplot()}}, \code{\link[heplots:heplot3d]{heplots::heplot3d()}}
 }
 \author{
 Michael Friendly and John Fox

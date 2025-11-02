@@ -102,8 +102,7 @@ canonical means plotted in the \code{plot} method}
 \item{col}{A vector of the unique colors to be used for the levels of the
 term in the \code{plot} method, one for each level of the \code{term}.  In
 this version, you should assign colors and point symbols explicitly, rather
-than relying on the somewhat arbitrary defaults, based on
-\code{\link[grDevices]{palette}}}
+than relying on the somewhat arbitrary defaults, based on \code{\link[grDevices:palette]{grDevices::palette()}}.}
 
 \item{pch}{A vector of the unique point symbols to be used for the levels of
 the term in the \code{plot} method}
@@ -285,8 +284,7 @@ Gittins, R. (1985). Canonical Analysis: A Review with Applications in
 Ecology, Berlin: Springer.
 }
 \seealso{
-\code{\link{candiscList}}, \code{\link[heplots]{heplot}},
-\code{\link[heplots]{heplot3d}}
+\code{\link[=candiscList]{candiscList()}}, \code{\link[heplots:heplot]{heplots::heplot()}}, \code{\link[heplots:heplot3d]{heplots::heplot3d()}}
 }
 \author{
 Michael Friendly and John Fox

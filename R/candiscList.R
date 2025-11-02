@@ -41,8 +41,7 @@
 #' @return An object of class `candiscList` which is a list of
 #'       `"candisc"` objects for the terms in the mlm.
 #' @author Michael Friendly and John Fox
-#' @seealso \code{\link{candisc}}, \code{\link[heplots]{heplot}},
-#'       \code{\link[heplots]{heplot3d}}
+#' @seealso [candisc()], [heplots::heplot()], [heplots::heplot3d()]
 #' @keywords multivariate hplot
 #' @examples
 #' 

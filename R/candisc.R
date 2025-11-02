@@ -90,8 +90,7 @@
 #' @param col A vector of the unique colors to be used for the levels of the
 #'        term in the `plot` method, one for each level of the `term`.  In
 #'        this version, you should assign colors and point symbols explicitly, rather
-#'        than relying on the somewhat arbitrary defaults, based on
-#'        \code{\link[grDevices]{palette}}
+#'        than relying on the somewhat arbitrary defaults, based on [grDevices::palette()].
 #' @param pch A vector of the unique point symbols to be used for the levels of
 #'        the term in the `plot` method
 #' @param scale Scale factor for the variable vectors in canonical space.  If
@@ -161,8 +160,7 @@
 #'     dimensions.  These are calculated as `Y \%*\% coeffs.raw`, where `Y`
 #'     contains the standardized response variables.}
 #' @author Michael Friendly and John Fox
-#' @seealso \code{\link{candiscList}}, \code{\link[heplots]{heplot}},
-#' \code{\link[heplots]{heplot3d}}
+#' @seealso [candiscList()], [heplots::heplot()], [heplots::heplot3d()]
 #' @references Bartlett, M. S. (1938). Further aspects of the theory of
 #' multiple regression. Proc. Cambridge Philosophical Society **34**, 33-34.
 #' 
@@ -284,12 +282,17 @@ candisc.mlm <- function(mod,
   # 	scores <- cbind( model.frame(mod)[,-1], scores )
   #### FIXME: scores should also include regressors in the model
   #  scores <- cbind( all.factors, as.data.frame(scores) )
-  scores <- cbind(model.frame(mod)[predictor.names(mod)], as.data.frame(scores))
+  scores <- cbind(model.frame(mod)[predictor.names(mod)], 
+                  as.data.frame(scores))
+
   result <- list(
     dfh = dfh, dfe = dfe,
-    eigenvalues = dc$values, canrsq = canrsq,
-    pct = pct, rank = rank, ndim = ndim, means = means,
-    factors = factors, term = term, terms = terms,
+    eigenvalues = dc$values, 
+    canrsq = canrsq,
+    pct = pct, rank = rank, 
+    ndim = ndim, means = means,
+    factors = factors, 
+    term = term, terms = terms,
     coeffs.raw = coeffs.raw, coeffs.std = coeffs.std,
     structure = structure,
     scores = scores

@@ -22,7 +22,7 @@
 )
 }
 \arguments{
-\item{mod}{A \code{cancor} object}
+\item{mod}{A \code{"cancor"} object, as computed by \code{\link[=cancor]{cancor()}}}
 
 \item{which}{A numeric vector containing the indices of the Y canonical
 dimensions to plot.}
@@ -84,7 +84,7 @@ the effects in the space of maximum canonical correlations, together with
 variable vectors representing the correlations of Y variables with the
 canonical dimensions.
 
-For consistency with \code{\link{heplot.candisc}}, the plots show effects in
+For consistency with \code{\link[=heplot.candisc]{heplot.candisc()}}, the plots show effects in
 the space of the canonical Y variables selected by \code{which}.
 }
 \details{
@@ -149,12 +149,9 @@ Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979). \emph{Multivariate
 Analysis}. London: Academic Press.
 }
 \seealso{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{  \code{\link{cancor}} for details on canonical correlation as
-  implemented here; 
-  \code{\link{plot.cancor}} for scatterplots of canonical 
-  variable scores.
-  \code{\link{heplot.candisc}}, \code{\link[heplots]{heplot}},
-  \code{\link[car]{linearHypothesis}}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{  [cancor()] for details on canonical correlation as implemented here; 
+  [plot.cancor()] for scatterplots of canonical  variable scores.
+  [heplot.candisc()], [heplots::heplot()], [car::linearHypothesis()]
 }\if{html}{\out{</div>}}
 }
 \author{

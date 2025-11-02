@@ -83,7 +83,7 @@ Brainder, "Redundancy in canonical correlation analysis",
 \url{https://brainder.org/2019/12/27/redundancy-in-canonical-correlation-analysis/}
 }
 \seealso{
-\code{\link{cancor}}
+\ \code{\link[=cancor]{cancor()}}
 }
 \author{
 Michael Friendly

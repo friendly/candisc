@@ -19,7 +19,7 @@
 #' variable vectors representing the correlations of Y variables with the
 #' canonical dimensions.
 #' 
-#' For consistency with \code{\link{heplot.candisc}}, the plots show effects in
+#' For consistency with [heplot.candisc()], the plots show effects in
 #' the space of the canonical Y variables selected by `which`.
 #' 
 #' @details
@@ -51,7 +51,7 @@
 #' the plot by re-sizing manually. You can override this using `asp=NA` in 2D plots
 #' 
 #' @aliases heplot.cancor heplot3d.cancor
-#' @param mod A `cancor` object
+#' @param mod A `"cancor"` object, as computed by [cancor()]
 #' @param which A numeric vector containing the indices of the Y canonical
 #'        dimensions to plot.
 #' @param scale Scale factor for the variable vectors in canonical space.  If
@@ -86,12 +86,10 @@
 #'       the limits of the horizontal and vertical axes. 
 #' @author Michael Friendly
 #' @seealso 
-#'       \code{\link{cancor}} for details on canonical correlation as
-#'       implemented here; 
-#'       \code{\link{plot.cancor}} for scatterplots of canonical 
-#'       variable scores.
-#'       \code{\link{heplot.candisc}}, \code{\link[heplots]{heplot}},
-#'       \code{\link[car]{linearHypothesis}}
+#'       [cancor()] for details on canonical correlation as implemented here; 
+#'       [plot.cancor()] for scatterplots of canonical  variable scores.
+#'       [heplot.candisc()], [heplots::heplot()], [car::linearHypothesis()]
+#' 
 #' @references Gittins, R. (1985). *Canonical Analysis: A Review with
 #' Applications in Ecology*, Berlin: Springer.
 #' 

@@ -33,7 +33,7 @@
 #' \item{Y.redun}{Total canonical redundancy for the Y variables} 
 #' \item{set.names}{names for the X and Y sets of variables}
 #' @author Michael Friendly
-#' @seealso \code{\link{cancor}}
+#' @seealso \ [cancor()]
 #' @references 
 #' Muller K. E. (1981).
 #'Relationships between redundancy analysis, canonical correlation, and multivariate regression. 
