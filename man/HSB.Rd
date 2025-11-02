@@ -36,7 +36,7 @@ Tatsuoka, M. M. (1988).  Multivariate Analysis: Techniques for
 Educational and Psychological Research (2nd ed.). New York: Macmillan,
 Appendix F, 430-442.
 
-\%Retrieved from: \%\url{http://www.gseis.ucla.edu/courses/data/hbs6.dta}
+\% Originally retrieved from: http://www.gseis.ucla.edu/courses/data/hbs6.dta
 }
 \description{
 The High School and Beyond Project was a longitudinal study of students in

@@ -4,7 +4,7 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/candisc)](https://cran.r-project.org/package=candisc)
 [![R_universe](https://friendly.r-universe.dev/badges/candisc)](https://friendly.r-universe.dev) 
 [![downloads](https://cranlogs.r-pkg.org/badges/grand-total/candisc)](https://cran.r-project.org/package=candisc)
-[![documentation](https://img.shields.io/badge/documentation-blue)](https://friendly.github.io/candisc)
+[![documentation](https://img.shields.io/badge/documentation-blue)](https://friendly.github.io/candisc/)
 
 <!-- badges: end -->
 
@@ -81,6 +81,3 @@ illustrates some of these methods.
 
 * A more comprehensive collection of examples is contained in the vignettes for the `heplots` package,
 `browseVignettes(package = "heplots")`.
-
-
- 

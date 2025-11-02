@@ -30,4 +30,5 @@ ggplot(data = cereal,
   theme(legend.position = "bottom")
 
 
-
+# some useful examples in <https://www.kaggle.com/code/jeandsantos/breakfast-cereals-data-analysis-and-clustering>. 
+# 

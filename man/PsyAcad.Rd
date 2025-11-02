@@ -18,7 +18,7 @@ A data frame with 600 observations on the following 8 variables.
 }
 }
 \source{
-Taken from \url{http://www.stats.idre.ucla.edu/r/dae/canonical-correlation-analysis}
+Taken from \url{https://stats.oarc.ucla.edu/r/dae/canonical-correlation-analysis/}
 }
 \usage{
 data("PsyAcad")

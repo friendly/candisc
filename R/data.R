@@ -97,7 +97,7 @@ NULL
 #' Educational and Psychological Research (2nd ed.). New York: Macmillan,
 #' Appendix F, 430-442.
 #' 
-#' %Retrieved from: %<http://www.gseis.ucla.edu/courses/data/hbs6.dta>
+#' % Originally retrieved from: http://www.gseis.ucla.edu/courses/data/hbs6.dta
 #' @keywords datasets
 #' @concept MMRA
 #' @concept cancor
@@ -281,7 +281,7 @@ NULL
 #'  }
 #'
 #' @source 
-#' Taken from <http://www.stats.idre.ucla.edu/r/dae/canonical-correlation-analysis>
+#' Taken from <https://stats.oarc.ucla.edu/r/dae/canonical-correlation-analysis/>
 #'
 #' @concept cancor
 #' @examples
@@ -372,14 +372,17 @@ NULL
 #' @seealso 
 #' [MASS::UScereal] has a similar dataset with fewer observations and variables, but with the variables normalized to a portion of one US cup.
 #' 
+#' <https://www.kaggle.com/datasets/crawford/80-cereals> Essentially the same dataset
+#' 
 #' @references 
-#' Jean Dos Santos, Breakfast Cereals: Data Analysis and Clustering, 
-#' <https://www.kaggle.com/code/jeandsantos/breakfast-cereals-data-analysis-and-clustering>. Does a bunch of data cleaning
+#' Jean Dos Santos, Breakfast Cereals: Data Analysis and Clustering, (Kaggle link doesn't work)
+#' Does a bunch of data cleaning
 #' and exploratory data analysis in R.
 #'
 #' @concept MMRA
 #' @concept cancor
 #' @examples
+#' library(dplyr)
 #' data(cereal)
 #' str(cereal)
 #' 
