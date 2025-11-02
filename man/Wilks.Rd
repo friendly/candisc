@@ -56,7 +56,7 @@ Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979).
 \emph{Multivariate Analysis}. London: Academic Press.
 }
 \seealso{
-\code{\link{cancor}}, ~~~
+\code{\link[=cancor]{cancor()}}
 }
 \author{
 Michael Friendly

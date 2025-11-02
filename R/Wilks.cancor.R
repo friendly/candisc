@@ -12,7 +12,7 @@
 #' @return A data.frame (of class `"anova"`) containing the test
 #' statistics 
 #' @author Michael Friendly
-#' @seealso \code{\link{cancor}}, ~~~
+#' @seealso [cancor()]
 #' @references Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979).
 #' *Multivariate Analysis*. London: Academic Press.
 #' @keywords htest

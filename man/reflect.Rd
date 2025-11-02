@@ -2,9 +2,18 @@
 % Please edit documentation in R/reflect.R
 \name{reflect}
 \alias{reflect}
+\alias{reflect.data.frame}
+\alias{reflect.cancor}
+\alias{reflect.candisc}
 \title{Reflect Columns in an Object, reversing the sign of all elements}
 \usage{
 reflect(object, columns = 1:2, ...)
+
+\method{reflect}{data.frame}(object, columns = 1:2, ...)
+
+\method{reflect}{cancor}(object, columns = 1:2, ...)
+
+\method{reflect}{candisc}(object, columns = 1:2, ...)
 }
 \arguments{
 \item{object}{An object whose columns are to be reflected}
@@ -30,6 +39,15 @@ This is often useful for interpreting a biplot, for example when a component (of
 \item \code{"candisc"} objects
 }
 }
+\section{Methods (by class)}{
+\itemize{
+\item \code{reflect(data.frame)}: \code{"data.frame"} method.
+
+\item \code{reflect(cancor)}: \code{"cancor"} method.
+
+\item \code{reflect(candisc)}: \code{"candisc"} method.
+
+}}
 \author{
 Michael Friendly
 }

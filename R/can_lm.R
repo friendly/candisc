@@ -2,7 +2,7 @@
 
 #' @description
 #' 
-#' This function uses \code{\link{candisc}} to transform the responses in a
+#' This function uses [candisc()] to transform the responses in a
 #' multivariate linear model to scores on canonical variables for a given term and then uses
 #' those scores as responses in a linear (lm) or multivariate linear model (mlm).
 #'
@@ -13,10 +13,10 @@
 #' 
 #' @param mod A `mlm` object
 #' @param term One term in that model
-#' @param \dots Arguments passed to \code{\link{candisc}}
+#' @param \dots Arguments passed to [candisc()]
 #' @return A `lm` object if `term` is a rank 1 hypothesis, otherwise a `mlm` object
 #' @author Michael Friendly
-#' @seealso \code{\link{candisc}}, \code{\link{cancor}}
+#' @seealso [candisc()], [cancor()]
 #' @examples
 #' 
 #' iris.mod <- lm(cbind(Petal.Length, Sepal.Length, Petal.Width, Sepal.Width) ~ Species, data=iris)

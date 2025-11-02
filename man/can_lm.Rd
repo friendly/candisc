@@ -11,13 +11,13 @@ can_lm(mod, term, ...)
 
 \item{term}{One term in that model}
 
-\item{\dots}{Arguments passed to \code{\link{candisc}}}
+\item{\dots}{Arguments passed to \code{\link[=candisc]{candisc()}}}
 }
 \value{
 A \code{lm} object if \code{term} is a rank 1 hypothesis, otherwise a \code{mlm} object
 }
 \description{
-This function uses \code{\link{candisc}} to transform the responses in a
+This function uses \code{\link[=candisc]{candisc()}} to transform the responses in a
 multivariate linear model to scores on canonical variables for a given term and then uses
 those scores as responses in a linear (lm) or multivariate linear model (mlm).
 
@@ -35,7 +35,7 @@ car::Anova(iris.can)
 
 }
 \seealso{
-\code{\link{candisc}}, \code{\link{cancor}}
+\code{\link[=candisc]{candisc()}}, \code{\link[=cancor]{cancor()}}
 }
 \author{
 Michael Friendly

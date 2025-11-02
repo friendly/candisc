@@ -323,19 +323,18 @@ Mardia, K. V., Kent, J. T. and Bibby, J. M. (1979). \emph{Multivariate
 Analysis}. London: Academic Press.
 }
 \seealso{
-Other implementations of CCA: \code{\link[stats]{cancor}} (very
-basic), \code{\link[yacca]{cca}} in the \pkg{yacca} (fairly complete, but
-very messy return structure), \code{\link[CCA]{cc}} in \pkg{CCA} (fairly
+Other implementations of CCA: \code{\link[stats:cancor]{stats::cancor()}} (very
+basic), \code{\link[yacca:cca]{yacca::cca()}} in the \pkg{yacca} (fairly complete, but
+very messy return structure), \code{\link[CCA:cc]{CCA::cc()}} in \pkg{CCA} (fairly
 complete, very messy return structure, no longer maintained).
 
-\code{\link{redundancy}}, for redundancy analysis;
-\code{\link{plot.cancor}}, for enhanced scatterplots of the canonical
-variates.
+\code{\link[=redundancy]{redundancy()}}, for redundancy analysis;
+\code{\link[=plot.cancor]{plot.cancor()}}, for enhanced scatterplots of the canonical variates.
 
-\code{\link{heplot.cancor}} for CCA HE plots and
-\code{\link[heplots]{heplots}} for generic heplot methods.
+\code{\link[=heplot.cancor]{heplot.cancor()}} for CCA HE plots and \code{\link[heplots:heplot]{heplots::heplot()}}
+for generic heplot methods.
 
-\code{\link{candisc}} for related methods focused on multivariate linear
+\code{\link{candisc}} \code{\link[=candisc]{candisc()}} for related methods focused on multivariate linear
 models with one or more factors among the X variables.
 }
 \author{

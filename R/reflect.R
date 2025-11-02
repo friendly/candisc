@@ -27,6 +27,7 @@ reflect <- function(object, columns = 1:2, ...) {
   UseMethod("reflect")
 }
 
+#' @describeIn reflect `"data.frame"` method.
 #' @export
 reflect.data.frame <- function(object, columns = 1:2, ...) {
   
@@ -34,6 +35,7 @@ reflect.data.frame <- function(object, columns = 1:2, ...) {
   object
 }
   
+#' @describeIn reflect `"cancor"` method.
 #' @export
 reflect.cancor <- function(object, columns = 1:2, ...) {
   
@@ -51,6 +53,7 @@ reflect.cancor <- function(object, columns = 1:2, ...) {
   object
 }
 
+#' @describeIn reflect `"candisc"` method.
 #' @export
 reflect.candisc <- function(object, columns = 1:2, ...) {
   
