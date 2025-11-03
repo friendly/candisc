@@ -1,5 +1,6 @@
 # Coef methods for lda / qda
 # What to do for qda?
+# UGH: MASS:::coef.lda() exists
 
 #' Extract Coefficients from Discriminant Analysis
 #' 

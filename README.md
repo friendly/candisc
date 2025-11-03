@@ -81,3 +81,19 @@ illustrates some of these methods.
 
 * A more comprehensive collection of examples is contained in the vignettes for the `heplots` package,
 `browseVignettes(package = "heplots")`.
+
+## Citation
+
+To cite package `candisc` in publications use:
+
+  Friendly M., Fox J. (2025). candisc: Visualizing Generalized Canonical Discriminant and Canonical Correlation
+  Analysis_. R package version 1.0.0, <https://CRAN.R-project.org/package=heplots>.
+
+For the theory on which these methods are based, also cite:
+
+  Friendly, M. (2007). “HE plots for Multivariate General Linear Models.” _Journal of Computational and Graphical
+  Statistics_, *16*(2), 421-444. <https://doi.org/10.1198/106186007X208407>.
+
+## References
+
+Friendly, M., & Kwan, E. (2003). Effect Ordering for Data Displays. Computational Statistics and Data Analysis, 43(4), 509–539. <https://doi.org/10.1016/S0167-9473(02)00290-6>

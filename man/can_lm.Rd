@@ -2,7 +2,7 @@
 % Please edit documentation in R/can_lm.R
 \name{can_lm}
 \alias{can_lm}
-\title{Transform a Multivariate Linear model mlm to a Canonical Representation}
+\title{Transform a Multivariate Linear model \code{mlm} to a Canonical Representation}
 \usage{
 can_lm(mod, term, ...)
 }

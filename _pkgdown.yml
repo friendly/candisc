@@ -41,6 +41,8 @@ reference:
     contents:
       - predict_discrim
       - plot_discrim
+      - coef.lda
+      - coef.qda
 
   - title: Graphics
     desc: Graphic utilities

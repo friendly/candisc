@@ -1,4 +1,4 @@
-#' Transform a Multivariate Linear model mlm to a Canonical Representation
+#' Transform a Multivariate Linear model `mlm` to a Canonical Representation
 
 #' @description
 #' 
