@@ -33,3 +33,10 @@ vecs
 
 vectors(vecs, col = "black", lwd = 2,
         scale = vecscale(vecs), xpd = TRUE)
+
+## qda
+
+iris.qda <- qda(Species ~ ., iris)
+iris.qda
+names(iris.qda)
+

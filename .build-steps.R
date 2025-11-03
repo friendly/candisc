@@ -23,6 +23,8 @@ remotes::install_github("r-lib/revdepcheck")
 Sys.setenv(R_BIOC_VERSION = 3.18)
 revdepcheck::revdep_check(num_workers = 4)
 
+# check URLs
+urlchecker::url_check()
 
 library(devtools)
 

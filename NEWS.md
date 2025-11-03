@@ -5,6 +5,7 @@ This is a major release, adding methods for linear/quadratic discriminant analys
 * Added `predict_discrim()` as a wrapper to `MASS::predict.lda()` returning a data.frame
 * Added `plot_discrim()` to plot decision regions for discriminant analysis using contours or background tiles
 * Added `reflect()` generic to allow axis reversal for candisc and cancor objects
+* Added `coef.lda()`, `coef.qda()` methods to extract coefficients
 * Improved documentation of a number of functions
 * Added additional plots to dataset documentation
 * Now use `Roxygen: list(markdown = TRUE)` in DESCRIPTION
