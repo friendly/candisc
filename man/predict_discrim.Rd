@@ -49,10 +49,19 @@ Using the \code{scores} argument, the function also returns the scores on the di
 linear discriminant analysis with \code{\link[MASS:lda]{MASS::lda()}}.
 }
 \examples{
+library(MASS)   # for lda()
+
+iris.lda <- lda(Species ~ ., iris)
+pred_iris <- predict_discrim(iris.lda)
+names(pred_iris)
+
+# include scores, exclude posterior
+pred_iris <- predict_discrim(iris.lda, scores = TRUE, posterior = FALSE)
+names(pred_iris)
+
 data(peng, package="heplots")
-library(MASS)
 peng.lda <- lda(species ~ bill_length + bill_depth + flipper_length + body_mass, 
                 data = peng)
-peng_pred <- predict(peng.lda)
+peng_pred <- predict_discrim(peng.lda, scores = TRUE)
 str(peng_pred)
 }
