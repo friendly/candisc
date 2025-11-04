@@ -19,7 +19,7 @@
 #' @param contour logical; should the plot display the boundaries of the classes by contours?
 #' @param contour.color color of the lines for the contour boundaries
 #' @param showgrid a character string; how to display predicted class regions: `"tile"` for [ggplot2::geom_tile()], `"point"` 
-#'        for [ggplot2::geom_point()], or "none" for no grid display.
+#'        for [ggplot2::geom_point()], or `"none"` for no grid display.
 #' @param point.size size of the plot symbols use to show the data observations
 #' @param ... further parameters passed to `predict()`
 #' @param modes.means   levels to use for evaluating predictions using the variables **not* specified in `vars`. If not specified, the function uses the means for quantitative variables, ...

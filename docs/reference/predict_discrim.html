@@ -112,23 +112,30 @@ linear discriminant analysis with <code><a href="https://rdrr.io/pkg/MASS/man/ld
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">iris.lda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">lda</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">pred_iris</span> <span class="op">&lt;-</span> <span class="fu">predict_discrim</span><span class="op">(</span><span class="va">iris.lda</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in predict_discrim(iris.lda):</span> could not find function "predict_discrim"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">pred_iris</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'pred_iris' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Species"      "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6] "maxp"        </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># include scores, exclude posterior</span></span></span>
 <span class="r-in"><span><span class="va">pred_iris</span> <span class="op">&lt;-</span> <span class="fu">predict_discrim</span><span class="op">(</span><span class="va">iris.lda</span>, scores <span class="op">=</span> <span class="cn">TRUE</span>, posterior <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in predict_discrim(iris.lda, scores = TRUE, posterior = FALSE):</span> could not find function "predict_discrim"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">pred_iris</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'pred_iris' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Species"      "Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6] "LD1"          "LD2"         </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">peng</span>, package<span class="op">=</span><span class="st">"heplots"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">peng.lda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">lda</a></span><span class="op">(</span><span class="va">species</span> <span class="op">~</span> <span class="va">bill_length</span> <span class="op">+</span> <span class="va">bill_depth</span> <span class="op">+</span> <span class="va">flipper_length</span> <span class="op">+</span> <span class="va">body_mass</span>, </span></span>
 <span class="r-in"><span>                data <span class="op">=</span> <span class="va">peng</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">peng_pred</span> <span class="op">&lt;-</span> <span class="fu">predict_discrim</span><span class="op">(</span><span class="va">peng.lda</span>, scores <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in predict_discrim(peng.lda, scores = TRUE):</span> could not find function "predict_discrim"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">peng_pred</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'peng_pred' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 'data.frame':	333 obs. of  8 variables:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ species       : Factor w/ 3 levels "Adelie","Chinstrap",..: 1 1 1 1 1 1 1 1 1 1 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ bill_length   : num  39.1 39.5 40.3 36.7 39.3 38.9 39.2 41.1 38.6 34.6 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ bill_depth    : num  18.7 17.4 18 19.3 20.6 17.8 19.6 17.6 21.2 21.1 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ flipper_length: num  181 186 195 193 190 181 195 182 191 198 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ body_mass     : num  3750 3800 3250 3450 3650 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ LD1           : num  4.32 2.44 2.98 4.54 5.66 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ LD2           : num  0.967 0.97 -0.168 1.626 0.824 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ maxp          : num  1 1 0.984 1 1 ...</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

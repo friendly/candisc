@@ -29,6 +29,7 @@ urlchecker::url_check()
 library(devtools)
 
 # prepare pkgdown site
+# -- need to install the current version
 build_readme()
 pkgdown::build_site()
 
