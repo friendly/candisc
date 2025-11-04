@@ -33,13 +33,15 @@ plot_discrim(
 \item{point.size}{size of the plot symbols use to show the data observations}
 
 \item{showgrid}{a character string; how to display predicted class regions: \code{"tile"} for \code{\link[ggplot2:geom_tile]{ggplot2::geom_tile()}}, \code{"point"}
-for \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, or "none" for no grid display.}
+for \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, or \code{"none"} for no grid display.}
 
 \item{...}{further parameters passed to \code{predict()}}
 
 \item{modes.means}{levels to use for evaluating predictions using the variables *\emph{not} specified in \code{vars}. If not specified, the function uses the means for quantitative variables, ...}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 Discriminant analysis can be more easily understood from plots of the data variables showing how observations are classified.
 \code{plot_discrim()} uses the ideas behind effect plots: Visualize predicted values for two focal variables over a
 grid, with other variables in a model held fixed.

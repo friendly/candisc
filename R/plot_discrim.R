@@ -2,11 +2,15 @@
 
 #' Create a discriminant analysis decision plot using ggplot.
 #' 
+#' @description
+#' `r lifecycle::badge("experimental")`
+#' 
 #' Discriminant analysis can be more easily understood from plots of the data variables showing how observations are classified.
 #' `plot_discrim()` uses the ideas behind effect plots: Visualize predicted values for two focal variables over a
 #' grid, with other variables in a model held fixed.
 #' 
 #' @details
+#' 
 #' In setting up this plot for [ggplot2::ggplot()], this function maps color and shape of class-specific elements of the plot to the value of
 #' the class variable in the discriminant analysis. But it simply uses the ggplot defaults...
 #' 

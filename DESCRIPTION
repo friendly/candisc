@@ -20,7 +20,8 @@ Suggests:
     MASS, 
     rpart, 
     rpart.plot,
-    klaR
+    klaR,
+    lifecycle
 LazyLoad: yes
 LazyData: yes
 Authors@R: c(
@@ -45,7 +46,8 @@ Description: Functions for computing and visualizing
 	for all factors in a multivariate linear model,
 	computing canonical scores and vectors for each term. The graphic functions provide low-rank (1D, 2D, 3D) 
 	visualizations of terms in an 'mlm' via the 'plot.candisc' and 'heplot.candisc' methods. Related plots are
-	now provided for canonical correlation analysis when all predictors are quantitative.
+	now provided for canonical correlation analysis when all predictors are quantitative. Methods for
+	linear discriminant analysis are now included.
 License: GPL (>= 2)
 Encoding: UTF-8
 VignetteBuilder: knitr
