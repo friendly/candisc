@@ -19,6 +19,4 @@ test_that("cda wrong input",  {
 
   expect_error(plotAddLabels.characters(cdaRes, labels = "eeee", pos = 4, cex = 1), "Label \"eeee\" does not exist.")
 
-  expect_error(plotAddLabels.characters(cdaRes, include = F), "No labels to plot. You specified to exclude (include = FALSE) all labels.", fixed = TRUE)
-
 })

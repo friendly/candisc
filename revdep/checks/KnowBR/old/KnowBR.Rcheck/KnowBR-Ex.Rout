@@ -1,7 +1,7 @@
 
-R version 4.3.2 (2023-10-31 ucrt) -- "Eye Holes"
-Copyright (C) 2023 The R Foundation for Statistical Computing
-Platform: x86_64-w64-mingw32/x64 (64-bit)
+R version 4.5.1 (2025-06-13 ucrt) -- "Great Square Root"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -23,11 +23,11 @@ Type 'q()' to quit R.
 > options(pager = "console")
 > library('KnowBR')
 Loading required package: fossil
-Warning: package 'fossil' was built under R version 4.3.3
+Warning: package 'fossil' was built under R version 4.5.2
 Loading required package: sp
-Warning: package 'sp' was built under R version 4.3.3
 Loading required package: maps
 Loading required package: shapefiles
+Warning: package 'shapefiles' was built under R version 4.5.2
 Loading required package: foreign
 
 Attaching package: 'shapefiles'
@@ -38,13 +38,12 @@ The following objects are masked from 'package:foreign':
 
 Loading required package: mgcv
 Loading required package: nlme
-This is mgcv 1.9-1. For overview type 'help("mgcv-package")'.
+This is mgcv 1.9-3. For overview type 'help("mgcv-package")'.
 Loading required package: plotrix
 Loading required package: vegan
+Warning: package 'vegan' was built under R version 4.5.2
 Loading required package: permute
-Loading required package: lattice
-Warning: package 'lattice' was built under R version 4.3.3
-This is vegan 2.6-4
+Warning: package 'permute' was built under R version 4.5.2
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
@@ -245,7 +244,7 @@ This is vegan 2.6-4
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.75 0.3 2.08 NA NA 
+Time elapsed:  1.55 0.4 1.98 NA NA 
 > grDevices::dev.off()
 null device 
           1 

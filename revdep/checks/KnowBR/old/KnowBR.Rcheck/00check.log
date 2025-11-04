@@ -1,9 +1,9 @@
 * using log directory 'C:/R/Projects/candisc/revdep/checks/KnowBR/old/KnowBR.Rcheck'
-* using R version 4.3.2 (2023-10-31 ucrt)
-* using platform: x86_64-w64-mingw32 (64-bit)
+* using R version 4.5.1 (2025-06-13 ucrt)
+* using platform: x86_64-w64-mingw32
 * R was compiled by
-    gcc.exe (GCC) 12.3.0
-    GNU Fortran (GCC) 12.3.0
+    gcc.exe (GCC) 14.2.0
+    GNU Fortran (GCC) 14.2.0
 * running under: Windows 10 x64 (build 19044)
 * using session charset: UTF-8
 * using options '--no-manual --no-build-vignettes'
@@ -19,9 +19,10 @@
 * checking for portable file names ... OK
 * checking whether package 'KnowBR' can be installed ... WARNING
 Found the following significant warnings:
-  Warning: package 'fossil' was built under R version 4.3.3
-  Warning: package 'sp' was built under R version 4.3.3
-  Warning: package 'lattice' was built under R version 4.3.3
+  Warning: package 'fossil' was built under R version 4.5.2
+  Warning: package 'shapefiles' was built under R version 4.5.2
+  Warning: package 'vegan' was built under R version 4.5.2
+  Warning: package 'permute' was built under R version 4.5.2
 See 'C:/R/Projects/candisc/revdep/checks/KnowBR/old/KnowBR.Rcheck/00install.out' for details.
 * checking installed package size ... OK
 * checking package directory ... OK
@@ -30,7 +31,7 @@ See 'C:/R/Projects/candisc/revdep/checks/KnowBR/old/KnowBR.Rcheck/00install.out'
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
-* checking R files for non-ASCII characters ... OK
+* checking code files for non-ASCII characters ... OK
 * checking R files for syntax errors ... OK
 * checking whether the package can be loaded ... OK
 * checking whether the package can be loaded with stated dependencies ... OK
@@ -43,7 +44,13 @@ See 'C:/R/Projects/candisc/revdep/checks/KnowBR/old/KnowBR.Rcheck/00install.out'
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
 * checking R code for possible problems ... OK
-* checking Rd files ... OK
+* checking Rd files ... NOTE
+checkRd: (-1) MapPolygon.Rd:20: Lost braces
+    20 |   \item{shape}{If the estimators in the function link[KnowBR]{KnowBPolygon} were calculated using an external shape file, it is necessary to indicate the file in this argument. It is not necessary to select any polygon within the file, just to load the whole shape file.}
+       |                                                              ^
+checkRd: (-1) SurveyQ.Rd:26: Lost braces
+    26 |   \item{shape}{If the estimators in the function link[KnowBR]{KnowBPolygon} were calculated using an external shape file, it is necessary to indicate the file in this argument. It is not necessary to select any polygon within the file, just to load the whole shape file.}
+       |                                                              ^
 * checking Rd metadata ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
@@ -52,8 +59,7 @@ See 'C:/R/Projects/candisc/revdep/checks/KnowBR/old/KnowBR.Rcheck/00install.out'
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
 * checking contents of 'data' directory ... OK
-* checking data for non-ASCII characters ... NOTE
-  Note: found 9 marked Latin-1 strings
+* checking data for non-ASCII characters ... OK
 * checking data for ASCII and uncompressed saves ... OK
 * checking examples ... OK
 * DONE

@@ -1,14 +1,14 @@
 * using log directory 'C:/R/Projects/candisc/revdep/checks/SurveyCC/old/SurveyCC.Rcheck'
-* using R version 4.3.2 (2023-10-31 ucrt)
-* using platform: x86_64-w64-mingw32 (64-bit)
+* using R version 4.5.1 (2025-06-13 ucrt)
+* using platform: x86_64-w64-mingw32
 * R was compiled by
-    gcc.exe (GCC) 12.3.0
-    GNU Fortran (GCC) 12.3.0
+    gcc.exe (GCC) 14.2.0
+    GNU Fortran (GCC) 14.2.0
 * running under: Windows 10 x64 (build 19044)
 * using session charset: UTF-8
 * using options '--no-manual --no-build-vignettes'
 * checking for file 'SurveyCC/DESCRIPTION' ... OK
-* this is package 'SurveyCC' version '0.1.1'
+* this is package 'SurveyCC' version '0.2.1'
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -25,7 +25,7 @@
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
-* checking R files for non-ASCII characters ... OK
+* checking code files for non-ASCII characters ... OK
 * checking R files for syntax errors ... OK
 * checking whether the package can be loaded ... OK
 * checking whether the package can be loaded with stated dependencies ... OK

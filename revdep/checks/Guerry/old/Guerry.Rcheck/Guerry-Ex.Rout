@@ -1,7 +1,7 @@
 
-R version 4.3.2 (2023-10-31 ucrt) -- "Eye Holes"
-Copyright (C) 2023 The R Foundation for Statistical Computing
-Platform: x86_64-w64-mingw32/x64 (64-bit)
+R version 4.5.1 (2025-06-13 ucrt) -- "Great Square Root"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -40,7 +40,6 @@ Type 'q()' to quit R.
 > 
 > library(Guerry)
 > library(sp)
-Warning: package 'sp' was built under R version 4.3.3
 > library(RColorBrewer)
 > 
 > data(Guerry)
@@ -151,7 +150,6 @@ detaching 'package:corrgram', 'package:car', 'package:carData'
 > ### ** Examples
 > 
 > library(sp)
-Warning: package 'sp' was built under R version 4.3.3
 > data(gfrance)
 > names(gfrance)  ## list @data variables
  [1] "CODE_DEPT"       "COUNT"           "AVE_ID_GEO"      "dept"           
@@ -211,7 +209,6 @@ detaching 'package:sp'
 > data(gfrance85)
 > require(sp)
 Loading required package: sp
-Warning: package 'sp' was built under R version 4.3.3
 > require(scales)
 Loading required package: scales
 > plot(gfrance85)   # plot the empty outline map
@@ -261,7 +258,7 @@ detaching 'package:scales', 'package:sp'
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  3.56 0.08 3.64 NA NA 
+Time elapsed:  4.16 0.17 4.97 NA NA 
 > grDevices::dev.off()
 null device 
           1 

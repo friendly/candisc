@@ -1,15 +1,15 @@
 * using log directory 'C:/R/Projects/candisc/revdep/checks/MorphoTools2/new/MorphoTools2.Rcheck'
-* using R version 4.3.2 (2023-10-31 ucrt)
-* using platform: x86_64-w64-mingw32 (64-bit)
+* using R version 4.5.1 (2025-06-13 ucrt)
+* using platform: x86_64-w64-mingw32
 * R was compiled by
-    gcc.exe (GCC) 12.3.0
-    GNU Fortran (GCC) 12.3.0
+    gcc.exe (GCC) 14.2.0
+    GNU Fortran (GCC) 14.2.0
 * running under: Windows 10 x64 (build 19044)
 * using session charset: UTF-8
 * using options '--no-manual --no-build-vignettes'
 * checking for file 'MorphoTools2/DESCRIPTION' ... OK
 * checking extension type ... Package
-* this is package 'MorphoTools2' version '1.0.1.1'
+* this is package 'MorphoTools2' version '1.0.2.1'
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK
@@ -27,7 +27,7 @@
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
-* checking R files for non-ASCII characters ... OK
+* checking code files for non-ASCII characters ... OK
 * checking R files for syntax errors ... OK
 * checking whether the package can be loaded ... OK
 * checking whether the package can be loaded with stated dependencies ... OK
@@ -35,7 +35,7 @@
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
 * checking loading without being on the library search path ... OK
-* checking startup messages can be suppressed ... OK
+* checking whether startup messages can be suppressed ... OK
 * checking dependencies in R code ... OK
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
@@ -61,7 +61,7 @@
 * checking tests ... OK
   Running 'testthat.R'
 * checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in 'inst/doc' ... OK
+* checking package vignettes ... OK
 * checking running R code from vignettes ... OK
   'MorphoTools2_tutorial.Rmd' using 'UTF-8'... OK
 * checking re-building of vignette outputs ... SKIPPED

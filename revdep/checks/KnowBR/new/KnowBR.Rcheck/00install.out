@@ -1,24 +1,28 @@
 * installing *source* package 'KnowBR' ...
+** this is package 'KnowBR' version '2.2'
 ** package 'KnowBR' successfully unpacked and MD5 sums checked
 ** using staged installation
 ** R
 ** data
 ** byte-compile and prepare package for lazy loading
 Warning messages:
-1: package 'fossil' was built under R version 4.3.3 
-2: package 'sp' was built under R version 4.3.3 
-3: package 'lattice' was built under R version 4.3.3 
+1: package 'fossil' was built under R version 4.5.2 
+2: package 'shapefiles' was built under R version 4.5.2 
+3: package 'vegan' was built under R version 4.5.2 
+4: package 'permute' was built under R version 4.5.2 
 ** help
 *** installing help indices
 *** copying figures
 ** building package indices
 ** testing if installed package can be loaded from temporary location
-Warning: package 'fossil' was built under R version 4.3.3
-Warning: package 'sp' was built under R version 4.3.3
-Warning: package 'lattice' was built under R version 4.3.3
+Warning: package 'fossil' was built under R version 4.5.2
+Warning: package 'shapefiles' was built under R version 4.5.2
+Warning: package 'vegan' was built under R version 4.5.2
+Warning: package 'permute' was built under R version 4.5.2
 ** testing if installed package can be loaded from final location
-Warning: package 'fossil' was built under R version 4.3.3
-Warning: package 'sp' was built under R version 4.3.3
-Warning: package 'lattice' was built under R version 4.3.3
+Warning: package 'fossil' was built under R version 4.5.2
+Warning: package 'shapefiles' was built under R version 4.5.2
+Warning: package 'vegan' was built under R version 4.5.2
+Warning: package 'permute' was built under R version 4.5.2
 ** testing if installed package keeps a record of temporary installation path
 * DONE (KnowBR)

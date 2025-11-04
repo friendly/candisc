@@ -1,4 +1,34 @@
+## Version 1.0.0
+
+This is a major release, adding methods for linear/quadratic discriminant analysis and improving package documentation
+
+* Added `predict_discrim()` as a wrapper to `MASS::predict.lda()` returning a data.frame
+* Added `plot_discrim()` to plot decision regions for discriminant analysis using contours or background tiles
+* Added `cor_lda()` to calculate structure correlations between variables and discriminant scores
+* Added `scores.lda()` method to extract discriminant scores
+* Added `reflect()` generic to allow axis reversal for candisc and cancor objects
+* Improved documentation of a number of functions
+* Added additional plots to dataset documentation
+* Now use `Roxygen: list(markdown = TRUE)` in DESCRIPTION
+* Ran `roxygen2md(scope = "simple")` for first pass of roxygen conversion to markdown, others converted by hand
+
+
+## Version 0.9.2
+
+o correct buglet with `var.labels` in `heplot.candisc`
+o Added cereal data
+
+## Version 0.9.1
+
+* `heplot.candisc()` gains a `var.labels` argument
+* add extra/mmreg.R example
+* add `scores.candisc()` method to extract canonical discriminant scores
+* added `cereal` dataset
+* added `PsyAcad` dataset
+
 ## Version 0.9.0 (2024-05-05)
+
+This is a semi-major release, largely of the documentation of the package.
 
 * Created `pkgdown` site, https://friendly.github.io/candisc/
 * Convert documentation to roxygen

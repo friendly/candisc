@@ -1,0 +1,56 @@
+
+> knitr::opts_chunk$set(message = FALSE, warning = FALSE, 
++     fig.height = 5, fig.width = 5, fig.align = "center", fig.path = "fig/robust-", 
++     .... [TRUNCATED] 
+
+> options(digits = 4)
+
+> set.seed(1071)
+
+> options(width = 80, continue = "  ")
+
+> library(heplots)
+Loading required package: broom
+
+> library(candisc)
+
+Attaching package: 'candisc'
+
+The following object is masked from 'package:stats':
+
+    cancor
+
+
+> library(ggplot2)
+
+> library(dplyr)
+
+Attaching package: 'dplyr'
+
+The following objects are masked from 'package:stats':
+
+    filter, lag
+
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+
+> library(mvinfluence)
+Warning: package 'mvinfluence' was built under R version 4.5.2
+Loading required package: car
+Loading required package: carData
+
+Attaching package: 'car'
+
+The following object is masked from 'package:dplyr':
+
+    recode
+
+
+> knitr::include_graphics(here::here("man", "figures", 
++     "weight-functions.jpg"))
+
+  When sourcing 'Robust.R':
+Error: Cannot find the file(s): "C:/Users/friendly/AppData/Local/Temp/Rtmpw5Ysv5/file100cc38eb24c6/vignettes/man/figures/weight-functions.jpg"
+Execution halted

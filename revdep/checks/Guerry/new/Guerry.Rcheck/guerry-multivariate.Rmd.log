@@ -12,18 +12,18 @@
 Loading required package: carData
 
 > library(effects)
+Warning: package 'effects' was built under R version 4.5.2
 lattice theme set by effectsTheme()
 See ?effectsTheme for details.
 
 > library(ggplot2)
-Warning: package 'ggplot2' was built under R version 4.3.3
 
 > library(ggrepel)
 
 > library(patchwork)
 
 > library(heplots)
-Warning: package 'heplots' was built under R version 4.3.3
+Warning: package 'heplots' was built under R version 4.5.2
 Loading required package: broom
 
 > library(candisc)
@@ -314,7 +314,7 @@ Vector scale factor set to  3.10537
 > knitr::write_bib(pkgs, file = here::here("vignettes", 
 +     "packages.bib"))
 Warning in file(con, "w") :
-  cannot open file 'C:/Users/friendly/AppData/Local/Temp/Rtmp6zgO7V/file61f0159e396b/vignettes/vignettes/packages.bib': No such file or directory
+  cannot open file 'C:/Users/friendly/AppData/Local/Temp/RtmpiysGio/file101605ec669a/vignettes/vignettes/packages.bib': No such file or directory
 
   When sourcing 'guerry-multivariate.R':
 Error: cannot open the connection

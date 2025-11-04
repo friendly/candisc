@@ -1,9 +1,9 @@
 * using log directory 'C:/R/Projects/candisc/revdep/checks/Guerry/old/Guerry.Rcheck'
-* using R version 4.3.2 (2023-10-31 ucrt)
-* using platform: x86_64-w64-mingw32 (64-bit)
+* using R version 4.5.1 (2025-06-13 ucrt)
+* using platform: x86_64-w64-mingw32
 * R was compiled by
-    gcc.exe (GCC) 12.3.0
-    GNU Fortran (GCC) 12.3.0
+    gcc.exe (GCC) 14.2.0
+    GNU Fortran (GCC) 14.2.0
 * running under: Windows 10 x64 (build 19044)
 * using session charset: UTF-8
 * using options '--no-manual --no-build-vignettes'
@@ -22,7 +22,11 @@
 * checking installed package size ... OK
 * checking package directory ... OK
 * checking 'build' directory ... OK
-* checking DESCRIPTION meta-information ... OK
+* checking DESCRIPTION meta-information ... NOTE
+  Missing dependency on R >= 4.1.0 because package code uses the pipe
+  |> or function shorthand \(...) syntax added in R 4.1.0.
+  File(s) using such syntax:
+    'gfrance85.Rd'
 * checking top-level files ... OK
 * checking for left-over files ... OK
 * checking index information ... OK
@@ -48,7 +52,7 @@
 * checking files in 'vignettes' ... OK
 * checking examples ... OK
 * checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in 'inst/doc' ... OK
+* checking package vignettes ... OK
 * checking running R code from vignettes ... ERROR
 Errors in running code in vignettes:
 when running code in 'guerry-multivariate.Rmd'
@@ -58,7 +62,7 @@ when running code in 'guerry-multivariate.Rmd'
 > knitr::write_bib(pkgs, file = here::here("vignettes", 
 +     "packages.bib"))
 Warning in file(con, "w") :
-  cannot open file 'C:/Users/friendly/AppData/Local/Temp/Rtmpqyw4Ox/file6198693f63d9/vignettes/vignettes/packages.bib': No such file or directory
+  cannot open file 'C:/Users/friendly/AppData/Local/Temp/Rtmpo3WHNm/file73081228228f/vignettes/vignettes/packages.bib': No such file or directory
 
   When sourcing 'guerry-multivariate.R':
 Error: cannot open the connection
@@ -68,4 +72,4 @@ Execution halted
   'guerry-multivariate.Rmd' using 'UTF-8'... failed
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
-Status: 1 ERROR
+Status: 1 ERROR, 1 NOTE

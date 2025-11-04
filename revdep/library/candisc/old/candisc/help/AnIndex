@@ -21,6 +21,8 @@ HSB	HSB
 plot.cancor	plot.cancor
 plot.candisc	candisc
 plot.candiscList	candiscList
+predictor.names	predictor.names
+predictor.names.default	predictor.names
 print.cancor	cancor
 print.cancor.redundancy	redundancy
 print.candisc	candisc
@@ -33,6 +35,7 @@ summary.candisc	candisc
 summary.candiscList	candiscList
 varOrder	varOrder
 varOrder.data.frame	varOrder
+varOrder.default	varOrder
 varOrder.mlm	varOrder
 vecscale	vecscale
 vectors	vectors

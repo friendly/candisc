@@ -2,16 +2,24 @@ Package: candisc
 Type: Package
 Title: Visualizing Generalized Canonical Discriminant and Canonical
         Correlation Analysis
-Version: 0.8-6
-Date: 2021-10-06
-Depends: R (>= 3.5.0), car, heplots (>= 0.8-6), graphics, stats
-Suggests: rgl, corrplot, knitr, rmarkdown, MASS, rpart, rpart.plot
+Version: 0.9.0
+Date: 2024-05-05
+Depends: R (>= 3.5.0), heplots (>= 0.8-6)
+Imports: car, graphics, stats
+Suggests: rgl, carData, corrplot, knitr, rmarkdown, MASS, rpart,
+        rpart.plot
 LazyLoad: yes
 LazyData: yes
-Authors@R: c(person(given = "Michael", family = "Friendly", role=c("aut", "cre"), email="friendly@yorku.ca"),
-             person(given = "John", family = "Fox", role="aut"))
-Author: Michael Friendly [aut, cre],
-  John Fox [aut]
+Authors@R: c(
+            person(given = "Michael", 
+                   family = "Friendly", 
+                   role=c("aut", "cre"), 
+                   email="friendly@yorku.ca",
+                   comment = c(ORCID = "0000-0002-3237-0941")),
+            person(given = "John", 
+                   family = "Fox", role="aut",
+                   comment = c(ORCID = "0000-0002-1196-8012"))
+            )
 Maintainer: Michael Friendly <friendly@yorku.ca>
 Language: en-US
 Description: Functions for computing and visualizing 
@@ -26,10 +34,16 @@ Description: Functions for computing and visualizing
 	visualizations of terms in an 'mlm' via the 'plot.candisc' and 'heplot.candisc' methods. Related plots are
 	now provided for canonical correlation analysis when all predictors are quantitative.
 License: GPL (>= 2)
-Packaged: 2021-10-07 16:46:01 UTC; friendly
+Encoding: UTF-8
 VignetteBuilder: knitr
+URL: https://github.com/friendly/candisc/,
+        https://friendly.github.io/candisc/
 BugReports: https://github.com/friendly/candisc/issues
+RoxygenNote: 7.3.1
 NeedsCompilation: no
+Packaged: 2024-05-06 17:16:02 UTC; friendly
+Author: Michael Friendly [aut, cre] (<https://orcid.org/0000-0002-3237-0941>),
+  John Fox [aut] (<https://orcid.org/0000-0002-1196-8012>)
 Repository: CRAN
-Date/Publication: 2021-10-07 17:10:02 UTC
-Built: R 4.3.2; ; 2024-02-13 04:56:57 UTC; windows
+Date/Publication: 2024-05-06 17:50:03 UTC
+Built: R 4.5.1; ; 2025-07-23 03:49:20 UTC; windows

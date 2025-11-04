@@ -1,2 +1,4 @@
 package,old,new,delta
-candisc,0.8-6,0.9.0,*
+candisc,0.9.0,1.0.0,*
+purrr,NA,1.2.0,*
+xfun,NA,0.54,*

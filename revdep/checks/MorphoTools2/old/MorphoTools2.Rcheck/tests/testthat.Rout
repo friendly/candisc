@@ -1,7 +1,7 @@
 
-R version 4.3.2 (2023-10-31 ucrt) -- "Eye Holes"
-Copyright (C) 2023 The R Foundation for Statistical Computing
-Platform: x86_64-w64-mingw32/x64 (64-bit)
+R version 4.5.1 (2025-06-13 ucrt) -- "Great Square Root"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -16,10 +16,8 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-Warning message:
-package 'testthat' was built under R version 4.3.3 
 > library(MorphoTools2)
-MorphoTools2 v1.0.1.1.  For help: https://github.com/MarekSlenker/MorphoTools2/wiki
+MorphoTools2 v1.0.2.1.  For help: https://github.com/MarekSlenker/MorphoTools2/wiki
 
 If you use MorphoTools2 in published research, please cite: 
 Slenker, M., Koutecky, P. & Marhold, K. (2022). MorphoTools2: an R package for multivariate morphometric analysis. Bioinformatics 38: 2954-2955. 
@@ -29,11 +27,11 @@ https://doi.org/10.1093/bioinformatics/btac173
 > #library(png)
 > 
 > test_check("MorphoTools2")
-[ FAIL 0 | WARN 1 | SKIP 0 | PASS 419 ]
+[ FAIL 0 | WARN 1 | SKIP 0 | PASS 417 ]
 
-[ FAIL 0 | WARN 1 | SKIP 0 | PASS 419 ]
+[ FAIL 0 | WARN 1 | SKIP 0 | PASS 417 ]
 > 
 > 
 > proc.time()
    user  system elapsed 
-   3.73    1.07    5.01 
+   4.12    0.75    5.45 

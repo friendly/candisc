@@ -1,7 +1,7 @@
 
-R version 4.3.2 (2023-10-31 ucrt) -- "Eye Holes"
-Copyright (C) 2023 The R Foundation for Statistical Computing
-Platform: x86_64-w64-mingw32/x64 (64-bit)
+R version 4.5.1 (2025-06-13 ucrt) -- "Great Square Root"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -82,7 +82,6 @@ The following objects are masked from 'package:base':
     intersect, setdiff, setequal, union
 
 Loading required package: ggplot2
-Warning: package 'ggplot2' was built under R version 4.3.3
 # A tibble: 6 × 6
   grade depression anxiety     n dep_se anx_se
   <ord>      <dbl>   <dbl> <int>  <dbl>  <dbl>
@@ -92,6 +91,8 @@ Warning: package 'ggplot2' was built under R version 4.3.3
 4 10         1.27    0.956   817 0.0431 0.0388
 5 11         1.37    1.12    790 0.0428 0.0411
 6 12         1.34    1.10    673 0.0439 0.0426
+Warning: `geom_errobarh()` was deprecated in ggplot2 4.0.0.
+ℹ Please use the `orientation` argument of `geom_errorbar()` instead.
 > 
 > # fit mlm
 > AH.mod <- lm(cbind(anxiety, depression) ~ grade, data=AddHealth)
@@ -325,6 +326,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 + 	plot(bees.eff2,multiline=TRUE,ask=FALSE)
 + }
 Loading required package: effects
+Warning: package 'effects' was built under R version 4.5.2
 lattice theme set by effectsTheme()
 See ?effectsTheme for details.
 > 
@@ -830,8 +832,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 + heplot(Big5.can, fill = TRUE, fill.alpha = 0.1)
 + }
 Loading required package: candisc
-Loading required package: car
-Loading required package: carData
 
 Attaching package: 'candisc'
 
@@ -845,7 +845,7 @@ Vector scale factor set to  5.482892
 > 
 > cleanEx()
 
-detaching 'package:candisc', 'package:car', 'package:carData'
+detaching 'package:candisc'
 
 > nameEx("Mahalanobis")
 > ### * Mahalanobis
@@ -907,8 +907,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 + 	heplot(jury.can, main="Canonical HE plot")
 + }
 Loading required package: candisc
-Loading required package: car
-Loading required package: carData
 
 Attaching package: 'candisc'
 
@@ -967,7 +965,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > 
 > cleanEx()
 
-detaching 'package:candisc', 'package:car', 'package:carData'
+detaching 'package:candisc'
 
 > nameEx("NLSY")
 > ### * NLSY
@@ -991,8 +989,8 @@ Loading required package: carData
 > 
 > # test control variables by themselves
 > # -------------------------------------
-> mod1 <- lm(cbind(read,math) ~ income+educ, data=NLSY)
-> Anova(mod1)
+> NLSY.mod1 <- lm(cbind(read, math) ~ income + educ, data=NLSY)
+> Anova(NLSY.mod1)
 
 Type II MANOVA Tests: Pillai test statistic
        Df test stat approx F num Df den Df   Pr(>F)   
@@ -1000,11 +998,11 @@ income  1  0.034469   4.2661      2    239 0.015121 *
 educ    1  0.051521   6.4912      2    239 0.001798 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-> heplot(mod1, fill=TRUE)
+> heplot(NLSY.mod1, fill=TRUE)
 > 
 > # test of overall regression
-> coefs <- rownames(coef(mod1))[-1]
-> linearHypothesis(mod1, coefs)
+> coefs <- rownames(coef(NLSY.mod1))[-1]
+> linearHypothesis(NLSY.mod1, coefs)
 
 Sum of squares and products for the hypothesis:
           read     math
@@ -1024,13 +1022,20 @@ Hotelling-Lawley  2 0.1302750  7.751361      4    476 4.6699e-06 ***
 Roy               2 0.1232808 14.793699      2    240 8.7377e-07 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-> heplot(mod1, fill=TRUE, hypotheses=list("Overall"=coefs))
+> heplot(NLSY.mod1, fill=TRUE, hypotheses=list("Overall"=coefs))
+> 
+> # coefficient plot
+> coefplot(NLSY.mod1, fill = TRUE,
++          col = c("darkgreen", "brown"),
++          lwd = 2,
++          ylim = c(-0.5, 3),
++          main = "Bivariate coefficient plot for reading and math\nwith 95% confidence ellipses")
 > 
 >  
 > # additional contribution of antisoc + hyperact over income + educ
 > # ----------------------------------------------------------------
-> mod2 <- lm(cbind(read,math) ~ antisoc + hyperact + income + educ, data=NLSY)
-> Anova(mod2)
+> NLSY.mod2 <- lm(cbind(read,math) ~ antisoc + hyperact + income + educ, data=NLSY)
+> Anova(NLSY.mod2)
 
 Type II MANOVA Tests: Pillai test statistic
          Df test stat approx F num Df den Df   Pr(>F)   
@@ -1041,9 +1046,9 @@ educ      1  0.053152   6.6521      2    237 0.001546 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > 
-> coefs <- rownames(coef(mod2))[-1]
-> heplot(mod2, fill=TRUE, hypotheses=list("Overall"=coefs, "mod2|mod1"=coefs[1:2]))
-> linearHypothesis(mod2, coefs[1:2])
+> coefs <- rownames(coef(NLSY.mod2))[-1]
+> heplot(NLSY.mod2, fill=TRUE, hypotheses=list("Overall"=coefs, "mod2|mod1"=coefs[1:2]))
+> linearHypothesis(NLSY.mod2, coefs[1:2])
 
 Sum of squares and products for the hypothesis:
          read     math
@@ -1064,9 +1069,17 @@ Roy               2 0.0221965 2.641385      2    238 0.073351 .
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > 
-> heplot(mod2, fill=TRUE, hypotheses=list("mod2|mod1"=coefs[1:2]))
+> heplot(NLSY.mod2, fill=TRUE, hypotheses=list("mod2|mod1"=coefs[1:2]))
 > 
-> 
+> # check for outliers
+> idx <- cqplot(NLSY.mod2, id.n = 5)
+> idx
+         DSQ  quantile           p
+142 49.21118 12.372417 0.002057613
+12  20.58795 10.175193 0.006172840
+152 11.61444  9.153541 0.010288066
+124 11.27507  8.480597 0.014403292
+102 11.13109  7.977968 0.018518519
 > 
 > 
 > 
@@ -1245,8 +1258,6 @@ ECG_QRS          7.5982397     4.9870508
 + cancor(cbind(TCAD, AMI) ~ as.numeric(Gender) + amount + BP + ECG_PR + ECG_QRS, data = Overdose)
 + }
 Loading required package: candisc
-Loading required package: car
-Loading required package: carData
 
 Attaching package: 'candisc'
 
@@ -1279,7 +1290,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > 
 > cleanEx()
 
-detaching 'package:candisc', 'package:car', 'package:carData'
+detaching 'package:candisc'
 
 > nameEx("Parenting")
 > ### * Parenting
@@ -1314,7 +1325,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 	Box's M-test for Homogeneity of Covariance Matrices
 
-data:  Y
+data:  eval(data, envir = environment(formula(Y)))
 Chi-Sq (approx.) = 28.343, df = 12, p-value = 0.004927
 
 > plot(boxM(parenting.mod))
@@ -1836,6 +1847,38 @@ deg8NP    8    NP  762 12.976712
  $ na   : int  12 30 16 17 26 34 23 19 16 26 ...
  $ ss   : int  16 27 16 8 17 25 18 14 13 25 ...
 > 
+> # Plot responses against each predictor
+> library(tidyr)
+> library(dplyr)
+
+Attaching package: 'dplyr'
+
+The following objects are masked from 'package:stats':
+
+    filter, lag
+
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+> library(ggplot2)
+> 
+> yvars <- c("SAT", "PPVT", "Raven" )
+> xvars <- c("n", "s", "ns", "na", "ss")
+> Rohwer_long <- Rohwer %>%
++   pivot_longer(cols = all_of(xvars), names_to = "xvar", values_to = "x") |>
++   pivot_longer(cols = all_of(yvars), names_to = "yvar", values_to = "y") |>
++   mutate(xvar = factor(xvar, xvars), yvar = factor(yvar, yvars))
+> 
+> ggplot(Rohwer_long, aes(x, y, color = SES, shape = SES, fill = SES)) +
++   geom_point() +
++   geom_smooth(method = "lm", se = FALSE, formula = y ~ x) +
++   stat_ellipse(geom = "polygon", level = 0.68, alpha = 0.1) +
++   facet_grid(yvar ~ xvar, scales = "free") +
++   labs(x = "predictor", y = "response") +
++   theme_bw(base_size = 14)
+> 
+> 
 > ## ANCOVA, assuming equal slopes
 > rohwer.mod <- lm(cbind(SAT, PPVT, Raven) ~ SES + n + s + ns + na + ss, data=Rohwer)
 > car::Anova(rohwer.mod)
@@ -1878,6 +1921,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > 
 > 
 > cleanEx()
+
+detaching 'package:ggplot2', 'package:dplyr', 'package:tidyr'
+
 > nameEx("RootStock")
 > ### * RootStock
 > 
@@ -2199,8 +2245,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 + 	plot(grades.can, term="boards")
 + 	}
 Loading required package: candisc
-Loading required package: car
-Loading required package: carData
 
 Attaching package: 'candisc'
 
@@ -2215,7 +2259,7 @@ The following object is masked from 'package:stats':
 > 
 > cleanEx()
 
-detaching 'package:candisc', 'package:car', 'package:carData'
+detaching 'package:candisc'
 
 > nameEx("SocialCog")
 > ### * SocialCog
@@ -2324,8 +2368,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > 
 > # candisc works best for factors with >2 levels
 > library(candisc)
-Loading required package: car
-Loading required package: carData
 
 Attaching package: 'candisc'
 
@@ -2362,7 +2404,7 @@ Vector scale factor set to  9.339074
 > 
 > cleanEx()
 
-detaching 'package:candisc', 'package:car', 'package:carData'
+detaching 'package:candisc'
 
 > nameEx("VocabGrowth")
 > ### * VocabGrowth
@@ -2582,7 +2624,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > 
 > ### Name: bartlettTests
 > ### Title: Bartlett Tests of Homogeneity of Variances
-> ### Aliases: bartlettTests
+> ### Aliases: bartlettTests bartlettTests.default bartlettTests.formula
+> ###   bartlettTests.lm
 > ### Keywords: htest
 > 
 > ### ** Examples
@@ -2609,6 +2652,15 @@ bh 0.7315  4     0.9474
 bl 3.5155  4     0.4755
 nh 4.3763  4     0.3575
 > 
+> # formula method
+> bartlettTests(cbind(mb, bh, bl, nh) ~ epoch, data=Skulls)
+Bartlett's Tests for Homogeneity of Variance  
+
+    Chisq df Pr(>Chisq)
+mb 7.3382  4     0.1191
+bh 0.7315  4     0.9474
+bl 3.5155  4     0.4755
+nh 4.3763  4     0.3575
 > 
 > 
 > 
@@ -2638,6 +2690,7 @@ data:  iris[, 1:4]
 Chi-Sq (approx.) = 140.94, df = 20, p-value < 2.2e-16
 
 > 
+> # summary method gives details
 > summary(res)
 Summary for Box's M-test of Equality of Covariance Matrices
 
@@ -2671,13 +2724,16 @@ max       2.364557e-01 4.878739e-01 0.6952548382 4.435659e-01
 + 	cex=c(rep(1.5, ng), 2.5), 
 + 	pch=c(rep(16, ng), 15),
 + 	col= c(rep("blue", ng), "red"))
+> 	
+> 	# plot method gives confidence intervals for logDet
+> plot(res, gplabel="Species")
 > 
 > # formula method
 > boxM( cbind(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) ~ Species, data=iris)
 
 	Box's M-test for Homogeneity of Covariance Matrices
 
-data:  Y
+data:  iris
 Chi-Sq (approx.) = 140.94, df = 20, p-value < 2.2e-16
 
 > 
@@ -2689,7 +2745,7 @@ Chi-Sq (approx.) = 140.94, df = 20, p-value < 2.2e-16
 
 	Box's M-test for Homogeneity of Covariance Matrices
 
-data:  Y
+data:  eval(data, envir = environment(formula(Y)))
 Chi-Sq (approx.) = 45.667, df = 40, p-value = 0.2483
 
 > 
@@ -2747,14 +2803,73 @@ Chi-Sq (approx.) = 45.667, df = 40, p-value = 0.2483
 > 
 > Species <- iris$Species
 > irisdev <- colDevs(iris[,1:4], Species, mean)
+> 
 > irisdev <- colDevs(iris[,1:4], Species, median)
 > # trimmed mean, using an anonymous function
 > irisdev <- colDevs(iris[,1:4], Species, function(x) mean(x, trim=0.25))
+> 
+> # include the group factor in output
+> irisdev <- colDevs(iris[,1:4], Species, group.var = "Species")
+> head(irisdev)
+  Species Sepal.Length Sepal.Width Petal.Length Petal.Width
+1  setosa        0.094       0.072       -0.062      -0.046
+2  setosa       -0.106      -0.428       -0.062      -0.046
+3  setosa       -0.306      -0.228       -0.162      -0.046
+4  setosa       -0.406      -0.328        0.038      -0.046
+5  setosa       -0.006       0.172       -0.062      -0.046
+6  setosa        0.394       0.472        0.238       0.154
 > 
 > # no grouping variable: deviations from column grand means
 > # include all variables (but suppress warning for this doc)
 > irisdev <- suppressWarnings( colDevs(iris) )
 > 
+> # two-way design
+> colDevs(Plastic[,1:3], Plastic[,"rate"])
+    tear gloss opacity
+1   0.01 -0.07    0.61
+2  -0.29  0.33    2.61
+3  -0.69  0.03   -0.79
+4   0.01  0.03    0.31
+5   0.01 -0.37   -2.99
+6   0.41 -0.47    1.91
+7   0.71  0.43   -1.79
+8   0.41  0.33    0.11
+9  -0.39 -0.07   -1.89
+10 -0.19 -0.17    1.91
+11 -0.38  0.04   -1.28
+12 -0.48  0.24    0.02
+13  0.12 -0.76   -0.28
+14  0.02 -0.66   -2.48
+15 -0.28 -0.56   -0.68
+16  0.02  0.14    4.32
+17 -0.08 -0.26    1.12
+18  0.12  0.64    2.82
+19  0.42  1.04   -1.38
+20  0.52  0.14   -2.18
+> colDevs(Plastic[,1:3], Plastic[,"additive"])
+    tear gloss opacity
+1  -0.09  0.36    0.96
+2  -0.39  0.76    2.96
+3  -0.79  0.46   -0.44
+4  -0.09  0.46    0.66
+5  -0.09  0.06   -2.64
+6  -0.08 -0.39    1.27
+7   0.22  0.51   -2.43
+8  -0.08  0.41   -0.53
+9  -0.88  0.01   -2.53
+10 -0.68 -0.09    1.27
+11  0.11 -0.04   -0.64
+12  0.01  0.16    0.66
+13  0.61 -0.84    0.36
+14  0.51 -0.74   -1.84
+15  0.21 -0.64   -0.04
+16  0.12 -0.29    3.97
+17  0.02 -0.69    0.77
+18  0.22  0.21    2.47
+19  0.52  0.61   -1.73
+20  0.62 -0.29   -2.53
+> # cell deviations
+> #' colDevs(Plastic[,1:3], interaction(Plastic[,c("rate", "additive")]))
 > 
 > 
 > 
@@ -2769,7 +2884,7 @@ Chi-Sq (approx.) = 45.667, df = 40, p-value = 0.2483
 > ###   groups
 > ### Aliases: covEllipses covEllipses.boxM covEllipses.data.frame
 > ###   covEllipses.matrix covEllipses.default covEllipses.formula
-> ### Keywords: hplot
+> ### Keywords: hplot multivariate
 > 
 > ### ** Examples
 > 
@@ -2818,7 +2933,7 @@ Chi-Sq (approx.) = 140.94, df = 20, p-value < 2.2e-16
 > ### Name: cqplot
 > ### Title: Chi Square Quantile-Quantile plots
 > ### Aliases: cqplot cqplot.default cqplot.mlm
-> ### Keywords: hplot
+> ### Keywords: hplot multivariate
 > 
 > ### ** Examples
 > 
@@ -2827,7 +2942,13 @@ Chi-Sq (approx.) = 140.94, df = 20, p-value < 2.2e-16
 > cqplot(iris[, 1:4])
 > 
 > iris.mod <- lm(as.matrix(iris[,1:4]) ~ Species, data=iris)
-> cqplot(iris.mod, id.n=3)
+> out <- cqplot(iris.mod, id.n=3)
+> # show return value
+> out
+         DSQ quantile           p
+119 17.41948 15.77709 0.003333333
+135 16.04843 13.27670 0.010000000
+42  16.01501 12.09388 0.016666667
 > 
 > # compare with car::qqPlot
 > car::qqPlot(Mahalanobis(iris[, 1:4]), dist="chisq", df=4)
@@ -2865,6 +2986,206 @@ Chi-Sq (approx.) = 140.94, df = 20, p-value < 2.2e-16
 > 
 > 
 > cleanEx()
+> nameEx("distancePlot")
+> ### * distancePlot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: distancePlot
+> ### Title: Distance Plot for Multivariate Model Diagnosis
+> ### Aliases: distancePlot distancePlot.default distancePlot.formula
+> ###   distancePlot.mlm
+> 
+> ### ** Examples
+> 
+> 
+> if(require("robustbase")) {
++   # Examples from Rousseeuw etal (2004)
++   data(pulpfiber, package="robustbase")
++   # Figure 1
++   distancePlot(pulpfiber[, 1:4], pulpfiber[, 5:8])   
++   # Figure 3
++   pulp.mod <- lm(cbind(Y1, Y2, Y3, Y4) ~ X1 + X2 + X3 + X4, data = pulpfiber)
++   distancePlot(pulp.mod, method = "mcd")
++ }
+Loading required package: robustbase
+Warning: package 'robustbase' was built under R version 4.5.2
+0.975 X, Y distance cutoffs: 3.338156 3.338156 
+0.975 X, Y distance cutoffs: 3.338156 3.338156 
+> 
+> # NLSY data
+> data(NLSY, package = "heplots")
+> NLSY.mlm <- lm(cbind(math, read) ~ income + educ + antisoc + hyperact,
++                data = NLSY)
+> 
+> distancePlot(NLSY.mlm)
+0.975 X, Y distance cutoffs: 3.338156 2.716203 
+> 
+> # gives the same result
+> distancePlot(NLSY[, 3:6], residuals(NLSY.mlm), level = 0.975)
+0.975 X, Y distance cutoffs: 3.338156 2.716203 
+> 
+> distancePlot(NLSY.mlm, method ="mve")
+0.975 X, Y distance cutoffs: 3.338156 2.716203 
+> 
+> # distancePlot(cbind(math, read) ~ income + educ + antisoc + hyperact,
+> #                data = NLSY)
+> 
+> # schooldata dataset
+> data(schooldata)
+> school.mod <- lm(cbind(reading, mathematics, selfesteem) ~ ., data=schooldata)
+> distancePlot(school.mod)
+0.975 X, Y distance cutoffs: 3.582248 3.057516 
+> 
+> data(Hernior)
+> Hern.mod <- lm(cbind(leave, nurse, los) ~
++                age + sex +  pstat +  build + cardiac + resp, data=Hernior)
+> distancePlot(Hern.mod)
+0.975 X, Y distance cutoffs: 3.801233 3.057516 
+> 
+> 
+> 
+> 
+> cleanEx()
+
+detaching 'package:robustbase'
+
+> nameEx("dogfood")
+> ### * dogfood
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: dogfood
+> ### Title: Dogfood Preferences
+> ### Aliases: dogfood
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(dogfood)
+> library(car)
+Loading required package: carData
+> library(candisc)
+
+Attaching package: 'candisc'
+
+The following object is masked from 'package:stats':
+
+    cancor
+
+> 
+> # make some boxplots
+> op <- par(mfrow = c(1,2))
+> boxplot(start ~ formula, data = dogfood)
+> points(start ~ formula, data = dogfood, pch=16, cex = 1.2)
+> 
+> boxplot(amount ~ formula, data = dogfood)
+> points(amount ~ formula, data = dogfood, pch=16, cex = 1.2)
+> par(op)
+> 
+> # setup contrasts to test interesting comparisons
+> C <- matrix(
++        c( 1,  1, -1, -1,         #Ours vs. Theirs
++           0,  0,  1, -1,           #Major vs. Alps
++           1, -1,  0,  0),             #New vs. Old
++        nrow=4, ncol=3)
+> # assign these to the formula factor
+> contrasts(dogfood$formula) <- C
+> # re-fit the model
+> dogfood.mod <- lm(cbind(start, amount) ~ formula, data=dogfood)
+> 
+> dogfood.mod <- lm(cbind(start, amount) ~ formula, data=dogfood)
+> Anova(dogfood.mod)
+
+Type II MANOVA Tests: Pillai test statistic
+        Df test stat approx F num Df den Df  Pr(>F)  
+formula  3   0.70178   2.1623      6     24 0.08289 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+> 
+> # data ellipses
+> covEllipses(cbind(start, amount) ~ formula, data=dogfood,
++   fill = TRUE, fill.alpha = 0.1)
+> 
+> # test these contrasts with multivariate tests 
+> linearHypothesis(dogfood.mod, "formula1", title="Ours vs. Theirs")
+
+Sum of squares and products for the hypothesis:
+          start   amount
+start    7.5625 -59.8125
+amount -59.8125 473.0625
+
+Sum of squares and products for error:
+       start amount
+start  25.75  11.75
+amount 11.75 390.25
+
+Multivariate Tests: Ours vs. Theirs
+                 Df test stat approx F num Df den Df    Pr(>F)   
+Pillai            1 0.6252849 9.177818      2     11 0.0045223 **
+Wilks             1 0.3747151 9.177818      2     11 0.0045223 **
+Hotelling-Lawley  1 1.6686941 9.177818      2     11 0.0045223 **
+Roy               1 1.6686941 9.177818      2     11 0.0045223 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+> linearHypothesis(dogfood.mod, "formula2", title="Old vs. New")
+
+Sum of squares and products for the hypothesis:
+       start amount
+start  0.125  1.875
+amount 1.875 28.125
+
+Sum of squares and products for error:
+       start amount
+start  25.75  11.75
+amount 11.75 390.25
+
+Multivariate Tests: Old vs. New
+                 Df test stat  approx F num Df den Df  Pr(>F)
+Pillai            1 0.0685104 0.4045209      2     11 0.67683
+Wilks             1 0.9314896 0.4045209      2     11 0.67683
+Hotelling-Lawley  1 0.0735493 0.4045209      2     11 0.67683
+Roy               1 0.0735493 0.4045209      2     11 0.67683
+> linearHypothesis(dogfood.mod, "formula3", title="Alps vs. Major")
+
+Sum of squares and products for the hypothesis:
+       start amount
+start      2  -13.0
+amount   -13   84.5
+
+Sum of squares and products for error:
+       start amount
+start  25.75  11.75
+amount 11.75 390.25
+
+Multivariate Tests: Alps vs. Major
+                 Df test stat approx F num Df den Df  Pr(>F)
+Pillai            1 0.2476229 1.810164      2     11 0.20912
+Wilks             1 0.7523771 1.810164      2     11 0.20912
+Hotelling-Lawley  1 0.3291208 1.810164      2     11 0.20912
+Roy               1 0.3291208 1.810164      2     11 0.20912
+> 
+> heplot(dogfood.mod, fill = TRUE, fill.alpha = 0.1)
+> 
+> # display contrasts in the heplot 
+> hyp <- list("Ours/Theirs" = "formula1",
++             "Old/New" = "formula2")
+> heplot(dogfood.mod, hypotheses = hyp,
++        fill = TRUE, fill.alpha = 0.1)
+> 
+> dogfood.can <- candisc(dogfood.mod, data=dogfood)
+> heplot(dogfood.can, 
++        fill = TRUE, fill.alpha = 0.1, 
++        lwd = 2, var.lwd = 2, var.cex = 2)
+Vector scale factor set to  2.635145 
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+
+detaching 'package:candisc', 'package:car', 'package:carData'
+
 > nameEx("ellipse.axes")
 > ### * ellipse.axes
 > 
@@ -2884,13 +3205,28 @@ Chi-Sq (approx.) = 140.94, df = 20, p-value < 2.2e-16
 > plot(iris[,1:2], asp=1)
 > car::ellipse(mu, cov, radius = radius)
 > res <- ellipse.axes(cov, center=mu, level = 0.68,
-+             labels = TRUE)
++                     labels = TRUE)
 > res
      Sepal.Length Sepal.Width
-Xmin  -1.24882344   0.1061294
-Xmax   1.24882344  -0.1061294
-Ymin  -0.05518532  -0.6493648
-Ymax   0.05518532   0.6493648
+Xmin     4.594510    3.163463
+Xmax     7.092157    2.951204
+Ymin     5.788148    2.407969
+Ymax     5.898519    3.706698
+> 
+> # try some options 
+> plot(iris[,1:2], asp=1)
+> car::ellipse(mu, cov, radius = radius)
+> abline(h=mu[2], v=mu[1], col = "grey")
+> ellipse.axes(cov, centre=mu, level = 0.68,
++              labels = "Dim", label.ends = 1:4,
++              lwd = 2, lty = 2, col = "red",
++              cex = 1.5)
+>              
+> # draw arrows rather than lines            
+> plot(iris[,1:2], asp=1)
+> car::ellipse(mu, cov, radius = radius)
+> ellipse.axes(cov, center=mu, level = 0.68,
++              type = "arrows", extend = 0.2)
 > 
 > 
 > 
@@ -2952,7 +3288,6 @@ Ymax   0.05518532   0.6493648
 > col <-c("blue", "green", "red")[iris$Species]
 > 
 > library(rgl)
-Warning: package 'rgl' was built under R version 4.3.3
 
 Attaching package: 'rgl'
 
@@ -3041,18 +3376,19 @@ detaching 'package:car', 'package:carData'
 > ### Name: glance.mlm
 > ### Title: Glance at an mlm object
 > ### Aliases: glance.mlm
+> ### Keywords: multivariate
 > 
 > ### ** Examples
 > 
 > iris.mod <- lm(cbind(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) ~ Species, data=iris)
 > glance(iris.mod)
-# A tibble: 4 × 9
-  response   r.squared adj.r.squared sigma fstatistic numdf dendf  p.value  nobs
-  <chr>          <dbl>         <dbl> <dbl>      <dbl> <dbl> <dbl>    <dbl> <int>
-1 Sepal.Len…     0.619         0.614 0.515      119.      2   147 1.67e-31   150
-2 Sepal.Wid…     0.401         0.393 0.340       49.2     2   147 4.49e-17   150
-3 Petal.Len…     0.941         0.941 0.430     1180.      2   147 2.86e-91   150
-4 Petal.Wid…     0.929         0.928 0.205      960.      2   147 4.17e-85   150
+# A tibble: 4 × 8
+  response     r.squared sigma fstatistic numdf dendf  p.value  nobs
+  <chr>            <dbl> <dbl>      <dbl> <dbl> <dbl>    <dbl> <int>
+1 Sepal.Length     0.619 0.515      119.      2   147 1.67e-31   150
+2 Sepal.Width      0.401 0.340       49.2     2   147 4.49e-17   150
+3 Petal.Length     0.941 0.430     1180.      2   147 2.86e-91   150
+4 Petal.Width      0.929 0.205      960.      2   147 4.17e-85   150
 > 
 > 
 > 
@@ -3535,7 +3871,8 @@ Warning in plot.xy(xy.coords(x, y), type = type, ...) :
 > 
 > ### Name: leveneTests
 > ### Title: Levene Tests of Homogeneity of Variances
-> ### Aliases: leveneTests
+> ### Aliases: leveneTests leveneTests.default leveneTests.formula
+> ###   leveneTests.lm
 > ### Keywords: htest
 > 
 > ### ** Examples
@@ -3571,6 +3908,37 @@ bh   4 145  0.7171 0.5816
 bl   4 145  0.6797 0.6071
 nh   4 145  1.0418 0.3878
 > 
+> # formula method
+> leveneTests(cbind(mb, bh, bl, nh) ~ epoch, data=Skulls)
+Levene's Tests for Homogeneity of Variance (center = median)
+
+   df1 df2 F value Pr(>F)
+mb   4 145  1.0367 0.3905
+bh   4 145  0.7171 0.5816
+bl   4 145  0.6797 0.6071
+nh   4 145  1.0418 0.3878
+> 
+> # use 10% trimmed means
+> leveneTests(cbind(mb, bh, bl, nh) ~ epoch, data=Skulls, trim = 0.1)
+Levene's Tests for Homogeneity of Variance (center = median: 0.1)
+
+   df1 df2 F value Pr(>F)
+mb   4 145  1.0367 0.3905
+bh   4 145  0.7171 0.5816
+bl   4 145  0.6797 0.6071
+nh   4 145  1.0418 0.3878
+> 
+> 
+> # mlm method
+> skulls.mod <- lm(cbind(mb, bh, bl, nh) ~ epoch, data=Skulls)
+> leveneTests(skulls.mod)
+Levene's Tests for Homogeneity of Variance (center = median)
+
+   df1 df2 F value Pr(>F)
+mb   4 145  1.0367 0.3905
+bh   4 145  0.7171 0.5816
+bl   4 145  0.6797 0.6071
+nh   4 145  1.0418 0.3878
 > 
 > 
 > 
@@ -3691,6 +4059,172 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > 
 > 
 > cleanEx()
+> nameEx("noteworthy")
+> ### * noteworthy
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: noteworthy
+> ### Title: Find noteworthy (unusual) points in a 2D plot
+> ### Aliases: noteworthy
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> # example code
+> set.seed(47)
+> x <- c(runif(100), 1.5, 1.6, 0)
+> y <- c(2*x[1:100] + rnorm(100, sd = 1.2), -2, 6, 6 )
+> z <- y - x
+> mod <- lm(y ~ x)
+> 
+> # testing function to compare noteworthy with car::showLabels() 
+> testnote <- function(x, y, n, method=NULL, ...)  {
++   plot(x, y)
++   abline(lm(y ~ x))
++   if (!is.null(method))
++     car::showLabels(x, y, n=n, method = method) |> print()
++   ids <- noteworthy(x, y, n=n, method = method, ...)
++   text(x[ids], y[ids], labels = ids, col = "red")
++   ids
++   }
+> 
+>   # Mahalanobis distance 
+> testnote(x, y, n = 5, method = "mahal")
+[1] 101 103 102  72  36
+[1] 101 103 102  72  36
+> testnote(x, y, n = 5, method = "mahal", level = .99)
+[1] 101 103 102  72  36
+[1] 101 103 102
+>   # Euclidean distance 
+> testnote(x, y, n = 5, method = "dsq")
+NULL
+[1] 102 103  72 101  36
+> 
+> testnote(x, y, n = 5, method = "y")
+[1] 102 103  72 101  36
+[1] 102 103  72 101  36
+> testnote(x, y, n = 5, method = "ry")
+NULL
+[1] 103 101 102  72  36
+> 
+>   # a vector of criterion values
+> testnote(x, y, n = 5, method = Mahalanobis(data.frame(x,y)))
+[1] 101 103 102  72  36
+[1] 101 103 102  72  36
+> testnote(x, y, n = 5, method = z)
+[1] 103 102   3  77  16
+[1] 103 102   3  77  16
+>   # vector of case IDs
+> testnote(x, y, n = 4, method = seq(10, 60, 10))
+[1] 10 20 30 40 50 60
+[1] 10 20 30 40 50 60
+> testnote(x, y, n = 4, method = which(cooks.distance(mod) > .25))
+[1] 101 102 103
+101 102 103 
+101 102 103 
+> 
+>   # test use of xy.coords  
+> noteworthy(data.frame(x,y), n=4)
+[1] 101 103 102  72
+> noteworthy(y ~ x, n=4)
+[1] 101 103 102  72
+> 
+> 
+> 
+> cleanEx()
+> nameEx("oral")
+> ### * oral
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: oral
+> ### Title: Effect of Delay in Oral Practice in Second Language Learning
+> ### Aliases: oral
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> library(car)
+Loading required package: carData
+> library(candisc)
+
+Attaching package: 'candisc'
+
+The following object is masked from 'package:stats':
+
+    cancor
+
+> data(oral)
+> 
+> # make some boxplots
+> op <- par(mfrow=c(1,4), cex.lab=1.5)
+> clr <- c("pink", "lightblue")
+> Boxplot(listen ~ group, data=oral, col = clr, cex.lab = 1.5)
+> Boxplot(speak ~  group, data=oral, col = clr, cex.lab = 1.5)
+> Boxplot(read ~   group, data=oral, col = clr, cex.lab = 1.5)
+[1] "37" "47" "51" "23" "27"
+> Boxplot(write ~  group, data=oral, col = clr, cex.lab = 1.5)
+[1] "51" "27"
+> par(op)
+> 
+> # view the data ellipses
+> covEllipses(cbind(listen, speak, read, write) ~ group, data=oral,
++     variables = 1:4,
++     level = 0.40,
++     pooled = FALSE,
++     fill = TRUE, fill.alpha = 0.05)
+> 
+> oral.mod <- lm(cbind(listen, speak, read, write) ~ group, data=oral)
+> Anova(oral.mod)
+
+Type II MANOVA Tests: Pillai test statistic
+      Df test stat approx F num Df den Df Pr(>F)
+group  1  0.085586   1.1933      4     51  0.325
+> 
+> # canonical view
+> oral.can <- candisc(oral.mod) |> print()
+
+Canonical Discriminant Analysis for group:
+
+    CanRsq Eigenvalue Difference Percent Cumulative
+1 0.085586   0.093596                100        100
+
+Test of H0: The canonical correlations in the 
+current row and all that follow are zero
+
+  LR test stat approx F numDF denDF Pr(> F)
+1      0.91441   1.1933     4    51   0.325
+> summary(oral.can)
+
+Canonical Discriminant Analysis for group:
+
+    CanRsq Eigenvalue Difference Percent Cumulative
+1 0.085586   0.093596                100        100
+
+Class means:
+
+[1]  0.30042 -0.30042
+
+ std coefficients:
+    listen      speak       read      write 
+ 0.5689397 -0.7403339 -0.0060816 -0.7079937 
+> 
+> # reflect the structure & scores to make them positive
+> oral.can$structure[, "Can1"] <- -1 * oral.can$structure[, "Can1"]
+> oral.can$scores[, "Can1"]    <- -1 * oral.can$scores[, "Can1"]
+> 
+> plot(oral.can, var.lwd=2)
+> 
+> 
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
+
+detaching 'package:candisc', 'package:car', 'package:carData'
+
 > nameEx("pairs.mlm")
 > ### * pairs.mlm
 > 
@@ -3746,7 +4280,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 	Box's M-test for Homogeneity of Covariance Matrices
 
-data:  Y
+data:  peng
 Chi-Sq (approx.) = 74.731, df = 20, p-value = 3.02e-08
 
 > plot(peng.boxm, gplabel="Species")
@@ -3822,7 +4356,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > 
 > data(Skulls)
 > sk.rmod <- robmlm(cbind(mb, bh, bl, nh) ~ epoch, data=Skulls)
-> plot(sk.rmod, col=Skulls$epoch)
+> plot(sk.rmod, col=Skulls$epoch, segments=TRUE)
 > axis(side=3, at=15+seq(0,120,30), labels=levels(Skulls$epoch), cex.axis=1)
 > 
 > # Pottery data
@@ -3844,6 +4378,47 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > 
 > 
 > cleanEx()
+> nameEx("rel_diff")
+> ### * rel_diff
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rel_diff
+> ### Title: Relative Difference between two Arrays or Data Frames
+> ### Aliases: rel_diff
+> 
+> ### ** Examples
+> 
+> # simple example
+> m1 <- cbind(c(0,1), c(1,1))
+> m2 <- cbind(c(0,1), c(1.01,1.11))
+> rel_diff(m1, m2, pct = FALSE) 
+     [,1] [,2]
+[1,]    0 0.01
+[2,]    0 0.11
+> rel_diff(m1, m2) 
+     [,1] [,2]
+[1,]    0    1
+[2,]    0   11
+> 
+> # compare coefficients
+> data(Skulls)
+> 
+> # fit manova model, classically and robustly
+> sk.mlm <- lm(cbind(mb, bh, bl, nh) ~ epoch, data=Skulls)
+> sk.rlm <- robmlm(cbind(mb, bh, bl, nh) ~ epoch, data=Skulls)
+> rel_diff(coef(sk.mlm),
++          coef(sk.rlm))
+                      mb          bh           bl           nh
+(Intercept)   0.01446592  0.08977463   0.04729215   0.08496078
+epoch.L       3.46042186 -0.59951299  -3.48922244   3.87957519
+epoch.Q     -20.74713900 -3.30993862 -51.99508454 125.92364818
+epoch.C     -25.78059257 -1.43305167   4.19962200  -0.62550036
+epoch^4      85.33424274  9.19478314 -15.44695305 -49.00471013
+> 
+> 
+> 
+> cleanEx()
 > nameEx("robmlm")
 > ### * robmlm
 > 
@@ -3858,8 +4433,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > ### ** Examples
 > 
 > 
-> ##############
 > # Skulls data
+> # -----------
+> data(Skulls)
 > 
 > # make shorter labels for epochs and nicer variable labels in heplots
 > Skulls$epoch <- factor(Skulls$epoch, labels=sub("c","",levels(Skulls$epoch)))
@@ -3880,9 +4456,9 @@ epoch.C      -0.5833713  -0.7912067  1.03002114 -0.8379419
 epoch^4       0.6350148   0.8787857 -0.55919989 -0.6233314
 > 
 > # index plot of weights
-> plot(sk.rmod$weights, type="h", xlab="Case Index", ylab="Robust mlm weight", col="gray")
+> plot(sk.rmod, segments = TRUE, col = Skulls$epoch)
 > points(sk.rmod$weights, pch=16, col=Skulls$epoch)
-> axis(side=1, at=15+seq(0,120,30), labels=levels(Skulls$epoch), tick=FALSE, cex.axis=1)
+> text(x = 15+seq(0,120,30), y = 1.05, labels=levels(Skulls$epoch), xpd=TRUE)
 > 
 > # heplots to see effect of robmlm vs. mlm
 > heplot(sk.mod, hypotheses=list(Lin="epoch.L", Quad="epoch.Q"), 
@@ -3990,6 +4566,16 @@ typewc       1.148   -0.166
 +          lower.panel=panel.ellipse, 
 +          upper.panel=panel.pts)
 > 
+> # check for multivariate outliers
+> res <- cqplot(schooldata, id.n = 5)
+> res
+        DSQ quantile           p
+59 44.58221 21.00172 0.007142857
+44 38.82543 17.97317 0.021428571
+33 27.92339 16.50356 0.035714286
+66 24.01111 15.50731 0.050000000
+35 21.73211 14.74557 0.064285714
+> 
 > #fit the MMreg model
 > school.mod <- lm(cbind(reading, mathematics, selfesteem) ~ 
 + 		             education + occupation + visit + counseling + teacher, data=schooldata)
@@ -4031,7 +4617,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 > wts <- school.rmod$weights
 > notable <- which(wts < 0.8)
 > plot(wts, type = "h", col="gray", ylab = "Observation weight")
-> points(1:length(wts), wts, 
+> points(seq_along(wts), wts, 
 +        pch=16,
 +        col = ifelse(wts < 0.8, "red", "black"))
 > 
@@ -4059,6 +4645,50 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 detaching 'package:corrgram'
 
+> nameEx("schoolsites")
+> ### * schoolsites
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: schoolsites
+> ### Title: Schooldata Sites
+> ### Aliases: schoolsites
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(schoolsites)
+> str(schoolsites)
+'data.frame':	70 obs. of  7 variables:
+ $ site       : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ type       : Factor w/ 2 levels "PFT","NFT": 1 1 1 1 1 1 1 1 1 1 ...
+ $ model      : Factor w/ 12 levels "BA","Bank Street",..: 10 10 10 10 10 10 10 12 12 12 ...
+ $ site_name  : chr  "Berkeley, CA" "Buffalo, NY" "Duluth, MN" "Fresno, CA" ...
+ $ region     : Factor w/ 4 levels "NC","NE","S",..: 4 2 1 4 2 4 4 3 2 1 ...
+ $ city_size  : Ord.factor w/ 4 levels "Rural"<"Small"<..: 3 4 3 3 1 3 3 4 2 3 ...
+ $ student_pop: int  99 77 77 48 14 36 51 99 80 96 ...
+> schools <- cbind(schooldata, schoolsites)
+> schools.mod <- lm(cbind(reading, mathematics, selfesteem) ~
++                     education + occupation + visit + counseling + teacher +
++                     type + region, data = schools)
+> car::Anova(schools.mod)
+
+Type II MANOVA Tests: Pillai test statistic
+           Df test stat approx F num Df den Df    Pr(>F)    
+education   1   0.37965  11.8320      3     58 3.773e-06 ***
+occupation  1   0.53605  22.3376      3     58 9.720e-10 ***
+visit       1   0.26933   7.1264      3     58 0.0003721 ***
+counseling  1   0.07204   1.5008      3     58 0.2238866    
+teacher     1   0.01106   0.2163      3     58 0.8847243    
+type        1   0.10345   2.2307      3     58 0.0942228 .  
+region      3   0.26764   1.9591      9    180 0.0465145 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+> 
+> 
+> 
+> 
+> cleanEx()
 > nameEx("statList")
 > ### * statList
 > 
@@ -4268,12 +4898,58 @@ A3:B2  8.0  4.5
 > 
 > 
 > 
+> cleanEx()
+> nameEx("uniStats")
+> ### * uniStats
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: uniStats
+> ### Title: Univariate Test Statistics for a Multivariate Linear Model
+> ### Aliases: uniStats
+> 
+> ### ** Examples
+> 
+> iris.mod <- lm(cbind(Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) ~ Species, data=iris)
+> car::Anova(iris.mod)
+
+Type II MANOVA Tests: Pillai test statistic
+        Df test stat approx F num Df den Df    Pr(>F)    
+Species  2    1.1919   53.466      8    290 < 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+> uniStats(iris.mod)
+Univariate tests for responses in the multivariate linear model iris.mod 
+
+                 R^2       F df1 df2    Pr(>F)    
+Sepal.Length 0.61871  119.26   2 147 < 2.2e-16 ***
+Sepal.Width  0.40078   49.16   2 147 < 2.2e-16 ***
+Petal.Length 0.94137 1180.16   2 147 < 2.2e-16 ***
+Petal.Width  0.92888  960.01   2 147 < 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+> 
+> data(Plastic, package = "heplots")
+> plastic.mod <- lm(cbind(tear, gloss, opacity) ~ rate*additive, data=Plastic)
+> # multivariate tests
+> car::Anova(plastic.mod)
+
+Type II MANOVA Tests: Pillai test statistic
+              Df test stat approx F num Df den Df   Pr(>F)   
+rate           1   0.61814   7.5543      3     14 0.003034 **
+additive       1   0.47697   4.2556      3     14 0.024745 * 
+rate:additive  1   0.22289   1.3385      3     14 0.301782   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+> 
+> 
+> 
 > ### * <FOOTER>
 > ###
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  6.28 0.69 7.01 NA NA 
+Time elapsed:  11.72 1.33 15.53 NA NA 
 > grDevices::dev.off()
 null device 
           1 

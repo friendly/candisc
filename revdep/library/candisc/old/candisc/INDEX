@@ -15,6 +15,7 @@ heplot.cancor           Canonical Correlation HE plots
 heplot.candisc          Canonical Discriminant HE plots
 heplot.candiscList      Canonical Discriminant HE plots
 plot.cancor             Canonical Correlation Plots
+predictor.names         Get predictor names from a 'lm'-like model
 redundancy              Canonical Redundancy Analysis
 varOrder                Order variables according to canonical
                         structure or other criteria

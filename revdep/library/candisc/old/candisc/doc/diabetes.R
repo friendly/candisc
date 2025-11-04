@@ -1,5 +1,6 @@
 ## ----echo=FALSE---------------------------------------------------------------
-knitr::opts_chunk$set(warning=FALSE, message=FALSE, collapse=TRUE, R.options=list(digits=4))
+knitr::opts_chunk$set(warning=FALSE, message=FALSE, 
+                      collapse=TRUE, R.options=list(digits=4))
 
 ## ----setup--------------------------------------------------------------------
 library(heplots)
@@ -42,7 +43,7 @@ diab.mlm <- lm(cbind(glufast, glutest, instest, sspg) ~ group, data=Diabetes)
 Anova(diab.mlm)
 
 ## ----cqplot, fig.width=6, fig.height=5----------------------------------------
-cqplot(diab.mlm)
+cqplot(diab.mlm, id.n = 3)
 
 ## ----he1, fig.width=6, fig.height=5, echo=-1----------------------------------
 op <- par(mar=c(4,4,1,1)+.5)
