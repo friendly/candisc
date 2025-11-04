@@ -28,11 +28,12 @@ plot_discrim(
 
 \item{contour}{logical; should the plot display the boundaries of the classes by contours?}
 
-\item{contour.color}{colour of the lines for the contour boundaries}
+\item{contour.color}{color of the lines for the contour boundaries}
 
 \item{point.size}{size of the plot symbols use to show the data observations}
 
-\item{showgrid}{a character string; how to display predicted class regions: "tile" for geom_tile, "point" for geom_point, or "none" for no grid display.}
+\item{showgrid}{a character string; how to display predicted class regions: \code{"tile"} for \code{\link[ggplot2:geom_tile]{ggplot2::geom_tile()}}, \code{"point"}
+for \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, or "none" for no grid display.}
 
 \item{...}{further parameters passed to \code{predict()}}
 
@@ -40,17 +41,18 @@ plot_discrim(
 }
 \description{
 Discriminant analysis can be more easily understood from plots of the data variables showing how observations are classified.
-\code{plot_discrim()} uses the ideas behind effect plots: Visualize predicted values for two focal variables, with other variables
-in a model held fixed.
+\code{plot_discrim()} uses the ideas behind effect plots: Visualize predicted values for two focal variables over a
+grid, with other variables in a model held fixed.
 }
 \details{
-In setting up this plot for ggplot(), this function maps color and shape of class-specific elements of the plot to the value of
+In setting up this plot for \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}, this function maps color and shape of class-specific elements of the plot to the value of
 the class variable in the discriminant analysis. But it simply uses the ggplot defaults...
 }
 \examples{
 library(MASS)
 library(ggplot2)
 library(dplyr)
+library(candisc)
 
 iris.lda <- lda(Species ~ ., iris)
 plot_discrim(iris.lda, Petal.Length ~ Petal.Width, data=iris, showgrid = "tile")

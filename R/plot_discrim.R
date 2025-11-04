@@ -3,25 +3,26 @@
 #' Create a discriminant analysis decision plot using ggplot.
 #' 
 #' Discriminant analysis can be more easily understood from plots of the data variables showing how observations are classified.
-#' `plot_discrim()` uses the ideas behind effect plots: Visualize predicted values for two focal variables, with other variables
-#' in a model held fixed.
+#' `plot_discrim()` uses the ideas behind effect plots: Visualize predicted values for two focal variables over a
+#' grid, with other variables in a model held fixed.
 #' 
 #' @details
-#' In setting up this plot for ggplot(), this function maps color and shape of class-specific elements of the plot to the value of
+#' In setting up this plot for [ggplot2::ggplot()], this function maps color and shape of class-specific elements of the plot to the value of
 #' the class variable in the discriminant analysis. But it simply uses the ggplot defaults...
 #' 
 #'
 #' @md
-#' @param model a discriminant analysis model object from `MASS::lda()` or `MASS::qda()`
-#' @param vars either a character vector of length 2 of the names of variables, or a formula of form V1 ~ V2 specifying y and x axis in the plot respectively.
-#' @param data data to use for visualization. Should contain all the data needed to use the model
+#' @param model   a discriminant analysis model object from `MASS::lda()` or `MASS::qda()`
+#' @param vars    either a character vector of length 2 of the names of variables, or a formula of form V1 ~ V2 specifying y and x axis in the plot respectively.
+#' @param data    data to use for visualization. Should contain all the data needed to use the model
 #' @param resolution number of points in x, y variables to use for visualizating the predicted class boundaries and regions.
 #' @param contour logical; should the plot display the boundaries of the classes by contours?
-#' @param contour.color colour of the lines for the contour boundaries
-#' @param showgrid a character string; how to display predicted class regions: "tile" for geom_tile, "point" for geom_point, or "none" for no grid display.
+#' @param contour.color color of the lines for the contour boundaries
+#' @param showgrid a character string; how to display predicted class regions: `"tile"` for [ggplot2::geom_tile()], `"point"` 
+#'        for [ggplot2::geom_point()], or "none" for no grid display.
 #' @param point.size size of the plot symbols use to show the data observations
 #' @param ... further parameters passed to `predict()`
-#' @param modes.means levels to use for evaluating predictions using the variables **not* specified in `vars`. If not specified, the function uses the means for quantitative variables, ...
+#' @param modes.means   levels to use for evaluating predictions using the variables **not* specified in `vars`. If not specified, the function uses the means for quantitative variables, ...
 #' @author Original code by Oliver on SO <https://stackoverflow.com/questions/63782598/quadratic-discriminant-analysis-qda-plot-in-r>. Generalized by Michael Friendly
 #' @seealso [klaR::partimat()]
 #' @importFrom ggplot2 ggplot aes geom_point geom_tile geom_contour .data 
@@ -30,6 +31,7 @@
 #' library(MASS)
 #' library(ggplot2)
 #' library(dplyr)
+#' library(candisc)
 #' 
 #' iris.lda <- lda(Species ~ ., iris)
 #' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, data=iris, showgrid = "tile")

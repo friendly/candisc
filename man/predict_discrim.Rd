@@ -21,7 +21,8 @@ predict_discrim(
 
 \item{prior}{The prior probabilities of the classes. By default, taken to be the proportions in what was set in the call to \code{\link[MASS:lda]{MASS::lda()}} or \code{\link[MASS:qda]{MASS::qda()}}}
 
-\item{dimen}{The dimension of the space to be used. If this is less than the number of available dimensions, min(p, ng-1), only the first \code{dimen} discriminant components are used. (This argument is not yet implemented because \code{\link[MASS:qda]{MASS::qda()}} does not support this.)}
+\item{dimen}{The dimension of the space to be used. If this is less than the number of available dimensions,
+\eqn{\min(p, ng-1)}, only the first \code{dimen} discriminant components are used. (This argument is not yet implemented because \code{\link[MASS:qda]{MASS::qda()}} does not support this.)}
 
 \item{scores}{A logical. If \code{TRUE}, the discriminant scores of the cases in \code{newdata} are appended as additional columns in the the result, with names \code{LD1}, \code{LD2}, ...}
 
@@ -49,6 +50,7 @@ Using the \code{scores} argument, the function also returns the scores on the di
 linear discriminant analysis with \code{\link[MASS:lda]{MASS::lda()}}.
 }
 \examples{
+library(candisc)
 library(MASS)   # for lda()
 
 iris.lda <- lda(Species ~ ., iris)

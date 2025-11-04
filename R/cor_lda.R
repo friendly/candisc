@@ -12,7 +12,7 @@
 #' @param prior   The prior probabilities of the classes. By default, taken to be the proportions in what was set 
 #'                in the call to [MASS::lda()]
 #' @param dimen   The dimension of the space to be used. If this is less than the number of available dimensions, 
-#'                \eqn{min(p, ng-1)}, only the first `dimen` discriminant components are used. 
+#'                \eqn{\min(p, ng-1)}, only the first `dimen` discriminant components are used. 
 #' @param method  a character string indicating which correlation coefficient is to be computed. One of `"pearson"` 
 #'                (default), `"kendall"`, or `"spearman"`: can be abbreviated. See [stats::cor()] for details
 #' @param ...     other arguments (presently ignored)
@@ -23,6 +23,7 @@
 #' @export
 #'
 #' @examples
+#' library(candisc)
 #' library(MASS)   # for lda()
 #' 
 #' iris.lda <- lda(Species ~ ., iris)

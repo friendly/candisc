@@ -41,6 +41,7 @@ reference:
     contents:
       - predict_discrim
       - plot_discrim
+      - cor_lda
 
   - title: Graphics
     desc: Graphic utilities

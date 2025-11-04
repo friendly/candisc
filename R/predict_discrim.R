@@ -23,7 +23,8 @@
 #' @param object   An object of class `"lda"` or `"qda"`  such as results from [MASS::lda()] or [MASS::qda()] 
 #' @param newdata  A data frame of cases to be classified or, if `object` has a formula, a data frame with columns of the same names as the variables used. A vector will be interpreted as a row vector. If `newdata` is missing, an attempt will be made to retrieve the data used to fit the `lda` object.
 #' @param prior The prior probabilities of the classes. By default, taken to be the proportions in what was set in the call to [MASS::lda()] or [MASS::qda()] 
-#' @param dimen The dimension of the space to be used. If this is less than the number of available dimensions, min(p, ng-1), only the first `dimen` discriminant components are used. (This argument is not yet implemented because [MASS::qda()] does not support this.)
+#' @param dimen The dimension of the space to be used. If this is less than the number of available dimensions, 
+#'              \eqn{\min(p, ng-1)}, only the first `dimen` discriminant components are used. (This argument is not yet implemented because [MASS::qda()] does not support this.)
 #' @param scores A logical. If `TRUE`, the discriminant scores of the cases in `newdata` are appended as additional columns in the the result, with names `LD1`, `LD2`, ...
 #' @param posterior Either a logical or the character string `"max"`. If `TRUE`, the posterior probabilities for all classes are included as columns named for the classes. If `FALSE`, these are omitted. If `"max"`, the maximum value of the probabilities across the classes are included, with the variable name `"maxp"`.
 #' @param ...      arguments based from or to other methods, not yet used here
@@ -33,6 +34,7 @@
 #' @importFrom stats predict
 #' @export
 #' @examples
+#' library(candisc)
 #' library(MASS)   # for lda()
 #' 
 #' iris.lda <- lda(Species ~ ., iris)

@@ -67,7 +67,7 @@
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2025-11-02</h4>
+            <h4 data-toc-skip class="date">2025-11-04</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/friendly/candisc/blob/HEAD/vignettes/diabetes.Rmd" class="external-link"><code>vignettes/diabetes.Rmd</code></a></small>
       <div class="d-none name"><code>diabetes.Rmd</code></div>
@@ -146,17 +146,27 @@ any principled reason.</p>
 <h2 id="data-ellipsoids-and-homogeneity-of-variance">Data ellipsoids and homogeneity of variance<a class="anchor" aria-label="anchor" href="#data-ellipsoids-and-homogeneity-of-variance"></a>
 </h2>
 <p>We start by plotting covariance ellipses for three of the variables
-in the data set. <code><a href="https://friendly.github.io/heplots/reference/covEllipses.html" class="external-link">heplots::covEllipses</a></code> is similar to
-<code>dataEllipse</code> in the <code>car</code> package, but tuned to
+in the data set. <code><a href="https://friendly.github.io/heplots/reference/covEllipses.html" class="external-link">heplots::covEllipses()</a></code> is similar to
+<code><a href="https://rdrr.io/pkg/car/man/Ellipses.html" class="external-link">dataEllipse()</a></code> in the <code>car</code> package, but tuned to
 plots designed to assess homogeneity of covariance matrices in MANOVA
-designs.</p>
+designs. It produces a scatterplot matrix of these when the
+<code>variables</code> argument is of length &gt; 2.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://friendly.github.io/heplots/reference/covEllipses.html" class="external-link">covEllipses</a></span><span class="op">(</span><span class="va">Diabetes</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="va">Diabetes</span><span class="op">$</span><span class="va">group</span>, </span>
+<span>     variables<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
+<span>   fill<span class="op">=</span><span class="cn">TRUE</span>, fill.alpha <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>   pooled<span class="op">=</span><span class="cn">FALSE</span>, </span>
+<span>     col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"darkgreen"</span><span class="op">)</span> </span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="diabetes_files/figure-html/covEllipse-1.png" alt="Plot matrix of data ellipses for diagnostic groups in three main variables of interest in the `Diabetes` dataset." width="480"><p class="caption">
+Plot matrix of data ellipses for diagnostic groups in three main
+variables of interest in the <code>Diabetes</code> dataset.
+</p>
+</div>
 <p>It is clear from this that there is a problem of heterogeneity of
 variance-covariance matrices here. The normal group shows the smallest
 variances and the overt diabetic group the largest.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://friendly.github.io/heplots/reference/covEllipses.html" class="external-link">covEllipses</a></span><span class="op">(</span><span class="va">Diabetes</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="va">Diabetes</span><span class="op">$</span><span class="va">group</span>, fill<span class="op">=</span><span class="cn">TRUE</span>, pooled<span class="op">=</span><span class="cn">FALSE</span>, </span>
-<span>    col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"darkgreen"</span><span class="op">)</span>, variables<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="diabetes_files/figure-html/covEllipse-1.png" width="480"></p>
 <p>As well, the plot suggests something more interesting about the
 difference between the overt and chemical diabetes groups. In the panel
 for <code>glufast</code> and <code>glutest</code>, there appears to be a
@@ -164,24 +174,26 @@ direct progression from normal to chemical to overt. However, this is
 not true in the other panels, where the chemical diabetes group differs
 from the normals in one direction, while the overt group differs in a
 different direction and has a within-group correlation opposite in sign
-to the others. This can be seen more easily in individual scatterplots,
-such as that below (using <code><a href="https://rdrr.io/pkg/car/man/scatterplot.html" class="external-link">car::scatterplot</a></code>).</p>
+to the others.</p>
+<p>This can be seen more easily in individual scatterplots, such as that
+below (using <code><a href="https://rdrr.io/pkg/car/man/scatterplot.html" class="external-link">car::scatterplot</a></code>).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/scatterplot.html" class="external-link">scatterplot</a></span><span class="op">(</span> <span class="va">instest</span> <span class="op">~</span> <span class="va">glutest</span> <span class="op">|</span> <span class="va">group</span>, data<span class="op">=</span><span class="va">Diabetes</span>, </span>
-<span>             pch<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>,<span class="fl">15</span>,<span class="fl">17</span><span class="op">)</span>, </span>
-<span>             col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"darkgreen"</span><span class="op">)</span>,</span>
-<span>             smooth<span class="op">=</span><span class="cn">FALSE</span>, </span>
-<span>             grid<span class="op">=</span><span class="cn">FALSE</span>, </span>
-<span>             legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>coords<span class="op">=</span><span class="st">"topright"</span><span class="op">)</span>, </span>
-<span>             lwd<span class="op">=</span><span class="fl">2</span>,</span>
-<span>             ellipse<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>levels<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="diabetes_files/figure-html/scatter-1.png" width="576"></p>
+<span>   pch<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>,<span class="fl">15</span>,<span class="fl">17</span><span class="op">)</span>, </span>
+<span>   col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"darkgreen"</span><span class="op">)</span>,</span>
+<span>   smooth<span class="op">=</span><span class="cn">FALSE</span>, </span>
+<span>   grid<span class="op">=</span><span class="cn">FALSE</span>, </span>
+<span>   legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>coords<span class="op">=</span><span class="st">"topright"</span><span class="op">)</span>, </span>
+<span>   lwd<span class="op">=</span><span class="fl">2</span>,</span>
+<span>   ellipse<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>levels<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="diabetes_files/figure-html/scatter-1.png" width="480" style="display: block; margin: auto;"></p>
 <p>This insight was part of the reason that Reaven and Miller concluded
 that chemical diabetes and overt diabetes reflected different disease
 regimes, rather than an increasing progression of severity.</p>
 <p>As an aside, we note that the differences among the groups can be
-readily seen in 3D using <code>scatter3d</code> in the <code>car</code>
-package.</p>
+readily seen in 3D using <code><a href="https://rdrr.io/pkg/car/man/scatter3d.html" class="external-link">car::scatter3d()</a></code>. In an R console,
+the plot can be zoomed and rotated manually or under <code>rgl</code>
+controls.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/car/man/scatter3d.html" class="external-link">scatter3d</a></span><span class="op">(</span><span class="va">sspg</span> <span class="op">~</span> <span class="va">glutest</span> <span class="op">+</span> <span class="va">instest</span> <span class="op">|</span> <span class="va">group</span>, data<span class="op">=</span><span class="va">Diabetes</span>, </span>
 <span>          surface<span class="op">=</span><span class="cn">FALSE</span>,    sphere.size<span class="op">=</span><span class="fl">1.5</span>, ellipsoid<span class="op">=</span><span class="cn">TRUE</span>,</span>
@@ -210,7 +222,7 @@ that go into Box’s M test.</p>
 <span></span>
 <span><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">+</span><span class="fl">.5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">diab.boxm</span>, cex.lab<span class="op">=</span><span class="fl">1.5</span><span class="op">)</span></span></code></pre></div>
-<p><img src="diabetes_files/figure-html/boxm-1.png" width="672"></p>
+<p><img src="diabetes_files/figure-html/boxm-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>The log determinants are ordered according to the sizes of the data
 ellipses we saw in the covariance ellipse plots.</p>
 </div>
@@ -252,7 +264,7 @@ line of equality. There are far too many points with large
 values.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://friendly.github.io/heplots/reference/cqplot.html" class="external-link">cqplot</a></span><span class="op">(</span><span class="va">diab.mlm</span>, id.n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="diabetes_files/figure-html/cqplot-1.png" width="576"></p>
+<p><img src="diabetes_files/figure-html/cqplot-1.png" width="576" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -275,13 +287,13 @@ shows that the means on both <code>glufast</code> and
 <code>Normal &lt; Chemical &lt; Overt</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://friendly.github.io/heplots/reference/heplot.html" class="external-link">heplot</a></span><span class="op">(</span><span class="va">diab.mlm</span>, fill<span class="op">=</span><span class="cn">TRUE</span>, fill.alpha<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="diabetes_files/figure-html/he1-1.png" width="576"></p>
+<p><img src="diabetes_files/figure-html/he1-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>The <code>pairs</code> method for an MLM gives a scatterplot matrix
 of HE plots for all pairs of response variables. The pattern for
 <code>instest</code> seems to differ from the other variables.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html" class="external-link">pairs</a></span><span class="op">(</span><span class="va">diab.mlm</span>, fill<span class="op">=</span><span class="cn">TRUE</span>, fill.alpha<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="diabetes_files/figure-html/he2-1.png" width="480"></p>
+<p><img src="diabetes_files/figure-html/he2-1.png" width="480" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level2">
 <h2 id="canonical-discriminant-analysis">Canonical discriminant analysis<a class="anchor" aria-label="anchor" href="#canonical-discriminant-analysis"></a>
@@ -331,7 +343,7 @@ multiplied by a scale factor, chosen so the vectors nearly fill the plot
 frame.&lt;/p&gt;"><sup>1</sup></a></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">diab.can</span>, ellipse<span class="op">=</span><span class="cn">TRUE</span>, var.lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="diabetes_files/figure-html/diab-can-plot-1.png" width="576"></p>
+<p><img src="diabetes_files/figure-html/diab-can-plot-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>In this plot it can be seen that:</p>
 <ul>
 <li><p>Dimension 1 is highly related to <code>glufast</code>,
@@ -359,7 +371,7 @@ ellipse is an indication of the magnitude of the multivariate effect for
 <code>group</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://friendly.github.io/heplots/reference/heplot.html" class="external-link">heplot</a></span><span class="op">(</span><span class="va">diab.can</span>, fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, fill.alpha<span class="op">=</span><span class="fl">0.1</span>, var.lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="diabetes_files/figure-html/diab-heplot,%20-1.png" width="576"></p>
+<p><img src="diabetes_files/figure-html/diab-heplot,%20-1.png" width="576" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">## Vector scale factor set to  12.06</span></span></code></pre>
 </div>
 </div>

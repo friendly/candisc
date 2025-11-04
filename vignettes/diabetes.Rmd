@@ -11,7 +11,8 @@ vignette: >
 
 ```{r echo=FALSE}
 knitr::opts_chunk$set(warning=FALSE, message=FALSE, 
-                      collapse=TRUE, R.options=list(digits=4))
+                      collapse=TRUE, R.options=list(digits=4),
+                      fig.align = "center")
 ```
 
 ## Background
@@ -51,16 +52,27 @@ The variables are:
 `relwt` is not used in this example, but that is not for any principled reason.
 
 ## Data ellipsoids and homogeneity of variance
+
 We start by plotting covariance ellipses for three of the variables in the data set.
-`heplots::covEllipses` is similar to `dataEllipse` in the `car` package, but tuned
+`heplots::covEllipses()` is similar to `dataEllipse()` in the `car` package, but tuned
 to plots designed to assess homogeneity of covariance matrices in MANOVA designs.
+It produces a scatterplot matrix of these when the `variables` argument is of length > 2.
+
+```{r covEllipse}
+#| fig-height: 5
+#| fig-width: 5
+#| fig-cap: "Plot matrix of data ellipses for diagnostic groups in three main variables of interest in the `Diabetes` dataset."
+covEllipses(Diabetes[,2:5], Diabetes$group, 
+	 variables=1:3,
+   fill=TRUE, fill.alpha = 0.2,
+   pooled=FALSE, 
+	 col=c("blue", "red", "darkgreen") 
+  )
+```
 
 It is clear from this that there is a problem of heterogeneity of variance-covariance matrices here.
 The normal group shows the smallest variances and the overt diabetic group the largest.
-```{r covEllipse, fig.height=5, fig.width=5}
-covEllipses(Diabetes[,2:5], Diabetes$group, fill=TRUE, pooled=FALSE, 
-	col=c("blue", "red", "darkgreen"), variables=1:3)
-```
+
 
 As well, the plot suggests something more interesting about the difference between
 the overt and chemical diabetes groups. In the panel for `glufast` and `glutest`,
@@ -68,26 +80,30 @@ there appears to be a direct progression from normal to chemical to overt.
 However, this is not true in the other panels, where the chemical diabetes group
 differs from the normals in one direction, while the overt group differs in a different
 direction and has a within-group correlation opposite in sign to the others.
+
 This can be seen more easily in individual scatterplots, such as that below
 (using `car::scatterplot`).
 
-```{r scatter, fig.width=6, fig.height=5, echo=-1}
+```{r scatter, echo=-1}
+#| fig-height: 5
+#| fig-width: 5
 op <- par(mar=c(4,4,0,1)+.5)
 scatterplot( instest ~ glutest | group, data=Diabetes, 
-             pch=c(16,15,17), 
-             col=c("blue", "red", "darkgreen"),
-             smooth=FALSE, 
-             grid=FALSE, 
-             legend=list(coords="topright"), 
-             lwd=2,
-             ellipse=list(levels=0.5))
+   pch=c(16,15,17), 
+   col=c("blue", "red", "darkgreen"),
+   smooth=FALSE, 
+   grid=FALSE, 
+   legend=list(coords="topright"), 
+   lwd=2,
+   ellipse=list(levels=0.5))
 ```
 
 This insight was part of the reason that Reaven and Miller
 concluded that chemical diabetes and overt diabetes reflected different disease regimes, rather than
 an increasing progression of severity.
 
-As an aside, we note that the differences among the groups can be readily seen in 3D using `scatter3d` in the `car` package.
+As an aside, we note that the differences among the groups can be readily seen in 3D using `car::scatter3d()`.
+In an R console, the plot can be zoomed and rotated manually or under `rgl` controls.
 ```{r scatter3d, eval=FALSE}
 scatter3d(sspg ~ glutest + instest | group, data=Diabetes, 
           surface=FALSE,	sphere.size=1.5, ellipsoid=TRUE,

@@ -19,7 +19,7 @@ cor_lda(
 in the call to \code{\link[MASS:lda]{MASS::lda()}}}
 
 \item{dimen}{The dimension of the space to be used. If this is less than the number of available dimensions,
-\eqn{min(p, ng-1)}, only the first \code{dimen} discriminant components are used.}
+\eqn{\min(p, ng-1)}, only the first \code{dimen} discriminant components are used.}
 
 \item{method}{a character string indicating which correlation coefficient is to be computed. One of \code{"pearson"}
 (default), \code{"kendall"}, or \code{"spearman"}: can be abbreviated. See \code{\link[stats:cor]{stats::cor()}} for details}
@@ -37,6 +37,7 @@ of the relations between the two sets than do the \code{scaling} weights returne
 the discriminant scores, showing the contributions of the variables by vectors.
 }
 \examples{
+library(candisc)
 library(MASS)   # for lda()
 
 iris.lda <- lda(Species ~ ., iris)
