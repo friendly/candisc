@@ -19,7 +19,7 @@
 #' @param model   a discriminant analysis model object from `MASS::lda()` or `MASS::qda()`
 #' @param vars    either a character vector of length 2 of the names of variables, or a formula of form V1 ~ V2 specifying y and x axis in the plot respectively.
 #' @param data    data to use for visualization. Should contain all the data needed to use the model
-#' @param resolution number of points in x, y variables to use for visualizating the predicted class boundaries and regions.
+#' @param resolution number of points in x, y variables to use for visualizing the predicted class boundaries and regions.
 #' @param contour logical; should the plot display the boundaries of the classes by contours?
 #' @param contour.color color of the lines for the contour boundaries
 #' @param showgrid a character string; how to display predicted class regions: `"tile"` for [ggplot2::geom_tile()], `"point"` 
