@@ -1,6 +1,14 @@
 # originally from: https://stackoverflow.com/questions/63782598/quadratic-discriminant-analysis-qda-plot-in-r
+# 
+# DONE: Make data optional -- get it from the model object
+# FIXED: Use rev() when `vars` is a formula
+# 
+# TODO: Points should allow `alpha` and be plotted last
+# TODO: Improve documentation; create vignette detailing how to use more generally with ggplot
+# TODO: Better explain `mode.means` or rename this
+# TODO: Can we do this in discriminant space using LD1, LD2?
 
-#' Create a discriminant analysis decision plot using ggplot.
+#' Create a Discriminant Analysis Decision Plot using ggplot.
 #' 
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -17,19 +25,23 @@
 #'
 #' @md
 #' @param model   a discriminant analysis model object from `MASS::lda()` or `MASS::qda()`
-#' @param vars    either a character vector of length 2 of the names of variables, or a formula of form V1 ~ V2 specifying y and x axis in the plot respectively.
-#' @param data    data to use for visualization. Should contain all the data needed to use the model
+#' @param vars    either a character vector of length 2 of the names of the `x` and `y` variables, or a formula of form `y ~ x` 
+#'                specifying the axes in the plot.
+#' @param data    data to use for visualization. Should contain all the data needed to use the `model` for prediction. The default is to use
+#'                the data used to fit the `model`.
 #' @param resolution number of points in x, y variables to use for visualizing the predicted class boundaries and regions.
 #' @param contour logical; should the plot display the boundaries of the classes by contours?
 #' @param contour.color color of the lines for the contour boundaries
 #' @param showgrid a character string; how to display predicted class regions: `"tile"` for [ggplot2::geom_tile()], `"point"` 
-#'        for [ggplot2::geom_point()], or `"none"` for no grid display.
+#'                for [ggplot2::geom_point()], or `"none"` for no grid display.
 #' @param point.size size of the plot symbols use to show the data observations
-#' @param ... further parameters passed to `predict()`
-#' @param modes.means   levels to use for evaluating predictions using the variables **not* specified in `vars`. If not specified, the function uses the means for quantitative variables, ...
+#' @param ...     further parameters passed to `predict()`
+#' @param modes.means   levels to use for evaluating predictions using the variables **not* specified in `vars`. If not specified, 
+#'                the function uses the means for quantitative variables, ...
 #' @author Original code by Oliver on SO <https://stackoverflow.com/questions/63782598/quadratic-discriminant-analysis-qda-plot-in-r>. Generalized by Michael Friendly
-#' @seealso [klaR::partimat()]
+#' @seealso [klaR::partimat()] for pairwise discriminant plots, but with little control of plot details
 #' @importFrom ggplot2 ggplot aes geom_point geom_tile geom_contour .data 
+#' @importFrom insight get_data
 #' @export
 #' @examples
 #' library(MASS)
@@ -39,25 +51,33 @@
 #' 
 #' iris.lda <- lda(Species ~ ., iris)
 #' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, data=iris, showgrid = "tile")
+#' # specifying `vars` as character names, getting `data` from the object
+#' plot_discrim(iris.lda, c("Petal.Length", "Petal.Width"), showgrid = "tile")
 #' 
-plot_discrim <- function(model, 
-                        vars, 
-                        data, 
-                        resolution = 100,
-                        contour = TRUE,
-                        contour.color = "black",
-                        point.size = 3,
-                        showgrid = c("tile", "point", "none"), 
-                        ...,
-                        modes.means) {
-  if(missing(model) || missing(vars) || missing(data))
-    stop('model, vars or data is missing')
+plot_discrim <- function(
+    model, 
+    vars, 
+    data = insight::get_data(model),
+    resolution = 100,
+    contour = TRUE,
+    contour.color = "black",
+    point.size = 3,
+    showgrid = c("tile", "point", "none"), 
+    ...,
+    modes.means) {
+  if(missing(model) || missing(vars))
+    stop('`model` or `vars` is missing')
   
-  # check what is supplied as `vars`
+  # if (missing(data)) {
+  #   data <- insight::get_data(model) 
+  # }
+
+  
+  # check what is supplied as `vars`. If a formula, reverse what is supplied by all.vars()
   if(!(is.character(vars) && 
        length(vars) == 2) && 
      !('formula' %in% class(vars) && 
-       length(vars <- all.vars(vars)) == 2))
+       length(vars <- rev(all.vars(vars))) == 2))
     stop('`vars` should be either a formula or a character vector of length 2.')
   if(!is.data.frame(data))
     stop('data does not seem to comform with standard types.')

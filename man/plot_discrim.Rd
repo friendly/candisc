@@ -2,12 +2,12 @@
 % Please edit documentation in R/plot_discrim.R
 \name{plot_discrim}
 \alias{plot_discrim}
-\title{Create a discriminant analysis decision plot using ggplot.}
+\title{Create a Discriminant Analysis Decision Plot using ggplot.}
 \usage{
 plot_discrim(
   model,
   vars,
-  data,
+  data = insight::get_data(model),
   resolution = 100,
   contour = TRUE,
   contour.color = "black",
@@ -20,11 +20,13 @@ plot_discrim(
 \arguments{
 \item{model}{a discriminant analysis model object from \code{MASS::lda()} or \code{MASS::qda()}}
 
-\item{vars}{either a character vector of length 2 of the names of variables, or a formula of form V1 ~ V2 specifying y and x axis in the plot respectively.}
+\item{vars}{either a character vector of length 2 of the names of the \code{x} and \code{y} variables, or a formula of form \code{y ~ x}
+specifying the axes in the plot.}
 
-\item{data}{data to use for visualization. Should contain all the data needed to use the model}
+\item{data}{data to use for visualization. Should contain all the data needed to use the \code{model} for prediction. The default is to use
+the data used to fit the \code{model}.}
 
-\item{resolution}{number of points in x, y variables to use for visualizating the predicted class boundaries and regions.}
+\item{resolution}{number of points in x, y variables to use for visualizing the predicted class boundaries and regions.}
 
 \item{contour}{logical; should the plot display the boundaries of the classes by contours?}
 
@@ -37,7 +39,8 @@ for \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, or \code{"none"} fo
 
 \item{...}{further parameters passed to \code{predict()}}
 
-\item{modes.means}{levels to use for evaluating predictions using the variables *\emph{not} specified in \code{vars}. If not specified, the function uses the means for quantitative variables, ...}
+\item{modes.means}{levels to use for evaluating predictions using the variables *\emph{not} specified in \code{vars}. If not specified,
+the function uses the means for quantitative variables, ...}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -58,10 +61,12 @@ library(candisc)
 
 iris.lda <- lda(Species ~ ., iris)
 plot_discrim(iris.lda, Petal.Length ~ Petal.Width, data=iris, showgrid = "tile")
+# specifying `vars` as character names, getting `data` from the object
+plot_discrim(iris.lda, c("Petal.Length", "Petal.Width"), showgrid = "tile")
 
 }
 \seealso{
-\code{\link[klaR:partimat]{klaR::partimat()}}
+\code{\link[klaR:partimat]{klaR::partimat()}} for pairwise discriminant plots, but with little control of plot details
 }
 \author{
 Original code by Oliver on SO \url{https://stackoverflow.com/questions/63782598/quadratic-discriminant-analysis-qda-plot-in-r}. Generalized by Michael Friendly

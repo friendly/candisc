@@ -1,3 +1,8 @@
+## Version 1.0.1
+
+* Fixed buglet in `plot_discrim()` where the variables in a formula needed to be reversed.
+* `plot_discrim()` now gets the `data` from the object, if not supplied.
+
 ## Version 1.0.0
 
 This is a major release, adding methods for linear/quadratic discriminant analysis and improving package documentation
