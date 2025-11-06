@@ -1,7 +1,10 @@
 ## Version 1.0.1
 
+This is a patch release, resolving some problems with `plot_discrim()`
+
 * Fixed buglet in `plot_discrim()` where the variables in a formula needed to be reversed.
 * `plot_discrim()` now gets the `data` from the object, if not supplied.
+* Added `tile.alpha` arg to `plot_discim()`; document how to customize colors, shapes, ...
 
 ## Version 1.0.0
 

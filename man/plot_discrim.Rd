@@ -11,8 +11,9 @@ plot_discrim(
   resolution = 100,
   contour = TRUE,
   contour.color = "black",
-  point.size = 3,
   showgrid = c("tile", "point", "none"),
+  tile.alpha = 0.2,
+  point.size = 3,
   ...,
   modes.means
 )
@@ -28,41 +29,65 @@ the data used to fit the \code{model}.}
 
 \item{resolution}{number of points in x, y variables to use for visualizing the predicted class boundaries and regions.}
 
-\item{contour}{logical; should the plot display the boundaries of the classes by contours?}
+\item{contour}{logical (default: \code{TRUE}); should the plot display the boundaries of the classes by contours?}
 
-\item{contour.color}{color of the lines for the contour boundaries}
-
-\item{point.size}{size of the plot symbols use to show the data observations}
+\item{contour.color}{color of the lines for the contour boundaries (default: \code{"black"})}
 
 \item{showgrid}{a character string; how to display predicted class regions: \code{"tile"} for \code{\link[ggplot2:geom_tile]{ggplot2::geom_tile()}}, \code{"point"}
 for \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, or \code{"none"} for no grid display.}
 
+\item{tile.alpha}{transparency value for the background tiles of predicted class}
+
+\item{point.size}{size of the plot symbols use to show the data observations}
+
 \item{...}{further parameters passed to \code{predict()}}
 
-\item{modes.means}{levels to use for evaluating predictions using the variables *\emph{not} specified in \code{vars}. If not specified,
+\item{modes.means}{levels to use for evaluating predictions using the variables \strong{not} specified in \code{vars}. If not specified,
 the function uses the means for quantitative variables, ...}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 Discriminant analysis can be more easily understood from plots of the data variables showing how observations are classified.
-\code{plot_discrim()} uses the ideas behind effect plots: Visualize predicted values for two focal variables over a
+\code{plot_discrim()} uses the ideas behind \strong{effect plots}: Visualize predicted values for two focal variables over a
 grid, with other variables in a model held fixed.
+
+In the case of discriminant analysis, the predicted values are class membership,
+so this can be visualized by mapping the categorical predicted class to discrete colors used as the background for the plot, or
+plotting the contours of predicted class membership as lines (for \verb{[MASS::lda()]}) or curves (for \verb{[MASS::qda()]}) in the plot.
 }
 \details{
-In setting up this plot for \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}, this function maps color and shape of class-specific elements of the plot to the value of
-the class variable in the discriminant analysis. But it simply uses the ggplot defaults...
+Since \code{plot_discrim()} returns a \code{"ggplot"} object, you can easily customize colors and shapes by adding scale layers after
+the function call. You an also add other graphic layers, such as annotations or labels for the groups.
+
+\strong{Customizing colors and shapes}
+\itemize{
+\item Use \code{scale_color_manual()} \strong{and} \code{scale_fill_manual()} to control the colors used when using \code{showgrid = "tile"}
+\item Use \code{scale_shape_manual()} to control the symbols used for \code{geom_points()}
+}
 }
 \examples{
 library(MASS)
 library(ggplot2)
 library(dplyr)
-library(candisc)
 
 iris.lda <- lda(Species ~ ., iris)
-plot_discrim(iris.lda, Petal.Length ~ Petal.Width, data=iris, showgrid = "tile")
-# specifying `vars` as character names, getting `data` from the object
-plot_discrim(iris.lda, c("Petal.Length", "Petal.Width"), showgrid = "tile")
+# formula call: y ~ x
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width)
+
+# specifying `vars` as character names for x, y
+plot_discrim(iris.lda, c("Petal.Width", "Petal.Length"))
+
+# Define custom colors and shapes, modify theme() and legend.position
+iris.colors <- c("red", "darkgreen", "blue")
+iris.pch <- 15:17
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width) +
+  scale_color_manual(values = iris.colors) +
+  scale_fill_manual(values = iris.colors) +
+  scale_shape_manual(values = iris.pch) +
+  theme_bw(base_size = 14) +
+  theme(legend.position = "inside",
+        legend.position.inside = c(.8, .25))
 
 }
 \seealso{

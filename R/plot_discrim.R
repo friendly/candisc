@@ -11,32 +11,42 @@
 #' Create a Discriminant Analysis Decision Plot using ggplot.
 #' 
 #' @description
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("experimental")` 
 #' 
 #' Discriminant analysis can be more easily understood from plots of the data variables showing how observations are classified.
-#' `plot_discrim()` uses the ideas behind effect plots: Visualize predicted values for two focal variables over a
-#' grid, with other variables in a model held fixed.
+#' `plot_discrim()` uses the ideas behind **effect plots**: Visualize predicted values for two focal variables over a
+#' grid, with other variables in a model held fixed. 
+#' 
+#' In the case of discriminant analysis, the predicted values are class membership,
+#' so this can be visualized by mapping the categorical predicted class to discrete colors used as the background for the plot, or
+#' plotting the contours of predicted class membership as lines (for `[MASS::lda()]`) or curves (for `[MASS::qda()]`) in the plot.
 #' 
 #' @details
 #' 
-#' In setting up this plot for [ggplot2::ggplot()], this function maps color and shape of class-specific elements of the plot to the value of
-#' the class variable in the discriminant analysis. But it simply uses the ggplot defaults...
+#' Since `plot_discrim()` returns a `"ggplot"` object, you can easily customize colors and shapes by adding scale layers after 
+#' the function call. You an also add other graphic layers, such as annotations or labels for the groups.
+#' 
+#' **Customizing colors and shapes**
+#' 
+#' * Use `scale_color_manual()` **and** `scale_fill_manual()` to control the colors used when using `showgrid = "tile"`
+#' * Use `scale_shape_manual()` to control the symbols used for `geom_points()`
+#' 
 #' 
 #'
-#' @md
 #' @param model   a discriminant analysis model object from `MASS::lda()` or `MASS::qda()`
 #' @param vars    either a character vector of length 2 of the names of the `x` and `y` variables, or a formula of form `y ~ x` 
 #'                specifying the axes in the plot.
 #' @param data    data to use for visualization. Should contain all the data needed to use the `model` for prediction. The default is to use
 #'                the data used to fit the `model`.
 #' @param resolution number of points in x, y variables to use for visualizing the predicted class boundaries and regions.
-#' @param contour logical; should the plot display the boundaries of the classes by contours?
-#' @param contour.color color of the lines for the contour boundaries
+#' @param contour logical (default: `TRUE`); should the plot display the boundaries of the classes by contours? 
+#' @param contour.color color of the lines for the contour boundaries (default: `"black"`)
 #' @param showgrid a character string; how to display predicted class regions: `"tile"` for [ggplot2::geom_tile()], `"point"` 
 #'                for [ggplot2::geom_point()], or `"none"` for no grid display.
 #' @param point.size size of the plot symbols use to show the data observations
+#' @param tile.alpha transparency value for the background tiles of predicted class
 #' @param ...     further parameters passed to `predict()`
-#' @param modes.means   levels to use for evaluating predictions using the variables **not* specified in `vars`. If not specified, 
+#' @param modes.means   levels to use for evaluating predictions using the variables **not** specified in `vars`. If not specified, 
 #'                the function uses the means for quantitative variables, ...
 #' @author Original code by Oliver on SO <https://stackoverflow.com/questions/63782598/quadratic-discriminant-analysis-qda-plot-in-r>. Generalized by Michael Friendly
 #' @seealso [klaR::partimat()] for pairwise discriminant plots, but with little control of plot details
@@ -47,12 +57,24 @@
 #' library(MASS)
 #' library(ggplot2)
 #' library(dplyr)
-#' library(candisc)
 #' 
 #' iris.lda <- lda(Species ~ ., iris)
-#' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, data=iris, showgrid = "tile")
-#' # specifying `vars` as character names, getting `data` from the object
-#' plot_discrim(iris.lda, c("Petal.Length", "Petal.Width"), showgrid = "tile")
+#' # formula call: y ~ x
+#' plot_discrim(iris.lda, Petal.Length ~ Petal.Width)
+#' 
+#' # specifying `vars` as character names for x, y
+#' plot_discrim(iris.lda, c("Petal.Width", "Petal.Length"))
+#' 
+#' # Define custom colors and shapes, modify theme() and legend.position
+#' iris.colors <- c("red", "darkgreen", "blue")
+#' iris.pch <- 15:17
+#' plot_discrim(iris.lda, Petal.Length ~ Petal.Width) +
+#'   scale_color_manual(values = iris.colors) +
+#'   scale_fill_manual(values = iris.colors) +
+#'   scale_shape_manual(values = iris.pch) +
+#'   theme_bw(base_size = 14) +
+#'   theme(legend.position = "inside",
+#'         legend.position.inside = c(.8, .25))
 #' 
 plot_discrim <- function(
     model, 
@@ -61,18 +83,15 @@ plot_discrim <- function(
     resolution = 100,
     contour = TRUE,
     contour.color = "black",
-    point.size = 3,
     showgrid = c("tile", "point", "none"), 
+    tile.alpha = 0.2,
+    point.size = 3,
     ...,
     modes.means) {
   if(missing(model) || missing(vars))
     stop('`model` or `vars` is missing')
   
-  # if (missing(data)) {
-  #   data <- insight::get_data(model) 
-  # }
 
-  
   # check what is supplied as `vars`. If a formula, reverse what is supplied by all.vars()
   if(!(is.character(vars) && 
        length(vars) == 2) && 
@@ -146,8 +165,7 @@ plot_discrim <- function(
   
   # Create the final plot.
   gg <- ggplot(data = data, 
-               aes(.data[[vars[1]]], .data[[vars[2]]])) + 
-    geom_point(aes(col = .data[[lhs]], shape = .data[[lhs]]), size = point.size)
+               aes(.data[[vars[1]]], .data[[vars[2]]])) 
 
   # Draw contour of the decision boundaries
   if (contour) {
@@ -163,15 +181,17 @@ plot_discrim <- function(
     gg <- gg + 
       geom_tile(aes(.data[[vars[1]]], .data[[vars[2]]], fill = .data[[lhs]]), 
                 data = pred.grid, 
-                alpha = 0.3)
+                alpha = tile.alpha)
   } else if(showgrid == "point") {
     gg <- gg + 
       geom_point(aes(.data[[vars[1]]], .data[[vars[2]]], col = .data[[lhs]]), 
                  data = pred.grid, 
                  shape = 20, size = 0.5, alpha = 0.4)
   }
-  # if showgrid == "none", don't add anything
-  gg
+
+  # add points
+  gg + geom_point(aes(col = .data[[lhs]], shape = .data[[lhs]]), size = point.size)
+
 }
 
 
