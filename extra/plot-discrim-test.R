@@ -1,0 +1,51 @@
+library(MASS)
+library(ggplot2)
+library(dplyr)
+
+iris.lda <- lda(Species ~ ., iris)
+# Test with tile display (default)
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, showgrid = "tile")
+
+# Test with point display
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, showgrid = "point")
+
+# Test with no grid
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, showgrid = "none")
+
+
+iris.qda <- qda(Species ~ ., iris)
+plot_discrim(iris.qda, Petal.Length ~ Petal.Width, data=iris, showgrid = "tile")
+
+# Define custom colors and shapes
+iris.colors <- c("red", "darkgreen", "blue")
+iris.pch <- 15:17
+
+# Fit the model
+iris.lda <- lda(Species ~ ., iris)
+
+# Create plot with custom colors and shapes
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+            data = iris, showgrid = "tile") +
+  scale_color_manual(values = iris.colors) +
+  scale_fill_manual(values = iris.colors) +
+  scale_shape_manual(values = iris.pch)
+
+# data ellipses
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+            ellipse = TRUE) 
+  
+  
+#   data(peng, package = "heplots")
+# #  source("R/penguin/penguin-colors.R")
+#   source("C:/R/Projects/Vis-MLM-book/R/penguin/penguin-colors.R")
+#   
+#   # use penguin colors
+#   peng.lda <- lda(species ~  bill_length + bill_depth + flipper_length + body_mass, data = peng)
+#   plot_discrim(peng.lda, bill_length ~ bill_depth, data=peng, showgrid = "tile") +
+#     scale_color_penguins()
+#   
+#   peng.qda <- qda(species ~  bill_length + bill_depth + flipper_length + body_mass, data = peng)
+#   plot_discrim(peng.qda, bill_length ~ bill_depth, data=peng, showgrid = "point") +
+#     scale_color_penguins()
+  
+

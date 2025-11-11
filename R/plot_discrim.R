@@ -2,8 +2,9 @@
 # 
 # DONE: Make data optional -- get it from the model object
 # FIXED: Use rev() when `vars` is a formula
+# DONE: Added data ellipses
+# DONE: Points should be plotted last
 # 
-# TODO: Points should allow `alpha` and be plotted last
 # TODO: Improve documentation; create vignette detailing how to use more generally with ggplot
 # TODO: Better explain `mode.means` or rename this
 # TODO: Can we do this in discriminant space using LD1, LD2?
@@ -11,24 +12,30 @@
 #' Create a Discriminant Analysis Decision Plot using ggplot.
 #' 
 #' @description
-#' `r lifecycle::badge("experimental")` 
+#' `r lifecycle::badge("experimental")`
 #' 
 #' Discriminant analysis can be more easily understood from plots of the data variables showing how observations are classified.
-#' `plot_discrim()` uses the ideas behind **effect plots**: Visualize predicted values for two focal variables over a
-#' grid, with other variables in a model held fixed. 
+#' `plot_discrim()` uses the ideas behind **effect plots** (Fox, 1987): Visualize predicted classes of the observations for two focal variables over a
+#' grid of their values, with other variables in a model held fixed. This differs from the usual effect plots in that the predicted
+#' values to be visualized are discrete categories rather than quantitative.
 #' 
 #' In the case of discriminant analysis, the predicted values are class membership,
 #' so this can be visualized by mapping the categorical predicted class to discrete colors used as the background for the plot, or
-#' plotting the contours of predicted class membership as lines (for `[MASS::lda()]`) or curves (for `[MASS::qda()]`) in the plot.
+#' plotting the **contours** of predicted class membership as lines (for `[MASS::lda()]`) or auadratic curves (for `[MASS::qda()]`) in the plot.
+#' The predicted class of any observation in the space of the variables displayed can also be rendered as colored **tiles** or **points**
+#' in the background of the plot.
 #' 
 #' @details
 #' 
-#' Since `plot_discrim()` returns a `"ggplot"` object, you can easily customize colors and shapes by adding scale layers after 
-#' the function call. You an also add other graphic layers, such as annotations or labels for the groups.
+#' This is an initial version of `plot_discrim()`. It is marked "experimental" because the arguments and defaults are still subject to change.
 #' 
 #' **Customizing colors and shapes**
 #' 
-#' * Use `scale_color_manual()` **and** `scale_fill_manual()` to control the colors used when using `showgrid = "tile"`
+#' Since `plot_discrim()` returns a `"ggplot"` object, you can easily customize colors and shapes by adding scale layers after 
+#' the function call. You can also add other graphic layers, such as annotations or labels for the groups.
+#' 
+#' * Use `scale_color_manual()` **and** `scale_fill_manual()` to control the colors used when using `showgrid = "tile"`, because that maps
+#'   both **both** `color` and `fill` to the group variable.
 #' * Use `scale_shape_manual()` to control the symbols used for `geom_points()`
 #' 
 #' 
@@ -39,16 +46,21 @@
 #' @param data    data to use for visualization. Should contain all the data needed to use the `model` for prediction. The default is to use
 #'                the data used to fit the `model`.
 #' @param resolution number of points in x, y variables to use for visualizing the predicted class boundaries and regions.
-#' @param contour logical (default: `TRUE`); should the plot display the boundaries of the classes by contours? 
-#' @param contour.color color of the lines for the contour boundaries (default: `"black"`)
+#' @param point.size size of the plot symbols use to show the data observations
 #' @param showgrid a character string; how to display predicted class regions: `"tile"` for [ggplot2::geom_tile()], `"point"` 
 #'                for [ggplot2::geom_point()], or `"none"` for no grid display.
-#' @param point.size size of the plot symbols use to show the data observations
-#' @param tile.alpha transparency value for the background tiles of predicted class
+#' @param contour logical (default: `TRUE`); should the plot display the boundaries of the classes by contours? 
+#' @param contour.color color of the lines for the contour boundaries (default: `"black"`)
+#' @param tile.alpha transparency value for the background tiles of predicted class.
+#' @param ellipse  logical; if `TRUE`, 68 percent data ellipses for the groups are added to the plot.
 #' @param ...     further parameters passed to `predict()`
 #' @param modes.means   levels to use for evaluating predictions using the variables **not** specified in `vars`. If not specified, 
 #'                the function uses the means for quantitative variables, ...
-#' @author Original code by Oliver on SO <https://stackoverflow.com/questions/63782598/quadratic-discriminant-analysis-qda-plot-in-r>. Generalized by Michael Friendly
+#' @author Original code by Oliver on SO <https://stackoverflow.com/questions/63782598/quadratic-discriminant-analysis-qda-plot-in-r>. 
+#' 
+#' Generalized by Michael Friendly
+#' @references 
+#'    Fox, J. (1987). Effect Displays for Generalized Linear Models. In C. C. Clogg (Ed.), _Sociological Methodology_, 1987 (pp. 347–361). Jossey-Bass
 #' @seealso [klaR::partimat()] for pairwise discriminant plots, but with little control of plot details
 #' @importFrom ggplot2 ggplot aes geom_point geom_tile geom_contour .data 
 #' @importFrom insight get_data
@@ -61,6 +73,15 @@
 #' iris.lda <- lda(Species ~ ., iris)
 #' # formula call: y ~ x
 #' plot_discrim(iris.lda, Petal.Length ~ Petal.Width)
+#' 
+#' # add data ellipses
+#' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+#'              ellipse = TRUE) 
+#' 
+#' # without contours
+#' # data ellipses
+#' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+#'              contour = FALSE) 
 #' 
 #' # specifying `vars` as character names for x, y
 #' plot_discrim(iris.lda, c("Petal.Width", "Petal.Length"))
@@ -75,17 +96,22 @@
 #'   theme_bw(base_size = 14) +
 #'   theme(legend.position = "inside",
 #'         legend.position.inside = c(.8, .25))
+#'
+#' # Quadratic discriminant analysis gives quite a different result
+#' iris.qda <- qda(Species ~ ., iris)
+#' plot_discrim(iris.qda, Petal.Length ~ Petal.Width)
 #' 
 plot_discrim <- function(
     model, 
     vars, 
     data = insight::get_data(model),
     resolution = 100,
+    point.size = 3,
+    showgrid = c("tile", "point", "none"), 
     contour = TRUE,
     contour.color = "black",
-    showgrid = c("tile", "point", "none"), 
     tile.alpha = 0.2,
-    point.size = 3,
+    ellipse = FALSE,
     ...,
     modes.means) {
   if(missing(model) || missing(vars))
@@ -189,58 +215,16 @@ plot_discrim <- function(
                  shape = 20, size = 0.5, alpha = 0.4)
   }
 
+  # add ellipses
+  if (ellipse == TRUE) {
+    gg <- gg +
+        stat_ellipse(
+          aes(color = .data[[lhs]]),
+          level = 0.68, linewidth = 1.2) 
+
+  }
   # add points
   gg + geom_point(aes(col = .data[[lhs]], shape = .data[[lhs]]), size = point.size)
 
 }
 
-
-if(FALSE){
-
-  library(MASS)
-  library(ggplot2)
-  library(dplyr)
-
-  iris.lda <- lda(Species ~ ., iris)
-  # Test with tile display (default)
-  plot_discrim(iris.lda, Petal.Length ~ Petal.Width, data=iris, showgrid = "tile")
-  
-  # Test with point display
-  plot_discrim(iris.lda, Petal.Length ~ Petal.Width, data=iris, showgrid = "point")
-  
-  # Test with no grid
-  plot_discrim(iris.lda, Petal.Length ~ Petal.Width, data=iris, showgrid = "none")
-
-
-  iris.qda <- qda(Species ~ ., iris)
-  plot_discrim(iris.qda, Petal.Length ~ Petal.Width, data=iris, showgrid = "tile")
-  
-  # Define custom colors and shapes
-  iris.colors <- c("red", "darkgreen", "blue")
-  iris.pch <- 15:17
-  
-  # Fit the model
-  iris.lda <- lda(Species ~ ., iris)
-  
-  # Create plot with custom colors and shapes
-  plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
-              data = iris, showgrid = "tile") +
-    scale_color_manual(values = iris.colors) +
-    scale_fill_manual(values = iris.colors) +
-    scale_shape_manual(values = iris.pch)
-  
-  
-#   data(peng, package = "heplots")
-# #  source("R/penguin/penguin-colors.R")
-#   source("C:/R/Projects/Vis-MLM-book/R/penguin/penguin-colors.R")
-#   
-#   # use penguin colors
-#   peng.lda <- lda(species ~  bill_length + bill_depth + flipper_length + body_mass, data = peng)
-#   plot_discrim(peng.lda, bill_length ~ bill_depth, data=peng, showgrid = "tile") +
-#     scale_color_penguins()
-#   
-#   peng.qda <- qda(species ~  bill_length + bill_depth + flipper_length + body_mass, data = peng)
-#   plot_discrim(peng.qda, bill_length ~ bill_depth, data=peng, showgrid = "point") +
-#     scale_color_penguins()
-  
-}

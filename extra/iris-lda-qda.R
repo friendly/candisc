@@ -45,7 +45,7 @@ decision_boundary <- function(model, data,vars, resolution = 200,...) {
   invisible(mats)
 }
 
-par(mfrow=c(2,2))
+op <- par(mfrow=c(2,2))
 # run the linear discriminant analysis and plot the decision boundary with Sepals variable
 model <- lda(Species ~ Sepal.Length + Sepal.Width, data=iris)
 lda_sepals <- decision_boundary(model, iris, vars= 'sepal' , main = "LDA_Sepals")
@@ -61,3 +61,5 @@ lda_petal =decision_boundary(model, iris, vars='petal', main = "LDA_petals")
 # run the quadratic discriminant analysis and plot the decision boundary with Petals variable
 model_qda <- qda(Species ~ Petal.Length + Petal.Width, data=iris)
 qda_petal =decision_boundary(model_qda, iris, vars='petal', main = "QDA_petals")
+par(op)
+

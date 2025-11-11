@@ -9,11 +9,12 @@ plot_discrim(
   vars,
   data = insight::get_data(model),
   resolution = 100,
+  point.size = 3,
+  showgrid = c("tile", "point", "none"),
   contour = TRUE,
   contour.color = "black",
-  showgrid = c("tile", "point", "none"),
   tile.alpha = 0.2,
-  point.size = 3,
+  ellipse = FALSE,
   ...,
   modes.means
 )
@@ -29,16 +30,18 @@ the data used to fit the \code{model}.}
 
 \item{resolution}{number of points in x, y variables to use for visualizing the predicted class boundaries and regions.}
 
-\item{contour}{logical (default: \code{TRUE}); should the plot display the boundaries of the classes by contours?}
-
-\item{contour.color}{color of the lines for the contour boundaries (default: \code{"black"})}
+\item{point.size}{size of the plot symbols use to show the data observations}
 
 \item{showgrid}{a character string; how to display predicted class regions: \code{"tile"} for \code{\link[ggplot2:geom_tile]{ggplot2::geom_tile()}}, \code{"point"}
 for \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, or \code{"none"} for no grid display.}
 
-\item{tile.alpha}{transparency value for the background tiles of predicted class}
+\item{contour}{logical (default: \code{TRUE}); should the plot display the boundaries of the classes by contours?}
 
-\item{point.size}{size of the plot symbols use to show the data observations}
+\item{contour.color}{color of the lines for the contour boundaries (default: \code{"black"})}
+
+\item{tile.alpha}{transparency value for the background tiles of predicted class.}
+
+\item{ellipse}{logical; if \code{TRUE}, 68 percent data ellipses for the groups are added to the plot.}
 
 \item{...}{further parameters passed to \code{predict()}}
 
@@ -49,20 +52,26 @@ the function uses the means for quantitative variables, ...}
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 Discriminant analysis can be more easily understood from plots of the data variables showing how observations are classified.
-\code{plot_discrim()} uses the ideas behind \strong{effect plots}: Visualize predicted values for two focal variables over a
-grid, with other variables in a model held fixed.
+\code{plot_discrim()} uses the ideas behind \strong{effect plots} (Fox, 1987): Visualize predicted classes of the observations for two focal variables over a
+grid of their values, with other variables in a model held fixed. This differs from the usual effect plots in that the predicted
+values to be visualized are discrete categories rather than quantitative.
 
 In the case of discriminant analysis, the predicted values are class membership,
 so this can be visualized by mapping the categorical predicted class to discrete colors used as the background for the plot, or
-plotting the contours of predicted class membership as lines (for \verb{[MASS::lda()]}) or curves (for \verb{[MASS::qda()]}) in the plot.
+plotting the \strong{contours} of predicted class membership as lines (for \verb{[MASS::lda()]}) or auadratic curves (for \verb{[MASS::qda()]}) in the plot.
+The predicted class of any observation in the space of the variables displayed can also be rendered as colored \strong{tiles} or \strong{points}
+in the background of the plot.
 }
 \details{
-Since \code{plot_discrim()} returns a \code{"ggplot"} object, you can easily customize colors and shapes by adding scale layers after
-the function call. You an also add other graphic layers, such as annotations or labels for the groups.
+This is an initial version of \code{plot_discrim()}. It is marked "experimental" because the arguments and defaults are still subject to change.
 
 \strong{Customizing colors and shapes}
+
+Since \code{plot_discrim()} returns a \code{"ggplot"} object, you can easily customize colors and shapes by adding scale layers after
+the function call. You can also add other graphic layers, such as annotations or labels for the groups.
 \itemize{
-\item Use \code{scale_color_manual()} \strong{and} \code{scale_fill_manual()} to control the colors used when using \code{showgrid = "tile"}
+\item Use \code{scale_color_manual()} \strong{and} \code{scale_fill_manual()} to control the colors used when using \code{showgrid = "tile"}, because that maps
+both \strong{both} \code{color} and \code{fill} to the group variable.
 \item Use \code{scale_shape_manual()} to control the symbols used for \code{geom_points()}
 }
 }
@@ -74,6 +83,15 @@ library(dplyr)
 iris.lda <- lda(Species ~ ., iris)
 # formula call: y ~ x
 plot_discrim(iris.lda, Petal.Length ~ Petal.Width)
+
+# add data ellipses
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+             ellipse = TRUE) 
+
+# without contours
+# data ellipses
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+             contour = FALSE) 
 
 # specifying `vars` as character names for x, y
 plot_discrim(iris.lda, c("Petal.Width", "Petal.Length"))
@@ -89,10 +107,19 @@ plot_discrim(iris.lda, Petal.Length ~ Petal.Width) +
   theme(legend.position = "inside",
         legend.position.inside = c(.8, .25))
 
+# Quadratic discriminant analysis gives quite a different result
+iris.qda <- qda(Species ~ ., iris)
+plot_discrim(iris.qda, Petal.Length ~ Petal.Width)
+
+}
+\references{
+Fox, J. (1987). Effect Displays for Generalized Linear Models. In C. C. Clogg (Ed.), \emph{Sociological Methodology}, 1987 (pp. 347–361). Jossey-Bass
 }
 \seealso{
 \code{\link[klaR:partimat]{klaR::partimat()}} for pairwise discriminant plots, but with little control of plot details
 }
 \author{
-Original code by Oliver on SO \url{https://stackoverflow.com/questions/63782598/quadratic-discriminant-analysis-qda-plot-in-r}. Generalized by Michael Friendly
+Original code by Oliver on SO \url{https://stackoverflow.com/questions/63782598/quadratic-discriminant-analysis-qda-plot-in-r}.
+
+Generalized by Michael Friendly
 }
