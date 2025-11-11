@@ -1,6 +1,7 @@
 library(MASS)
 library(ggplot2)
 library(dplyr)
+library(patchwork)
 
 iris.lda <- lda(Species ~ ., iris)
 # Test with tile display (default)
@@ -48,4 +49,26 @@ plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
 #   plot_discrim(peng.qda, bill_length ~ bill_depth, data=peng, showgrid = "point") +
 #     scale_color_penguins()
   
+# Plots to advertise package
 
+p1 <- plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+            contour = FALSE,
+            ellipse = TRUE) +
+  scale_color_manual(values = iris.colors) +
+  scale_fill_manual(values = iris.colors) +
+  scale_shape_manual(values = iris.pch) +
+  theme_minimal(base_size = 16) +
+  theme(legend.position = "inside",
+        legend.position.inside = c(.8, .2))
+
+p2 <- plot_discrim(iris.qda, Petal.Length ~ Petal.Width, 
+            contour = FALSE,
+            ellipse = TRUE) +
+  scale_color_manual(values = iris.colors) +
+  scale_fill_manual(values = iris.colors) +
+  scale_shape_manual(values = iris.pch) +
+  theme_minimal(base_size = 16) +
+  theme(legend.position = "inside",
+        legend.position.inside = c(.8, .2))
+
+p1 + p2

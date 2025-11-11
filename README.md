@@ -33,25 +33,28 @@ The `candisc` package generalizes this to multi-way MANOVA designs
 for all terms in a multivariate linear model (i.e., an `mlm` object),
 computing canonical scores and vectors for each term (giving a `"candiscList"` object).
 
+For `mlm`s with more than a few response variables, these methods often provide a 
+much simpler interpretation of the nature of effects in low-D _canonical space_ than
+heplots for pairs of responses or an HE plot matrix of all responses in _variable space_.
+
+
+
 **Visualization methods**
 
 The graphic functions are designed to provide low-rank (1D, 2D, 3D) visualizations of
 terms in a `"mlm"` via the `plot.candisc()` method, which plots the observations
-in canonical space, together with **variable vectors** showing the relations of the 
-response `y` variables to the canonical variables `Can1`, `Can2`, similar to a biplot.
+in _canonical space_, together with **variable vectors** showing the relations of the 
+response `y` variables to the canonical variables `Can1`, `Can2`. This is the same idea
+as that of a **biplot** (Gabriel, 1971).
 
 The HE plot `heplot.candisc()` and `heplot3d.candisc()` methods use a similar framework,
 but replace the observations and groupwise data ellipses in the plot with 
 representations of the **H** ellipsoid, representing between-group variation
 in the means and the **E** ellipsoid reflecting the pooled within-group variation.
 
-For `mlm`s with more than a few response variables, these methods often provide a 
-much simpler interpretation of the nature of effects in canonical space than
-heplots for pairs of responses or an HE plot matrix of all responses in variable space.
-
 Analogously, a multivariate linear (regression) model with quantitative predictors can also be
 represented in a reduced-rank space by means of a canonical correlation
-transformation of the Y and X variables to _uncorrelated_ **canonical variates*, named with the prefix
+transformation of the Y and X variables to _uncorrelated_ **canonical variates**, named with the prefix
 `Ycan` and `Xcan`.  Computation for this analysis is provided by `cancor()`
 and related methods.  Visualization of these results in canonical space
 are provided by the `plot.cancor()`,  `heplot.cancor()` 
@@ -93,7 +96,7 @@ install.packages('candisc', repos = c('https://friendly.r-universe.dev')
 * A new vignette, `vignette("diabetes", package="candisc")`,
 illustrates some of these methods.
 
-* A more comprehensive collection of examples is contained in the vignettes for the `heplots` package,
+* A more comprehensive collection of examples, illustrating multivariate regression and MANOVA methods, is contained in the vignettes for the `heplots` package,
 `browseVignettes(package = "heplots")`.
 
 ## Citation
@@ -113,3 +116,5 @@ For the theory on which these methods are based, also cite:
 Friendly, M. (2002). Corrgrams: Exploratory displays for correlation matrices. _The American Statistician_, **56**(4), 316–324. <https://doi.org/10.1198/000313002533>
 
 Friendly, M., & Kwan, E. (2003). Effect Ordering for Data Displays. _Computational Statistics and Data Analysis_, **43**(4), 509–539. <https://doi.org/10.1016/S0167-9473(02)00290-6>
+
+Gabriel, K. R. (1971). The Biplot Graphic Display of Matrices with Application to Principal Components Analysis. _Biometrics_, **58**(3), 453–467.

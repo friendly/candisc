@@ -15,7 +15,7 @@ figures:
       fig.asp: 1
 
 reference:
-  - title: candisc
+  - title: 🚀📈 candisc
     desc:  Canonical discriminant analysis
     contents:
       - candisc-package
@@ -26,7 +26,7 @@ reference:
       - heplot.candisc
       - heplot.candiscList
 
-  - title: cancor
+  - title: 🚀📈 cancor
     desc:  Canonical correlation analysis
     contents:
       - cancor
@@ -36,15 +36,15 @@ reference:
       - scores
       - Wilks
 
-  - title: discrim
+  - title: 📈 discrim
     desc: Discriminant analysis
     contents:
       - predict_discrim
       - plot_discrim
       - cor_lda
 
-  - title: Graphics
-    desc: Graphic utilities
+  - title: 🧩 Utilities
+    desc: Utility functions for graphics
     contents:
       - predictor.names
       - reflect
@@ -53,8 +53,8 @@ reference:
       - vectors3d
       - vecscale
 
-  - title: Data
-    desc: Datasets
+  - title: 🧮 Data
+    desc: Datasets used to illustrate the methods in the package
     contents:
       - cereal
       - Grass
