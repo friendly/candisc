@@ -112,6 +112,7 @@ plot_discrim <- function(
     contour.color = "black",
     tile.alpha = 0.2,
     ellipse = FALSE,
+    ellipse.args = list(level = 0.68, ),
     ...,
     modes.means) {
   if(missing(model) || missing(vars))
@@ -205,12 +206,14 @@ plot_discrim <- function(
   # Add grid visualization based on showgrid option
   if(showgrid == "tile") {
     gg <- gg + 
-      geom_tile(aes(.data[[vars[1]]], .data[[vars[2]]], fill = .data[[lhs]]), 
+      geom_tile(aes(.data[[vars[1]]], .data[[vars[2]]], 
+                    fill = .data[[lhs]]), 
                 data = pred.grid, 
                 alpha = tile.alpha)
   } else if(showgrid == "point") {
     gg <- gg + 
-      geom_point(aes(.data[[vars[1]]], .data[[vars[2]]], col = .data[[lhs]]), 
+      geom_point(aes(.data[[vars[1]]], .data[[vars[2]]], 
+                     col = .data[[lhs]]), 
                  data = pred.grid, 
                  shape = 20, size = 0.5, alpha = 0.4)
   }
@@ -224,7 +227,9 @@ plot_discrim <- function(
 
   }
   # add points
-  gg + geom_point(aes(col = .data[[lhs]], shape = .data[[lhs]]), size = point.size)
+  gg + geom_point(aes(col = .data[[lhs]], 
+                      shape = .data[[lhs]]), 
+                  size = point.size)
 
 }
 
