@@ -1,11 +1,13 @@
-## Version 1.0.1
+## Version 1.0.2
 
-This is a patch release, resolving some problems with `plot_discrim()` and adding functionality
+This is a minor release, resolving some problems with `plot_discrim()` and adding functionality
 
 * Fixed buglet in `plot_discrim()` where the variables in a formula needed to be reversed.
 * `plot_discrim()` now gets the `data` from the object, if not supplied.
 * Added `tile.alpha` arg to `plot_discim()`; document how to customize colors, shapes, ...
 * `plot_discrim()` gains an `ellipse` argument to draw data ellipses for the groups.
+* Added `ellipse.args` to control stat_ellipse() parameters
+* Added `labels` and `labels.args` for class labels at group means
 * Flesh out package description in README.
 
 ## Version 1.0.0

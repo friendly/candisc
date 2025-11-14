@@ -15,8 +15,11 @@ plot_discrim(
   contour.color = "black",
   tile.alpha = 0.2,
   ellipse = FALSE,
+  ellipse.args = list(level = 0.68, linewidth = 1.2),
+  labels = FALSE,
+  labels.args = list(geom = "text", size = 5),
   ...,
-  modes.means
+  other.levels
 )
 }
 \arguments{
@@ -43,10 +46,29 @@ for \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}, or \code{"none"} fo
 
 \item{ellipse}{logical; if \code{TRUE}, 68 percent data ellipses for the groups are added to the plot.}
 
+\item{ellipse.args}{a named list of arguments passed to \code{\link[ggplot2:stat_ellipse]{ggplot2::stat_ellipse()}}. Common arguments include
+\code{level} (confidence level, default: 0.68), \code{linewidth} (line thickness, default: 1.2),
+\code{geom} (either \code{"path"} for unfilled ellipses or \code{"polygon"} for filled ellipses),
+and \code{alpha} (transparency for filled ellipses). Any valid argument to \code{stat_ellipse()} can be used.}
+
+\item{labels}{logical; if \code{TRUE}, class labels are added to the plot at the group means (default: \code{FALSE}).}
+
+\item{labels.args}{a named list of arguments passed to \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} or \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}.
+Common arguments include \code{geom} (either \code{"text"} or \code{"label"}, default: \code{"text"}),
+\code{size} (text size, default: 5), \code{fontface} (e.g., \code{"bold"} or \code{"italic"}),
+\code{nudge_x} and \code{nudge_y} (position offsets), and \code{alpha} (transparency for label backgrounds).
+Any valid argument to \code{geom_text()} or \code{geom_label()} can be used.}
+
 \item{...}{further parameters passed to \code{predict()}}
 
-\item{modes.means}{levels to use for evaluating predictions using the variables \strong{not} specified in \code{vars}. If not specified,
-the function uses the means for quantitative variables, ...}
+\item{other.levels}{a named list specifying the fixed values to use for variables in the model that are
+\strong{not} included in \code{vars} (the non-focal variables). These values are held constant across
+the prediction grid. If not specified, the function uses sensible defaults: means for
+quantitative variables, and the first level for factors or character variables. For example,
+if your model includes variables \code{Age}, \code{Gender}, and \code{Income}, but you're plotting
+\code{Sepal.Length ~ Sepal.Width}, you might specify
+\code{other.levels = list(Age = 30, Gender = "Female", Income = 50000)} to generate predictions
+at those fixed values for the non-focal variables.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -74,6 +96,32 @@ the function call. You can also add other graphic layers, such as annotations or
 both \strong{both} \code{color} and \code{fill} to the group variable.
 \item Use \code{scale_shape_manual()} to control the symbols used for \code{geom_points()}
 }
+
+\strong{Customizing ellipses}
+
+The \code{ellipse.args} parameter provides fine control over the appearance of data ellipses. Common arguments include:
+\itemize{
+\item \code{level}: the confidence level for the ellipse (default: 0.68)
+\item \code{linewidth}: thickness of the ellipse line (default: 1.2)
+\item \code{geom}: either \code{"path"} for unfilled ellipses (default) or \code{"polygon"} for filled ellipses
+\item \code{alpha}: transparency when using \code{geom = "polygon"}
+}
+
+See \code{\link[ggplot2:stat_ellipse]{ggplot2::stat_ellipse()}} for additional parameters.
+
+\strong{Adding class labels}
+
+The \code{labels} and \code{labels.args} parameters allow you to add text labels for each class, positioned at the
+group means. Common arguments for \code{labels.args} include:
+\itemize{
+\item \code{geom}: either \code{"text"} (default) for simple text or \code{"label"} for text with a background box
+\item \code{size}: text size (default: 5)
+\item \code{fontface}: font style such as \code{"bold"} or \code{"italic"}
+\item \code{nudge_x}, \code{nudge_y}: offsets for label positioning
+\item \code{alpha}: transparency for label backgrounds when using \code{geom = "label"}
+}
+
+See \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} and \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}} for additional parameters.
 }
 \examples{
 library(MASS)
@@ -87,6 +135,16 @@ plot_discrim(iris.lda, Petal.Length ~ Petal.Width)
 # add data ellipses
 plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
              ellipse = TRUE) 
+
+# add filled ellipses with transparency
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+             ellipse = TRUE,
+             ellipse.args = list(geom = "polygon", alpha = 0.2)) 
+
+# customize ellipse level and line thickness
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+             ellipse = TRUE,
+             ellipse.args = list(level = 0.95, linewidth = 2)) 
 
 # without contours
 # data ellipses
@@ -110,6 +168,26 @@ plot_discrim(iris.lda, Petal.Length ~ Petal.Width) +
 # Quadratic discriminant analysis gives quite a different result
 iris.qda <- qda(Species ~ ., iris)
 plot_discrim(iris.qda, Petal.Length ~ Petal.Width)
+
+# Add class labels at group means
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+             labels = TRUE)
+
+# Add labels with custom styling
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+             labels = TRUE,
+             labels.args = list(geom = "label", size = 6, fontface = "bold"))
+
+# Add labels with position adjustments
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+             labels = TRUE,
+             labels.args = list(nudge_y = 0.1, size = 5))
+
+# Control non-focal variables with other.levels
+# The iris model uses all 4 variables, but we're only plotting 2
+# Specify fixed values for Sepal.Length and Sepal.Width
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
+             other.levels = list(Sepal.Length = 6.0, Sepal.Width = 3.0))
 
 }
 \references{
