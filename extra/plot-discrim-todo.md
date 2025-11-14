@@ -29,7 +29,7 @@ for the variables to be plotted. Here is the code I tried, but it gave errors
    select(!!!vars) |>
    summarise(across(vars), mean)
 ```
-Then, implement a `labels = TRUE/FALSE` arguement, with default `FALSE`.
+Then, implement a `labels = TRUE/FALSE` argument, with default `FALSE`.
 Along with this, implement a `labels.args = list(...)` which can take
 `geom = "text"` or `geom = `label`, along with other arguments to these
 like `nudge_x`, `nudge_y`.

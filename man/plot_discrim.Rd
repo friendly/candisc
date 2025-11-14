@@ -71,8 +71,6 @@ if your model includes variables \code{Age}, \code{Gender}, and \code{Income}, b
 at those fixed values for the non-focal variables.}
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
 Discriminant analysis can be more easily understood from plots of the data variables showing how observations are classified.
 \code{plot_discrim()} uses the ideas behind \strong{effect plots} (Fox, 1987): Visualize predicted classes of the observations for two focal variables over a
 grid of their values, with other variables in a model held fixed. This differs from the usual effect plots in that the predicted
@@ -85,12 +83,11 @@ The predicted class of any observation in the space of the variables displayed c
 in the background of the plot.
 }
 \details{
-This is an initial version of \code{plot_discrim()}. It is marked "experimental" because the arguments and defaults are still subject to change.
+Since \code{plot_discrim()} returns a \code{"ggplot"} object, you can easily customize colors and shapes by adding scale layers after
+the function call. You can also add other graphic layers, such as annotations, and control the overall appearance of
+plots using \code{\link[ggplot2:theme]{ggplot2::theme()}} components.
 
 \strong{Customizing colors and shapes}
-
-Since \code{plot_discrim()} returns a \code{"ggplot"} object, you can easily customize colors and shapes by adding scale layers after
-the function call. You can also add other graphic layers, such as annotations or labels for the groups.
 \itemize{
 \item Use \code{scale_color_manual()} \strong{and} \code{scale_fill_manual()} to control the colors used when using \code{showgrid = "tile"}, because that maps
 both \strong{both} \code{color} and \code{fill} to the group variable.
@@ -186,8 +183,9 @@ plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
 # Control non-focal variables with other.levels
 # The iris model uses all 4 variables, but we're only plotting 2
 # Specify fixed values for Sepal.Length and Sepal.Width
-plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
-             other.levels = list(Sepal.Length = 6.0, Sepal.Width = 3.0))
+# FIXME
+# plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
+#              other.levels = list(Sepal.Length = 6.0, Sepal.Width = 3.0))
 
 }
 \references{

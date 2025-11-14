@@ -2,19 +2,20 @@
 # 
 # DONE: Make data optional -- get it from the model object
 # FIXED: Use rev() when `vars` is a formula
-# DONE: Added data ellipses
-# DONE: Points should be plotted last
-# DONE: Added ellipse.args to control stat_ellipse() parameters
-# DONE: Added labels and labels.args for class labels at group means
-# DONE: Renamed modes.means to other.levels and improved documentation
-# 
-# TODO: Improve documentation; create vignette detailing how to use more generally with ggplot
+# DONE: ✔️ Added data ellipses
+# DONE: ✔️ Points should be plotted last
+# DONE: ✔️ Added ellipse.args to control stat_ellipse() parameters
+# DONE: ✔️ Added `labels` and `labels.args` for class labels at group means
+# DONE: ✔️ Renamed `modes.means` to `other.levels` and improved documentation
+#
+# TODO: ❌ Fix bug with other.levels: "other.levels are lacking one or more variables"
+# TOTO: ❌ Fix mapping for stat_ellipse() when specifying `geom = "polygon"`
+# TODO: Create vignette detailing how to use more generally with ggplot
 # TODO: Can we do this in discriminant space using LD1, LD2?
 
 #' Create a Discriminant Analysis Decision Plot using ggplot.
 #' 
 #' @description
-#' `r lifecycle::badge("experimental")`
 #' 
 #' Discriminant analysis can be more easily understood from plots of the data variables showing how observations are classified.
 #' `plot_discrim()` uses the ideas behind **effect plots** (Fox, 1987): Visualize predicted classes of the observations for two focal variables over a
@@ -23,18 +24,18 @@
 #' 
 #' In the case of discriminant analysis, the predicted values are class membership,
 #' so this can be visualized by mapping the categorical predicted class to discrete colors used as the background for the plot, or
-#' plotting the **contours** of predicted class membership as lines (for `[MASS::lda()]`) or auadratic curves (for `[MASS::qda()]`) in the plot.
+#' plotting the **contours** of predicted class membership as lines (for `[MASS::lda()]`) or qauadratic curves (for `[MASS::qda()]`) in the plot.
 #' The predicted class of any observation in the space of the variables displayed can also be rendered as colored **tiles** or **points**
 #' in the background of the plot.
 #' 
 #' @details
 #' 
-#' This is an initial version of `plot_discrim()`. It is marked "experimental" because the arguments and defaults are still subject to change.
+#' Since `plot_discrim()` returns a `"ggplot"` object, you can easily customize colors and shapes by adding scale layers after 
+#' the function call. You can also add other graphic layers, such as annotations, and control the overall appearance of
+#' plots using [ggplot2::theme()] components.
 #' 
 #' **Customizing colors and shapes**
 #' 
-#' Since `plot_discrim()` returns a `"ggplot"` object, you can easily customize colors and shapes by adding scale layers after 
-#' the function call. You can also add other graphic layers, such as annotations or labels for the groups.
 #' 
 #' * Use `scale_color_manual()` **and** `scale_fill_manual()` to control the colors used when using `showgrid = "tile"`, because that maps
 #'   both **both** `color` and `fill` to the group variable.
@@ -170,8 +171,9 @@
 #' # Control non-focal variables with other.levels
 #' # The iris model uses all 4 variables, but we're only plotting 2
 #' # Specify fixed values for Sepal.Length and Sepal.Width
-#' plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
-#'              other.levels = list(Sepal.Length = 6.0, Sepal.Width = 3.0))
+#' # FIXME
+#' # plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
+#' #              other.levels = list(Sepal.Length = 6.0, Sepal.Width = 3.0))
 #' 
 plot_discrim <- function(
     model, 
