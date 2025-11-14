@@ -78,7 +78,7 @@ values to be visualized are discrete categories rather than quantitative.
 
 In the case of discriminant analysis, the predicted values are class membership,
 so this can be visualized by mapping the categorical predicted class to discrete colors used as the background for the plot, or
-plotting the \strong{contours} of predicted class membership as lines (for \verb{[MASS::lda()]}) or auadratic curves (for \verb{[MASS::qda()]}) in the plot.
+plotting the \strong{contours} of predicted class membership as lines (for \verb{[MASS::lda()]}) or qauadratic curves (for \verb{[MASS::qda()]}) in the plot.
 The predicted class of any observation in the space of the variables displayed can also be rendered as colored \strong{tiles} or \strong{points}
 in the background of the plot.
 }

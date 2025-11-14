@@ -1,6 +1,8 @@
 # TODO: add stuff for other discriminant methods: 
 #  library(mda) -> mda() -> predict.mda()
 # TODO: use data.frame() for result, rather than cbind()
+#
+# DONE: Default for `posterior` becomes FALSE
 #  
 #' Predicted values for discriminant analysis
 #' 
@@ -22,14 +24,21 @@
 #' 
 #' @param object   An object of class `"lda"` or `"qda"`  such as results from [MASS::lda()] or [MASS::qda()] 
 #' @param newdata  A data frame of cases to be classified or, if `object` has a formula, a data frame with columns of the same names as the variables used. A vector will be interpreted as a row vector. If `newdata` is missing, an attempt will be made to retrieve the data used to fit the `lda` object.
-#' @param prior The prior probabilities of the classes. By default, taken to be the proportions in what was set in the call to [MASS::lda()] or [MASS::qda()] 
-#' @param dimen The dimension of the space to be used. If this is less than the number of available dimensions, 
-#'              \eqn{\min(p, ng-1)}, only the first `dimen` discriminant components are used. (This argument is not yet implemented because [MASS::qda()] does not support this.)
-#' @param scores A logical. If `TRUE`, the discriminant scores of the cases in `newdata` are appended as additional columns in the the result, with names `LD1`, `LD2`, ...
-#' @param posterior Either a logical or the character string `"max"`. If `TRUE`, the posterior probabilities for all classes are included as columns named for the classes. If `FALSE`, these are omitted. If `"max"`, the maximum value of the probabilities across the classes are included, with the variable name `"maxp"`.
-#' @param ...      arguments based from or to other methods, not yet used here
+#' @param prior    The prior probabilities of the classes. By default, taken to be the proportions in what was set in the 
+#'                 call to [MASS::lda()] or [MASS::qda()] 
+#' @param dimen    The dimension of the space to be used. If this is less than the number of available dimensions, 
+#'                 \eqn{\min(p, ng-1)}, only the first `dimen` discriminant components are used. 
+#'                 (This argument is not yet implemented because [MASS::qda()] does not support this.)
+#' @param scores   A logical. If `TRUE`, the discriminant scores of the cases in `newdata` are appended as additional columns in 
+#'                 the the result, with names `LD1`, `LD2`, ...
+#' @param posterior Either a logical or the character string `"max"`. If `TRUE`, the posterior probabilities for all classes 
+#'                  are included as columns named for the classes. If `FALSE`, these are omitted. If `"max"`, the maximum 
+#'                  value of the probabilities across the classes are included, with the variable name `"maxp"`.
+#' @param ...       arguments based from or to other methods, not yet used here
 #' @md
-#' @returns A `data.frame`, containing the the predicted class of the observations, values of the `newdata` variables and the maximum value of the posterior probabilities of the classes. `rownames()` in the result are inherited from those in `newdata`.
+#' @returns A `data.frame`, containing the the predicted class of the observations (named for the class in the model) and 
+#'          values of the `newdata` variables. Other variables included are determined by the `scores` and `posterior` arguments. 
+#'          `rownames()` in the result are inherited from those in `newdata`.
 #' @importFrom insight get_modelmatrix find_response
 #' @importFrom stats predict
 #' @export
@@ -56,7 +65,7 @@ predict_discrim <- function(object,
                             prior = object$prior,
                             dimen,
                             scores = FALSE,
-                            posterior = "max",
+                            posterior = FALSE,    # was: "max",
                             ...) {
   cls <- class(object)
   if (!cls %in% c("lda", "qda")) {

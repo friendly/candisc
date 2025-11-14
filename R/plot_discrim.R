@@ -13,7 +13,7 @@
 # TODO: Create vignette detailing how to use more generally with ggplot
 # TODO: Can we do this in discriminant space using LD1, LD2?
 
-#' Create a Discriminant Analysis Decision Plot using ggplot.
+#' Discriminant Analysis Decision Plot using ggplot.
 #' 
 #' @description
 #' 

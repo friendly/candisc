@@ -9,6 +9,7 @@ This is a minor release, resolving some problems with `plot_discrim()` and addin
 * Added `ellipse.args` to control stat_ellipse() parameters
 * Added `labels` and `labels.args` for class labels at group means
 * Flesh out package description in README.
+* Default for `posterior` in `predict_discrim()` becomes `FALSE`, as rarely needed
 
 ## Version 1.0.0
 

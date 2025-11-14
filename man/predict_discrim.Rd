@@ -10,7 +10,7 @@ predict_discrim(
   prior = object$prior,
   dimen,
   scores = FALSE,
-  posterior = "max",
+  posterior = FALSE,
   ...
 )
 }
@@ -19,19 +19,26 @@ predict_discrim(
 
 \item{newdata}{A data frame of cases to be classified or, if \code{object} has a formula, a data frame with columns of the same names as the variables used. A vector will be interpreted as a row vector. If \code{newdata} is missing, an attempt will be made to retrieve the data used to fit the \code{lda} object.}
 
-\item{prior}{The prior probabilities of the classes. By default, taken to be the proportions in what was set in the call to \code{\link[MASS:lda]{MASS::lda()}} or \code{\link[MASS:qda]{MASS::qda()}}}
+\item{prior}{The prior probabilities of the classes. By default, taken to be the proportions in what was set in the
+call to \code{\link[MASS:lda]{MASS::lda()}} or \code{\link[MASS:qda]{MASS::qda()}}}
 
 \item{dimen}{The dimension of the space to be used. If this is less than the number of available dimensions,
-\eqn{\min(p, ng-1)}, only the first \code{dimen} discriminant components are used. (This argument is not yet implemented because \code{\link[MASS:qda]{MASS::qda()}} does not support this.)}
+\eqn{\min(p, ng-1)}, only the first \code{dimen} discriminant components are used.
+(This argument is not yet implemented because \code{\link[MASS:qda]{MASS::qda()}} does not support this.)}
 
-\item{scores}{A logical. If \code{TRUE}, the discriminant scores of the cases in \code{newdata} are appended as additional columns in the the result, with names \code{LD1}, \code{LD2}, ...}
+\item{scores}{A logical. If \code{TRUE}, the discriminant scores of the cases in \code{newdata} are appended as additional columns in
+the the result, with names \code{LD1}, \code{LD2}, ...}
 
-\item{posterior}{Either a logical or the character string \code{"max"}. If \code{TRUE}, the posterior probabilities for all classes are included as columns named for the classes. If \code{FALSE}, these are omitted. If \code{"max"}, the maximum value of the probabilities across the classes are included, with the variable name \code{"maxp"}.}
+\item{posterior}{Either a logical or the character string \code{"max"}. If \code{TRUE}, the posterior probabilities for all classes
+are included as columns named for the classes. If \code{FALSE}, these are omitted. If \code{"max"}, the maximum
+value of the probabilities across the classes are included, with the variable name \code{"maxp"}.}
 
 \item{...}{arguments based from or to other methods, not yet used here}
 }
 \value{
-A \code{data.frame}, containing the the predicted class of the observations, values of the \code{newdata} variables and the maximum value of the posterior probabilities of the classes. \code{rownames()} in the result are inherited from those in \code{newdata}.
+A \code{data.frame}, containing the the predicted class of the observations (named for the class in the model) and
+values of the \code{newdata} variables. Other variables included are determined by the \code{scores} and \code{posterior} arguments.
+\code{rownames()} in the result are inherited from those in \code{newdata}.
 }
 \description{
 \code{predict_discrim} calculates predicted class membership values for a linear or quadratic discriminant analysis,
