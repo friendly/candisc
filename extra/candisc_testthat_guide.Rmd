@@ -1,0 +1,667 @@
+---
+title: "Testing Guide for candisc Package"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  eval = FALSE,  # Set to TRUE when ready to run tests
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+# Overview
+
+This document provides a comprehensive guide for implementing `testthat` unit tests for the `candisc` package. The functions are organized by their primary purpose, with specific test suggestions for each.
+
+The package includes functions for:
+
+- **Canonical discriminant analysis**: `candisc()`, `candiscList()`
+- **Canonical correlation analysis**: `cancor()`
+- **Visualization methods**: `plot.*()`, `heplot.*()`, `heplot3d.*()`
+- **Discriminant analysis extensions**: `predict_discrim()`, `plot_discrim()`
+- **Utility functions**: `varOrder()`, `can_lm()`, `dataIndex()`
+
+---
+
+# Core Computational Functions
+
+## 1. `candisc()` - Canonical Discriminant Analysis
+
+**What it does:** Performs generalized canonical discriminant analysis for one term in a multivariate linear model.
+
+**Key tests to implement:**
+
+```{r candisc-tests}
+library(testthat)
+library(candisc)
+
+test_that("candisc returns correct structure", {
+  # Setup test data
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data = Pottery)
+  pottery.can <- candisc(pottery.mod)
+  
+  # Test object class
+  expect_s3_class(pottery.can, "candisc")
+  
+  # Test essential components exist
+  expect_true(all(c("dfh", "dfe", "eigenvalues", "canrsq", 
+                    "pct", "ndim", "means", "structure", 
+                    "coeffs.raw", "coeffs.std", "scores") %in% 
+                    names(pottery.can)))
+  
+  # Test dimensions
+  expect_equal(pottery.can$ndim, min(pottery.can$dfh, ncol(pottery.mod$model[[1]])))
+  
+  # Test eigenvalues are non-negative
+  expect_true(all(pottery.can$eigenvalues >= 0))
+  
+  # Test canonical R-squared is between 0 and 1
+  expect_true(all(pottery.can$canrsq >= 0 & pottery.can$canrsq <= 1))
+})
+
+test_that("candisc handles 1D case correctly", {
+  # Test with only 2 groups (1 canonical dimension)
+  data(Wine, package = "candisc")
+  wine_subset <- Wine[Wine$Cultivar %in% c("barolo", "grignolino"), ]
+  wine_subset$Cultivar <- droplevels(wine_subset$Cultivar)
+  
+  wine.mod <- lm(cbind(Alcohol, Sugar) ~ Cultivar, data = wine_subset)
+  wine.can <- candisc(wine.mod)
+  
+  expect_equal(wine.can$ndim, 1)
+  expect_equal(length(wine.can$eigenvalues), 1)
+})
+
+test_that("candisc handles ndim parameter", {
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data = Pottery)
+  
+  # Request only 2 dimensions
+  pottery.can <- candisc(pottery.mod, ndim = 2)
+  expect_equal(ncol(pottery.can$scores) - ncol(pottery.mod$model[, -1, drop = FALSE]), 2)
+})
+
+test_that("candisc error handling", {
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(Al ~ Site, data = Pottery)  # Univariate model
+  
+  # Should error on non-mlm object
+  expect_error(candisc(pottery.mod))
+})
+```
+
+---
+
+## 2. `candiscList()` - Multiple Terms
+
+**What it does:** Performs canonical discriminant analysis for all terms in a multivariate linear model.
+
+**Key tests to implement:**
+
+```{r candisclist-tests}
+test_that("candiscList returns correct structure", {
+  data(Wine, package = "candisc")
+  wine.mod <- lm(cbind(Alcohol, Sugar, Acid) ~ Region + Cultivar, data = Wine)
+  wine.canL <- candiscList(wine.mod)
+  
+  # Test object class
+  expect_s3_class(wine.canL, "candiscList")
+  
+  # Test that it's a list with named components
+  expect_type(wine.canL, "list")
+  expect_true(length(wine.canL) > 0)
+  
+  # Each component should be a candisc object
+  for (i in seq_along(wine.canL)) {
+    expect_s3_class(wine.canL[[i]], "candisc")
+  }
+})
+
+test_that("candiscList handles terms parameter", {
+  data(Wine, package = "candisc")
+  wine.mod <- lm(cbind(Alcohol, Sugar, Acid) ~ Region + Cultivar, data = Wine)
+  
+  # Request only one term
+  wine.canL <- candiscList(wine.mod, terms = "Region")
+  expect_equal(length(wine.canL), 1)
+  expect_equal(names(wine.canL), "Region")
+})
+```
+
+---
+
+## 3. `cancor()` - Canonical Correlation Analysis
+
+**What it does:** Computes canonical correlation analysis between two sets of variables.
+
+**Key tests to implement:**
+
+```{r cancor-tests}
+test_that("cancor returns correct structure", {
+  data(Rohwer, package = "heplots")
+  X <- as.matrix(Rohwer[, 6:10])  # PA tests
+  Y <- as.matrix(Rohwer[, 3:5])   # Ability variables
+  
+  cc <- cancor(X, Y, set.names = c("PA", "Ability"))
+  
+  # Test object class
+  expect_s3_class(cc, "cancor")
+  
+  # Test essential components
+  expect_true(all(c("cancor", "names", "ndim", "dim", 
+                    "coef", "scores", "X", "Y") %in% names(cc)))
+  
+  # Test canonical correlations are between 0 and 1
+  expect_true(all(cc$cancor >= 0 & cc$cancor <= 1))
+  
+  # Test they're in decreasing order
+  expect_true(all(diff(cc$cancor) <= 0))
+})
+
+test_that("cancor formula method works", {
+  data(Rohwer, package = "heplots")
+  
+  # Formula interface
+  cc_formula <- cancor(cbind(SAT, PPVT, Raven) ~ n + s + ns + na + ss,
+                      data = Rohwer)
+  
+  expect_s3_class(cc_formula, "cancor")
+  expect_true("terms" %in% names(cc_formula))
+})
+
+test_that("cancor handles missing data", {
+  data(Rohwer, package = "heplots")
+  X <- as.matrix(Rohwer[, 6:10])
+  Y <- as.matrix(Rohwer[, 3:5])
+  
+  # Introduce missing values
+  X[1, 1] <- NA
+  
+  cc_na <- cancor(X, Y, na.rm = TRUE)
+  expect_s3_class(cc_na, "cancor")
+  expect_true(cc_na$dim$n < nrow(X))
+})
+
+test_that("cancor ndim parameter works", {
+  data(Rohwer, package = "heplots")
+  X <- as.matrix(Rohwer[, 6:10])
+  Y <- as.matrix(Rohwer[, 3:5])
+  
+  cc2 <- cancor(X, Y, ndim = 2)
+  expect_equal(cc2$ndim, 2)
+  expect_equal(ncol(cc2$scores$xscores), 2)
+})
+```
+
+---
+
+# S3 Methods and Extractors
+
+## 4. `coef.candisc()` and `coef.cancor()`
+
+**What they do:** Extract coefficients from canonical analysis objects.
+
+**Key tests to implement:**
+
+```{r coef-tests}
+test_that("coef.candisc returns different coefficient types", {
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data = Pottery)
+  pottery.can <- candisc(pottery.mod)
+  
+  # Test different types
+  coef_std <- coef(pottery.can, type = "std")
+  coef_raw <- coef(pottery.can, type = "raw")
+  coef_structure <- coef(pottery.can, type = "structure")
+  
+  expect_true(is.matrix(coef_std) || is.data.frame(coef_std))
+  expect_true(is.matrix(coef_raw) || is.data.frame(coef_raw))
+  expect_true(is.matrix(coef_structure) || is.data.frame(coef_structure))
+  
+  # Dimensions should match
+  expect_equal(nrow(coef_std), nrow(coef_raw))
+})
+
+test_that("coef.cancor extracts X and Y coefficients", {
+  data(Rohwer, package = "heplots")
+  X <- as.matrix(Rohwer[, 6:10])
+  Y <- as.matrix(Rohwer[, 3:5])
+  cc <- cancor(X, Y)
+  
+  coef_cc <- coef(cc)
+  
+  expect_true(is.list(coef_cc))
+  expect_true(all(c("X", "Y") %in% names(coef_cc)))
+  expect_equal(nrow(coef_cc$X), ncol(X))
+  expect_equal(nrow(coef_cc$Y), ncol(Y))
+})
+```
+
+---
+
+## 5. `print()` and `summary()` Methods
+
+**What they do:** Display information about canonical analysis objects.
+
+**Key tests to implement:**
+
+```{r print-summary-tests}
+test_that("print methods produce output", {
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data = Pottery)
+  pottery.can <- candisc(pottery.mod)
+  
+  # Should not error
+  expect_output(print(pottery.can))
+  expect_output(summary(pottery.can))
+})
+
+test_that("summary.candisc with different options", {
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data = Pottery)
+  pottery.can <- candisc(pottery.mod)
+  
+  # Test with means
+  expect_output(summary(pottery.can, means = TRUE))
+  
+  # Test with scores
+  expect_output(summary(pottery.can, scores = TRUE))
+  
+  # Test with different coefficient types
+  expect_output(summary(pottery.can, coef = c("std", "raw")))
+})
+```
+
+---
+
+# Visualization Functions
+
+## 6. `plot.candisc()` and `plot.cancor()`
+
+**What they do:** Create plots of canonical scores and structure.
+
+**Key tests to implement:**
+
+```{r plot-tests}
+test_that("plot.candisc creates plot without error", {
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data = Pottery)
+  pottery.can <- candisc(pottery.mod)
+  
+  # 2D plot
+  expect_silent(plot(pottery.can))
+  
+  # 1D plot
+  expect_silent(plot(pottery.can, which = 1))
+})
+
+test_that("plot.candisc handles various parameters", {
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data = Pottery)
+  pottery.can <- candisc(pottery.mod)
+  
+  # Test with ellipse
+  expect_silent(plot(pottery.can, ellipse = TRUE))
+  
+  # Test with custom colors
+  expect_silent(plot(pottery.can, col = c("red", "blue", "green")))
+  
+  # Test with variable vectors
+  expect_silent(plot(pottery.can, var.col = "darkgreen"))
+})
+
+test_that("plot.cancor creates diagnostic plots", {
+  data(Rohwer, package = "heplots")
+  X <- as.matrix(Rohwer[, 6:10])
+  Y <- as.matrix(Rohwer[, 3:5])
+  cc <- cancor(X, Y)
+  
+  # Should create plot without error
+  expect_silent(plot(cc, which = 1))
+})
+```
+
+---
+
+## 7. `heplot.candisc()` and `heplot3d.candisc()`
+
+**What they do:** Create HE (Hypothesis-Error) plots in canonical space.
+
+**Key tests to implement:**
+
+```{r heplot-tests}
+test_that("heplot.candisc creates plot", {
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data = Pottery)
+  pottery.can <- candisc(pottery.mod)
+  
+  # Should not error
+  expect_silent(heplot(pottery.can))
+})
+
+test_that("heplot.candisc handles which parameter", {
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data = Pottery)
+  pottery.can <- candisc(pottery.mod)
+  
+  # Different dimensions
+  expect_silent(heplot(pottery.can, which = c(1, 2)))
+  expect_silent(heplot(pottery.can, which = c(1, 3)))
+})
+
+test_that("heplot.candiscList handles multiple terms", {
+  data(Grass, package = "candisc")
+  grass.mod <- lm(cbind(N1, N9, N27, N81, N243) ~ Block + Species, 
+                  data = Grass)
+  grass.canL <- candiscList(grass.mod)
+  
+  # Should handle list input
+  expect_silent(heplot(grass.canL, ask = FALSE))
+})
+
+test_that("heplot3d requires rgl", {
+  skip_if_not_installed("rgl")
+  
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data = Pottery)
+  pottery.can <- candisc(pottery.mod)
+  
+  # 3D plot
+  expect_silent(heplot3d(pottery.can))
+})
+```
+
+---
+
+# Discriminant Analysis Extensions
+
+## 8. `predict_discrim()` and `plot_discrim()`
+
+**What they do:** Simplified interface for prediction and visualization of discriminant analysis.
+
+**Key tests to implement:**
+
+```{r discrim-tests}
+test_that("predict_discrim works with lda", {
+  skip_if_not_installed("MASS")
+  
+  data(Wine, package = "candisc")
+  library(MASS)
+  
+  wine.lda <- lda(Cultivar ~ ., data = Wine)
+  wine.pred <- predict_discrim(wine.lda)
+  
+  expect_true(is.data.frame(wine.pred))
+  expect_true("class" %in% names(wine.pred))
+  expect_true("posterior" %in% names(wine.pred))
+})
+
+test_that("plot_discrim creates ggplot", {
+  skip_if_not_installed("MASS")
+  skip_if_not_installed("ggplot2")
+  
+  data(Wine, package = "candisc")
+  library(MASS)
+  
+  wine.lda <- lda(Cultivar ~ Alcohol + Sugar, data = Wine)
+  
+  p <- plot_discrim(wine.lda, Wine)
+  expect_s3_class(p, "gg")
+  expect_s3_class(p, "ggplot")
+})
+```
+
+---
+
+# Utility Functions
+
+## 9. `varOrder()` - Variable Ordering
+
+**What it does:** Orders variables for better visualization.
+
+**Key tests to implement:**
+
+```{r varorder-tests}
+test_that("varOrder returns permutation", {
+  data(Rohwer, package = "heplots")
+  X <- as.matrix(Rohwer[, 6:10])
+  Y <- as.matrix(Rohwer[, 3:5])
+  
+  cc <- cancor(X, Y)
+  
+  # Different methods
+  order1 <- varOrder(cc, method = "angles")
+  order2 <- varOrder(cc, method = "dim1")
+  
+  expect_true(is.numeric(order1))
+  expect_equal(length(order1), ncol(Y))
+  expect_true(all(sort(order1) == seq_len(ncol(Y))))
+})
+
+test_that("varOrder handles different methods", {
+  data(Rohwer, package = "heplots")
+  X <- as.matrix(Rohwer[, 6:10])
+  Y <- as.matrix(Rohwer[, 3:5])
+  cc <- cancor(X, Y)
+  
+  # Test all available methods
+  methods <- c("angles", "dim1", "alphabet")
+  
+  for (method in methods) {
+    order <- varOrder(cc, method = method)
+    expect_true(is.numeric(order))
+  }
+})
+```
+
+---
+
+## 10. `can_lm()` - Transform MLM to Canonical Form
+
+**What it does:** Transforms a multivariate linear model to canonical form.
+
+**Key tests to implement:**
+
+```{r can_lm-tests}
+test_that("can_lm transforms mlm correctly", {
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data = Pottery)
+  pottery.can <- candisc(pottery.mod)
+  
+  # Transform to canonical space
+  can.mod <- can_lm(pottery.mod, pottery.can)
+  
+  expect_s3_class(can.mod, "mlm")
+  expect_s3_class(can.mod, "lm")
+  
+  # Response should be canonical scores
+  expect_true(all(grepl("^Can", colnames(can.mod$model[[1]]))))
+})
+
+test_that("can_lm preserves model structure", {
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data = Pottery)
+  pottery.can <- candisc(pottery.mod)
+  
+  can.mod <- can_lm(pottery.mod, pottery.can)
+  
+  # Should have same number of observations
+  expect_equal(nrow(pottery.mod$model), nrow(can.mod$model))
+  
+  # Predictors should be the same
+  expect_equal(pottery.mod$terms, can.mod$terms)
+})
+```
+
+---
+
+## 11. `dataIndex()` - Observation Indices
+
+**What it does:** Returns indices of observations in a model data frame.
+
+**Key tests to implement:**
+
+```{r dataindex-tests}
+test_that("dataIndex returns correct indices", {
+  data(Pottery, package = "carData")
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data = Pottery)
+  
+  indices <- dataIndex(pottery.mod)
+  
+  expect_true(is.numeric(indices))
+  expect_equal(length(indices), nrow(pottery.mod$model))
+  expect_true(all(indices == seq_len(nrow(pottery.mod$model))))
+})
+
+test_that("dataIndex handles subset", {
+  data(Pottery, package = "carData")
+  
+  # Fit model with subset
+  pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, 
+                   data = Pottery,
+                   subset = Al > 15)
+  
+  indices <- dataIndex(pottery.mod)
+  
+  expect_true(length(indices) < nrow(Pottery))
+  expect_true(all(indices %in% seq_len(nrow(Pottery))))
+})
+```
+
+---
+
+## 12. `redundancy()` - Canonical Redundancy Analysis
+
+**What it does:** Computes redundancy analysis for canonical correlation.
+
+**Key tests to implement:**
+
+```{r redundancy-tests}
+test_that("redundancy returns correct structure", {
+  data(Rohwer, package = "heplots")
+  X <- as.matrix(Rohwer[, 6:10])
+  Y <- as.matrix(Rohwer[, 3:5])
+  cc <- cancor(X, Y)
+  
+  red <- redundancy(cc)
+  
+  expect_true(is.list(red))
+  expect_true(all(c("Xcan.redun", "Ycan.redun") %in% names(red)))
+})
+
+test_that("redundancy values are valid", {
+  data(Rohwer, package = "heplots")
+  X <- as.matrix(Rohwer[, 6:10])
+  Y <- as.matrix(Rohwer[, 3:5])
+  cc <- cancor(X, Y)
+  
+  red <- redundancy(cc)
+  
+  # Redundancy should be between 0 and 1
+  expect_true(all(red$Xcan.redun >= 0 & red$Xcan.redun <= 1))
+  expect_true(all(red$Ycan.redun >= 0 & red$Ycan.redun <= 1))
+})
+```
+
+---
+
+# Testing Strategy and Best Practices
+
+## General Testing Principles
+
+1. **Test core functionality first**: Focus on computational functions (`candisc()`, `cancor()`)
+2. **Test edge cases**: Single dimension, missing data, minimal groups
+3. **Test error handling**: Invalid inputs, incompatible dimensions
+4. **Test mathematical properties**: Eigenvalues non-negative, correlations in [0,1]
+5. **Ensure backward compatibility**: Test with various R versions and dependencies
+
+## Setting Up Tests
+
+```{r test-setup}
+# In tests/testthat/setup.R
+library(candisc)
+
+# Load required packages for tests
+if (requireNamespace("carData", quietly = TRUE)) {
+  library(carData)
+}
+if (requireNamespace("heplots", quietly = TRUE)) {
+  library(heplots)
+}
+
+# Helper function for approximate equality
+expect_approx_equal <- function(object, expected, tolerance = 1e-6) {
+  expect_true(all(abs(object - expected) < tolerance))
+}
+```
+
+## Running Tests
+
+```{r run-tests}
+# Run all tests
+library(testthat)
+library(candisc)
+
+# Run tests for the package
+test_dir("tests/testthat")
+
+# Or run individual test files
+test_file("tests/testthat/test-candisc.R")
+```
+
+---
+
+# Priority Functions for Initial Testing
+
+**High Priority** (Core computational functions):
+1. `candisc()`
+2. `cancor()`
+3. `candiscList()`
+4. `coef()` methods
+
+**Medium Priority** (Extraction and utilities):
+5. `summary()` and `print()` methods
+6. `varOrder()`
+7. `can_lm()`
+8. `redundancy()`
+
+**Lower Priority** (Visualization - harder to test):
+9. `plot.*()` methods
+10. `heplot.*()` methods
+11. `predict_discrim()` and `plot_discrim()`
+
+---
+
+# Notes
+
+- Visualization functions are harder to test programmatically but can be tested for:
+  - No errors when called
+  - Return values (for functions that return plot data)
+  - Correct dimensions of plotted data
+  
+- Consider using **vdiffr** package for visual regression testing of plots
+
+- Many functions depend on specific data structures from the **heplots** and **carData** packages
+
+- Some tests may need to be skipped on CRAN if they require:
+  - Heavy computation
+  - Optional packages (rgl, MASS, ggplot2)
+  - Interactive elements
+
+---
+
+# Session Info
+
+```{r session-info, eval=TRUE}
+sessionInfo()
+```
