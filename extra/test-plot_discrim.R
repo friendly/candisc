@@ -3,7 +3,7 @@ library(ggplot2)
 library(dplyr)
 
 # Source the modified function
-source(here::here("extra", "plot_discrim.R"))  # Adjust path as needed
+source(here::here("extra", "plot_discrim-mod3.R"))  # Adjust path as needed
 
 # Create LDA model with all 4 iris variables
 iris.lda <- lda(Species ~ ., iris)

@@ -4,7 +4,6 @@
 # FIXED: Use rev() when `vars` is a formula
 # DONE: Added data ellipses
 # DONE: Points should be plotted last
-# DONE: Added ellipse.args to control stat_ellipse() parameters
 # 
 # TODO: Improve documentation; create vignette detailing how to use more generally with ggplot
 # TODO: Better explain `mode.means` or rename this
@@ -39,16 +38,6 @@
 #'   both **both** `color` and `fill` to the group variable.
 #' * Use `scale_shape_manual()` to control the symbols used for `geom_points()`
 #' 
-#' **Customizing ellipses**
-#' 
-#' The `ellipse.args` parameter provides fine control over the appearance of data ellipses. Common arguments include:
-#' 
-#' * `level`: the confidence level for the ellipse (default: 0.68)
-#' * `linewidth`: thickness of the ellipse line (default: 1.2)
-#' * `geom`: either `"path"` for unfilled ellipses (default) or `"polygon"` for filled ellipses
-#' * `alpha`: transparency when using `geom = "polygon"`
-#' 
-#' See [ggplot2::stat_ellipse()] for additional parameters.
 #' 
 #'
 #' @param model   a discriminant analysis model object from `MASS::lda()` or `MASS::qda()`
@@ -64,10 +53,6 @@
 #' @param contour.color color of the lines for the contour boundaries (default: `"black"`)
 #' @param tile.alpha transparency value for the background tiles of predicted class.
 #' @param ellipse  logical; if `TRUE`, 68 percent data ellipses for the groups are added to the plot.
-#' @param ellipse.args a named list of arguments passed to [ggplot2::stat_ellipse()]. Common arguments include 
-#'                `level` (confidence level, default: 0.68), `linewidth` (line thickness, default: 1.2), 
-#'                `geom` (either `"path"` for unfilled ellipses or `"polygon"` for filled ellipses), 
-#'                and `alpha` (transparency for filled ellipses). Any valid argument to `stat_ellipse()` can be used.
 #' @param ...     further parameters passed to `predict()`
 #' @param modes.means   levels to use for evaluating predictions using the variables **not** specified in `vars`. If not specified, 
 #'                the function uses the means for quantitative variables, ...
@@ -92,16 +77,6 @@
 #' # add data ellipses
 #' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
 #'              ellipse = TRUE) 
-#' 
-#' # add filled ellipses with transparency
-#' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
-#'              ellipse = TRUE,
-#'              ellipse.args = list(geom = "polygon", alpha = 0.2)) 
-#' 
-#' # customize ellipse level and line thickness
-#' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
-#'              ellipse = TRUE,
-#'              ellipse.args = list(level = 0.95, linewidth = 2)) 
 #' 
 #' # without contours
 #' # data ellipses
@@ -137,7 +112,7 @@ plot_discrim <- function(
     contour.color = "black",
     tile.alpha = 0.2,
     ellipse = FALSE,
-    ellipse.args = list(level = 0.68, linewidth = 1.2),
+    ellipse.args = list(level = 0.68, ),
     ...,
     modes.means) {
   if(missing(model) || missing(vars))
@@ -243,23 +218,18 @@ plot_discrim <- function(
                  shape = 20, size = 0.5, alpha = 0.4)
   }
 
-  # add ellipses with user-specified arguments
+  # add ellipses
   if (ellipse == TRUE) {
-    # Prepare the base aesthetics for stat_ellipse
-    ellipse_call <- list(
-      mapping = aes(color = .data[[lhs]])
-    )
-    
-    # Merge user-provided ellipse.args with the base call
-    ellipse_call <- c(ellipse_call, ellipse.args)
-    
-    # Add stat_ellipse layer with combined arguments
-    gg <- gg + do.call(stat_ellipse, ellipse_call)
+    gg <- gg +
+        stat_ellipse(
+          aes(color = .data[[lhs]]),
+          level = 0.68, linewidth = 1.2) 
+
   }
-  
   # add points
   gg + geom_point(aes(col = .data[[lhs]], 
                       shape = .data[[lhs]]), 
                   size = point.size)
 
 }
+
