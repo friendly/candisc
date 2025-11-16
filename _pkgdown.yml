@@ -8,6 +8,8 @@ template:
     base_font: {google: "Roboto"}
     heading_font: {google: "Roboto Slab"}
     code_font: {google: "JetBrains Mono"}
+  # use demo/ files in pkgdown. These get copied to docs/demo/
+  assets: demo/
 
 figures:
   other.parameters:

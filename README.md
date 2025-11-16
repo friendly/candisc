@@ -72,10 +72,10 @@ implements a collection of these methods.
 
 **Discriminant analysis**
 
-A start has been made on extending these graphical methods to discriminant analysis,
-for example from `MASS:lda()` beginning with a simplified interface to 
+Some of these visualization methods have now been extended to discriminant analysis,
+for example from `MASS:lda()` or `MASS:lda()`, beginning with a simplified interface to 
 prediction, in `predict_discrim()`. A new plotting method, `plot_discrim()`, provides
-`ggplot2` plots of the classification regions and decision boundaries.
+`ggplot2` plots of the classification regions and decision boundaries in data space and in discriminant space.
 
 
 ## Installation

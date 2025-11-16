@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,15 +36,21 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.1" id="version-101">Version 1.0.1<a class="anchor" aria-label="anchor" href="#version-101"></a></h2>
-<p>This is a patch release, resolving some problems with <code><a href="../reference/plot_discrim.html">plot_discrim()</a></code> and adding functionality</p>
+<h2 class="pkg-version" data-toc-text="1.0.2" id="version-102">Version 1.0.2<a class="anchor" aria-label="anchor" href="#version-102"></a></h2>
+<p>This is a minor release, resolving some problems with <code><a href="../reference/plot_discrim.html">plot_discrim()</a></code> and adding functionality</p>
 <ul><li>Fixed buglet in <code><a href="../reference/plot_discrim.html">plot_discrim()</a></code> where the variables in a formula needed to be reversed.</li>
 <li>
 <code><a href="../reference/plot_discrim.html">plot_discrim()</a></code> now gets the <code>data</code> from the object, if not supplied.</li>
 <li>Added <code>tile.alpha</code> arg to <code>plot_discim()</code>; document how to customize colors, shapes, …</li>
 <li>
 <code><a href="../reference/plot_discrim.html">plot_discrim()</a></code> gains an <code>ellipse</code> argument to draw data ellipses for the groups.</li>
+<li>Added <code>ellipse.args</code> to control stat_ellipse() parameters</li>
+<li>Added <code>labels</code> and <code>labels.args</code> for class labels at group means</li>
 <li>Flesh out package description in README.</li>
+<li>Default for <code>posterior</code> in <code><a href="../reference/predict_discrim.html">predict_discrim()</a></code> becomes <code>FALSE</code>, as rarely needed</li>
+<li>
+<code><a href="../reference/plot_discrim.html">plot_discrim()</a></code> now allows plotting the results in discriminant space, e.g., <code>LD2 ~ LD1</code>
+</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="version-100">Version 1.0.0<a class="anchor" aria-label="anchor" href="#version-100"></a></h2><p class="text-muted">CRAN release: 2025-11-05</p>
