@@ -12,6 +12,7 @@ This is a minor release, resolving some problems with `plot_discrim()` and addin
 * Default for `posterior` in `predict_discrim()` becomes `FALSE`, as rarely needed
 * `plot_discrim()` now allows plotting the results in discriminant space, e.g., `LD2 ~ LD1`
 * It also generates nice labels for the discriminant dimensions
+* Added `scores.lda()` to extract discriminant scores
 
 ## Version 1.0.0
 

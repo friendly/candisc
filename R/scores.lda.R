@@ -29,11 +29,12 @@
 #'    str()
 #'  
 scores.lda <- function(x,
-                       prior = object$prior,
+                       prior = x$prior,
                        dimen,
                        ...) {
 
   scores <- predict_discrim(x,
+                            prior = prior,
                             dimen = dimen,
                             scores = TRUE, 
                             posterior = FALSE)

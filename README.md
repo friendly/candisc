@@ -12,7 +12,7 @@
 # candisc  <img src="man/figures/logo.png" align="right" height="160px" />
 **Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis**
 
-Version 1.0.2
+Version 1.0.3
 
 <!-- when in Rmd format, can use
 Version `r getNamespaceVersion("candisc")`
@@ -74,8 +74,10 @@ implements a collection of these methods.
 
 Some of these visualization methods have now been extended to discriminant analysis,
 for example from `MASS:lda()` or `MASS:lda()`, beginning with a simplified interface to 
-prediction, in `predict_discrim()`. A new plotting method, `plot_discrim()`, provides
-`ggplot2` plots of the classification regions and decision boundaries in data space and in discriminant space.
+prediction, in `predict_discrim()`. 
+
+* A new plotting method, `plot_discrim()`, provides `ggplot2` plots of the classification regions and decision boundaries in data space and in discriminant space.
+* `cor_lda()` calculates correlations between the observed variables and the discriminant dimensions.
 
 
 ## Installation
