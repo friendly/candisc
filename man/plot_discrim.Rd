@@ -96,7 +96,8 @@ plots using \code{\link[ggplot2:theme]{ggplot2::theme()}} components.
 \itemize{
 \item Use \code{scale_color_manual()} \strong{and} \code{scale_fill_manual()} to control the colors used when using \code{showgrid = "tile"}, because that maps
 both \strong{both} \code{color} and \code{fill} to the group variable.
-\item Use \code{scale_shape_manual()} to control the symbols used for \code{geom_points()}
+\item Use \code{scale_shape_manual()} to control the symbols used for \code{geom_points()}. Note that if there are more than 6 classes, you will need
+to use this, because \code{ggplot} only provides for 6 different shapes.
 }
 
 \strong{Customizing ellipses}
@@ -105,7 +106,7 @@ The \code{ellipse.args} parameter provides fine control over the appearance of d
 \itemize{
 \item \code{level}: the confidence level for the ellipse (default: 0.68)
 \item \code{linewidth}: thickness of the ellipse line (default: 1.2)
-\item \code{geom}: either \code{"path"} for unfilled ellipses (default) or \code{"polygon"} for filled ellipses
+\item \code{geom}: either \code{"path"} for unfilled ellipses (default) or \code{"polygon"} for filled ellipses (\strong{NB}: at present, the \code{fill} aesthetic is not mapped to the class variable.)
 \item \code{alpha}: transparency when using \code{geom = "polygon"}
 }
 

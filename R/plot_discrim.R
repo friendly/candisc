@@ -44,7 +44,8 @@
 #' 
 #' * Use `scale_color_manual()` **and** `scale_fill_manual()` to control the colors used when using `showgrid = "tile"`, because that maps
 #'   both **both** `color` and `fill` to the group variable.
-#' * Use `scale_shape_manual()` to control the symbols used for `geom_points()`
+#' * Use `scale_shape_manual()` to control the symbols used for `geom_points()`. Note that if there are more than 6 classes, you will need 
+#'   to use this, because `ggplot` only provides for 6 different shapes.
 #' 
 #' **Customizing ellipses**
 #' 
@@ -52,8 +53,8 @@
 #' 
 #' * `level`: the confidence level for the ellipse (default: 0.68)
 #' * `linewidth`: thickness of the ellipse line (default: 1.2)
-#' * `geom`: either `"path"` for unfilled ellipses (default) or `"polygon"` for filled ellipses
-#' * `alpha`: transparency when using `geom = "polygon"`
+#' * `geom`: either `"path"` for unfilled ellipses (default) or `"polygon"` for filled ellipses (**NB**: at present, the `fill` aesthetic is not mapped to the class variable.)
+#' * `alpha`: transparency when using `geom = "polygon"` 
 #' 
 #' See [ggplot2::stat_ellipse()] for additional parameters.
 #' 

@@ -183,11 +183,12 @@ the function call. You can also add other graphic layers, such as annotations, a
 plots using <code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">ggplot2::theme()</a></code> components.</p>
 <p><strong>Customizing colors and shapes</strong></p><ul><li><p>Use <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual()</a></code> <strong>and</strong> <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual()</a></code> to control the colors used when using <code>showgrid = "tile"</code>, because that maps
 both <strong>both</strong> <code>color</code> and <code>fill</code> to the group variable.</p></li>
-<li><p>Use <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual()</a></code> to control the symbols used for <code>geom_points()</code></p></li>
+<li><p>Use <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual()</a></code> to control the symbols used for <code>geom_points()</code>. Note that if there are more than 6 classes, you will need
+to use this, because <code>ggplot</code> only provides for 6 different shapes.</p></li>
 </ul><p><strong>Customizing ellipses</strong></p>
 <p>The <code>ellipse.args</code> parameter provides fine control over the appearance of data ellipses. Common arguments include:</p><ul><li><p><code>level</code>: the confidence level for the ellipse (default: 0.68)</p></li>
 <li><p><code>linewidth</code>: thickness of the ellipse line (default: 1.2)</p></li>
-<li><p><code>geom</code>: either <code>"path"</code> for unfilled ellipses (default) or <code>"polygon"</code> for filled ellipses</p></li>
+<li><p><code>geom</code>: either <code>"path"</code> for unfilled ellipses (default) or <code>"polygon"</code> for filled ellipses (<strong>NB</strong>: at present, the <code>fill</code> aesthetic is not mapped to the class variable.)</p></li>
 <li><p><code>alpha</code>: transparency when using <code>geom = "polygon"</code></p></li>
 </ul><p>See <code><a href="https://ggplot2.tidyverse.org/reference/stat_ellipse.html" class="external-link">ggplot2::stat_ellipse()</a></code> for additional parameters.</p>
 <p><strong>Adding class labels</strong></p>

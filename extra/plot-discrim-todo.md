@@ -62,3 +62,24 @@ plot_discrim(iris.lda2, LD2 ~ LD1,
   theme_minimal(base_size = 16) 
 ```
 
+In the present version for plotting in discrimininant space, it would be useful to automatically create labels
+for the axes that contain the percent of between-group variance accounted for by each dimension.
+Please fetch the current version from https://raw.githubusercontent.com/friendly/candisc/refs/heads/master/R/plot_discrim.R
+The code to get better axis labels, for the first two dimensions is:
+```
+svd <- iris.lda$svd
+var <- 100 * round(svd^2/sum(svd^2), 3)
+labs <- glue::glue("Discriminant dimension {1:2} ({var}%)") |>
+  print()
+# Discriminant dimension 1 (86.5%)
+# Discriminant dimension 2 (13.5%)
+```
+
+Then, for ggplot, the code to add labels would be like:
+
+```
+ + labs(x = labs[1], y = labs[2])
+```
+
+What makes this tricky is that when there are more than 2 discriminant dimensions, one can use `LD3 ~ LD2`, and the
+labels should use those components of the `svd` variances.
