@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
 </h1>
 </div>
 <p><strong>Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis</strong></p>
-<p>Version 1.0.2</p>
+<p>Version 1.0.3</p>
 <!-- when in Rmd format, can use
 Version `r getNamespaceVersion("candisc")`
 -->
@@ -83,7 +83,12 @@ Version `r getNamespaceVersion("candisc")`
 <p><strong>Variable ordering</strong></p>
 <p>The relations among response variables in linear models can also be useful for “effect ordering” (Friendly &amp; Kwan (2003)) for <em>variables</em> in other multivariate data displays, such as heatmaps or “corrgrams” (Friendly, 2002) of correlations. to make the displayed relationships more coherent. The function <code><a href="reference/varOrder.html">varOrder()</a></code> implements a collection of these methods.</p>
 <p><strong>Discriminant analysis</strong></p>
-<p>Some of these visualization methods have now been extended to discriminant analysis, for example from <code>MASS:lda()</code> or <code>MASS:lda()</code>, beginning with a simplified interface to prediction, in <code><a href="reference/predict_discrim.html">predict_discrim()</a></code>. A new plotting method, <code><a href="reference/plot_discrim.html">plot_discrim()</a></code>, provides <code>ggplot2</code> plots of the classification regions and decision boundaries in data space and in discriminant space.</p>
+<p>Some of these visualization methods have now been extended to discriminant analysis, for example from <code>MASS:lda()</code> or <code>MASS:lda()</code>, beginning with a simplified interface to prediction, in <code><a href="reference/predict_discrim.html">predict_discrim()</a></code>.</p>
+<ul>
+<li>A new plotting method, <code><a href="reference/plot_discrim.html">plot_discrim()</a></code>, provides <code>ggplot2</code> plots of the classification regions and decision boundaries in data space and in discriminant space.</li>
+<li>
+<code><a href="reference/cor_lda.html">cor_lda()</a></code> calculates correlations between the observed variables and the discriminant dimensions.</li>
+</ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
