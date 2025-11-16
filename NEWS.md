@@ -10,6 +10,7 @@ This is a minor release, resolving some problems with `plot_discrim()` and addin
 * Added `labels` and `labels.args` for class labels at group means
 * Flesh out package description in README.
 * Default for `posterior` in `predict_discrim()` becomes `FALSE`, as rarely needed
+* `plot_discrim()` now allows plotting the results in discriminant space, e.g., `LD2 ~ LD1`
 
 ## Version 1.0.0
 

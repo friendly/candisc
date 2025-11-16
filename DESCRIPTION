@@ -10,14 +10,14 @@ Imports:
   stats, 
   insight,
   dplyr,
-  ggplot2
+  ggplot2,
+  MASS
 Suggests: 
     rgl,
     carData,
     corrplot,
     knitr,
     rmarkdown,
-    MASS, 
     rpart, 
     rpart.plot,
     klaR,

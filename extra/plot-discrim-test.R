@@ -72,3 +72,44 @@ p2 <- plot_discrim(iris.qda, Petal.Length ~ Petal.Width,
         legend.position.inside = c(.8, .2))
 
 p1 + p2
+
+# plot in discriminant space
+# 
+iris_scored <- predict_discrim(iris.lda, scores=TRUE)
+head(iris_scored)
+
+iris.lda2 <- lda(Species ~ LD1 + LD2, data=iris_scored)
+iris.lda2
+
+plot_discrim(iris.lda2, LD2 ~ LD1,
+             contour = FALSE,
+             ellipse = TRUE) +
+  scale_color_manual(values = iris.colors) +
+  scale_fill_manual(values = iris.colors) +
+  scale_shape_manual(values = iris.pch) +
+  theme_minimal(base_size = 16) 
+
+
+############################################################
+# Test new LDA plots
+############################################################
+############################################################
+
+source(here::here("extra/plot_discrim-LD-space.R"))
+
+# Basic discriminant space plot
+plot_discrim(iris.lda, LD2 ~ LD1)
+
+# With ellipses and labels
+plot_discrim(iris.lda, LD2 ~ LD1, 
+             ellipse = TRUE,
+             labels = TRUE)
+
+# Comprehensive styled plot
+plot_discrim(iris.lda, LD2 ~ LD1,
+             contour = FALSE,
+             ellipse = TRUE,
+             labels = TRUE) +
+  scale_color_manual(values = iris.colors) +
+  scale_fill_manual(values = iris.colors) +
+  theme_minimal()

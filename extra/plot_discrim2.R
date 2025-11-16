@@ -7,14 +7,13 @@
 # DONE: ✔️ Added ellipse.args to control stat_ellipse() parameters
 # DONE: ✔️ Added `labels` and `labels.args` for class labels at group means
 # DONE: ✔️ Renamed `modes.means` to `other.levels` and improved documentation
-# DONE: ✔️ Added discriminant space plotting (LD1, LD2)
 #
 # TODO: ❌ Fix bug with other.levels: "other.levels are lacking one or more variables"
-# TODO: ❌ Fix mapping for stat_ellipse() when specifying `geom = "polygon"` -fill isn't mapped so ellipses are gray
+# TOTO: ❌ Fix mapping for stat_ellipse() when specifying `geom = "polygon"` byalso
 # TODO: Create vignette detailing how to use more generally with ggplot
-# TODO: Consider using .LD1, .LD2 to avoid name clashes
+# TODO: Can we do this in discriminant space using LD1, LD2?
 
-#' Discriminant Analysis Decision Plots using ggplot.
+#' Discriminant Analysis Decision Plot using ggplot.
 #' 
 #' @description
 #' 
@@ -25,13 +24,9 @@
 #' 
 #' In the case of discriminant analysis, the predicted values are class membership,
 #' so this can be visualized by mapping the categorical predicted class to discrete colors used as the background for the plot, or
-#' plotting the **contours** of predicted class membership as lines (for `[MASS::lda()]`) or quadratic curves (for `[MASS::qda()]`) in the plot.
+#' plotting the **contours** of predicted class membership as lines (for `[MASS::lda()]`) or qauadratic curves (for `[MASS::qda()]`) in the plot.
 #' The predicted class of any observation in the space of the variables displayed can also be rendered as colored **tiles** or **points**
 #' in the background of the plot.
-#' 
-#' `plot_discrim()` also allows you to visualize the classification in **discriminant space**, of the weighted scores that best distinguish
-#' among the groups. When there are only two discriminant dimensions, this view captures all the information regarding group separation
-#' contained in all the predictors used in the `lda()` / `qda()` analysis.
 #' 
 #' @details
 #' 
@@ -70,21 +65,10 @@
 #' 
 #' See [ggplot2::geom_text()] and [ggplot2::geom_label()] for additional parameters.
 #' 
-#' **Plotting in discriminant space**
-#' 
-#' When `vars` specifies `LD1` and/or `LD2` (e.g., `LD2 ~ LD1`), the function automatically:
-#' 
-#' 1. Calculates discriminant scores using `predict_discrim()`
-#' 2. Creates a new LDA model in discriminant space using `LD1` and `LD2` as predictors.
-#' 3. Plots the observations and decision boundaries in that space
-#' 
-#' This is useful for visualizing the discriminant analysis results in the space where 
-#' groups are maximally separated.
-#' 
 #'
 #' @param model   a discriminant analysis model object from `MASS::lda()` or `MASS::qda()`
 #' @param vars    either a character vector of length 2 of the names of the `x` and `y` variables, or a formula of form `y ~ x` 
-#'                specifying the axes in the plot. To plot in discriminant space, use `LD2 ~ LD1` or `LD1 ~ LD2`.
+#'                specifying the axes in the plot.
 #' @param data    data to use for visualization. Should contain all the data needed to use the `model` for prediction. The default is to use
 #'                the data used to fit the `model`.
 #' @param resolution number of points in x, y variables to use for visualizing the predicted class boundaries and regions.
@@ -113,8 +97,7 @@
 #'                if your model includes variables `Age`, `Gender`, and `Income`, but you're plotting 
 #'                `Sepal.Length ~ Sepal.Width`, you might specify 
 #'                `other.levels = list(Age = 30, Gender = "Female", Income = 50000)` to generate predictions 
-#'                at those fixed values for the non-focal variables. This parameter is not used when plotting
-#'                in discriminant space (i.e., when `vars` contains `LD1` or `LD2`).
+#'                at those fixed values for the non-focal variables.
 #' @author Original code by Oliver on SO <https://stackoverflow.com/questions/63782598/quadratic-discriminant-analysis-qda-plot-in-r>. 
 #' 
 #' Generalized by Michael Friendly
@@ -124,8 +107,6 @@
 #' @importFrom ggplot2 ggplot aes geom_point geom_tile geom_contour geom_text geom_label stat_ellipse .data 
 #' @importFrom dplyr group_by summarise across all_of
 #' @importFrom insight get_data
-#' @importFrom MASS lda
-#' @importFrom stats as.formula
 #' @export
 #' @examples
 #' library(MASS)
@@ -143,7 +124,7 @@
 #' # add filled ellipses with transparency
 #' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
 #'              ellipse = TRUE,
-#'              ellipse.args = list(geom = "polygon", alpha = 0.2)) 
+#'              ellipse.args = list(geom = "polygon", alpha = 0.1)) 
 #' 
 #' # customize ellipse level and line thickness
 #' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
@@ -194,11 +175,6 @@
 #' # plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
 #' #              other.levels = list(Sepal.Length = 6.0, Sepal.Width = 3.0))
 #' 
-#' # Plot in discriminant space
-#' plot_discrim(iris.lda, LD2 ~ LD1, 
-#'              ellipse = TRUE,
-#'              labels = TRUE)
-#' 
 plot_discrim <- function(
     model, 
     vars, 
@@ -231,40 +207,6 @@ plot_discrim <- function(
   # Validate and match showgrid argument
   showgrid <- match.arg(showgrid)
   
-  # Check if we're plotting in discriminant space (LD1, LD2)
-  is_discrim_space <- any(grepl("^LD[0-9]+$", vars))
-  
-  if (is_discrim_space) {
-    # Get the class variable name from the original model
-    t <- terms(model)
-    lhs <- as.character(t[[2]])
-    
-    # Calculate discriminant scores using predict_discrim()
-    data_scored <- predict_discrim(model, scores = TRUE)
-    
-    # Check that the requested LD variables exist in the scored data
-    if (!all(vars %in% colnames(data_scored))) {
-      stop(paste("Requested discriminant variables", paste(vars, collapse = ", "), 
-                 "not found in discriminant scores. Available:", 
-                 paste(grep("^LD[0-9]+$", colnames(data_scored), value = TRUE), collapse = ", ")))
-    }
-    
-    # Create a new LDA model in discriminant space
-    # Build formula: Species ~ LD1 + LD2
-    ld_vars_in_model <- grep("^LD[0-9]+$", colnames(data_scored), value = TRUE)
-    formula_str <- paste(lhs, "~", paste(ld_vars_in_model, collapse = " + "))
-    ld_formula <- as.formula(formula_str)
-    
-    # Fit new LDA model in discriminant space
-    model <- MASS::lda(ld_formula, data = data_scored)
-    data <- data_scored
-    
-    # For discriminant space, we don't use other.levels
-    if (!missing(other.levels)) {
-      warning("'other.levels' is ignored when plotting in discriminant space")
-    }
-  }
-  
   t <- terms(model)
   if(!all((other.vars <- attr(t, 'term.labels')) %in% colnames(data)))
     stop('data is missing one or more variables in model.')
@@ -284,42 +226,29 @@ plot_discrim <- function(
   names(prd.vars) <- vars
 
   # set up data for prediction for the remaining (non-focal) variables
-  # Skip this section if we're in discriminant space
-  if (!is_discrim_space) {
-    if(missing(other.levels)){
-      other.vars <- other.vars[!other.vars %in% vars]
-      if(length(other.vars)){
-        other.levels <- lapply(data[, other.vars], function(x){
-          if(is.character(x)){
-            unique(x)[1]
-          }else if(is.factor(x)){
-            levels(x)[1]
-          }else{
-            mean(x)
-          }
-        }) 
-        names(other.levels) <- other.vars
-      }else
-        other.levels <- NULL
-    }else{
-      if(is.null(other.vars))
-        warning('other.vars is null but other.levels was provided. Please leave this missing.')
-      if(!all(other.vars %in% names(other.levels)))
-        stop('other.levels are lacking one or more variables.')
-      other.levels <- as.list(other.levels)
-      if(any(lengths(other.levels) > 1))
-        stop('other.levels should only contain a single value for each variable.')
-    }
-  } else {
-    # In discriminant space, handle other LD dimensions if present
+  if(missing(other.levels)){
     other.vars <- other.vars[!other.vars %in% vars]
     if(length(other.vars)){
       other.levels <- lapply(data[, other.vars], function(x){
-        mean(x)  # All LD variables are numeric
+        if(is.character(x)){
+          unique(x)[1]
+        }else if(is.factor(x)){
+          levels(x)[1]
+        }else{
+          mean(x)
+        }
       }) 
       names(other.levels) <- other.vars
     }else
       other.levels <- NULL
+  }else{
+    if(is.null(other.vars))
+      warning('other.vars is null but other.levels was provided. Please leave this missing.')
+    if(!all(other.vars %in% names(other.levels)))
+      stop('other.levels are lacking one or more variables.')
+    other.levels <- as.list(other.levels)
+    if(any(lengths(other.levels) > 1))
+      stop('other.levels should only contain a single value for each variable.')
   }
 
   # Construct the grid of values of all variables in the model to be used for prediction

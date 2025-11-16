@@ -10,11 +10,10 @@
 # DONE: ✔️ Added discriminant space plotting (LD1, LD2)
 #
 # TODO: ❌ Fix bug with other.levels: "other.levels are lacking one or more variables"
-# TODO: ❌ Fix mapping for stat_ellipse() when specifying `geom = "polygon"` -fill isn't mapped so ellipses are gray
+# TODO: ❌ Fix mapping for stat_ellipse() when specifying `geom = "polygon"`
 # TODO: Create vignette detailing how to use more generally with ggplot
-# TODO: Consider using .LD1, .LD2 to avoid name clashes
 
-#' Discriminant Analysis Decision Plots using ggplot.
+#' Discriminant Analysis Decision Plot using ggplot.
 #' 
 #' @description
 #' 
@@ -28,10 +27,6 @@
 #' plotting the **contours** of predicted class membership as lines (for `[MASS::lda()]`) or quadratic curves (for `[MASS::qda()]`) in the plot.
 #' The predicted class of any observation in the space of the variables displayed can also be rendered as colored **tiles** or **points**
 #' in the background of the plot.
-#' 
-#' `plot_discrim()` also allows you to visualize the classification in **discriminant space**, of the weighted scores that best distinguish
-#' among the groups. When there are only two discriminant dimensions, this view captures all the information regarding group separation
-#' contained in all the predictors used in the `lda()` / `qda()` analysis.
 #' 
 #' @details
 #' 
@@ -75,7 +70,7 @@
 #' When `vars` specifies `LD1` and/or `LD2` (e.g., `LD2 ~ LD1`), the function automatically:
 #' 
 #' 1. Calculates discriminant scores using `predict_discrim()`
-#' 2. Creates a new LDA model in discriminant space using `LD1` and `LD2` as predictors.
+#' 2. Creates a new LDA model in discriminant space
 #' 3. Plots the observations and decision boundaries in that space
 #' 
 #' This is useful for visualizing the discriminant analysis results in the space where 
@@ -125,7 +120,6 @@
 #' @importFrom dplyr group_by summarise across all_of
 #' @importFrom insight get_data
 #' @importFrom MASS lda
-#' @importFrom stats as.formula
 #' @export
 #' @examples
 #' library(MASS)
