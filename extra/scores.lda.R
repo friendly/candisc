@@ -1,5 +1,7 @@
 # Extract discriminant scores for lda()
 # -- just a thin wrapper on predict_discrim to provide a `scores()` method
+# 
+# TODO: Allow function to also return the actual class of the observations
 
 
 #' Extract Observation Discriminant Scores for Linear Discriminant Analysis

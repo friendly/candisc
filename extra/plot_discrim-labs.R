@@ -25,13 +25,9 @@
 #' 
 #' In the case of discriminant analysis, the predicted values are class membership,
 #' so this can be visualized by mapping the categorical predicted class to discrete colors used as the background for the plot, or
-#' plotting the **contours** of predicted class membership as lines (for [MASS::lda()]) or quadratic curves (for [MASS::qda()]) in the plot.
+#' plotting the **contours** of predicted class membership as lines (for `[MASS::lda()]`) or quadratic curves (for `[MASS::qda()]`) in the plot.
 #' The predicted class of any observation in the space of the variables displayed can also be rendered as colored **tiles** or **points**
 #' in the background of the plot.
-#' 
-#' `plot_discrim()` also allows you to visualize the classification in **discriminant space**, of the weighted scores that best distinguish
-#' among the groups. When there are only two discriminant dimensions, this view captures all the information regarding group separation
-#' contained in all the predictors used in the `lda()` / `qda()` analysis. But, you can plot any pair of dimensions.
 #' 
 #' @details
 #' 
@@ -42,10 +38,9 @@
 #' **Customizing colors and shapes**
 #' 
 #' 
-#' * Use [ggplot2::scale_color_manual()] **and** [ggplot2::scale_fill_manual()] to control the colors used when using `showgrid = "tile"`, because that maps
+#' * Use `scale_color_manual()` **and** `scale_fill_manual()` to control the colors used when using `showgrid = "tile"`, because that maps
 #'   both **both** `color` and `fill` to the group variable.
-#' * Use [ggplot2::scale_shape_manual()] to control the symbols used for `geom_points()`. Note that if there are more than 6 classes, you will need 
-#'   to use this, because `ggplot` only provides for 6 different shapes.
+#' * Use `scale_shape_manual()` to control the symbols used for `geom_points()`
 #' 
 #' **Customizing ellipses**
 #' 
@@ -53,7 +48,7 @@
 #' 
 #' * `level`: the confidence level for the ellipse (default: 0.68)
 #' * `linewidth`: thickness of the ellipse line (default: 1.2)
-#' * `geom`: either `"path"` for unfilled ellipses (default) or `"polygon"` for filled ellipses. (**NB**: at present, the `fill` aesthetic is not mapped to the class variable.)
+#' * `geom`: either `"path"` for unfilled ellipses (default) or `"polygon"` for filled ellipses
 #' * `alpha`: transparency when using `geom = "polygon"`
 #' 
 #' See [ggplot2::stat_ellipse()] for additional parameters.
@@ -128,7 +123,6 @@
 #' @importFrom dplyr group_by summarise across all_of
 #' @importFrom insight get_data
 #' @importFrom MASS lda
-#' @importFrom stats as.formula
 #' @export
 #' @examples
 #' library(MASS)
@@ -152,6 +146,14 @@
 #' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
 #'              ellipse = TRUE,
 #'              ellipse.args = list(level = 0.95, linewidth = 2)) 
+#' 
+#' # without contours
+#' # data ellipses
+#' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+#'              contour = FALSE) 
+#' 
+#' # specifying `vars` as character names for x, y
+#' plot_discrim(iris.lda, c("Petal.Width", "Petal.Length"))
 #' 
 #' # Define custom colors and shapes, modify theme() and legend.position
 #' iris.colors <- c("red", "darkgreen", "blue")
@@ -182,11 +184,22 @@
 #'              labels = TRUE,
 #'              labels.args = list(nudge_y = 0.1, size = 5))
 #' 
+#' # Control non-focal variables with other.levels
+#' # The iris model uses all 4 variables, but we're only plotting 2
+#' # Specify fixed values for Sepal.Length and Sepal.Width
+#' # FIXME
+#' # plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
+#' #              other.levels = list(Sepal.Length = 6.0, Sepal.Width = 3.0))
+#' 
 #' # Plot in discriminant space with automatic variance labels
 #' plot_discrim(iris.lda, LD2 ~ LD1, 
 #'              ellipse = TRUE,
 #'              labels = TRUE)
 #' 
+#' # Plot other discriminant dimensions (e.g., LD3 vs LD2)
+#' # Axis labels automatically show correct variance percentages
+#' plot_discrim(iris.lda, LD3 ~ LD2, 
+#'              ellipse = TRUE)
 #' 
 plot_discrim <- function(
     model, 

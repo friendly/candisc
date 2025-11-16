@@ -7,14 +7,14 @@
 # DONE: ✔️ Added ellipse.args to control stat_ellipse() parameters
 # DONE: ✔️ Added `labels` and `labels.args` for class labels at group means
 # DONE: ✔️ Renamed `modes.means` to `other.levels` and improved documentation
-# DONE: ✔️ Added discriminant space plotting (LD1, LD2, etc.)
-# DONE: ✔️ Added automatic axis labels with variance percentages for discriminant space
+# DONE: ✔️ Added discriminant space plotting (LD1, LD2)
 #
 # TODO: ❌ Fix bug with other.levels: "other.levels are lacking one or more variables"
-# TODO: ❌ Fix mapping for stat_ellipse() when specifying `geom = "polygon"`
+# TODO: ❌ Fix mapping for stat_ellipse() when specifying `geom = "polygon"` -fill isn't mapped so ellipses are gray
 # TODO: Create vignette detailing how to use more generally with ggplot
+# TODO: Consider using .LD1, .LD2 to avoid name clashes
 
-#' Discriminant Analysis Decision Plot using ggplot.
+#' Discriminant Analysis Decision Plots using ggplot.
 #' 
 #' @description
 #' 
@@ -25,7 +25,7 @@
 #' 
 #' In the case of discriminant analysis, the predicted values are class membership,
 #' so this can be visualized by mapping the categorical predicted class to discrete colors used as the background for the plot, or
-#' plotting the **contours** of predicted class membership as lines (for [MASS::lda()]) or quadratic curves (for [MASS::qda()]) in the plot.
+#' plotting the **contours** of predicted class membership as lines (for `[MASS::lda()]`) or quadratic curves (for `[MASS::qda()]`) in the plot.
 #' The predicted class of any observation in the space of the variables displayed can also be rendered as colored **tiles** or **points**
 #' in the background of the plot.
 #' 
@@ -42,9 +42,9 @@
 #' **Customizing colors and shapes**
 #' 
 #' 
-#' * Use [ggplot2::scale_color_manual()] **and** [ggplot2::scale_fill_manual()] to control the colors used when using `showgrid = "tile"`, because that maps
+#' * Use `scale_color_manual()` **and** `scale_fill_manual()` to control the colors used when using `showgrid = "tile"`, because that maps
 #'   both **both** `color` and `fill` to the group variable.
-#' * Use [ggplot2::scale_shape_manual()] to control the symbols used for `geom_points()`. Note that if there are more than 6 classes, you will need 
+#' * Use `scale_shape_manual()` to control the symbols used for `geom_points()`. Note that if there are more than 6 classes, you will need 
 #'   to use this, because `ggplot` only provides for 6 different shapes.
 #' 
 #' **Customizing ellipses**
@@ -53,8 +53,8 @@
 #' 
 #' * `level`: the confidence level for the ellipse (default: 0.68)
 #' * `linewidth`: thickness of the ellipse line (default: 1.2)
-#' * `geom`: either `"path"` for unfilled ellipses (default) or `"polygon"` for filled ellipses. (**NB**: at present, the `fill` aesthetic is not mapped to the class variable.)
-#' * `alpha`: transparency when using `geom = "polygon"`
+#' * `geom`: either `"path"` for unfilled ellipses (default) or `"polygon"` for filled ellipses (**NB**: at present, the `fill` aesthetic is not mapped to the class variable.)
+#' * `alpha`: transparency when using `geom = "polygon"` 
 #' 
 #' See [ggplot2::stat_ellipse()] for additional parameters.
 #' 
@@ -76,18 +76,16 @@
 #' When `vars` specifies `LD1` and/or `LD2` (e.g., `LD2 ~ LD1`), the function automatically:
 #' 
 #' 1. Calculates discriminant scores using `predict_discrim()`
-#' 2. Creates a new LDA model in discriminant space
+#' 2. Creates a new LDA model in discriminant space using `LD1` and `LD2` as predictors.
 #' 3. Plots the observations and decision boundaries in that space
-#' 4. Adds axis labels showing the percentage of between-group variance explained by each dimension
 #' 
 #' This is useful for visualizing the discriminant analysis results in the space where 
-#' groups are maximally separated. The axis labels automatically include the variance percentages,
-#' e.g., "Discriminant dimension 1 (86.5%)".
+#' groups are maximally separated.
 #' 
 #'
 #' @param model   a discriminant analysis model object from `MASS::lda()` or `MASS::qda()`
 #' @param vars    either a character vector of length 2 of the names of the `x` and `y` variables, or a formula of form `y ~ x` 
-#'                specifying the axes in the plot. To plot in discriminant space, use `LD2 ~ LD1`, `LD3 ~ LD2`, etc.
+#'                specifying the axes in the plot. To plot in discriminant space, use `LD2 ~ LD1` or `LD1 ~ LD2`.
 #' @param data    data to use for visualization. Should contain all the data needed to use the `model` for prediction. The default is to use
 #'                the data used to fit the `model`.
 #' @param resolution number of points in x, y variables to use for visualizing the predicted class boundaries and regions.
@@ -116,15 +114,15 @@
 #'                if your model includes variables `Age`, `Gender`, and `Income`, but you're plotting 
 #'                `Sepal.Length ~ Sepal.Width`, you might specify 
 #'                `other.levels = list(Age = 30, Gender = "Female", Income = 50000)` to generate predictions 
-#'                at those fixed values for the non-focal variables. This parameter is ignored when plotting
-#'                in discriminant space (i.e., when `vars` contains `LD1`, `LD2`, etc.).
+#'                at those fixed values for the non-focal variables. This parameter is not used when plotting
+#'                in discriminant space (i.e., when `vars` contains `LD1` or `LD2`).
 #' @author Original code by Oliver on SO <https://stackoverflow.com/questions/63782598/quadratic-discriminant-analysis-qda-plot-in-r>. 
 #' 
 #' Generalized by Michael Friendly
 #' @references 
 #'    Fox, J. (1987). Effect Displays for Generalized Linear Models. In C. C. Clogg (Ed.), _Sociological Methodology_, 1987 (pp. 347–361). Jossey-Bass
 #' @seealso [klaR::partimat()] for pairwise discriminant plots, but with little control of plot details
-#' @importFrom ggplot2 ggplot aes geom_point geom_tile geom_contour geom_text geom_label stat_ellipse labs .data 
+#' @importFrom ggplot2 ggplot aes geom_point geom_tile geom_contour geom_text geom_label stat_ellipse .data 
 #' @importFrom dplyr group_by summarise across all_of
 #' @importFrom insight get_data
 #' @importFrom MASS lda
@@ -152,6 +150,14 @@
 #' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
 #'              ellipse = TRUE,
 #'              ellipse.args = list(level = 0.95, linewidth = 2)) 
+#' 
+#' # without contours
+#' # data ellipses
+#' plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+#'              contour = FALSE) 
+#' 
+#' # specifying `vars` as character names for x, y
+#' plot_discrim(iris.lda, c("Petal.Width", "Petal.Length"))
 #' 
 #' # Define custom colors and shapes, modify theme() and legend.position
 #' iris.colors <- c("red", "darkgreen", "blue")
@@ -182,11 +188,17 @@
 #'              labels = TRUE,
 #'              labels.args = list(nudge_y = 0.1, size = 5))
 #' 
-#' # Plot in discriminant space with automatic variance labels
+#' # Control non-focal variables with other.levels
+#' # The iris model uses all 4 variables, but we're only plotting 2
+#' # Specify fixed values for Sepal.Length and Sepal.Width
+#' # FIXME
+#' # plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
+#' #              other.levels = list(Sepal.Length = 6.0, Sepal.Width = 3.0))
+#' 
+#' # Plot in discriminant space
 #' plot_discrim(iris.lda, LD2 ~ LD1, 
 #'              ellipse = TRUE,
 #'              labels = TRUE)
-#' 
 #' 
 plot_discrim <- function(
     model, 
@@ -220,12 +232,8 @@ plot_discrim <- function(
   # Validate and match showgrid argument
   showgrid <- match.arg(showgrid)
   
-  # Check if we're plotting in discriminant space (LD1, LD2, etc.) EARLY
-  # so we can handle the workflow before trying to validate vars in original data
+  # Check if we're plotting in discriminant space (LD1, LD2)
   is_discrim_space <- any(grepl("^LD[0-9]+$", vars))
-  
-  # Store original model for variance calculation later
-  original_model <- model
   
   if (is_discrim_space) {
     # Get the class variable name from the original model
@@ -243,7 +251,7 @@ plot_discrim <- function(
     }
     
     # Create a new LDA model in discriminant space
-    # Build formula: Species ~ LD1 + LD2 + ...
+    # Build formula: Species ~ LD1 + LD2
     ld_vars_in_model <- grep("^LD[0-9]+$", colnames(data_scored), value = TRUE)
     formula_str <- paste(lhs, "~", paste(ld_vars_in_model, collapse = " + "))
     ld_formula <- as.formula(formula_str)
@@ -409,23 +417,6 @@ plot_discrim <- function(
       gg <- gg + do.call(geom_text, label_call)
     }
   }
-  
-  # Add automatic axis labels with variance percentages for discriminant space
-  if (is_discrim_space) {
-    # Extract SVD from the ORIGINAL model (not the recreated one in LD space)
-    svd <- original_model$svd
-    var <- 100 * round(svd^2/sum(svd^2), 3)
-    
-    # Extract the dimension numbers from vars (e.g., "LD1" -> 1, "LD2" -> 2)
-    ld_nums <- as.integer(gsub("LD", "", vars))
-    
-    # Create labels for the specific dimensions being plotted
-    axis_labels <- paste0("Discriminant dimension ", ld_nums, " (", var[ld_nums], "%)")
-    
-    # Add the labs layer with x and y labels
-    gg <- gg + labs(x = axis_labels[1], y = axis_labels[2])
-  }
-  
   # return ggplot object
   gg  
 

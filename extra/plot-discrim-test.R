@@ -95,7 +95,7 @@ plot_discrim(iris.lda2, LD2 ~ LD1,
 ############################################################
 ############################################################
 
-source(here::here("extra/plot_discrim-LD-space.R"))
+source(here::here("extra/plot_discrim-labs.R"))
 
 # Basic discriminant space plot
 plot_discrim(iris.lda, LD2 ~ LD1)
@@ -109,7 +109,10 @@ plot_discrim(iris.lda, LD2 ~ LD1,
 plot_discrim(iris.lda, LD2 ~ LD1,
              contour = FALSE,
              ellipse = TRUE,
-             labels = TRUE) +
+             labels = TRUE,
+             labels.args = list(geom = "label")) +
   scale_color_manual(values = iris.colors) +
   scale_fill_manual(values = iris.colors) +
-  theme_minimal()
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
+
