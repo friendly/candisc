@@ -69,7 +69,8 @@ plot_discrim(painters.lda, LD2 ~ LD1,
              labels = TRUE, 
              labels.args = list(geom = "label")) +
   scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
-  theme_classic(base_size = 15)
+  theme_classic(base_size = 15) +
+  theme(legend.position = "none")
 
 # Dimensions 1 & 3
 plot_discrim(painters.lda, LD3 ~ LD1,

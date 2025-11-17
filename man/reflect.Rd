@@ -23,7 +23,7 @@ reflect(object, columns = 1:2, ...)
 \item{...}{Unused}
 }
 \value{
-The object with specified columns of the variable coefficients and observation scores multiplied by -1.
+The object with specified columns of the appropriate components (variable coefficients, observation scores, ...) multiplied by -1.
 }
 \description{
 \code{candisc} and \code{cancor}  objects have coefficients for the X and Y and weighted scores for these,
@@ -36,9 +36,9 @@ This is often useful for interpreting a biplot, for example when a component (of
 \details{
 \code{reflect} methods are available for:
 \itemize{
-\item \code{data.frame}s
-\item \code{"cancor"} objects
-\item \code{"candisc"} objects
+\item \code{data.frame}s, for numeric columns
+\item \code{"cancor"} objects, for the coefficients and scores of the \code{X} and \code{Y} variables
+\item \code{"candisc"} objects, for the coefficients, structure correlations and scores
 }
 
 Note that \code{\link[=plot.candisc]{plot.candisc()}} and \code{\link[=plot.candisc]{plot.candisc()}} can handle this internally using the argument \code{rev.axes}.
@@ -52,6 +52,10 @@ Note that \code{\link[=plot.candisc]{plot.candisc()}} and \code{\link[=plot.cand
 \item \code{reflect(candisc)}: \code{"candisc"} method.
 
 }}
+\examples{
+# None yet
+
+}
 \seealso{
 \link[ggbiplot:reflect]{ggbiplot::reflect} has similar methods for PCA-like objects
 }

@@ -95,7 +95,7 @@ plot_discrim(iris.lda2, LD2 ~ LD1,
 ############################################################
 ############################################################
 
-source(here::here("extra/plot_discrim-labs.R"))
+#source(here::here("extra/plot_discrim-labs.R"))
 
 # Basic discriminant space plot
 plot_discrim(iris.lda, LD2 ~ LD1)
@@ -106,7 +106,8 @@ plot_discrim(iris.lda, LD2 ~ LD1,
              labels = TRUE)
 
 # Comprehensive styled plot
-plot_discrim(iris.lda, LD2 ~ LD1,
+
+plt <- plot_discrim(iris.lda, LD2 ~ LD1,
              contour = FALSE,
              ellipse = TRUE,
              labels = TRUE,
@@ -115,4 +116,27 @@ plot_discrim(iris.lda, LD2 ~ LD1,
   scale_fill_manual(values = iris.colors) +
   theme_minimal(base_size = 14) +
   theme(legend.position = "none")
+plt
+
+
+# add variable vectors
+# 
+vecs <- cor_lda(iris.lda)
+vecs
+
+# make a tidy data frame for gggda::geom_vector
+# or, maybe use geom_arrow?
+vecs <- vecs |>
+  as.data.frame() |>
+  tibble::rownames_to_column(var = "label") |>
+  mutate(label = stringr::str_replace(label, "\\.", "\n")) |>
+  print()
+
+plt +
+  gggda::geom_vector(
+    data = vecs,
+    aes(x = 4 * LD1, y = 4 * LD2, label = label),
+    lineheight = 0.8, linewidth = 1.25, size = 5
+  ) +
+  coord_equal()
 
