@@ -15,6 +15,10 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE,
                       fig.align = "center")
 ```
 
+Vignette built using `heplots`, version `r packageDescription("heplots")[["Version"]]`,
+`candisc`, version `r packageDescription("candisc")[["Version"]]` and `car`, version `r packageDescription("car")[["Version"]]`.
+
+
 ## Background
 
 
