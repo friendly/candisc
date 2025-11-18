@@ -28,7 +28,28 @@
 #' @seealso [ggbiplot::reflect] has similar methods for PCA-like objects
 #' @export
 #' @examples
-#' # None yet
+#' # reflect cols in a data.frame
+#' X <- data.frame(x1 = 1:4, x2 = 5:8)
+#' reflect(X)
+#' reflect(X, 1)
+#' reflect(X, 2)
+#' cbind (X, letters[1:4]) |> reflect(1)
+#'
+#' # reflect a candisc 
+#' iris.mod <- lm(cbind(Petal.Length, Sepal.Length, Petal.Width, Sepal.Width) ~ Species, data=iris)
+#' iris.can <- candisc(iris.mod, data=iris)
+#' coef(iris.can)
+#' # reflect Can1
+#' iris.can |> reflect(1) |> coef()
+#' 
+#' # reflect a cancor
+#' data(Rohwer, package="heplots")
+#' X <- as.matrix(Rohwer[,6:10])  # the PA tests
+#' Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
+#' Rohwer.can <- cancor(X, Y, set.names=c("PA", "Ability"))
+#' coef(Rohwer)
+#' Rohwer.can |> reflect() |> coef()
+#'
 #' 
 reflect <- function(object, columns = 1:2, ...) {
   UseMethod("reflect")
@@ -67,11 +88,15 @@ reflect.cancor <- function(object, columns = 1:2, ...) {
 #' @export
 reflect.candisc <- function(object, columns = 1:2, ...) {
   
-  object$coeffs_raw[, columns] <- -1 * object$coeffs_raw[, columns]
-  object$coeffs_std[, columns] <- -1 * object$coeffs_std[, columns]
+  check_cols(object$coeffs.raw, columns)  
+  check_numeric(object$coeffs.raw, columns)
+  object$coeffs.raw[, columns] <- -1 * object$coeffs.raw[, columns]
+  object$coeffs.std[, columns] <- -1 * object$coeffs.std[, columns]
 
   object$structure[, columns] <- -1 * object$structure[, columns]
-  object$scores[, columns] <- -1 * object$scores[, columns]
+  
+  canVars <- paste0("Can", columns)
+  object$scores[, canVars] <- -1 * object$scores[, canVars]
   
   object
   
