@@ -1,6 +1,6 @@
 ## Version 1.1.0
 
-This is a minor release, resolving some problems with `plot_discrim()` and adding considerable functionality
+This is a major release, resolving some problems with `plot_discrim()` and adding considerable functionality
 
 * Fixed buglet in `plot_discrim()` where the variables in a formula needed to be reversed.
 * `plot_discrim()` now gets the `data` from the object, if not supplied.
@@ -14,6 +14,8 @@ This is a minor release, resolving some problems with `plot_discrim()` and addin
 * It also generates nice labels for the discriminant dimensions
 * Added `scores.lda()` to extract discriminant scores
 * Fixed problems in reflect()
+* Added examples to README
+* Started to add `testthat` to package checks
 
 ## Version 1.0.0
 

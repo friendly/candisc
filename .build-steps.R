@@ -28,6 +28,8 @@ urlchecker::url_check()
 
 library(devtools)
 
+devtools::install(build_vignettes = TRUE)
+
 # prepare pkgdown site
 # -- need to install the current version
 build_readme()
