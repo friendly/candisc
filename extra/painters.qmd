@@ -1,0 +1,232 @@
+---
+title: "Painters data: HE Plots and Canonical Discriminant Analysis"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Painters data: HE Plots and Canonical Discriminant Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE, 
+                      collapse=TRUE, R.options=list(digits=4),
+                      fig.align = "center")
+```
+
+Vignette built using `heplots`, version `r packageDescription("heplots")[["Version"]]`,
+`candisc`, version `r packageDescription("candisc")[["Version"]]` and `ggplot2`, version `r packageDescription("ggplot2")[["Version"]]`.
+
+
+## Introduction
+
+The `painters` dataset from the MASS package contains subjective assessments of 54 classical painters on four aesthetic qualities: Composition, Drawing, Colour, and Expression. These ratings, on a scale of 0-20, were made by the 18th century art critic Roger de Piles and reflect his judgment of artistic merit. The painters are classified into eight schools: Renaissance (A), Mannerist (B), Seicento (C), Venetian (D), Lombard (E), Sixteenth Century (F), Seventeenth Century (G), and French (H).
+
+This vignette demonstrates the use of hypothesis-error (HE) plots, canonical discriminant analysis, and discriminant analysis plots to understand how the schools differ in their aesthetic characteristics.
+
+```{r setup, message=FALSE}
+library(MASS)
+library(heplots)
+library(candisc)
+library(ggplot2)
+
+data(painters, package = "MASS")
+```
+
+## Data Preparation
+
+We begin by using longer, more descriptive labels to identify the schools, making the plots easier to interpret.
+
+```{r data-prep}
+school <- c("Renaissance", "Mannerist", "Seiento", "Venetian",
+            "Lombard", "16th C", "17th C", "French")
+levels(painters$School) <- school
+head(painters)
+```
+
+## How many from each school?
+
+The distribution of painters across schools is unbalanced, with some schools having many more representatives than others.
+
+```{r school-counts}
+table(painters$School)
+```
+
+## Exploratory plots
+
+Before conducting formal multivariate analyses, we explore the data visually. A boxplot shows the distribution of colour scores across schools.
+
+```{r boxplot, fig.width=8, fig.height=5}
+ggplot(data = painters, aes(x = School, y = Colour, fill = School)) +
+  geom_boxplot() +
+  labs(title = "Colour Scores Distribution by Painting School",
+       x = "School",
+       y = "Colour Score (0-20)") +
+  theme_bw()
+```
+
+To examine all four aesthetic variables simultaneously, we reshape the data to long format and create violin plots overlaid with individual points.
+
+```{r violin-plots, fig.width=8, fig.height=5}
+painters_long <- painters |>
+  tidyr::pivot_longer(cols = c(Composition, Drawing, Colour, Expression),
+                      names_to = "Metric", values_to = "Score")
+
+ggplot(painters_long, aes(x = Metric, y = Score, fill = Metric)) +
+  geom_violin(alpha = 0.3) +
+  geom_jitter(width = 0.1) +
+  labs(title = "Distribution of De Piles' Scores",
+       y = "Score (0-20)") +
+  theme_light() +
+  theme(legend.position = "none")
+```
+
+## Sample scatterplots
+
+Scatterplots of pairs of variables, with data ellipses for each school, reveal the multivariate relationships and potential group separation.
+
+```{r scatter1, fig.width=8, fig.height=6}
+ggplot(painters,
+       aes(Composition, Colour,
+           color = School, shape = School)) +
+  geom_point(size = 3) +
+  stat_ellipse(level = 0.68) +
+  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  theme_classic(base_size = 15)
+```
+
+```{r scatter2, fig.width=8, fig.height=6}
+ggplot(painters,
+       aes(Drawing, Expression,
+           color = School, shape = School)) +
+  geom_point(size = 3) +
+  stat_ellipse(level = 0.68) +
+  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  theme_classic(base_size = 15)
+```
+
+## MANOVA: how do the schools differ according to the aesthetic qualities?
+
+We fit a multivariate linear model (MANOVA) to test whether schools differ significantly on the four aesthetic variables considered jointly. The model treats School as the predictor and the four aesthetic scores as a multivariate response.
+
+```{r manova}
+painters.mod <- lm(cbind(Composition, Drawing, Colour, Expression) ~ School, 
+                   data = painters)
+coef(painters.mod)
+```
+
+## Check for multivariate outliers
+
+Before interpreting the MANOVA results, we check for multivariate outliers using a chi-square Q-Q plot of squared Mahalanobis distances.
+
+```{r outliers, fig.width=7, fig.height=7}
+cqplot(painters.mod, id.n = 3)
+```
+
+## HE plots
+
+Hypothesis-error (HE) plots provide a visual representation of multivariate hypothesis tests. The H ellipse represents the hypothesis sum of squares and cross-products, while the E ellipse represents error variation. When H extends outside E, there is evidence of a significant effect.
+
+By default, the plot shows the first two variables (Composition and Drawing).
+
+```{r heplot1, fig.width=7, fig.height=7}
+heplot(painters.mod,
+       fill = TRUE, fill.alpha = c(0.1, 0.05),
+       cex.lab = 1.25)
+```
+
+We can also examine other pairs of variables, such as Colour and Expression.
+
+```{r heplot2, fig.width=7, fig.height=7}
+heplot(painters.mod,
+       variables = 3:4,
+       fill = TRUE, fill.alpha = c(0.1, 0.05),
+       cex.lab = 1.25)
+```
+
+## All pairwise HE plots
+
+To get a comprehensive view of how schools differ across all pairs of variables, we create a matrix of pairwise HE plots.
+
+```{r pairs-heplot, fig.width=10, fig.height=10}
+pairs(painters.mod)
+```
+
+## Canonical analysis
+
+Canonical discriminant analysis reduces the dimensionality of the multivariate differences among schools. It finds linear combinations of the original variables that maximize between-group variation relative to within-group variation.
+
+```{r candisc}
+painters.can <- candisc(painters.mod)
+painters.can
+summary(painters.can)
+```
+
+The output shows how many dimensions (canonical variates) are needed to account for the differences among schools, along with the percentage of between-group variance explained by each dimension.
+
+## HE plot in canonical space
+
+Plotting the data in canonical space provides the clearest view of group separation, as the canonical dimensions are specifically constructed to maximize differences among schools.
+
+```{r heplot-can, fig.width=8, fig.height=8}
+heplot(painters.can,
+       fill = TRUE, fill.alpha = c(0.1, 0.05),
+       var.lwd = 2, var.cex = 1.4,
+       cex.lab = 1.25)
+```
+
+## 3D view
+
+The analysis suggests three significant dimensions of differences among schools. We can visualize all three dimensions simultaneously using a 3D HE plot.
+
+```{r heplot3d, eval=FALSE}
+if(requireNamespace("rgl")) {
+  heplot3d(painters.can, col = c("pink", "brown"))
+}
+```
+
+## Discriminant analysis
+
+Linear discriminant analysis (LDA) provides another approach to understanding group differences and can be used for classification. Unlike canonical discriminant analysis, which focuses on visualization and interpretation, LDA is optimized for predicting group membership.
+
+```{r lda}
+painters.lda <- lda(School ~ Composition + Drawing + Colour + Expression,
+                    data = painters)
+painters.lda
+```
+
+We can examine the confusion matrix to see how well the discriminant function classifies painters into their actual schools:
+
+```{r confusion}
+class_table <- table(
+  actual = painters$School,
+  predicted = predict(painters.lda)$class
+)
+class_table
+```
+
+The `plot_discrim()` function visualizes the discriminant analysis results by plotting observations in the space defined by the discriminant dimensions (LD1, LD2, etc.). Here we plot the first two discriminant dimensions:
+
+```{r plot-discrim1, fig.width=9, fig.height=7}
+plot_discrim(painters.lda, LD2 ~ LD1,
+             labels = TRUE,
+             labels.args = list(geom = "label")) +
+  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  theme_classic(base_size = 15) +
+  theme(legend.position = "none")
+```
+
+We can also examine other pairs of discriminant dimensions, such as LD1 and LD3:
+
+```{r plot-discrim2, fig.width=9, fig.height=7}
+plot_discrim(painters.lda, LD3 ~ LD1,
+             labels = TRUE,
+             labels.args = list(geom = "label")) +
+  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  theme_classic(base_size = 15)
+```
+
+## Summary
+
+This vignette has demonstrated the use of HE plots, canonical discriminant analysis, and discriminant analysis plots to understand how classical painting schools differ in their aesthetic characteristics. HE plots provide intuitive visual tests of multivariate hypotheses, canonical analysis reveals the dimensions of maximum group separation, and discriminant analysis plots show how well groups can be distinguished and classified in reduced dimensional space.

@@ -84,9 +84,32 @@ Then, for ggplot, the code to add labels would be like:
 What makes this tricky is that when there are more than 2 discriminant dimensions, one can use `LD3 ~ LD2`, and the
 labels should use those components of the `svd` variances.
 
+## Vignettes
+
 In the candisc package, I have a demo file,
 https://raw.githubusercontent.com/friendly/candisc/refs/heads/master/demo/painters.R
-I would like to turn into a vignette for the package in `.qmd` format.
-Begin with a brief statement of what the `MASS::painters` data set consists of.
+I would like to turn into a vignette for the package in `.qmd` format,
+with the main focus on HE plots, candisc plots and discriminant analysis plots.
+Read the source file and I'll give you further instructions.
 
+Begin with a brief statement of what the `MASS::painters` data set consists of.
+Then incorporate the analysis and graphic steps into the vignette. Treat each block
+of code starting with a comment `#' ##` as a new section.
+Comments like `#'` are meant to be used as text. You can expand on what these are
+saying, but not too long.
+
+Use this style of YAML header
+
+```
+---
+title: "Diabetes data: heplots and candisc examples"
+author: "Michael Friendly"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Diabetes data: heplots and candisc examples}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```
 

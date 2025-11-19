@@ -3,11 +3,13 @@
 #' author: Michael Friendly
 #' ---
 
+#' ## Load packages and the dataset
 library(MASS)
 library(heplots)
 library(ggplot2)
 
 data(painters, package = "MASS")
+str(painters)
 
 #' ## Use longer labels to identify the schools
 school <- c("Renaissance", "Mannerist", "Sciento", "Venetian",
@@ -32,12 +34,12 @@ painters_long <- painters |>
                       names_to = "Metric", values_to = "Score")
 
 ggplot(painters_long, aes(x = Metric, y = Score, fill = Metric)) +
-  geom_violin(alpha =0.3) +
+  geom_violin(alpha = 0.3) +
   geom_jitter(width = 0.1) +
   labs(title = "Distribution of De Piles' Scores",
        y = "Score (0-20)") +
   theme_light() +
-  theme(legend.position = "none") # Hide redundant legend
+  theme(legend.position = "none") # no need for a legend
 
 #' ## Sample scatterplots
 ggplot(painters,
@@ -57,7 +59,8 @@ ggplot(painters,
   theme_classic(base_size = 15) 
 
   
-#' ## MANOVA: how do the schools differ according to the aesthetic qualities?
+#' ## MANOVA: 
+#' How do the various schools differ according to the aesthetic qualities?
 painters.mod <- lm(cbind(Composition, Drawing, Colour, Expression) ~ School, data=painters)
 coef(painters.mod)
 
@@ -70,6 +73,7 @@ heplot(painters.mod,
        fill = TRUE, fill.alpha = c(0.1, 0.05),
        cex.lab = 1.25)
 
+#' Specify `variables` for other variables
 heplot(painters.mod,
        variables = 3:4,
        fill = TRUE, fill.alpha = c(0.1, 0.05),
