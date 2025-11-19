@@ -5,24 +5,67 @@
 
 library(MASS)
 library(heplots)
+library(ggplot2)
 
 data(painters, package = "MASS")
 
-#' Use longer labels to identify the schools
+#' ## Use longer labels to identify the schools
 school <- c("Renaissance", "Mannerist", "Sciento", "Venetian",
 		"Lombard", "16th C", "17th C", "French")
 levels(painters$School) <- school
 head(painters)
 
-#' How many from each school?
+#' ## How many from each school?
 table(painters$School)
 
+#' ## Exploratory plots
+ggplot(data = painters, aes(x = School, y = Colour, fill = School)) +
+  geom_boxplot() +
+  labs(title = "Colour Scores Distribution by Painting School",
+       x = "School",
+       y = "Colour Score (0-20)") +
+  theme_bw()
+
+#' ## Reshape to long format for plotting multiple variables
+painters_long <- painters |>
+  tidyr::pivot_longer(cols = c(Composition, Drawing, Colour, Expression),
+                      names_to = "Metric", values_to = "Score")
+
+ggplot(painters_long, aes(x = Metric, y = Score, fill = Metric)) +
+  geom_violin(alpha =0.3) +
+  geom_jitter(width = 0.1) +
+  labs(title = "Distribution of De Piles' Scores",
+       y = "Score (0-20)") +
+  theme_light() +
+  theme(legend.position = "none") # Hide redundant legend
+
+#' ## Sample scatterplots
+ggplot(painters,
+       aes(Composition, Colour,
+           color = School, shape = School)) +
+  geom_point(size=3) +
+  stat_ellipse(level = 0.68) +
+  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  theme_classic(base_size = 15) 
+
+ggplot(painters,
+       aes(Drawing, Expression,
+           color = School, shape = School)) +
+  geom_point(size=3) +
+  stat_ellipse(level = 0.68) +
+  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  theme_classic(base_size = 15) 
+
+  
 #' ## MANOVA: how do the schools differ according to the aesthetic qualities?
 painters.mod <- lm(cbind(Composition, Drawing, Colour, Expression) ~ School, data=painters)
 coef(painters.mod)
 
+#' ## Check for multivariate outliers
+cqplot(painters.mod, id.n = 3)
+
 #' ## HE plots
-#' By default, plots the first two variables
+#' By default, it plots the first two variables
 heplot(painters.mod,
        fill = TRUE, fill.alpha = c(0.1, 0.05),
        cex.lab = 1.25)
@@ -32,6 +75,7 @@ heplot(painters.mod,
        fill = TRUE, fill.alpha = c(0.1, 0.05),
        cex.lab = 1.25)
 
+#' All pairwise HE pots
 pairs(painters.mod)
 
 #' ## Canonical analysis

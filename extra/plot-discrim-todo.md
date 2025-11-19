@@ -83,3 +83,10 @@ Then, for ggplot, the code to add labels would be like:
 
 What makes this tricky is that when there are more than 2 discriminant dimensions, one can use `LD3 ~ LD2`, and the
 labels should use those components of the `svd` variances.
+
+In the candisc package, I have a demo file,
+https://raw.githubusercontent.com/friendly/candisc/refs/heads/master/demo/painters.R
+I would like to turn into a vignette for the package in `.qmd` format.
+Begin with a brief statement of what the `MASS::painters` data set consists of.
+
+
