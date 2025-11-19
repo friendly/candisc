@@ -23,10 +23,9 @@ Vignette built using `heplots`, version `r packageDescription("heplots")[["Versi
 
 ## Introduction
 
-The `painters` dataset from the `MASS` package contains subjective assessments of 54 classical painters on four aesthetic qualities: Composition, Drawing, Colour, and Expression. These ratings, on a scale of 0-20, were made by the 18th century art critic Roger de Piles [-@DePiles1743], a notable member of the French Academy of Painting and Sculpture. The ratings , reflect his judgment of "artistic merit"
-of these painters on these dimensions, including the well-known Michelangelo, Tintoretto, Titian, Rembrandt, Rubens, Durer and others that art historians know well.
+The `painters` dataset from the `MASS` package contains subjective assessments of 54 classical painters on four aesthetic qualities: Composition, Drawing, Colour, and Expression. These ratings, on a scale of 0-20, were made by the 18th century art critic Roger de Piles [-@DePiles1743], a notable member of the French Academy of Painting and Sculpture. The ratings reflect his judgment of the "artistic merit" of these painters on each of these dimensions.  His painters include the well-known Michelangelo, Tintoretto, Titian, Rembrandt, Rubens, Durer and others that art historians know well.
 
-The painters are classified into eight schools: Renaissance (A), Mannerist (B), Seicento (C), Venetian (D), Lombard (E), Sixteenth Century (F), Seventeenth Century (G), and French (H). This data was first analysed by @Davenport1972 and later featured in @VenablesRipley2002.
+The 54 painters are classified into eight schools: Renaissance (A), Mannerist (B), Seicento (C), Venetian (D), Lombard (E), Sixteenth Century (F), Seventeenth Century (G), and French (H). This data was first analysed by @Davenport1972 and later featured in @VenablesRipley2002.
  
 This vignette demonstrates the use of hypothesis-error (HE) plots, canonical discriminant analysis, and discriminant analysis plots to understand how the schools differ in their aesthetic characteristics. It shows that, while simple univariate and bivariate plots
 are often useful, dimension reduction methods can give a clearer view.
