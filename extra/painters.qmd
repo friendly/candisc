@@ -30,6 +30,7 @@ library(MASS)
 library(heplots)
 library(candisc)
 library(ggplot2)
+library(car)
 
 data(painters, package = "MASS")
 ```
@@ -113,6 +114,13 @@ We fit a multivariate linear model (MANOVA) to test whether schools differ signi
 ```{r manova}
 painters.mod <- lm(cbind(Composition, Drawing, Colour, Expression) ~ School, 
                    data = painters)
+car::Anova(painters.mod)
+```
+
+With `School` as an unordered factor, the intercept represents
+`Renaissance` painters. Coefficients for the other schools
+represent their difference from Renaissance.
+```{r coef}
 coef(painters.mod)
 ```
 
