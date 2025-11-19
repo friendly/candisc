@@ -6,6 +6,7 @@
 #' ## Load packages and the dataset
 library(MASS)
 library(heplots)
+library(candisc)
 library(ggplot2)
 library(dplyr)
 
@@ -98,13 +99,28 @@ pairs(painters.mod)
 #' How many dimensions of differences?
 painters.can <- candisc(painters.mod)
 painters.can
-summary(painters.can)
+
+#' ## Canonincal plots
+plot(painters.can,
+     conf = 0.68, 
+     ellipse= TRUE, fill.alpha = 0.05,
+     var.lwd = 2, var.cex = 1.4,
+     cex.lab = 1.25)
+
+plot(painters.can,
+     which = c(1,3),
+     conf = 0.68,
+     ellipse= TRUE, fill.alpha = 0.05,
+     var.lwd = 2, var.cex = 1.4,
+     cex.lab = 1.25)
+
 
 #' ## HE plot in canonical space
 heplot(painters.can,
        fill = TRUE, fill.alpha = c(0.1, 0.05),
        var.lwd = 2, var.cex = 1.4,
-       cex.lab = 1.25)
+       cex.lab = 1.25,
+       prefix = "Canonical dimension")
 
 
 

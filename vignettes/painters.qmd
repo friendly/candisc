@@ -28,7 +28,8 @@ of these painters on these dimensions, including the well-known Michelangelo, Ti
 
 The painters are classified into eight schools: Renaissance (A), Mannerist (B), Seicento (C), Venetian (D), Lombard (E), Sixteenth Century (F), Seventeenth Century (G), and French (H). This data was first analysed by @Davenport1972 and later featured in @VenablesRipley2002.
  
-This vignette demonstrates the use of hypothesis-error (HE) plots, canonical discriminant analysis, and discriminant analysis plots to understand how the schools differ in their aesthetic characteristics.
+This vignette demonstrates the use of hypothesis-error (HE) plots, canonical discriminant analysis, and discriminant analysis plots to understand how the schools differ in their aesthetic characteristics. It shows that, while simple univariate and bivariate plots
+are often useful, dimension reduction methods can give a clearer view.
 
 ```{r setup, message=FALSE}
 library(MASS)
@@ -44,6 +45,7 @@ str(painters)
 
 ## Data Preparation
 
+The `School` factor in the dataset just uses letters, "A" through "H".
 We begin by using longer, more descriptive labels to identify the schools, making the plots easier to interpret.
 
 ```{r data-prep}
@@ -63,7 +65,7 @@ table(painters$School)
 
 ## Exploratory plots
 
-Before conducting formal multivariate analyses, we explore the data visually. A boxplot shows the distribution of colour scores across schools.
+Before conducting formal multivariate analyses, we explore the data visually. A boxplot shows the distribution of colour scores across schools. You could do the same for the other variables.
 
 ```{r boxplot, fig.width=8, fig.height=5}
 ggplot(data = painters, aes(x = School, y = Colour, fill = School)) +
@@ -71,10 +73,13 @@ ggplot(data = painters, aes(x = School, y = Colour, fill = School)) +
   labs(title = "Colour Scores Distribution by Painting School",
        x = "School",
        y = "Colour Score (0-20)") +
-  theme_bw()
+  theme_bw(base_size = 15)
 ```
 
-To examine all four aesthetic variables simultaneously, we reshape the data to long format and create violin plots overlaid with individual points.
+The Venetian and 17th C painters were given high marks for their use of color.
+
+Alternatively, to examine all four aesthetic variables simultaneously, you need to reshape the data to long format.
+Here, I create violin plots overlaid with individual points.
 
 ```{r violin-plots, fig.width=8, fig.height=5}
 painters_long <- painters |>
@@ -86,7 +91,7 @@ ggplot(painters_long, aes(x = Metric, y = Score, fill = Metric)) +
   geom_jitter(width = 0.1) +
   labs(title = "Distribution of De Piles' Scores",
        y = "Score (0-20)") +
-  theme_light() +
+  theme_light(base_size = 15) +
   theme(legend.position = "none")
 ```
 
@@ -131,7 +136,7 @@ ggplot(painters,
 However, with so many schools, it is hard to get a clear idea of how they differ on these aesthetic qualities from bivariate plots.
 Here's where multivariate methods can help.
 
-## MANOVA: how do the schools differ according to the aesthetic qualities?
+## MANOVA: Testing school differences on the aesthetic qualities
 
 We fit a multivariate linear model (MANOVA) to test whether schools differ significantly on the four aesthetic variables considered jointly. The model treats School as the predictor and the four aesthetic scores as a multivariate response.
 
@@ -151,8 +156,9 @@ coef(painters.mod)
 ## Check for multivariate outliers
 
 Before interpreting the MANOVA results, we check for multivariate outliers using a chi-square Q-Q plot of squared Mahalanobis distances.
+This looks OK, because all the painters are well within the confidence bounds.
 
-```{r outliers, fig.width=7, fig.height=7}
+```{r outliers, fig.width=6, fig.height=6}
 cqplot(painters.mod, id.n = 3)
 ```
 
@@ -186,38 +192,44 @@ school, very high on Expression, but low on use of Colour, vs. the Venetian scho
 
 ## All pairwise HE plots
 
-To get a comprehensive view of how schools differ across all pairs of variables, we create a matrix of pairwise HE plots.
+To get a comprehensive view of how schools differ across all pairs of variables, we create a matrix of pairwise HE plots,
+provided by the `heplots::pairs.mlm()` method.
 
 ```{r pairs-heplot, fig.width=10, fig.height=10}
 pairs(painters.mod)
 ```
 
+The configuration of the means for the schools on these pairs of ratings might give food for thought to an art historian.
+
 ## Canonical analysis
+
 
 Canonical discriminant analysis reduces the dimensionality of the multivariate differences among schools. It finds linear combinations of the original variables that maximize between-group variation relative to within-group variation.
 
 ```{r candisc}
 painters.can <- candisc(painters.mod)
 painters.can
-summary(painters.can)
 ```
 
-The output shows how many dimensions (canonical variates) are needed to account for the differences among schools, along with the percentage of between-group variance explained by each dimension.
+The output shows how many dimensions (canonical variates) are needed to account for the differences among schools, along with the percentage of between-group variance explained by each dimension. The first two dimensions account for 81% of between-school
+variance, but the third dimension is also significant, adding 15.8%.
 
 ## HE plot in canonical space
 
-Plotting the data in canonical space provides the clearest view of group separation, as the canonical dimensions are specifically constructed to maximize differences among schools.
+Plotting the data in canonical space provides the clearest view of group separation, as the canonical dimensions are specifically constructed to maximize differences among schools. Variable vector in this plot have components proportional to the
+correlations of the observed aesthetic variables with the canonical scores.
 
 ```{r heplot-can, fig.width=8, fig.height=8}
 heplot(painters.can,
        fill = TRUE, fill.alpha = c(0.1, 0.05),
        var.lwd = 2, var.cex = 1.4,
-       cex.lab = 1.25)
+       cex.lab = 1.25,
+       prefix = "Canonical dimension")
 ```
 
 ## 3D view
 
-The analysis suggests three significant dimensions of differences among schools. We can visualize all three dimensions simultaneously using a 3D HE plot.
+The analysis suggests three significant dimensions of differences among schools. We can visualize all three dimensions simultaneously using a 3D HE plot. This plot is not yet rendered in the vignette.
 
 ```{r heplot3d, eval=FALSE}
 if(requireNamespace("rgl")) {
@@ -227,7 +239,7 @@ if(requireNamespace("rgl")) {
 
 ## Discriminant analysis
 
-Linear discriminant analysis (LDA) provides another approach to understanding group differences and can be used for classification. Unlike canonical discriminant analysis, which focuses on visualization and interpretation, LDA is optimized for predicting group membership.
+Linear discriminant analysis (LDA) provides another approach to understanding group differences and can be used for classification. Unlike canonical discriminant analysis, which focuses on visualization for the MANOVA model, LDA is optimized for predicting group membership. But the `plot_discrim()` provides something similar, and the dimensions are essentially the same.
 
 ```{r lda}
 painters.lda <- lda(School ~ Composition + Drawing + Colour + Expression,
@@ -235,6 +247,7 @@ painters.lda <- lda(School ~ Composition + Drawing + Colour + Expression,
 painters.lda
 ```
 
+<!--
 We can examine the confusion matrix to see how well the discriminant function classifies painters into their actual schools:
 
 ```{r confusion}
@@ -244,6 +257,7 @@ class_table <- table(
 )
 class_table
 ```
+-->
 
 The `plot_discrim()` function visualizes the discriminant analysis results by plotting observations in the space defined by the discriminant dimensions (LD1, LD2, etc.). Here we plot the first two discriminant dimensions:
 
@@ -263,7 +277,8 @@ plot_discrim(painters.lda, LD3 ~ LD1,
              labels = TRUE,
              labels.args = list(geom = "label")) +
   scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
-  theme_classic(base_size = 15)
+  theme_classic(base_size = 15) +
+  theme(legend.position = "none")
 ```
 
 ## Summary
