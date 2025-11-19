@@ -7,6 +7,7 @@
 library(MASS)
 library(heplots)
 library(ggplot2)
+library(dplyr)
 
 data(painters, package = "MASS")
 str(painters)
@@ -42,21 +43,32 @@ ggplot(painters_long, aes(x = Metric, y = Score, fill = Metric)) +
   theme(legend.position = "none") # no need for a legend
 
 #' ## Sample scatterplots
+
+means <- painters |>
+  group_by(School) |>
+  summarise(across(Composition:Expression, mean))
+
 ggplot(painters,
        aes(Composition, Colour,
            color = School, shape = School)) +
   geom_point(size=3) +
-  stat_ellipse(level = 0.68) +
+  stat_ellipse(level = 0.68, linewidth = 1.3) +
+  geom_label(data = means,
+             aes(label = School)) +
   scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
-  theme_classic(base_size = 15) 
+  theme_classic(base_size = 15) +
+  theme(legend.position = "none")
 
 ggplot(painters,
        aes(Drawing, Expression,
            color = School, shape = School)) +
   geom_point(size=3) +
-  stat_ellipse(level = 0.68) +
+  stat_ellipse(level = 0.68, linewidth = 1.3) +
+  geom_label(data = means,
+             aes(label = School)) +
   scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
-  theme_classic(base_size = 15) 
+  theme_classic(base_size = 15) +
+  theme(legend.position = "none")
 
   
 #' ## MANOVA: 

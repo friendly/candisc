@@ -115,20 +115,23 @@ using `MASS:lda()` or `MASS:qda()`.
 
 ## Installation
 
-|                     |                                               |
-|---------------------|-----------------------------------------------|
-| CRAN version        | `install.packages("candisc")`                 |
-| Development version | `remotes::install_github("friendly/candisc")` |
+The current official release of the `candisc` package can be installed from CRAN. The most recent
+development version can be installed from R-universe or this Github repo.
 
-Or, install from r-universe:
+|                     |                                                                            |
+|---------------------|----------------------------------------------------------------------------|
+| CRAN version        | `install.packages("candisc")`                                              |
+| R-universe          | `install.packages('candisc', repos = c('https://friendly.r-universe.dev')` |
+| GitHub version      | `remotes::install_github("friendly/candisc")`                              |
 
-```r
-install.packages('candisc', repos = c('https://friendly.r-universe.dev')
-```
 
 ## Vignettes
 
-* A new vignette, `vignette("diabetes", package="candisc")`, illustrates some of these methods.
+* A new vignette, `vignette("diabetes", package="candisc")`, illustrates some of the methods of this package, with a dataset
+on forms of diabetes.
+
+* Another vignette, `vignette("painters", package="candisc")`, applies these methods to a dataset on the aesthetic ratings of classical
+painters.
 
 * A more comprehensive collection of examples, illustrating multivariate regression and MANOVA methods, is contained in the vignettes for the `heplots` package. Use `browseVignettes(package = "heplots")` to see them all.
 

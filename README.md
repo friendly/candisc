@@ -20,7 +20,7 @@ Correlation Analysis**
 Version 1.1.0
 
 <!-- when in Rmd format, can use
-Version 1.0.2
+Version 1.1.0
 -->
 
 ## Description
@@ -96,21 +96,25 @@ quadratic discriminant analysis, using `MASS:lda()` or `MASS:qda()`.
 
 ## Installation
 
-|                     |                                               |
-|---------------------|-----------------------------------------------|
-| CRAN version        | `install.packages("candisc")`                 |
-| Development version | `remotes::install_github("friendly/candisc")` |
+The current official release of the `candisc` package can be installed
+from CRAN. The most recent development version can be installed from
+R-universe or this Github repo.
 
-Or, install from r-universe:
-
-``` r
-install.packages('candisc', repos = c('https://friendly.r-universe.dev')
-```
+|  |  |
+|----|----|
+| CRAN version | `install.packages("candisc")` |
+| R-universe | `install.packages('candisc', repos = c('https://friendly.r-universe.dev')` |
+| GitHub version | `remotes::install_github("friendly/candisc")` |
 
 ## Vignettes
 
 - A new vignette, `vignette("diabetes", package="candisc")`, illustrates
-  some of these methods.
+  some of the methods of this package, with a dataset on forms of
+  diabetes.
+
+- Another vignette, `vignette("painters", package="candisc")`, applies
+  these methods to a dataset on the aesthetic ratings of classical
+  painters.
 
 - A more comprehensive collection of examples, illustrating multivariate
   regression and MANOVA methods, is contained in the vignettes for the

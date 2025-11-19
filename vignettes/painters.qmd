@@ -3,6 +3,8 @@ title: "Painters data: HE Plots and Canonical Discriminant Analysis"
 author: "Michael Friendly"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+bibliography: references.bib
+csl: apa.csl
 vignette: >
   %\VignetteIndexEntry{Painters data: HE Plots and Canonical Discriminant Analysis}
   %\VignetteEngine{knitr::rmarkdown}
@@ -21,8 +23,11 @@ Vignette built using `heplots`, version `r packageDescription("heplots")[["Versi
 
 ## Introduction
 
-The `painters` dataset from the MASS package contains subjective assessments of 54 classical painters on four aesthetic qualities: Composition, Drawing, Colour, and Expression. These ratings, on a scale of 0-20, were made by the 18th century art critic Roger de Piles and reflect his judgment of artistic merit. The painters are classified into eight schools: Renaissance (A), Mannerist (B), Seicento (C), Venetian (D), Lombard (E), Sixteenth Century (F), Seventeenth Century (G), and French (H).
+The `painters` dataset from the `MASS` package contains subjective assessments of 54 classical painters on four aesthetic qualities: Composition, Drawing, Colour, and Expression. These ratings, on a scale of 0-20, were made by the 18th century art critic Roger de Piles [-@DePiles1743], a notable member of the French Academy of Painting and Sculpture. The ratings , reflect his judgment of "artistic merit"
+of these painters on these dimensions, including the well-known Michelangelo, Tintoretto, Titian, Rembrandt, Rubens, Durer and others that art historians know well.
 
+The painters are classified into eight schools: Renaissance (A), Mannerist (B), Seicento (C), Venetian (D), Lombard (E), Sixteenth Century (F), Seventeenth Century (G), and French (H). This data was first analysed by @Davenport1972 and later featured in @VenablesRipley2002.
+ 
 This vignette demonstrates the use of hypothesis-error (HE) plots, canonical discriminant analysis, and discriminant analysis plots to understand how the schools differ in their aesthetic characteristics.
 
 ```{r setup, message=FALSE}
@@ -31,8 +36,10 @@ library(heplots)
 library(candisc)
 library(ggplot2)
 library(car)
+library(dplyr)
 
 data(painters, package = "MASS")
+str(painters)
 ```
 
 ## Data Preparation
@@ -85,27 +92,44 @@ ggplot(painters_long, aes(x = Metric, y = Score, fill = Metric)) +
 
 ## Sample scatterplots
 
-Scatterplots of pairs of variables, with data ellipses for each school, reveal the multivariate relationships and potential group separation.
+Scatterplots of pairs of variables, with data ellipses for each school, can reveal the multivariate relationships and potential group separation.
+When I map `shape` to `School`, `ggplot` complains because it only provides 6 shapes, so it is necessary to use
+`scale_shape_manual()`. I avoid using a legend by labeling the schools at their means.
 
 ```{r scatter1, fig.width=8, fig.height=6}
+means <- painters |>
+  group_by(School) |>
+  summarise(across(Composition:Expression, mean))
+
 ggplot(painters,
        aes(Composition, Colour,
            color = School, shape = School)) +
-  geom_point(size = 3) +
-  stat_ellipse(level = 0.68) +
+  geom_point(size=3) +
+  stat_ellipse(level = 0.68, linewidth = 1.3) +
+  geom_label(data = means,
+             aes(label = School)) +
   scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
-  theme_classic(base_size = 15)
+  theme_classic(base_size = 15) +
+  theme(legend.position = "none")
 ```
+
+Simmilarly, here's a plot for Drawing and Expression:
 
 ```{r scatter2, fig.width=8, fig.height=6}
 ggplot(painters,
        aes(Drawing, Expression,
            color = School, shape = School)) +
-  geom_point(size = 3) +
-  stat_ellipse(level = 0.68) +
+  geom_point(size=3) +
+  stat_ellipse(level = 0.68, linewidth = 1.3) +
+  geom_label(data = means,
+             aes(label = School)) +
   scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
-  theme_classic(base_size = 15)
+  theme_classic(base_size = 15) +
+  theme(legend.position = "none")
 ```
+
+However, with so many schools, it is hard to get a clear idea of how they differ on these aesthetic qualities from bivariate plots.
+Here's where multivariate methods can help.
 
 ## MANOVA: how do the schools differ according to the aesthetic qualities?
 
@@ -134,9 +158,9 @@ cqplot(painters.mod, id.n = 3)
 
 ## HE plots
 
-Hypothesis-error (HE) plots provide a visual representation of multivariate hypothesis tests. The H ellipse represents the hypothesis sum of squares and cross-products, while the E ellipse represents error variation. When H extends outside E, there is evidence of a significant effect.
+Hypothesis-error (HE) plots provide a visual representation of multivariate hypothesis tests. The **H** ellipse represents the hypothesis sum of squares and cross-products, while the **E** ellipse represents error (within-group) variation. When **H** extends anywhere outside **E**, there is evidence of a significant effect.
 
-By default, the plot shows the first two variables (Composition and Drawing).
+By default, the `heplot()` shows the first two variables (Composition and Drawing).
 
 ```{r heplot1, fig.width=7, fig.height=7}
 heplot(painters.mod,
@@ -144,7 +168,10 @@ heplot(painters.mod,
        cex.lab = 1.25)
 ```
 
-We can also examine other pairs of variables, such as Colour and Expression.
+This tells us that the means for the schools of painting are positively correlated on these variables.
+The within-group residuals are also positively correlated, to about the same extent.
+
+We can also examine other pairs of variables, such as `Colour` and `Expression`.
 
 ```{r heplot2, fig.width=7, fig.height=7}
 heplot(painters.mod,
@@ -152,6 +179,10 @@ heplot(painters.mod,
        fill = TRUE, fill.alpha = c(0.1, 0.05),
        cex.lab = 1.25)
 ```
+
+Here, the means for the schools are negatively correlated, but what seems to drive this is large difference between the French
+school, very high on Expression, but low on use of Colour, vs. the Venetian school which shows the reverse pattern.
+
 
 ## All pairwise HE plots
 
@@ -238,3 +269,5 @@ plot_discrim(painters.lda, LD3 ~ LD1,
 ## Summary
 
 This vignette has demonstrated the use of HE plots, canonical discriminant analysis, and discriminant analysis plots to understand how classical painting schools differ in their aesthetic characteristics. HE plots provide intuitive visual tests of multivariate hypotheses, canonical analysis reveals the dimensions of maximum group separation, and discriminant analysis plots show how well groups can be distinguished and classified in reduced dimensional space.
+
+## References

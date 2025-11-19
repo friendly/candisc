@@ -1,6 +1,6 @@
 ## Test environments
 * local Windows 10, 4.5.1 (2025-06-13 ucrt)
-* winbuilder: R Under development (unstable) (2025-11-03 r88979 ucrt)
+* winbuilder: R Under development (unstable) (2025-11-17 r89032 ucrt)
 
 ## R CMD check results
 There were no ERRORs, WARNINGs or NOTES 
