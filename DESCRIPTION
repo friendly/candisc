@@ -1,8 +1,8 @@
 Package: candisc
 Type: Package
 Title: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis
-Version: 1.0.2
-Date: 2025-11-14
+Version: 1.1.0
+Date: 2025-11-18
 Depends: R (>= 4.1.0), heplots (>= 0.8-6)
 Imports: 
   car, 
@@ -10,18 +10,19 @@ Imports:
   stats, 
   insight,
   dplyr,
-  ggplot2
+  ggplot2,
+  MASS
 Suggests: 
     rgl,
     carData,
     corrplot,
     knitr,
     rmarkdown,
-    MASS, 
-    rpart, 
+    rpart,
     rpart.plot,
     klaR,
-    lifecycle
+    lifecycle,
+    testthat (>= 3.0.0)
 LazyLoad: yes
 LazyData: yes
 Authors@R: c(
@@ -55,3 +56,4 @@ URL: https://github.com/friendly/candisc/, https://friendly.github.io/candisc/
 BugReports: https://github.com/friendly/candisc/issues
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
+Config/testthat/edition: 3

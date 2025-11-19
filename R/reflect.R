@@ -13,9 +13,9 @@
 #' @details
 #' `reflect` methods are available for:
 #' 
-#' * `data.frame`s
-#' *  `"cancor"` objects
-#' *  `"candisc"` objects
+#' * `data.frame`s, for numeric columns
+#' *  `"cancor"` objects, for the coefficients and scores of the `X` and `Y` variables
+#' *  `"candisc"` objects, for the coefficients, structure correlations and scores
 #' 
 #' Note that [plot.candisc()] and [plot.candisc()] can handle this internally using the argument `rev.axes`.
 #' 
@@ -23,10 +23,34 @@
 #' @param columns a vector of indices of the columns to reflect
 #' @param ...     Unused
 #'
-#' @returns The object with specified columns of the variable coefficients and observation scores multiplied by -1.
+#' @returns The object with specified columns of the appropriate components (variable coefficients, observation scores, ...) multiplied by -1.
 #' @author Michael Friendly
 #' @seealso [ggbiplot::reflect] has similar methods for PCA-like objects
 #' @export
+#' @examples
+#' # reflect cols in a data.frame
+#' X <- data.frame(x1 = 1:4, x2 = 5:8)
+#' reflect(X)
+#' reflect(X, 1)
+#' reflect(X, 2)
+#' cbind (X, letters[1:4]) |> reflect(1)
+#'
+#' # reflect a candisc 
+#' iris.mod <- lm(cbind(Petal.Length, Sepal.Length, Petal.Width, Sepal.Width) ~ Species, data=iris)
+#' iris.can <- candisc(iris.mod, data=iris)
+#' coef(iris.can)
+#' # reflect Can1
+#' iris.can |> reflect(1) |> coef()
+#' 
+#' # reflect a cancor
+#' data(Rohwer, package="heplots")
+#' X <- as.matrix(Rohwer[,6:10])  # the PA tests
+#' Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
+#' Rohwer.can <- cancor(X, Y, set.names=c("PA", "Ability"))
+#' coef(Rohwer)
+#' Rohwer.can |> reflect() |> coef()
+#'
+#' 
 reflect <- function(object, columns = 1:2, ...) {
   UseMethod("reflect")
 }
@@ -34,7 +58,9 @@ reflect <- function(object, columns = 1:2, ...) {
 #' @describeIn reflect `"data.frame"` method.
 #' @export
 reflect.data.frame <- function(object, columns = 1:2, ...) {
-  
+
+  check_cols(object, columns)  
+  check_numeric(object, columns)
   object[, columns] <- -1 * object[, columns]
   object
 }
@@ -43,11 +69,12 @@ reflect.data.frame <- function(object, columns = 1:2, ...) {
 #' @export
 reflect.cancor <- function(object, columns = 1:2, ...) {
   
-  check <- function(x, cols){
-    if(!all(cols %in% 1:ncol(x))) stop("Illegal columns selected:",
-                                       paste(cols, collapse = ", "))
-  }
-  check(object)
+  # check <- function(x, cols){
+  #   if(!all(cols %in% 1:ncol(x))) stop("Illegal columns selected:",
+  #                                      paste(cols, collapse = ", "))
+  # }
+
+  check_cols(object$coef$X, columns)
   object$coef$X[, columns] <- -1 * object$coef$X[, columns]
   object$coef$Y[, columns] <- -1 * object$coef$Y[, columns]
   
@@ -61,13 +88,29 @@ reflect.cancor <- function(object, columns = 1:2, ...) {
 #' @export
 reflect.candisc <- function(object, columns = 1:2, ...) {
   
-  object$coeffs_raw[, columns] <- -1 * object$coeffs_raw[, columns]
-  object$coeffs_std[, columns] <- -1 * object$coeffs_std[, columns]
+  check_cols(object$coeffs.raw, columns)  
+  check_numeric(object$coeffs.raw, columns)
+  object$coeffs.raw[, columns] <- -1 * object$coeffs.raw[, columns]
+  object$coeffs.std[, columns] <- -1 * object$coeffs.std[, columns]
 
   object$structure[, columns] <- -1 * object$structure[, columns]
-  object$scores[, columns] <- -1 * object$scores[, columns]
+  
+  canVars <- paste0("Can", columns)
+  object$scores[, canVars] <- -1 * object$scores[, canVars]
   
   object
   
 }
-  
+
+check_cols <- function(x, cols)  {
+  xcols <- 1:ncol(x)
+  if (!all(cols %in% xcols)) stop("Illegal columns selected:",
+                                       paste(cols, collapse = ", "))
+}
+
+check_numeric <- function(x, cols)  {
+  df <- x[, cols]
+  if (!all(sapply(df, is.numeric))) stop("Only numeric columns can be reflected:",
+                                       paste(cols, collapse = ", "))
+}
+

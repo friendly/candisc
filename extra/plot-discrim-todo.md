@@ -11,14 +11,6 @@ values into the call to `stat_ellipse()`. The `list(...)`  should allow any argu
 valid for `stat_ellipse()`. Document these changes in the roxygen comments like
 `@param ellipse.args`.
 
-The function currently plots in the space of the observed variables. I'd like to also
-allow it to plot the observations and predictions in discrinimant space.
-This can be done by allowing the `vars` argument to take the special form
-`LD2 ~ LD1` or `LD1 ~ LD2`. Then for generating the grid of predicted classes
-the function should calculate a new `lda()` of the form
-`mod.lda <- lda(class ~ LD1 + LD2, data=) where `data` is the set of 
-data values for the variables obtained by `data = insight::get_data(model)`.
-
 I would like to be able to add direct labels for the classes using either
 `geom_text()` or `geom_label()`. These should be positioned near the means
 of the classes. As part of this the function should calculate the class means
@@ -37,3 +29,57 @@ like `nudge_x`, `nudge_y`.
 Next, rename the argument `modes.means` to `other.levels` and better explain in the documentation
 that it controls how the non-focal variables are represented in the data frame used to generate
 the predicted classes over the grid.
+
+## Plots in discriminant space.
+
+This is a continuation of the conversation on plotting results of LDA / QDA in the `candisc`
+package. The present version of the function `plot_discrim()` is in the
+github repo at https://raw.githubusercontent.com/friendly/candisc/refs/heads/master/R/plot_discrim.R
+Read this and then I'll pose several enhancements.
+
+
+The function currently plots in the space of the observed variables. I'd like to also
+allow it to plot the observations and predictions in discriminant space; that is using
+the variables `LD1` and `LD2` calculated using `predict_discrim()`.
+
+I think this can be done by allowing the `vars` argument to take the special form
+`LD2 ~ LD1` or `LD1 ~ LD2`. Then for generating the grid of predicted classes
+the function should calculate a new `lda()` of the form
+`mod.lda <- lda(class ~ LD1 + LD2, data=) where `data` is the set of 
+data values for the variables obtained from `predict_discrim()` for this revised model.
+Here is the code I used to construct an example using the present version.
+
+```
+iris_scored <- predict_discrim(iris.lda, scores=TRUE)
+iris.lda2 <- lda(Species ~ LD1 + LD2, data=iris_scored)
+
+plot_discrim(iris.lda2, LD2 ~ LD1,
+             contour = FALSE,
+             ellipse = TRUE) +
+  scale_color_manual(values = iris.colors) +
+  scale_fill_manual(values = iris.colors) +
+  scale_shape_manual(values = iris.pch) +
+  theme_minimal(base_size = 16) 
+```
+
+In the present version for plotting in discrimininant space, it would be useful to automatically create labels
+for the axes that contain the percent of between-group variance accounted for by each dimension.
+Please fetch the current version from https://raw.githubusercontent.com/friendly/candisc/refs/heads/master/R/plot_discrim.R
+The code to get better axis labels, for the first two dimensions is:
+```
+svd <- iris.lda$svd
+var <- 100 * round(svd^2/sum(svd^2), 3)
+labs <- glue::glue("Discriminant dimension {1:2} ({var}%)") |>
+  print()
+# Discriminant dimension 1 (86.5%)
+# Discriminant dimension 2 (13.5%)
+```
+
+Then, for ggplot, the code to add labels would be like:
+
+```
+ + labs(x = labs[1], y = labs[2])
+```
+
+What makes this tricky is that when there are more than 2 discriminant dimensions, one can use `LD3 ~ LD2`, and the
+labels should use those components of the `svd` variances.
