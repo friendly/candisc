@@ -23,12 +23,19 @@ head(painters)
 #' ## How many from each school?
 table(painters$School)
 
+# Use theme_set() !!!
+options(
+  ggplot2.discrete.colour = function() scale_colour_brewer(palette = "Dark2"),
+  ggplot2.discrete.fill = function() scale_fill_brewer(palette = "Dark2")
+)
+
 #' ## Exploratory plots
 ggplot(data = painters, aes(x = School, y = Colour, fill = School)) +
   geom_boxplot() +
   labs(title = "Colour Scores Distribution by Painting School",
        x = "School",
        y = "Colour Score (0-20)") +
+  scale_fill_brewer(palette = "Dark2") +
   theme_bw()
 
 #' ## Reshape to long format for plotting multiple variables
@@ -58,6 +65,7 @@ ggplot(painters,
   geom_label(data = means,
              aes(label = School)) +
   scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  scale_color_brewer(palette = "Dark2") +
   theme_classic(base_size = 15) +
   theme(legend.position = "none")
 
@@ -69,6 +77,7 @@ ggplot(painters,
   geom_label(data = means,
              aes(label = School)) +
   scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  scale_color_brewer(palette = "Dark2") +
   theme_classic(base_size = 15) +
   theme(legend.position = "none")
 
