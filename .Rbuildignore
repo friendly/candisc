@@ -18,3 +18,4 @@ NAMESPACE-old
 ^CRAN-SUBMISSION$
 data-raw/
 extra/
+vitnettes/.quarto
