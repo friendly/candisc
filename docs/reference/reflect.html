@@ -15,7 +15,7 @@ This is often useful for interpreting a biplot, for example when a component (of
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,6 +27,7 @@ This is often useful for interpreting a biplot, for example when a component (of
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/diabetes.html">Diabetes data: heplots and candisc examples</a></li>
+    <li><a class="dropdown-item" href="../articles/painters.html">Painters data: HE Plots and Canonical Discriminant Analysis</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -84,13 +85,13 @@ This is often useful for interpreting a biplot, for example when a component (of
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The object with specified columns of the variable coefficients and observation scores multiplied by -1.</p>
+    <p>The object with specified columns of the appropriate components (variable coefficients, observation scores, ...) multiplied by -1.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p><code>reflect</code> methods are available for:</p><ul><li><p><code>data.frame</code>s</p></li>
-<li><p><code>"cancor"</code> objects</p></li>
-<li><p><code>"candisc"</code> objects</p></li>
+    <p><code>reflect</code> methods are available for:</p><ul><li><p><code>data.frame</code>s, for numeric columns</p></li>
+<li><p><code>"cancor"</code> objects, for the coefficients and scores of the <code>X</code> and <code>Y</code> variables</p></li>
+<li><p><code>"candisc"</code> objects, for the coefficients, structure correlations and scores</p></li>
 </ul><p>Note that <code><a href="candisc.html">plot.candisc()</a></code> and <code><a href="candisc.html">plot.candisc()</a></code> can handle this internally using the argument <code>rev.axes</code>.</p>
     </div>
     <div class="section level2">
@@ -109,6 +110,70 @@ This is often useful for interpreting a biplot, for example when a component (of
     <p>Michael Friendly</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># reflect cols in a data.frame</span></span></span>
+<span class="r-in"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x1 <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>, x2 <span class="op">=</span> <span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">reflect</span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   x1 x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -1 -5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -2 -6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -3 -7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -4 -8</span>
+<span class="r-in"><span><span class="fu">reflect</span><span class="op">(</span><span class="va">X</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   x1 x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -1  5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -2  6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -3  7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -4  8</span>
+<span class="r-in"><span><span class="fu">reflect</span><span class="op">(</span><span class="va">X</span>, <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   x1 x2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1 -5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2 -6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3 -7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4 -8</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span> <span class="op">(</span><span class="va">X</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">reflect</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   x1 x2 letters[1:4]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -1  5            a</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -2  6            b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -3  7            c</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -4  8            d</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># reflect a candisc </span></span></span>
+<span class="r-in"><span><span class="va">iris.mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">Petal.Length</span>, <span class="va">Sepal.Length</span>, <span class="va">Petal.Width</span>, <span class="va">Sepal.Width</span><span class="op">)</span> <span class="op">~</span> <span class="va">Species</span>, data<span class="op">=</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">iris.can</span> <span class="op">&lt;-</span> <span class="fu"><a href="candisc.html">candisc</a></span><span class="op">(</span><span class="va">iris.mod</span>, data<span class="op">=</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">iris.can</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    Can1        Can2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length  0.9472572  0.40103782</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Length -0.4269548 -0.01240753</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Width   0.5751608 -0.58103986</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Width  -0.5212417 -0.73526131</span>
+<span class="r-in"><span><span class="co"># reflect Can1</span></span></span>
+<span class="r-in"><span><span class="va">iris.can</span> <span class="op">|&gt;</span> <span class="fu">reflect</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    Can1        Can2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Length -0.9472572  0.40103782</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Length  0.4269548 -0.01240753</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Petal.Width  -0.5751608 -0.58103986</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Sepal.Width   0.5212417 -0.73526131</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># reflect a cancor</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Rohwer</span>, package<span class="op">=</span><span class="st">"heplots"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">Rohwer</span><span class="op">[</span>,<span class="fl">6</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span>  <span class="co"># the PA tests</span></span></span>
+<span class="r-in"><span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">Rohwer</span><span class="op">[</span>,<span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span>   <span class="co"># the aptitude/ability variables</span></span></span>
+<span class="r-in"><span><span class="va">Rohwer.can</span> <span class="op">&lt;-</span> <span class="fu"><a href="cancor.html">cancor</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">Y</span>, set.names<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"PA"</span>, <span class="st">"Ability"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">Rohwer</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-in"><span><span class="va">Rohwer.can</span> <span class="op">|&gt;</span> <span class="fu">reflect</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Xcan1        Xcan2       Xcan3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> n   0.07746734  0.046929646  0.13442728</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s  -0.05421146 -0.111867775  0.23331362</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ns -0.11348543 -0.221792097 -0.09291490</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> na  0.13877865  0.094120811 -0.05069181</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ss  0.08919774  0.008243993 -0.03600015</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
@@ -118,7 +183,7 @@ This is often useful for interpreting a biplot, for example when a component (of
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

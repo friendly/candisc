@@ -9,6 +9,7 @@ library(heplots)
 library(candisc)
 library(ggplot2)
 library(dplyr)
+library(tidyr)
 
 data(painters, package = "MASS")
 str(painters)
@@ -32,8 +33,8 @@ ggplot(data = painters, aes(x = School, y = Colour, fill = School)) +
 
 #' ## Reshape to long format for plotting multiple variables
 painters_long <- painters |>
-  tidyr::pivot_longer(cols = c(Composition, Drawing, Colour, Expression),
-                      names_to = "Metric", values_to = "Score")
+  pivot_longer(cols = c(Composition, Drawing, Colour, Expression),
+               names_to = "Metric", values_to = "Score")
 
 ggplot(painters_long, aes(x = Metric, y = Score, fill = Metric)) +
   geom_violin(alpha = 0.3) +

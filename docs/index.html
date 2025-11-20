@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,6 +45,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="articles/diabetes.html">Diabetes data: heplots and candisc examples</a></li>
+    <li><a class="dropdown-item" href="articles/painters.html">Painters data: HE Plots and Canonical Discriminant Analysis</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
@@ -69,49 +70,170 @@
 </h1>
 </div>
 <p><strong>Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis</strong></p>
-<p>Version 1.0.3</p>
+<p>Version 1.1.0</p>
 <!-- when in Rmd format, can use
-Version `r getNamespaceVersion("candisc")`
+Version 1.1.0
 -->
+<div class="section level2">
+<h2 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
+</h2>
 <p>This package includes functions for computing and visualizing generalized canonical discriminant analyses and canonical correlation analysis for a multivariate linear model (MLM). The goal is to provide ways of visualizing such models in a low-dimensional space corresponding to dimensions (linear combinations of the response variables) of maximal relationship to the predictor variables.</p>
 <p>Traditional canonical discriminant analysis is restricted to a one-way MANOVA design and is equivalent to canonical correlation analysis between a set of quantitative response variables and a set of dummy variables coded from the factor variable. The <code>candisc</code> package generalizes this to multi-way MANOVA designs for all terms in a multivariate linear model (i.e., an <code>mlm</code> object), computing canonical scores and vectors for each term (giving a <code>"candiscList"</code> object).</p>
 <p>For <code>mlm</code>s with more than a few response variables, these methods often provide a much simpler interpretation of the nature of effects in low-D <em>canonical space</em> than heplots for pairs of responses or an HE plot matrix of all responses in <em>variable space</em>.</p>
-<p><strong>Visualization methods</strong></p>
+<p>The <code>candisc</code> package originated as a low-D cousin of the <a href="https://friendly.github.io/heplots/index.html" class="external-link">heplots package</a>, designed to provide visualization methods in low-dimensional space.</p>
+<div class="section level3">
+<h3 id="visualization-methods">Visualization methods<a class="anchor" aria-label="anchor" href="#visualization-methods"></a>
+</h3>
 <p>The graphic functions are designed to provide low-rank (1D, 2D, 3D) visualizations of terms in a <code>"mlm"</code> via the <code><a href="reference/candisc.html">plot.candisc()</a></code> method, which plots the observations in <em>canonical space</em>, together with <strong>variable vectors</strong> showing the relations of the response <code>y</code> variables to the canonical variables <code>Can1</code>, <code>Can2</code>. This is the same idea as that of a <strong>biplot</strong> (Gabriel, 1971).</p>
 <p>The HE plot <code><a href="reference/heplot.candisc.html">heplot.candisc()</a></code> and <code><a href="reference/heplot.candisc.html">heplot3d.candisc()</a></code> methods use a similar framework, but replace the observations and groupwise data ellipses in the plot with representations of the <strong>H</strong> ellipsoid, representing between-group variation in the means and the <strong>E</strong> ellipsoid reflecting the pooled within-group variation.</p>
 <p>Analogously, a multivariate linear (regression) model with quantitative predictors can also be represented in a reduced-rank space by means of a canonical correlation transformation of the Y and X variables to <em>uncorrelated</em> <strong>canonical variates</strong>, named with the prefix <code>Ycan</code> and <code>Xcan</code>. Computation for this analysis is provided by <code><a href="reference/cancor.html">cancor()</a></code> and related methods. Visualization of these results in canonical space are provided by the <code><a href="reference/plot.cancor.html">plot.cancor()</a></code>, <code><a href="reference/heplot.cancor.html">heplot.cancor()</a></code> and <code><a href="reference/heplot.cancor.html">heplot3d.cancor()</a></code> methods.</p>
-<p><strong>Variable ordering</strong></p>
+</div>
+<div class="section level3">
+<h3 id="variable-ordering">Variable ordering<a class="anchor" aria-label="anchor" href="#variable-ordering"></a>
+</h3>
 <p>The relations among response variables in linear models can also be useful for “effect ordering” (Friendly &amp; Kwan (2003)) for <em>variables</em> in other multivariate data displays, such as heatmaps or “corrgrams” (Friendly, 2002) of correlations. to make the displayed relationships more coherent. The function <code><a href="reference/varOrder.html">varOrder()</a></code> implements a collection of these methods.</p>
-<p><strong>Discriminant analysis</strong></p>
-<p>Some of these visualization methods have now been extended to discriminant analysis, for example from <code>MASS:lda()</code> or <code>MASS:lda()</code>, beginning with a simplified interface to prediction, in <code><a href="reference/predict_discrim.html">predict_discrim()</a></code>.</p>
+</div>
+<div class="section level3">
+<h3 id="discriminant-analysis">Discriminant analysis<a class="anchor" aria-label="anchor" href="#discriminant-analysis"></a>
+</h3>
+<p>Some of these visualization methods have now been extended to linear and quadratic discriminant analysis, using <code>MASS:lda()</code> or <code>MASS:qda()</code>.</p>
 <ul>
+<li>Provides a simplified interface to prediction, in <code><a href="reference/predict_discrim.html">predict_discrim()</a></code>.</li>
 <li>A new plotting method, <code><a href="reference/plot_discrim.html">plot_discrim()</a></code>, provides <code>ggplot2</code> plots of the classification regions and decision boundaries in data space and in discriminant space.</li>
 <li>
 <code><a href="reference/cor_lda.html">cor_lda()</a></code> calculates correlations between the observed variables and the discriminant dimensions.</li>
 </ul>
+</div>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<table class="table"><tbody>
+<p>The current official release of the <code>candisc</code> package can be installed from CRAN. The most recent development version can be installed from R-universe or this Github repo.</p>
+<table class="table">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<tbody>
 <tr>
 <td>CRAN version</td>
 <td><code>install.packages("candisc")</code></td>
 </tr>
 <tr>
-<td>Development version</td>
+<td>R-universe</td>
+<td><code>install.packages('candisc', repos = c('https://friendly.r-universe.dev')</code></td>
+</tr>
+<tr>
+<td>GitHub version</td>
 <td><code>remotes::install_github("friendly/candisc")</code></td>
 </tr>
-</tbody></table>
-<p>Or, install from r-universe:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'candisc'</span>, <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">'https://friendly.r-universe.dev'</span>)</span></code></pre></div>
+</tbody>
+</table>
 </div>
 <div class="section level2">
 <h2 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
 </h2>
 <ul>
-<li><p>A new vignette, <code><a href="articles/diabetes.html">vignette("diabetes", package="candisc")</a></code>, illustrates some of these methods.</p></li>
-<li><p>A more comprehensive collection of examples, illustrating multivariate regression and MANOVA methods, is contained in the vignettes for the <code>heplots</code> package, <code>browseVignettes(package = "heplots")</code>.</p></li>
+<li><p>A new vignette, <code><a href="articles/diabetes.html">vignette("diabetes", package="candisc")</a></code>, illustrates some of the methods of this package, with a dataset on forms of diabetes.</p></li>
+<li><p>Another vignette, <code><a href="articles/painters.html">vignette("painters", package="candisc")</a></code>, applies these methods to a dataset on the aesthetic ratings of classical painters.</p></li>
+<li>
+<p>A more comprehensive collection of examples, illustrating multivariate regression and MANOVA methods, is contained in the vignettes for the <code>heplots</code> package. Use <code>browseVignettes(package = "heplots")</code> to see them all.</p>
+<ul>
+<li><a href="https://friendly.github.io/heplots/articles/HE_manova.html" class="external-link">HE plot MANOVA Examples</a></li>
+<li><a href="https://friendly.github.io/heplots/articles/HE_mmra.html" class="external-link">HE plot MMRA Examples</a></li>
 </ul>
+</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<p>These examples will get you started.</p>
+<div class="section level3">
+<h3 id="iris-data">Iris data<a class="anchor" aria-label="anchor" href="#iris-data"></a>
+</h3>
+<p>Using the <code>iris</code> data, fit the multivariate model for <code>Species</code>. You can feed this to <code><a href="reference/candisc.html">candisc()</a></code> to get the canonical discriminant equivalent.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris.mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">Petal.Length</span>, <span class="va">Sepal.Length</span>, <span class="va">Petal.Width</span>, <span class="va">Sepal.Width</span><span class="op">)</span> <span class="op">~</span> <span class="va">Species</span>, data<span class="op">=</span><span class="va">iris</span><span class="op">)</span></span>
+<span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html" class="external-link">Anova</a></span><span class="op">(</span><span class="va">iris.mod</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Type II MANOVA Tests: Pillai test statistic</span></span>
+<span><span class="co">#&gt;         Df test stat approx F num Df den Df    Pr(&gt;F)    </span></span>
+<span><span class="co">#&gt; Species  2    1.1919   53.466      8    290 &lt; 2.2e-16 ***</span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span></span>
+<span><span class="va">iris.can</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/candisc.html">candisc</a></span><span class="op">(</span><span class="va">iris.mod</span>, data<span class="op">=</span><span class="va">iris</span><span class="op">)</span></span>
+<span><span class="va">iris.can</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Canonical Discriminant Analysis for Species:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;    CanRsq Eigenvalue Difference  Percent Cumulative</span></span>
+<span><span class="co">#&gt; 1 0.96987   32.19193     31.907 99.12126     99.121</span></span>
+<span><span class="co">#&gt; 2 0.22203    0.28539     31.907  0.87874    100.000</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Test of H0: The canonical correlations in the </span></span>
+<span><span class="co">#&gt; current row and all that follow are zero</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   LR test stat approx F numDF denDF   Pr(&gt; F)    </span></span>
+<span><span class="co">#&gt; 1      0.02344  199.145     8   288 &lt; 2.2e-16 ***</span></span>
+<span><span class="co">#&gt; 2      0.77797   13.794     3   145 5.794e-08 ***</span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
+<p>This says that although there are 4 dimensions in the <code>iris</code> data, only two are needed to fully account for the differences among the group means relative to within-group variation. Both are significant by the likelihood ratio tests, but the first accounts for 99.1% of these differences.</p>
+<p>Methods are available to extract coefficients (<code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef()</a></code>) and scores of observations on the canonical dimensions (<code><a href="reference/cancor.html">scores()</a></code>).</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get coefficients</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">iris.can</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                    Can1        Can2</span></span>
+<span><span class="co">#&gt; Petal.Length  0.9472572  0.40103782</span></span>
+<span><span class="co">#&gt; Sepal.Length -0.4269548 -0.01240753</span></span>
+<span><span class="co">#&gt; Petal.Width   0.5751608 -0.58103986</span></span>
+<span><span class="co">#&gt; Sepal.Width  -0.5212417 -0.73526131</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/cancor.html">scores</a></span><span class="op">(</span><span class="va">iris.can</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 'data.frame':    150 obs. of  3 variables:</span></span>
+<span><span class="co">#&gt;  $ Species: Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ Can1   : num  -8.06 -7.13 -7.49 -6.81 -8.13 ...</span></span>
+<span><span class="co">#&gt;  $ Can2   : num  -0.3 0.787 0.265 0.671 -0.514 ...</span></span></code></pre></div>
+<p>Correlations between the observed variables and the canonical dimensions are given by the <code>$structure</code> component of the object.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris.can</span><span class="op">$</span><span class="va">structure</span></span>
+<span><span class="co">#&gt;                    Can1        Can2</span></span>
+<span><span class="co">#&gt; Petal.Length  0.9849513 -0.04603709</span></span>
+<span><span class="co">#&gt; Sepal.Length  0.7918878 -0.21759312</span></span>
+<span><span class="co">#&gt; Petal.Width   0.9728120 -0.22290236</span></span>
+<span><span class="co">#&gt; Sepal.Width  -0.5307590 -0.75798931</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="plotting-methods">Plotting methods<a class="anchor" aria-label="anchor" href="#plotting-methods"></a>
+</h3>
+<p>The basic plot for a <code>"candisc"</code> object is a scatterplot of the <code>scores()name</code> for the observations on the canonical variates, which are the linear combinations of the observed variables. For ease of interpretation, it plots vectors for the responses in the model showing their structure correlations with the canonical dimension.</p>
+<p>The following plot illustrates some of the options.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#-- assign colors and symbols corresponding to species</span></span>
+<span><span class="va">iris.colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"darkgreen"</span>, <span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="va">iris.pch</span> <span class="op">&lt;-</span> <span class="fl">15</span><span class="op">:</span><span class="fl">17</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">iris.can</span>, </span>
+<span>  col <span class="op">=</span> <span class="va">iris.colors</span>,</span>
+<span>  pch <span class="op">=</span> <span class="va">iris.pch</span>,</span>
+<span>  ellipse <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  var.lwd <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  cex.lab <span class="op">=</span> <span class="fl">1.4</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-iris-canplot-1.png"><!-- --></p>
+<p>The <code>heplot()</code> method for a “candisc” object replaces the individual scores by a <strong>H</strong> ellipse showing variation of the means and an <strong>E</strong> ellipse reflecting the pooled within-group variation.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">heplot</span><span class="op">(</span></span>
+<span>  <span class="va">iris.can</span>,</span>
+<span>  fill <span class="op">=</span> <span class="cn">TRUE</span>, fill.alpha <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  prefix <span class="op">=</span> <span class="st">"Canonical dimension"</span>,</span>
+<span>  var.col <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  var.lwd <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  scale <span class="op">=</span> <span class="fl">35</span>,</span>
+<span>  lab.cex <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-iris-heplot-1.png"><!-- --></p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
@@ -182,7 +304,7 @@ Version `r getNamespaceVersion("candisc")`
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

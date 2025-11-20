@@ -9,7 +9,7 @@ from MASS::lda()."><meta property="og:image" content="https://friendly.github.io
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,6 +21,7 @@ from MASS::lda()."><meta property="og:image" content="https://friendly.github.io
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/diabetes.html">Diabetes data: heplots and candisc examples</a></li>
+    <li><a class="dropdown-item" href="../articles/painters.html">Painters data: HE Plots and Canonical Discriminant Analysis</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -91,7 +92,9 @@ in the call to <code><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="exte
 <span class="r-in"><span><span class="va">iris.lda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">lda</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">~</span> <span class="va">.</span>, <span class="va">iris</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="cancor.html">scores</a></span><span class="op">(</span><span class="va">iris.lda</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("scores"):</span> no applicable method for 'scores' applied to an object of class "lda"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 'data.frame':	150 obs. of  2 variables:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ LD1: num  8.06 7.13 7.49 6.81 8.13 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ LD2: num  -0.3 0.787 0.265 0.671 -0.514 ...</span>
 <span class="r-in"><span> </span></span>
 </code></pre></div>
     </div>
@@ -104,7 +107,7 @@ in the call to <code><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="exte
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

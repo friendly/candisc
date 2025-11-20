@@ -22,6 +22,7 @@ Suggests:
     rpart.plot,
     klaR,
     lifecycle,
+    tidyr, 
     testthat (>= 3.0.0)
 LazyLoad: yes
 LazyData: yes
