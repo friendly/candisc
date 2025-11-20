@@ -10,6 +10,7 @@ library(candisc)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
+library(RColorBrewer)
 
 data(painters, package = "MASS")
 str(painters)
@@ -28,6 +29,11 @@ options(
   ggplot2.discrete.colour = function() scale_colour_brewer(palette = "Dark2"),
   ggplot2.discrete.fill = function() scale_fill_brewer(palette = "Dark2")
 )
+theme_set(theme_classic(base_size = 16))
+
+# base R graphics
+school.colors <- brewer.pal(n = 8, name = "Dark2")
+school.pch <- c(16, 17, 15, 9, 7, 8, 10, 5)
 
 #' ## Exploratory plots
 ggplot(data = painters, aes(x = School, y = Colour, fill = School)) +
@@ -35,8 +41,9 @@ ggplot(data = painters, aes(x = School, y = Colour, fill = School)) +
   labs(title = "Colour Scores Distribution by Painting School",
        x = "School",
        y = "Colour Score (0-20)") +
-  scale_fill_brewer(palette = "Dark2") +
-  theme_bw()
+  theme(legend.position = "none")
+  # scale_fill_brewer(palette = "Dark2") +
+  # theme_bw()
 
 #' ## Reshape to long format for plotting multiple variables
 painters_long <- painters |>
@@ -88,7 +95,12 @@ painters.mod <- lm(cbind(Composition, Drawing, Colour, Expression) ~ School, dat
 coef(painters.mod)
 
 #' ## Check for multivariate outliers
-cqplot(painters.mod, id.n = 3)
+cqplot(painters.mod, 
+       id.n = 3,
+       fill.alpha = 0.1,
+       col = school.colors[painters$School],
+       pch = school.pch[painters$School]
+       )
 
 #' ## HE plots
 #' By default, it plots the first two variables

@@ -1,12 +1,12 @@
 ---
-title: "Painters data: HE Plots and Canonical Discriminant Analysis"
+title: "Multivariate Visualization of Painters Style"
 author: "Michael Friendly"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 bibliography: references.bib
 csl: apa.csl
 vignette: >
-  %\VignetteIndexEntry{Painters data: HE Plots and Canonical Discriminant Analysis}
+  %\VignetteIndexEntry{Multivariate Visualization of Painters Style}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -25,10 +25,59 @@ Vignette built using `heplots`, version `r packageDescription("heplots")[["Versi
 
 The `painters` dataset from the `MASS` package contains subjective assessments of 54 classical painters on four aesthetic qualities: Composition, Drawing, Colour, and Expression. These ratings, on a scale of 0-20, were made by the 18th century art critic Roger de Piles [-@DePiles1743], a notable member of the French Academy of Painting and Sculpture. The ratings reflect his judgment of the "artistic merit" of these painters on each of these dimensions.  His painters include the well-known Michelangelo, Tintoretto, Titian, Rembrandt, Rubens, Durer and others that art historians know well.
 
-The 54 painters are classified into eight schools: Renaissance (A), Mannerist (B), Seicento (C), Venetian (D), Lombard (E), Sixteenth Century (F), Seventeenth Century (G), and French (H). This data was first analysed by @Davenport1972 and later featured in @VenablesRipley2002.
+The 54 painters are classified into eight schools: Renaissance (A), Mannerist (B), Seicento (C), Venetian (D), Lombard (E), Sixteenth Century (F), Seventeenth Century (G), and French (H). This data was first analysed by @Davenport1972, Jolliffe [-@Jolliffe1986] 
+used it to illustrate principal components analysis, and the data later featured in @VenablesRipley2002, who put it into the
+`MASS` package.
+
+### Painters schools: Going further
+
+Other analysts largely treated the schools of painting used by de Piles as discrete categories, and this is the path I follow here.
+
+But, for the record, it is possible to go further, by placing these schools in approximate chronological order, and describing some of
+their characteristics.
+
+```{r}
+#| label: tbl-schools-table
+#| echo: false
+library(gt)
+schools.tab <- data.frame(
+  School = c("Renaissance", "Venetian", "Lombard", "16th C", 
+             "Mannerist", "Sciento", "17th C", "French"),
+  Period = c("1400-1520", "1450-1600", "1490-1600", "1500-1600",
+             "1520-1600", "1600-1700", "1600-1700", "1600-1750"),
+  Characteristics = c(
+    "Emphasis on naturalism, perspective, classical ideals; focus on balance, harmony, and proportion. Key figures: Leonardo, Michelangelo, Raphael.",
+    "Rich color and light effects (overlaps Renaissance/Mannerist periods); emphasis on sensuous surfaces, atmospheric effects. e.g.: Titian, Veronese, Tintoretto.",
+    "Northern Italian style; naturalism with dramatic chiaroscuro; influenced by both Renaissance ideals and Venetian colorism. e.g.: Albani, Caravaggio",
+    "Late Renaissance through Mannerism; transition period showing diverse regional styles across Europe.",
+    "Reaction to Renaissance harmony; elongated figures, complex compositions, artificial elegance, and emotional intensity. e.g.,: Parmigiano",
+    "Likely refers to 17th century Italian schools emphasizing dramatic realism and scientific observation of nature (possibly related to Caravaggio's influence).",
+    "Baroque period; dramatic use of light and shadow, movement, emotional intensity, grandeur. Includes Caravaggism and various national Baroque styles.",
+    "French Baroque and emerging Rococo; emphasis on classical restraint, academic standards, royal patronage. Poussin, Claude Lorrain, later Watteau."
+  )
+)
+
+schools.tab |>
+  gt() |>
+  cols_width(
+    School ~ px(80),
+    Period ~ px(100),
+    Characteristics ~ px(400)
+  ) |>
+  tab_header(title = "Chronological overview of painting schools") |>
+  tab_options(column_labels.font.weight = "bold")
+```
+
  
-This vignette demonstrates the use of hypothesis-error (HE) plots, canonical discriminant analysis, and discriminant analysis plots to understand how the schools differ in their aesthetic characteristics. It shows that, while simple univariate and bivariate plots
+
+### This vignette
+
+This vignette demonstrates the use of multivariate visualization methods of the `candisc` package, and its' sister, `heplots`.
+The main goal is to illustrate how
+hypothesis-error (HE) plots, canonical discriminant analysis, and discriminant analysis plots help understand how the schools differ in their aesthetic characteristics. It shows that, while simple univariate and bivariate plots
 are often useful, dimension reduction methods can give a clearer view.
+
+Let's get started.
 
 ```{r setup, message=FALSE}
 library(MASS)
@@ -37,6 +86,7 @@ library(candisc)
 library(ggplot2)
 library(car)
 library(dplyr)
+library(RColorBrewer)
 
 data(painters, package = "MASS")
 str(painters)
@@ -64,7 +114,21 @@ table(painters$School)
 
 ## Exploratory plots
 
-Before conducting formal multivariate analyses, we explore the data visually. A boxplot shows the distribution of colour scores across schools. You could do the same for the other variables.
+Before conducting formal multivariate analyses, we explore the data visually. A boxplot shows the distribution of Colour scores across schools. You could do the same for the other variables.
+
+First, set up colors and other graphic attributes to be consistent across plots. I chose the `RColorBrewer` discrete palette,
+`Dark2`.
+```{r colors}
+options(
+  ggplot2.discrete.colour = function() scale_colour_brewer(palette = "Dark2"),
+  ggplot2.discrete.fill = function() scale_fill_brewer(palette = "Dark2")
+)
+
+# base R graphics
+school.colors <- brewer.pal(n = length(levels(painters$School)), name = "Dark2")
+school.pch <- c(16, 17, 15, 9, 7, 8, 10, 5)
+```
+
 
 ```{r boxplot, fig.width=8, fig.height=5}
 ggplot(data = painters, aes(x = School, y = Colour, fill = School)) +
@@ -252,7 +316,7 @@ We can examine the confusion matrix to see how well the discriminant function cl
 ```{r confusion}
 class_table <- table(
   actual = painters$School,
-  predicted = predict(painters.lda)$class
+  predicted = predict(painters.lda)$class 
 )
 class_table
 ```
