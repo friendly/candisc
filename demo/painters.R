@@ -71,8 +71,8 @@ ggplot(painters,
   stat_ellipse(level = 0.68, linewidth = 1.3) +
   geom_label(data = means,
              aes(label = School)) +
-  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
-  scale_color_brewer(palette = "Dark2") +
+  scale_shape_manual(values = school.pch) +
+#  scale_color_brewer(palette = "Dark2") +
   theme_classic(base_size = 15) +
   theme(legend.position = "none")
 
@@ -83,8 +83,8 @@ ggplot(painters,
   stat_ellipse(level = 0.68, linewidth = 1.3) +
   geom_label(data = means,
              aes(label = School)) +
-  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
-  scale_color_brewer(palette = "Dark2") +
+  scale_shape_manual(values = school.pch) +
+#  scale_color_brewer(palette = "Dark2") +
   theme_classic(base_size = 15) +
   theme(legend.position = "none")
 
