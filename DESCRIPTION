@@ -23,7 +23,8 @@ Suggests:
     klaR,
     lifecycle,
     tidyr, 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    RColorBrewer
 LazyLoad: yes
 LazyData: yes
 Authors@R: c(

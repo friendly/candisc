@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Painters data: HE Plots and Canonical Discriminant Analysis • candisc</title>
+<title>Multivariate Visualization of Painters Style • candisc</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -20,7 +20,7 @@
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="painters_files/libs/quarto-html/popper.min.js"></script><script src="painters_files/libs/quarto-html/tippy.umd.min.js"></script><link href="painters_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="painters_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Painters data: HE Plots and Canonical Discriminant Analysis">
+<!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Multivariate Visualization of Painters Style">
 <meta property="og:image" content="https://friendly.github.io/candisc/logo.png">
 </head>
 <body>
@@ -45,7 +45,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/diabetes.html">Diabetes data: heplots and candisc examples</a></li>
-    <li><a class="dropdown-item" href="../articles/painters.html">Painters data: HE Plots and Canonical Discriminant Analysis</a></li>
+    <li><a class="dropdown-item" href="../articles/painters.html">Multivariate Visualization of Painters Style</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -63,10 +63,10 @@
 </nav><div class="container template-quarto">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Painters data: HE Plots and Canonical Discriminant Analysis</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Multivariate Visualization of Painters Style</h1>
 
       <p class="author">Michael Friendly</p>
-      <p class="date">2025-11-19</p>
+      <p class="date">2025-11-21</p>
 
       <small class="dont-index">Source: <a href="https://github.com/friendly/candisc/blob/HEAD/vignettes/painters.qmd" class="external-link"><code>vignettes/painters.qmd</code></a></small>
       <div class="d-none name"><code></code></div>
@@ -77,12 +77,535 @@
 
 
 
-    <p>Vignette built using <code>heplots</code>, version 1.7.8, <code>candisc</code>, version 1.1.0 and <code>ggplot2</code>, version 4.0.1.</p>
+    <p>Vignette built using <code>heplots</code>, version 1.7.9, <code>candisc</code>, version 1.1.0 and <code>ggplot2</code>, version 4.0.0.</p>
 <section class="level2"><h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>The <code>painters</code> dataset from the <code>MASS</code> package contains subjective assessments of 54 classical painters on four aesthetic qualities: Composition, Drawing, Colour, and Expression. These ratings, on a scale of 0-20, were made by the 18th century art critic Roger de Piles <span class="citation" data-cites="DePiles1743">(<a href="#ref-DePiles1743" role="doc-biblioref">1743</a>)</span>, a notable member of the French Academy of Painting and Sculpture. The ratings reflect his judgment of the “artistic merit” of these painters on each of these dimensions. His painters include the well-known Michelangelo, Tintoretto, Titian, Rembrandt, Rubens, Durer and others that art historians know well.</p>
-<p>The 54 painters are classified into eight schools: Renaissance (A), Mannerist (B), Seicento (C), Venetian (D), Lombard (E), Sixteenth Century (F), Seventeenth Century (G), and French (H). This data was first analysed by <span class="citation" data-cites="Davenport1972">Davenport &amp; Studdert-Kennedy (<a href="#ref-Davenport1972" role="doc-biblioref">1972</a>)</span> and later featured in <span class="citation" data-cites="VenablesRipley2002">Venables &amp; Ripley (<a href="#ref-VenablesRipley2002" role="doc-biblioref">2002</a>)</span>.</p>
-<p>This vignette demonstrates the use of hypothesis-error (HE) plots, canonical discriminant analysis, and discriminant analysis plots to understand how the schools differ in their aesthetic characteristics. It shows that, while simple univariate and bivariate plots are often useful, dimension reduction methods can give a clearer view.</p>
+<p>The 54 painters are classified into eight schools: Renaissance (A), Mannerist (B), Seicento (C), Venetian (D), Lombard (E), Sixteenth Century (F), Seventeenth Century (G), and French (H). This data was first analysed by <span class="citation" data-cites="Davenport1972">Davenport &amp; Studdert-Kennedy (<a href="#ref-Davenport1972" role="doc-biblioref">1972</a>)</span>. Jolliffe <span class="citation" data-cites="Jolliffe1986">(<a href="#ref-Jolliffe1986" role="doc-biblioref">1986</a>)</span> used it to illustrate principal components analysis, and the data later featured in <span class="citation" data-cites="VenablesRipley2002">Venables &amp; Ripley (<a href="#ref-VenablesRipley2002" role="doc-biblioref">2002</a>)</span>, who put it into the <code>MASS</code> package.</p>
+<section class="level3"><h3 id="painters-schools-going-further">Painters schools: Going further<a class="anchor" aria-label="anchor" href="#painters-schools-going-further"></a>
+</h3>
+<p>Other analysts largely treated the schools of painting used by de Piles as discrete categories, and this is the path I follow here.</p>
+<p>But, for the record, it is possible to go further, by placing these schools in approximate chronological order and describing some of their characteristics, as shown in <a href="#tbl-schools-table" class="quarto-xref">Table 1</a>.</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-schools-table" class="cell quarto-float quarto-figure quarto-figure-center" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-schools-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 1: Characteristics of painting schools
+</figcaption><div aria-describedby="tbl-schools-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="gtgptqypuc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#gtgptqypuc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#gtgptqypuc thead, #gtgptqypuc tbody, #gtgptqypuc tfoot, #gtgptqypuc tr, #gtgptqypuc td, #gtgptqypuc th {
+  border-style: none;
+}
+
+#gtgptqypuc p {
+  margin: 0;
+  padding: 0;
+}
+
+#gtgptqypuc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#gtgptqypuc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#gtgptqypuc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gtgptqypuc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gtgptqypuc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gtgptqypuc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gtgptqypuc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gtgptqypuc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gtgptqypuc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gtgptqypuc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gtgptqypuc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gtgptqypuc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gtgptqypuc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#gtgptqypuc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#gtgptqypuc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gtgptqypuc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gtgptqypuc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gtgptqypuc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gtgptqypuc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtgptqypuc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#gtgptqypuc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#gtgptqypuc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#gtgptqypuc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtgptqypuc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#gtgptqypuc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#gtgptqypuc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gtgptqypuc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtgptqypuc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gtgptqypuc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gtgptqypuc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gtgptqypuc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gtgptqypuc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gtgptqypuc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtgptqypuc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gtgptqypuc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gtgptqypuc .gt_left {
+  text-align: left;
+}
+
+#gtgptqypuc .gt_center {
+  text-align: center;
+}
+
+#gtgptqypuc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gtgptqypuc .gt_font_normal {
+  font-weight: normal;
+}
+
+#gtgptqypuc .gt_font_bold {
+  font-weight: bold;
+}
+
+#gtgptqypuc .gt_font_italic {
+  font-style: italic;
+}
+
+#gtgptqypuc .gt_super {
+  font-size: 65%;
+}
+
+#gtgptqypuc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#gtgptqypuc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#gtgptqypuc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#gtgptqypuc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#gtgptqypuc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gtgptqypuc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gtgptqypuc .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#gtgptqypuc .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#gtgptqypuc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="table gt_table do-not-create-environment cell caption-top" data-quarto-postprocess="true" style="table-layout:fixed;width:0px;" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border">Chronological overview of painting schools</th>
+</tr>
+<tr class="gt_col_headings even">
+<th id="School" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">School</th>
+<th id="Period" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Period</th>
+<th id="Characteristics" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Characteristics</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="School">Renaissance</td>
+<td class="gt_row gt_right" headers="Period">1400-1520</td>
+<td class="gt_row gt_left" headers="Characteristics">Emphasis on naturalism, perspective, classical ideals; focus on balance, harmony, and proportion. Key figures: Leonardo, Michelangelo, Raphael.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="School">Venetian</td>
+<td class="gt_row gt_right" headers="Period">1450-1600</td>
+<td class="gt_row gt_left" headers="Characteristics">Rich color and light effects (overlaps Renaissance/Mannerist periods); emphasis on sensuous surfaces, atmospheric effects. e.g.: Titian, Veronese, Tintoretto.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="School">Lombard</td>
+<td class="gt_row gt_right" headers="Period">1490-1600</td>
+<td class="gt_row gt_left" headers="Characteristics">Northern Italian style; naturalism with dramatic chiaroscuro; influenced by both Renaissance ideals and Venetian colorism. e.g.: Albani, Caravaggio</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="School">16th C</td>
+<td class="gt_row gt_right" headers="Period">1500-1600</td>
+<td class="gt_row gt_left" headers="Characteristics">Late Renaissance through Mannerism; transition period showing diverse regional styles across Europe.</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="School">Mannerist</td>
+<td class="gt_row gt_right" headers="Period">1520-1600</td>
+<td class="gt_row gt_left" headers="Characteristics">Reaction to Renaissance harmony; elongated figures, complex compositions, artificial elegance, and emotional intensity. e.g.,: Parmigiano</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="School">Sciento</td>
+<td class="gt_row gt_right" headers="Period">1600-1700</td>
+<td class="gt_row gt_left" headers="Characteristics">Likely refers to 17th century Italian schools emphasizing dramatic realism and scientific observation of nature (possibly related to Caravaggio's influence).</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="School">17th C</td>
+<td class="gt_row gt_right" headers="Period">1600-1700</td>
+<td class="gt_row gt_left" headers="Characteristics">Baroque period; dramatic use of light and shadow, movement, emotional intensity, grandeur. Includes Caravaggism and various national Baroque styles.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="School">French</td>
+<td class="gt_row gt_right" headers="Period">1600-1750</td>
+<td class="gt_row gt_left" headers="Characteristics">French Baroque and emerging Rococo; emphasis on classical restraint, academic standards, royal patronage. Poussin, Claude Lorrain, later Watteau.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>For example, for other analyses, the <code>School</code> variable could be made an ordered factor, or schools could be categorized into in broad periods (“Early”, “Transition”, “Baroque”), or by main emphasis (“Form”, “Color”, “Drama”)</p>
+</section><section class="level3"><h3 id="this-vignette">This vignette<a class="anchor" aria-label="anchor" href="#this-vignette"></a>
+</h3>
+<p>This vignette demonstrates the use of multivariate visualization methods of the <code>candisc</code> package, and its’ sister, <code>heplots</code>. The main goal is to illustrate how hypothesis-error (HE) plots, canonical discriminant analysis, and discriminant analysis plots help understand how the schools differ in their aesthetic characteristics. It shows that, while simple univariate and bivariate plots are often useful, dimension reduction methods can give a clearer view.</p>
+<p>Let’s get started. Load packages, and the <code>painters</code> data.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">MASS</a></span><span class="op">)</span></span>
@@ -91,6 +614,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/" class="external-link">car</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">painters</span>, package <span class="op">=</span> <span class="st">"MASS"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">painters</span><span class="op">)</span></span>
@@ -101,7 +625,7 @@
 <span><span class="co">##  $ Expression : int  3 14 7 8 0 14 8 6 4 18 ...</span></span>
 <span><span class="co">##  $ School     : Factor w/ 8 levels "A","B","C","D",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span></code></pre></div>
 </div>
-</section><section class="level2"><h2 id="data-preparation">Data Preparation<a class="anchor" aria-label="anchor" href="#data-preparation"></a>
+</section></section><section class="level2"><h2 id="data-preparation">Data Preparation<a class="anchor" aria-label="anchor" href="#data-preparation"></a>
 </h2>
 <p>The <code>School</code> factor in the dataset just uses letters, “A” through “H”. We begin by using longer, more descriptive labels to identify the schools, making the plots easier to interpret.</p>
 <div class="cell" data-layout-align="center">
@@ -120,7 +644,7 @@
 </div>
 </section><section class="level2"><h2 id="how-many-from-each-school">How many from each school?<a class="anchor" aria-label="anchor" href="#how-many-from-each-school"></a>
 </h2>
-<p>The distribution of painters across schools is unbalanced, with some schools having many more representatives than others.</p>
+<p>The distribution of painters across schools is unbalanced, with some schools having many more representatives than others. In particular, the small <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">n = 4</annotation></semantics></math> for 16th C and French schools affect some multivariate methods (e.g., Box’s M test for equality, <code><a href="https://friendly.github.io/heplots/reference/boxM.html" class="external-link">heplots::boxM()</a></code>) which rely on estimating the within-group covariance matrices.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">painters</span><span class="op">$</span><span class="va">School</span><span class="op">)</span></span>
@@ -132,15 +656,28 @@
 </div>
 </section><section class="level2"><h2 id="exploratory-plots">Exploratory plots<a class="anchor" aria-label="anchor" href="#exploratory-plots"></a>
 </h2>
-<p>Before conducting formal multivariate analyses, we explore the data visually. A boxplot shows the distribution of colour scores across schools. You could do the same for the other variables.</p>
+<p>Before conducting formal multivariate analyses, we explore the data visually.</p>
+<p>First, set up colors and other graphic attributes to be consistent across plots. I chose the <code>RColorBrewer</code> discrete palette, <code>Dark2</code>.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span></span>
+<span>  ggplot2.discrete.colour <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_colour_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span>,</span>
+<span>  ggplot2.discrete.fill <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># base R graphics</span></span>
+<span><span class="va">school.colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">brewer.pal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">painters</span><span class="op">$</span><span class="va">School</span><span class="op">)</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span></span>
+<span><span class="va">school.pch</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">15</span>, <span class="fl">9</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+</div>
+<p>A boxplot shows the distribution of Colour scores across schools. You could do the same for the other variables. In general, I try to suppress legends where possible, because the space they take reduces resolution for the data.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">painters</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">School</span>, y <span class="op">=</span> <span class="va">Colour</span>, fill <span class="op">=</span> <span class="va">School</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Colour Scores Distribution by Painting School"</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"School"</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Colour Score (0-20)"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure><p><img src="painters_files/figure-html/boxplot-1.png" class="quarto-figure quarto-figure-center" width="768"></p>
@@ -151,7 +688,7 @@
 <p>The Venetian and 17th C painters were given high marks for their use of color.</p>
 <p>Alternatively, to examine all four aesthetic variables simultaneously, you need to reshape the data to long format. Here, I create violin plots overlaid with individual points.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">painters_long</span> <span class="op">&lt;-</span> <span class="va">painters</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Composition</span>, <span class="va">Drawing</span>, <span class="va">Colour</span>, <span class="va">Expression</span><span class="op">)</span>,</span>
 <span>                      names_to <span class="op">=</span> <span class="st">"Metric"</span>, values_to <span class="op">=</span> <span class="st">"Score"</span><span class="op">)</span></span>
@@ -159,7 +696,7 @@
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">painters_long</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Metric</span>, y <span class="op">=</span> <span class="va">Score</span>, fill <span class="op">=</span> <span class="va">Metric</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html" class="external-link">geom_violin</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html" class="external-link">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Distribution of De Piles' Scores"</span>,</span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Distribution of de Piles' Scores"</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Score (0-20)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_light</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
@@ -170,11 +707,15 @@
 </div>
 </div>
 </div>
+<p>Note that de Piles used the full range of 0–20 for most of these measures, but the range for <code>Drawing</code> had no ratings in the lower quarter.</p>
 </section><section class="level2"><h2 id="sample-scatterplots">Sample scatterplots<a class="anchor" aria-label="anchor" href="#sample-scatterplots"></a>
 </h2>
-<p>Scatterplots of pairs of variables, with data ellipses for each school, can reveal the multivariate relationships and potential group separation. When I map <code>shape</code> to <code>School</code>, <code>ggplot</code> complains because it only provides 6 shapes, so it is necessary to use <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual()</a></code>. I avoid using a legend by labeling the schools at their means.</p>
+<p>Scatterplots of pairs of variables, with data ellipses for each school, can reveal the multivariate relationships and potential group separation, but they are limited to 2D views, where the other variables vary as they do.</p>
+<!-- When I map `shape` to `School`, `ggplot` complains because it only provides 6 shapes, so it is necessary to use -->
+<!-- `scale_shape_manual()`. I avoid using a legend by labeling the schools at their means. -->
+<p>Data ellipses and labels for the schools at their group mean help to make such plots more understandable.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">means</span> <span class="op">&lt;-</span> <span class="va">painters</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">School</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="va">Composition</span><span class="op">:</span><span class="va">Expression</span>, <span class="va">mean</span><span class="op">)</span><span class="op">)</span></span>
@@ -186,7 +727,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ellipse.html" class="external-link">stat_ellipse</a></span><span class="op">(</span>level <span class="op">=</span> <span class="fl">0.68</span>, linewidth <span class="op">=</span> <span class="fl">1.3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_label</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">means</span>,</span>
 <span>             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">School</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">15</span>, <span class="fl">9</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">school.pch</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
@@ -196,9 +737,10 @@
 </div>
 </div>
 </div>
+<p>You can see, for example, that the Venetian school and 17th C painters were rated highest on use of color.</p>
 <p>Simmilarly, here’s a plot for Drawing and Expression:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">painters</span>,</span>
 <span>       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">Drawing</span>, <span class="va">Expression</span>,</span>
 <span>           color <span class="op">=</span> <span class="va">School</span>, shape <span class="op">=</span> <span class="va">School</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -206,7 +748,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_ellipse.html" class="external-link">stat_ellipse</a></span><span class="op">(</span>level <span class="op">=</span> <span class="fl">0.68</span>, linewidth <span class="op">=</span> <span class="fl">1.3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_label</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">means</span>,</span>
 <span>             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">School</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">15</span>, <span class="fl">9</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">school.pch</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
@@ -221,7 +763,7 @@
 </h2>
 <p>We fit a multivariate linear model (MANOVA) to test whether schools differ significantly on the four aesthetic variables considered jointly. The model treats School as the predictor and the four aesthetic scores as a multivariate response.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">painters.mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">Composition</span>, <span class="va">Drawing</span>, <span class="va">Colour</span>, <span class="va">Expression</span><span class="op">)</span> <span class="op">~</span> <span class="va">School</span>, </span>
 <span>                   data <span class="op">=</span> <span class="va">painters</span><span class="op">)</span></span>
 <span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/Anova.html" class="external-link">Anova</a></span><span class="op">(</span><span class="va">painters.mod</span><span class="op">)</span></span>
@@ -234,7 +776,7 @@
 </div>
 <p>With <code>School</code> as an unordered factor, the intercept represents <code>Renaissance</code> painters. Coefficients for the other schools represent their difference from Renaissance.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">painters.mod</span><span class="op">)</span></span>
 <span><span class="co">##                 Composition Drawing Colour Expression</span></span>
 <span><span class="co">## (Intercept)          10.400 14.7000  9.000    8.20000</span></span>
@@ -250,7 +792,7 @@
 </h2>
 <p>Before interpreting the MANOVA results, we check for multivariate outliers using a chi-square Q-Q plot of squared Mahalanobis distances. This looks OK, because all the painters are well within the confidence bounds.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://friendly.github.io/heplots/reference/cqplot.html" class="external-link">cqplot</a></span><span class="op">(</span><span class="va">painters.mod</span>, id.n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -264,7 +806,7 @@
 <p>Hypothesis-error (HE) plots provide a visual representation of multivariate hypothesis tests. The <strong>H</strong> ellipse represents the hypothesis sum of squares and cross-products, while the <strong>E</strong> ellipse represents error (within-group) variation. When <strong>H</strong> extends anywhere outside <strong>E</strong>, there is evidence of a significant effect.</p>
 <p>By default, the <code><a href="https://friendly.github.io/heplots/reference/heplot.html" class="external-link">heplot()</a></code> shows the first two variables (Composition and Drawing).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://friendly.github.io/heplots/reference/heplot.html" class="external-link">heplot</a></span><span class="op">(</span><span class="va">painters.mod</span>,</span>
 <span>       fill <span class="op">=</span> <span class="cn">TRUE</span>, fill.alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span><span class="op">)</span>,</span>
 <span>       cex.lab <span class="op">=</span> <span class="fl">1.25</span><span class="op">)</span></span></code></pre></div>
@@ -278,7 +820,7 @@
 <p>This tells us that the means for the schools of painting are positively correlated on these variables. The within-group residuals are also positively correlated, to about the same extent.</p>
 <p>We can also examine other pairs of variables, such as <code>Colour</code> and <code>Expression</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://friendly.github.io/heplots/reference/heplot.html" class="external-link">heplot</a></span><span class="op">(</span><span class="va">painters.mod</span>,</span>
 <span>       variables <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">4</span>,</span>
 <span>       fill <span class="op">=</span> <span class="cn">TRUE</span>, fill.alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span><span class="op">)</span>,</span>
@@ -295,7 +837,7 @@
 </h2>
 <p>To get a comprehensive view of how schools differ across all pairs of variables, we create a matrix of pairwise HE plots, provided by the <code><a href="https://friendly.github.io/heplots/reference/pairs.mlm.html" class="external-link">heplots::pairs.mlm()</a></code> method.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html" class="external-link">pairs</a></span><span class="op">(</span><span class="va">painters.mod</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -309,7 +851,7 @@
 </h2>
 <p>Canonical discriminant analysis reduces the dimensionality of the multivariate differences among schools. It finds linear combinations of the original variables that maximize between-group variation relative to within-group variation.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">painters.can</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/candisc.html">candisc</a></span><span class="op">(</span><span class="va">painters.mod</span><span class="op">)</span></span>
 <span><span class="va">painters.can</span></span>
 <span><span class="co">## </span></span>
@@ -337,7 +879,7 @@
 </h2>
 <p>Plotting the data in canonical space provides the clearest view of group separation, as the canonical dimensions are specifically constructed to maximize differences among schools. Variable vector in this plot have components proportional to the correlations of the observed aesthetic variables with the canonical scores.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://friendly.github.io/heplots/reference/heplot.html" class="external-link">heplot</a></span><span class="op">(</span><span class="va">painters.can</span>,</span>
 <span>       fill <span class="op">=</span> <span class="cn">TRUE</span>, fill.alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.05</span><span class="op">)</span>,</span>
 <span>       var.lwd <span class="op">=</span> <span class="fl">2</span>, var.cex <span class="op">=</span> <span class="fl">1.4</span>,</span>
@@ -355,7 +897,7 @@
 </h2>
 <p>The analysis suggests three significant dimensions of differences among schools. We can visualize all three dimensions simultaneously using a 3D HE plot. This plot is not yet rendered in the vignette.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"rgl"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://friendly.github.io/heplots/reference/heplot3d.html" class="external-link">heplot3d</a></span><span class="op">(</span><span class="va">painters.can</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pink"</span>, <span class="st">"brown"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
@@ -364,12 +906,12 @@
 </h2>
 <p>Linear discriminant analysis (LDA) provides another approach to understanding group differences and can be used for classification. Unlike canonical discriminant analysis, which focuses on visualization for the MANOVA model, LDA is optimized for predicting group membership. But the <code><a href="../reference/plot_discrim.html">plot_discrim()</a></code> provides something similar, and the dimensions are essentially the same.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">painters.lda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">lda</a></span><span class="op">(</span><span class="va">School</span> <span class="op">~</span> <span class="va">Composition</span> <span class="op">+</span> <span class="va">Drawing</span> <span class="op">+</span> <span class="va">Colour</span> <span class="op">+</span> <span class="va">Expression</span>,</span>
+<div class="sourceCode cell-code" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">painters.lda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/lda.html" class="external-link">lda</a></span><span class="op">(</span><span class="va">School</span> <span class="op">~</span> <span class="va">.</span>,</span>
 <span>                    data <span class="op">=</span> <span class="va">painters</span><span class="op">)</span></span>
 <span><span class="va">painters.lda</span></span>
 <span><span class="co">## Call:</span></span>
-<span><span class="co">## lda(School ~ Composition + Drawing + Colour + Expression, data = painters)</span></span>
+<span><span class="co">## lda(School ~ ., data = painters)</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Prior probabilities of groups:</span></span>
 <span><span class="co">## Renaissance   Mannerist     Seiento    Venetian     Lombard      16th C </span></span>
@@ -399,6 +941,7 @@
 <span><span class="co">##    LD1    LD2    LD3    LD4 </span></span>
 <span><span class="co">## 0.5908 0.2164 0.1586 0.0342</span></span></code></pre></div>
 </div>
+<p>Again, we see that there are three dimensions that seem important in understanding how the Schools differ in terms of the ratings on these four aesthetic attributes.</p>
 <!--
 We can examine the confusion matrix to see how well the discriminant function classifies painters into their actual schools:
 
@@ -437,11 +980,11 @@ class_table
 -->
 <p>The <code><a href="../reference/plot_discrim.html">plot_discrim()</a></code> function visualizes the discriminant analysis results by plotting observations in the space defined by the discriminant dimensions (LD1, LD2, etc.). Here we plot the first two discriminant dimensions:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_discrim.html">plot_discrim</a></span><span class="op">(</span><span class="va">painters.lda</span>, <span class="va">LD2</span> <span class="op">~</span> <span class="va">LD1</span>,</span>
 <span>             labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>             labels.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"label"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">15</span>, <span class="fl">9</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">school.pch</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
@@ -453,11 +996,11 @@ class_table
 </div>
 <p>We can also examine other pairs of discriminant dimensions, such as LD1 and LD3:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_discrim.html">plot_discrim</a></span><span class="op">(</span><span class="va">painters.lda</span>, <span class="va">LD3</span> <span class="op">~</span> <span class="va">LD1</span>,</span>
 <span>             labels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>             labels.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="st">"label"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span>, <span class="fl">17</span>, <span class="fl">15</span>, <span class="fl">9</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_shape_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">school.pch</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">15</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <div class="cell-output-display">
@@ -467,6 +1010,16 @@ class_table
 </div>
 </div>
 </div>
+<p>To complete this, it would be useful to add vectors for the variables in these plots as in the plots for the <code>painters.can</code> object shown above. This is not yet implemented in the package, but the vectors are given by columns of <code><a href="../reference/cor_lda.html">cor_lda()</a></code></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cor_lda.html">cor_lda</a></span><span class="op">(</span><span class="va">painters.lda</span><span class="op">)</span></span>
+<span><span class="co">##                 LD1     LD2      LD3    LD4</span></span>
+<span><span class="co">## Composition -0.1824  0.2287 -0.90850 0.2984</span></span>
+<span><span class="co">## Drawing     -0.5740 -0.4342 -0.23701 0.6525</span></span>
+<span><span class="co">## Colour       0.9491  0.2293  0.04403 0.2113</span></span>
+<span><span class="co">## Expression  -0.4661  0.4811 -0.28324 0.6864</span></span></code></pre></div>
+</div>
 </section><section class="level2"><h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
 <p>This vignette has demonstrated the use of HE plots, canonical discriminant analysis, and discriminant analysis plots to understand how classical painting schools differ in their aesthetic characteristics. HE plots provide intuitive visual tests of multivariate hypotheses, canonical analysis reveals the dimensions of maximum group separation, and discriminant analysis plots show how well groups can be distinguished and classified in reduced dimensional space.</p>
@@ -475,6 +1028,9 @@ class_table
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-Davenport1972" class="csl-entry" role="listitem">
 Davenport, M., &amp; Studdert-Kennedy, G. (1972). The statistical analysis of aesthetic judgment: An exploration. <em>Applied Statistics</em>, <em>21</em>(3), 324–333. http://doi.org/<a href="https://doi.org/10.2307/2346281" class="external-link">10.2307/2346281</a>
+</div>
+<div id="ref-Jolliffe1986" class="csl-entry" role="listitem">
+Jolliffe, I. T. (1986). <em>Principal component analysis</em>. <em>Springer Series in Statistics</em>. Springer New York. http://doi.org/<a href="https://doi.org/10.1007/978-1-4757-1904-8" class="external-link">10.1007/978-1-4757-1904-8</a>
 </div>
 <div id="ref-DePiles1743" class="csl-entry" role="listitem">
 Piles, R. de. (1743). <em>The principles of painting</em>. London: n.p.
@@ -576,7 +1132,7 @@ Venables, W. N., &amp; Ripley, B. D. (2002). <em>Modern applied statistics with 
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

@@ -67,6 +67,7 @@ schools.tab |>
   ) |>
   tab_header(title = "Chronological overview of painting schools") |>
   tab_options(column_labels.font.weight = "bold")
+  tab_options(table.width = pct(100))
 ```
 
 For example, for other analyses, the `School` variable could be made an ordered factor, or schools could be
