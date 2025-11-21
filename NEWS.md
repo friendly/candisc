@@ -17,6 +17,7 @@ This is a major release, resolving some problems with `plot_discrim()` and addin
 * Added examples to README
 * Started to add `testthat` to package checks
 * Added another vignette using the `MASS::painters` data
+* Added `painters2` dataset
 
 ## Version 1.0.0
 

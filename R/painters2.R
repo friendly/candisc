@@ -1,4 +1,4 @@
-#' Extended Painters Data with Historical Art Variables
+#' Painters Data with Historical Art Variables
 #'
 #' @description
 #' 

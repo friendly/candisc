@@ -1,4 +1,5 @@
 # Confusion matrix for LDA / QDA
+# TODO: Provide a print method
 
 confusion <- function(object) {
   
@@ -10,6 +11,8 @@ confusion <- function(object) {
   accuracy <- sum(diag(tab)) / sum(tab) * 100
   error <- 100 - accuracy
   
-  structure(tab, accuracy, error)
+  attributes(tab) <- list(accuracy = accuracy, error = error)
+  
+  tab
   
 }

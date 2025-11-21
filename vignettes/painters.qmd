@@ -109,6 +109,9 @@ head(painters)
 ## How many from each school?
 
 The distribution of painters across schools is unbalanced, with some schools having many more representatives than others.
+In particular, the small $n = 4$ for 16th C and French schools
+affect some multivariate methods (e.g., Box's M test for equality, `heplots::boxM()`)
+which rely on estimating the within-group covariance matrices.
 
 ```{r school-counts}
 table(painters$School)
@@ -316,10 +319,13 @@ if(requireNamespace("rgl")) {
 Linear discriminant analysis (LDA) provides another approach to understanding group differences and can be used for classification. Unlike canonical discriminant analysis, which focuses on visualization for the MANOVA model, LDA is optimized for predicting group membership. But the `plot_discrim()` provides something similar, and the dimensions are essentially the same.
 
 ```{r lda}
-painters.lda <- lda(School ~ Composition + Drawing + Colour + Expression,
+painters.lda <- lda(School ~ .,
                     data = painters)
 painters.lda
 ```
+
+Again, we see that there are three dimensions that seem important in understanding how the Schools differ
+in terms of the ratings on these four aesthetic attributes.
 
 <!--
 We can examine the confusion matrix to see how well the discriminant function classifies painters into their actual schools:
@@ -339,7 +345,7 @@ The `plot_discrim()` function visualizes the discriminant analysis results by pl
 plot_discrim(painters.lda, LD2 ~ LD1,
              labels = TRUE,
              labels.args = list(geom = "label")) +
-  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  scale_shape_manual(values = school.pch) +
   theme_classic(base_size = 15) +
   theme(legend.position = "none")
 ```
@@ -350,10 +356,17 @@ We can also examine other pairs of discriminant dimensions, such as LD1 and LD3:
 plot_discrim(painters.lda, LD3 ~ LD1,
              labels = TRUE,
              labels.args = list(geom = "label")) +
-  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  scale_shape_manual(values = school.pch) +
   theme_classic(base_size = 15) +
   theme(legend.position = "none")
 ```
+
+To complete this, it would be useful to add vectors for the variables in these plots as in the plots for the `painters.can` object shown above. This is not yet implemented in the package, but the vectors are given by columns of `cor_lda()`
+
+```{r}
+cor_lda(painters.lda)
+```
+
 
 ## Summary
 

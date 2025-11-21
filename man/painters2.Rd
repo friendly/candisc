@@ -3,7 +3,7 @@
 \docType{data}
 \name{painters2}
 \alias{painters2}
-\title{Extended Painters Data with Historical Art Variables}
+\title{Painters Data with Historical Art Variables}
 \format{
 A data frame with 54 observations on 10 variables:
 \describe{

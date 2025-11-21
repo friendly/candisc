@@ -154,7 +154,7 @@ if(requireNamespace("rgl")){
 						
 #' ## Discriminant analysis
 #'
-painters.lda <- lda(School ~ Composition + Drawing + Colour + Expression,
+painters.lda <- lda(School ~ .,
                     data = painters) 		
 painters.lda
 
@@ -162,6 +162,8 @@ class_table <- table(
   actual = painters$School,
   predicted = predict(painters.lda)$class)
 
+acc <- 100 * sum(diag(class_table)) / sum(class_table)
+err <- 100 - acc
 
 plot_discrim(painters.lda, LD2 ~ LD1,
              labels = TRUE, 
@@ -176,6 +178,23 @@ plot_discrim(painters.lda, LD3 ~ LD1,
              labels.args = list(geom = "label")) +
   scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
   theme_classic(base_size = 15)
+
+# QDA
+
+painters.qda <- qda(School ~ .,
+                    data = painters) 		
+painters.qda
+
+# Error in qda.default(x, grouping, ...) : 
+#   some group is too small for 'qda'
+
+
+plot_discrim(painters.qda, LD2 ~ LD1,
+             labels = TRUE, 
+             labels.args = list(geom = "label")) +
+  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  theme_classic(base_size = 15) +
+  theme(legend.position = "none")
 
 
 

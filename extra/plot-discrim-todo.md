@@ -113,3 +113,7 @@ vignette: >
 ---
 ```
 
+One final thing I'd like to do with my function `plot_discrim()` is to be able to draw vectors
+in the plot representing the correlations of the observed variables with the discriminant dimensions.
+This applies only when the formula in the call to `plot_discrim()` specifies the dimensions
+like `LD2 ~ LD`.  For an "lda" object, these correlations can be calculated using `cor_lda()`.
