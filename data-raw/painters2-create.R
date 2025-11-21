@@ -2,8 +2,20 @@
 library(MASS)
 data(painters)
 
+# keep original School letter
+Sch <- painters$School
+
+#' ## Use longer labels to identify the schools
+school <- c("Renaissance", "Mannerist", "Sciento", "Venetian",
+            "Lombard", "16th C", "17th C", "French")
+levels(painters$School) <- school
+
+
 # Create the extended dataset
 painters2 <- painters
+
+# keep original School letter
+painters2$Sch <- Sch
 
 # Add Period variable - broad historical grouping
 school_to_period <- c(
@@ -17,7 +29,7 @@ school_to_period <- c(
   "French" = "Baroque"
 )
 
-painters2$Period <- factor(
+painters2$Period <- ordered(
   school_to_period[as.character(painters2$School)],
   levels = c("Early", "Transition", "Baroque")
 )
@@ -78,16 +90,16 @@ str(painters2)
 
 # Show cross-tabulations
 cat("\n=== School by Period ===\n")
-print(table(painters2$School, painters2$Period))
+table(painters2$School, painters2$Period)
 
 cat("\n=== School by Emphasis ===\n")
-print(table(painters2$School, painters2$Emphasis))
+table(painters2$School, painters2$Emphasis)
 
 cat("\n=== School by Style ===\n")
-print(table(painters2$School, painters2$Style))
+table(painters2$School, painters2$Style)
 
 cat("\n=== School by Light ===\n")
-print(table(painters2$School, painters2$Light))
+table(painters2$School, painters2$Light)
 
 # Save the dataset for inclusion in the candisc package
-# usethis::use_data(painters2, overwrite = TRUE)
+usethis::use_data(painters2, overwrite = TRUE)

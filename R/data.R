@@ -37,6 +37,7 @@
 #' @keywords datasets
 #' @concept MANOVA
 #' @concept candisc
+#' @concept discrim
 #' @examples
 #' 
 #' str(Grass)
@@ -170,6 +171,7 @@ NULL
 #' @keywords datasets
 #' @concept MANOVA
 #' @concept candisc
+#' @concept discrim
 #' @examples
 #' 
 #' data(Wine)
@@ -230,6 +232,7 @@ NULL
 #' % ~~ reference to a publication or URL from which the data were obtained ~~
 #' @keywords datasets
 #' @concept candisc
+#' @concept discrim
 #' @examples
 #' 
 #' data(Wolves)

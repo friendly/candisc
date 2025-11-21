@@ -65,4 +65,5 @@ package.
 }
 \concept{MANOVA}
 \concept{candisc}
+\concept{discrim}
 \keyword{datasets}
