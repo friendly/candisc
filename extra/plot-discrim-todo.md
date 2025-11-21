@@ -62,7 +62,7 @@ plot_discrim(iris.lda2, LD2 ~ LD1,
   theme_minimal(base_size = 16) 
 ```
 
-In the present version for plotting in discrimininant space, it would be useful to automatically create labels
+In the present version for plotting in discriminant space, it would be useful to automatically create labels
 for the axes that contain the percent of between-group variance accounted for by each dimension.
 Please fetch the current version from https://raw.githubusercontent.com/friendly/candisc/refs/heads/master/R/plot_discrim.R
 The code to get better axis labels, for the first two dimensions is:
@@ -113,7 +113,11 @@ vignette: >
 ---
 ```
 
+## Variable vectors
+
 One final thing I'd like to do with my function `plot_discrim()` is to be able to draw vectors
 in the plot representing the correlations of the observed variables with the discriminant dimensions.
 This applies only when the formula in the call to `plot_discrim()` specifies the dimensions
 like `LD2 ~ LD`.  For an "lda" object, these correlations can be calculated using `cor_lda()`.
+
+--> see code in `plot-discrim-test.R`
