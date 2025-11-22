@@ -33,6 +33,7 @@ and adding considerable functionality
 - Started to add `testthat` to package checks
 - Added another vignette using the
   [`MASS::painters`](https://rdrr.io/pkg/MASS/man/painters.html) data
+- Added `painters2` dataset
 
 ## Version 1.0.0
 

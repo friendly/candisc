@@ -40,6 +40,7 @@ their characteristics, as shown in @tbl-schools-table.
 #| label: tbl-schools-table
 #| echo: false
 #| tbl-cap: "Characteristics of painting schools"
+#| out-width: "100%"
 library(gt)
 schools.tab <- data.frame(
   School = c("Renaissance", "Venetian", "Lombard", "16th C", 
@@ -60,14 +61,14 @@ schools.tab <- data.frame(
 
 schools.tab |>
   gt() |>
+  tab_options(column_labels.font.weight = "bold") |>
+  tab_options(table.width = pct(100)) |>
   cols_width(
     School ~ px(80),
     Period ~ px(100),
     Characteristics ~ px(400)
   ) |>
-  tab_header(title = "Chronological overview of painting schools") |>
-  tab_options(column_labels.font.weight = "bold")
-  tab_options(table.width = pct(100))
+  tab_header(title = "Chronological overview of painting schools") 
 ```
 
 For example, for other analyses, the `School` variable could be made an ordered factor, or schools could be

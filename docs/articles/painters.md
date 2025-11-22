@@ -1,4 +1,4 @@
-# Painters data: HE Plots and Canonical Discriminant Analysis
+# Multivariate Visualization of Painters Style
 
 Vignette built using `heplots`, version 1.7.8, `candisc`, version 1.1.0
 and `ggplot2`, version 4.0.1.
@@ -19,14 +19,50 @@ The 54 painters are classified into eight schools: Renaissance (A),
 Mannerist (B), Seicento (C), Venetian (D), Lombard (E), Sixteenth
 Century (F), Seventeenth Century (G), and French (H). This data was
 first analysed by Davenport & Studdert-Kennedy
-([1972](#ref-Davenport1972)) and later featured in Venables & Ripley
-([2002](#ref-VenablesRipley2002)).
+([1972](#ref-Davenport1972)). Jolliffe ([1986](#ref-Jolliffe1986)) used
+it to illustrate principal components analysis, and the data later
+featured in Venables & Ripley ([2002](#ref-VenablesRipley2002)), who put
+it into the `MASS` package.
 
-This vignette demonstrates the use of hypothesis-error (HE) plots,
-canonical discriminant analysis, and discriminant analysis plots to
-understand how the schools differ in their aesthetic characteristics. It
-shows that, while simple univariate and bivariate plots are often
-useful, dimension reduction methods can give a clearer view.
+### Painters schools: Going further
+
+Other analysts largely treated the schools of painting used by de Piles
+as discrete categories, and this is the path I follow here.
+
+But, for the record, it is possible to go further, by placing these
+schools in approximate chronological order and describing some of their
+characteristics, as shown in [Table 1](#tbl-schools-table).
+
+| Chronological overview of painting schools |  |  |
+|----|----|----|
+| School | Period | Characteristics |
+| Renaissance | 1400-1520 | Emphasis on naturalism, perspective, classical ideals; focus on balance, harmony, and proportion. Key figures: Leonardo, Michelangelo, Raphael. |
+| Venetian | 1450-1600 | Rich color and light effects (overlaps Renaissance/Mannerist periods); emphasis on sensuous surfaces, atmospheric effects. e.g.: Titian, Veronese, Tintoretto. |
+| Lombard | 1490-1600 | Northern Italian style; naturalism with dramatic chiaroscuro; influenced by both Renaissance ideals and Venetian colorism. e.g.: Albani, Caravaggio |
+| 16th C | 1500-1600 | Late Renaissance through Mannerism; transition period showing diverse regional styles across Europe. |
+| Mannerist | 1520-1600 | Reaction to Renaissance harmony; elongated figures, complex compositions, artificial elegance, and emotional intensity. e.g.,: Parmigiano |
+| Sciento | 1600-1700 | Likely refers to 17th century Italian schools emphasizing dramatic realism and scientific observation of nature (possibly related to Caravaggio's influence). |
+| 17th C | 1600-1700 | Baroque period; dramatic use of light and shadow, movement, emotional intensity, grandeur. Includes Caravaggism and various national Baroque styles. |
+| French | 1600-1750 | French Baroque and emerging Rococo; emphasis on classical restraint, academic standards, royal patronage. Poussin, Claude Lorrain, later Watteau. |
+
+Table 1: Characteristics of painting schools
+
+For example, for other analyses, the `School` variable could be made an
+ordered factor, or schools could be categorized into in broad periods
+(“Early”, “Transition”, “Baroque”), or by main emphasis (“Form”,
+“Color”, “Drama”)
+
+### This vignette
+
+This vignette demonstrates the use of multivariate visualization methods
+of the `candisc` package, and its’ sister, `heplots`. The main goal is
+to illustrate how hypothesis-error (HE) plots, canonical discriminant
+analysis, and discriminant analysis plots help understand how the
+schools differ in their aesthetic characteristics. It shows that, while
+simple univariate and bivariate plots are often useful, dimension
+reduction methods can give a clearer view.
+
+Let’s get started. Load packages, and the `painters` data.
 
 ``` r
 library(MASS)
@@ -35,6 +71,7 @@ library(candisc)
 library(ggplot2)
 library(car)
 library(dplyr)
+library(RColorBrewer)
 
 data(painters, package = "MASS")
 str(painters)
@@ -69,7 +106,11 @@ head(painters)
 ## How many from each school?
 
 The distribution of painters across schools is unbalanced, with some
-schools having many more representatives than others.
+schools having many more representatives than others. In particular, the
+small $`n = 4`$ for 16th C and French schools affect some multivariate
+methods (e.g., Box’s M test for equality,
+[`heplots::boxM()`](https://friendly.github.io/heplots/reference/boxM.html))
+which rely on estimating the within-group covariance matrices.
 
 ``` r
 table(painters$School)
@@ -83,8 +124,26 @@ table(painters$School)
 ## Exploratory plots
 
 Before conducting formal multivariate analyses, we explore the data
-visually. A boxplot shows the distribution of colour scores across
-schools. You could do the same for the other variables.
+visually.
+
+First, set up colors and other graphic attributes to be consistent
+across plots. I chose the `RColorBrewer` discrete palette, `Dark2`.
+
+``` r
+options(
+  ggplot2.discrete.colour = function() scale_colour_brewer(palette = "Dark2"),
+  ggplot2.discrete.fill = function() scale_fill_brewer(palette = "Dark2")
+)
+
+# base R graphics
+school.colors <- brewer.pal(n = length(levels(painters$School)), name = "Dark2")
+school.pch <- c(16, 17, 15, 9, 7, 8, 10, 5)
+```
+
+A boxplot shows the distribution of Colour scores across schools. You
+could do the same for the other variables. In general, I try to suppress
+legends where possible, because the space they take reduces resolution
+for the data.
 
 ``` r
 ggplot(data = painters, aes(x = School, y = Colour, fill = School)) +
@@ -92,7 +151,7 @@ ggplot(data = painters, aes(x = School, y = Colour, fill = School)) +
   labs(title = "Colour Scores Distribution by Painting School",
        x = "School",
        y = "Colour Score (0-20)") +
-  theme_bw(base_size = 15)
+  theme(legend.position = "none")
 ```
 
 ![](painters_files/figure-html/boxplot-1.png)
@@ -112,7 +171,7 @@ painters_long <- painters |>
 ggplot(painters_long, aes(x = Metric, y = Score, fill = Metric)) +
   geom_violin(alpha = 0.3) +
   geom_jitter(width = 0.1) +
-  labs(title = "Distribution of De Piles' Scores",
+  labs(title = "Distribution of de Piles' Scores",
        y = "Score (0-20)") +
   theme_light(base_size = 15) +
   theme(legend.position = "none")
@@ -120,14 +179,19 @@ ggplot(painters_long, aes(x = Metric, y = Score, fill = Metric)) +
 
 ![](painters_files/figure-html/violin-plots-1.png)
 
+Note that de Piles used the full range of 0–20 for most of these
+measures, but the range for `Drawing` had no ratings in the lower
+quarter.
+
 ## Sample scatterplots
 
 Scatterplots of pairs of variables, with data ellipses for each school,
 can reveal the multivariate relationships and potential group
-separation. When I map `shape` to `School`, `ggplot` complains because
-it only provides 6 shapes, so it is necessary to use
-[`scale_shape_manual()`](https://ggplot2.tidyverse.org/reference/scale_manual.html).
-I avoid using a legend by labeling the schools at their means.
+separation, but they are limited to 2D views, where the other variables
+vary as they do.
+
+Data ellipses and labels for the schools at their group mean help to
+make such plots more understandable.
 
 ``` r
 means <- painters |>
@@ -141,12 +205,15 @@ ggplot(painters,
   stat_ellipse(level = 0.68, linewidth = 1.3) +
   geom_label(data = means,
              aes(label = School)) +
-  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  scale_shape_manual(values = school.pch) +
   theme_classic(base_size = 15) +
   theme(legend.position = "none")
 ```
 
 ![](painters_files/figure-html/scatter1-1.png)
+
+You can see, for example, that the Venetian school and 17th C painters
+were rated highest on use of color.
 
 Simmilarly, here’s a plot for Drawing and Expression:
 
@@ -158,7 +225,7 @@ ggplot(painters,
   stat_ellipse(level = 0.68, linewidth = 1.3) +
   geom_label(data = means,
              aes(label = School)) +
-  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  scale_shape_manual(values = school.pch) +
   theme_classic(base_size = 15) +
   theme(legend.position = "none")
 ```
@@ -355,11 +422,11 @@ But the
 provides something similar, and the dimensions are essentially the same.
 
 ``` r
-painters.lda <- lda(School ~ Composition + Drawing + Colour + Expression,
+painters.lda <- lda(School ~ .,
                     data = painters)
 painters.lda
 ## Call:
-## lda(School ~ Composition + Drawing + Colour + Expression, data = painters)
+## lda(School ~ ., data = painters)
 ## 
 ## Prior probabilities of groups:
 ## Renaissance   Mannerist     Seiento    Venetian     Lombard      16th C 
@@ -390,6 +457,10 @@ painters.lda
 ## 0.5908 0.2164 0.1586 0.0342
 ```
 
+Again, we see that there are three dimensions that seem important in
+understanding how the Schools differ in terms of the ratings on these
+four aesthetic attributes.
+
 The
 [`plot_discrim()`](https://friendly.github.io/candisc/reference/plot_discrim.md)
 function visualizes the discriminant analysis results by plotting
@@ -400,7 +471,7 @@ LD2, etc.). Here we plot the first two discriminant dimensions:
 plot_discrim(painters.lda, LD2 ~ LD1,
              labels = TRUE,
              labels.args = list(geom = "label")) +
-  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  scale_shape_manual(values = school.pch) +
   theme_classic(base_size = 15) +
   theme(legend.position = "none")
 ```
@@ -414,12 +485,27 @@ and LD3:
 plot_discrim(painters.lda, LD3 ~ LD1,
              labels = TRUE,
              labels.args = list(geom = "label")) +
-  scale_shape_manual(values = c(16, 17, 15, 9, 7, 8, 10, 5)) +
+  scale_shape_manual(values = school.pch) +
   theme_classic(base_size = 15) +
   theme(legend.position = "none")
 ```
 
 ![](painters_files/figure-html/plot-discrim2-1.png)
+
+To complete this, it would be useful to add vectors for the variables in
+these plots as in the plots for the `painters.can` object shown above.
+This is not yet implemented in the package, but the vectors are given by
+columns of
+[`cor_lda()`](https://friendly.github.io/candisc/reference/cor_lda.md)
+
+``` r
+cor_lda(painters.lda)
+##                 LD1     LD2      LD3    LD4
+## Composition -0.1824  0.2287 -0.90850 0.2984
+## Drawing     -0.5740 -0.4342 -0.23701 0.6525
+## Colour       0.9491  0.2293  0.04403 0.2113
+## Expression  -0.4661  0.4811 -0.28324 0.6864
+```
 
 ## Summary
 
@@ -437,6 +523,10 @@ Davenport, M., & Studdert-Kennedy, G. (1972). The statistical analysis
 of aesthetic judgment: An exploration. *Applied Statistics*, *21*(3),
 324–333.
 http://doi.org/[10.2307/2346281](https://doi.org/10.2307/2346281)
+
+Jolliffe, I. T. (1986). *Principal component analysis*. *Springer Series
+in Statistics*. Springer New York.
+http://doi.org/[10.1007/978-1-4757-1904-8](https://doi.org/10.1007/978-1-4757-1904-8)
 
 Piles, R. de. (1743). *The principles of painting*. London: n.p.
 

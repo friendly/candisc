@@ -101,6 +101,8 @@ Datasets used to illustrate the methods in the package
   Yields from Nitrogen nutrition of grass species
 - [`HSB`](https://friendly.github.io/candisc/reference/HSB.md) : High
   School and Beyond Data
+- [`painters2`](https://friendly.github.io/candisc/reference/painters2.md)
+  : Painters Data with Historical Art Variables
 - [`PsyAcad`](https://friendly.github.io/candisc/reference/PsyAcad.md) :
   Psychological Measures and Academic Achievement
 - [`Wine`](https://friendly.github.io/candisc/reference/Wine.md) :
