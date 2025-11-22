@@ -119,6 +119,8 @@ plt <- plot_discrim(iris.lda, LD2 ~ LD1,
   theme(legend.position = "none")
 plt
 
+# reverse axes
+plt + scale_x_reverse()
 
 # add variable vectors
 # 
@@ -136,8 +138,8 @@ vecs <- vecs |>
 plt +
   gggda::geom_vector(
     data = vecs,
-    aes(x = 3 * LD1, y = 3 * LD2, label = label),
-    lineheight = 0.8, linewidth = 1.25, size = 5, angle=0
-  ) +
+    aes(x = 4 * LD1, y = 4 * LD2, label = label),
+    lineheight = 0.8, linewidth = 1.25, size = 5) +
+  scale_y_continuous(expand = expansion(add = c(3, 1))) +
   coord_equal()
 

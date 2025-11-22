@@ -113,6 +113,16 @@ vignette: >
 ---
 ```
 
+## Reversing axes
+
+Please fetch the current version of `plot_discrim()` from https://raw.githubusercontent.com/friendly/candisc/refs/heads/master/R/plot_discrim.R
+When plotting discriminant scores in discriminant space, the orientation of the axes LD1
+and LD2 is arbitrary, in that either or both can be multiplied by -1 without changing the fit.
+
+Implement an option, `rev.axes`, a vector of two logical T/F values, that when 
+`rev.axes[1] ==TRUE` reverses the sign of the horizontal axis, and similarly for `rev.axes[2]`,
+reversing the vertical axis.
+
 ## Variable vectors
 
 One final thing I'd like to do with my function `plot_discrim()` is to be able to draw vectors
