@@ -120,4 +120,4 @@ in the plot representing the correlations of the observed variables with the dis
 This applies only when the formula in the call to `plot_discrim()` specifies the dimensions
 like `LD2 ~ LD`.  For an "lda" object, these correlations can be calculated using `cor_lda()`.
 
---> see code in `plot-discrim-test.R`
+--> see code in `extra/plot-discrim-test.R`

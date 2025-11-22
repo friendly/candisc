@@ -107,6 +107,7 @@ plot_discrim(iris.lda, LD2 ~ LD1,
 
 # Comprehensive styled plot
 
+#iris.lda <- reflect(iris.lda)
 plt <- plot_discrim(iris.lda, LD2 ~ LD1,
              contour = FALSE,
              ellipse = TRUE,
@@ -135,8 +136,8 @@ vecs <- vecs |>
 plt +
   gggda::geom_vector(
     data = vecs,
-    aes(x = 4 * LD1, y = 4 * LD2, label = label),
-    lineheight = 0.8, linewidth = 1.25, size = 5
+    aes(x = 3 * LD1, y = 3 * LD2, label = label),
+    lineheight = 0.8, linewidth = 1.25, size = 5, angle=0
   ) +
   coord_equal()
 
