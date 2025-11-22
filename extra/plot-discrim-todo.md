@@ -121,7 +121,13 @@ and LD2 is arbitrary, in that either or both can be multiplied by -1 without cha
 
 Implement an option, `rev.axes`, a vector of two logical T/F values, that when 
 `rev.axes[1] ==TRUE` reverses the sign of the horizontal axis, and similarly for `rev.axes[2]`,
-reversing the vertical axis.
+reversing the vertical axis. This only applies for plots of the discriminant variables.
+
+## axis limits
+Limits of the variables plotted currently use the range of the focal x, y variables in lines 271-278.
+Can you add arguments `xlim`, `ylim`, with defaults `NULL` to allow these ranges to be
+overridden. This is a bit tricky, since the current version uses `lapply(data[, vars] ...`
+rather than identifying x, y
 
 ## Variable vectors
 

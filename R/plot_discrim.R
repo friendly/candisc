@@ -10,10 +10,11 @@
 # DONE: ✔️ Added discriminant space plotting (LD1, LD2, etc.)
 # DONE: ✔️ Added automatic axis labels with variance percentages for discriminant space
 #
-# TODO: ❌ Fix bug with other.levels: "other.levels are lacking one or more variables"
-# TODO: ❌ Fix mapping for stat_ellipse() when specifying `geom = "polygon"`
 # TODO: Create vignette detailing how to use more generally with ggplot
 # TODO: Implement `rev.axes()` as in `plot.candisc()`
+# TODO: Add args `xlim`, `ylim` to allow to expand the limits for the focal x, y variables in the plot
+# TODO: ❌ Fix bug with other.levels: "other.levels are lacking one or more variables"
+# TODO: ❌ Fix mapping for stat_ellipse() when specifying `geom = "polygon"`
 
 #' Discriminant Analysis Decision Plot using ggplot.
 #' 
