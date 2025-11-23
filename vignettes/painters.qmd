@@ -5,6 +5,9 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 bibliography: references.bib
 csl: apa.csl
+link-citations: true
+pkgdown:
+  as_is: true
 vignette: >
   %\VignetteIndexEntry{Multivariate Visualization of Painters Style}
   %\VignetteEngine{knitr::rmarkdown}
@@ -41,7 +44,7 @@ their characteristics, as shown in @tbl-schools-table.
 #| echo: false
 #| tbl-cap: "Characteristics of painting schools"
 #| out-width: "100%"
-library(gt)
+library(tinytable)
 schools.tab <- data.frame(
   School = c("Renaissance", "Venetian", "Lombard", "16th C", 
              "Mannerist", "Sciento", "17th C", "French"),
@@ -59,24 +62,18 @@ schools.tab <- data.frame(
   )
 )
 
-schools.tab |>
-  gt() |>
-  tab_options(column_labels.font.weight = "bold") |>
-  tab_options(table.width = pct(100)) |>
-  cols_width(
-    School ~ px(80),
-    Period ~ px(100),
-    Characteristics ~ px(400)
-  ) |>
-  tab_header(title = "Chronological overview of painting schools") 
+tt(schools.tab) |>
+  style_tt(i = 0, bold = TRUE) |>
+  style_tt(j = 1:3, align = "l")
 ```
 
 For example, for other analyses, the `School` variable could be made an ordered factor, or schools could be
-categorized into in broad periods ("Early", "Transition", "Baroque"), or by main emphasis ("Form", "Color", "Drama")
+categorized into in broad periods ("Early", "Transition", "Baroque"), or by main emphasis ("Form", "Color", "Drama").
+A dataset with these features is now available as `candisc::painters2`.
 
 ### This vignette
 
-This vignette demonstrates the use of multivariate visualization methods of the `candisc` package, and its' sister, `heplots`.
+This vignette demonstrates the use of multivariate visualization methods of the `candisc` package, and its' mother package, [`heplots`](https://friendly.github.io/heplots/).
 The main goal is to illustrate how
 hypothesis-error (HE) plots, canonical discriminant analysis, and discriminant analysis plots help understand how the schools differ in their aesthetic characteristics. It shows that, while simple univariate and bivariate plots
 are often useful, dimension reduction methods can give a clearer view.

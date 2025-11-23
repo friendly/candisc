@@ -1,0 +1,8 @@
+"dataset","rows","cols","Title","tags"
+"Grass","40","7","Yields from Nitrogen nutrition of grass species","MANOVA candisc discrim"
+"HSB","600","15","High School and Beyond Data","MMRA cancor"
+"PsyAcad","600","8","Psychological Measures and Academic Achievement","cancor"
+"Wine","178","14","Chemical composition of three cultivars of wine","MANOVA candisc discrim"
+"Wolves","25","12","Wolf skulls","candisc discrim"
+"cereal","77","16","Breakfast Cereal Dataset","MMRA cancor"
+"painters2","54","10","Painters Data with Historical Art Variables","MANOVA candisc discrim"

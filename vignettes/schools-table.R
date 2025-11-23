@@ -34,6 +34,8 @@ schools.tab |>
   tab_header(title = "Chronological overview of painting schools") |>
   tab_options(column_labels.font.weight = "bold")
 
+tinytable::tt(schools.tab)
+
 # Defining other variables to reflect differences among schools
 # 
 # The variables capture:

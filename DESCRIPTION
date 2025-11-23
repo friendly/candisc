@@ -24,7 +24,8 @@ Suggests:
     lifecycle,
     tidyr, 
     testthat (>= 3.0.0),
-    RColorBrewer
+    RColorBrewer,
+    tinytable
 LazyLoad: yes
 LazyData: yes
 Authors@R: c(

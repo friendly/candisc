@@ -2,44 +2,76 @@
 library(stringr)
 library(dplyr)
 library(here)
+library(tidyr)
 
 
-#concepts <- system2('grep  "concept{" man/*.Rd', stdout = TRUE)
 concepts <- system2(command = "grep", 
                     args = c(shQuote("concept{"), "man/*.Rd"), 
                     stdout = TRUE)
-concepts |>
-  str_replace("man/", "") |>
-  str_replace(".Rd", "") |>
-  str_replace("concept\\{", "")
 
-# Source - https://stackoverflow.com/a/79827659
-# Posted by user2554330
-# Retrieved 2025-11-22, License - CC BY-SA 4.0
-
-filename <- "man/painters2.Rd"
-rd <- tools::parse_Rd(filename)
-for (i in seq_along(rd))
-  if (attr(rd[[i]], "Rd_tag") == "\\concept")
-    print(filename, " has the concept ", rd[[i]])
+#  [1] "man/Grass.Rd:\\concept{MANOVA}"      "man/Grass.Rd:\\concept{candisc}"    
+#  [3] "man/Grass.Rd:\\concept{discrim}"     "man/HSB.Rd:\\concept{MMRA}"         
+#  [5] "man/HSB.Rd:\\concept{cancor}"        "man/PsyAcad.Rd:\\concept{cancor}"   
+#  [7] "man/Wine.Rd:\\concept{MANOVA}"       "man/Wine.Rd:\\concept{candisc}"     
+#  [9] "man/Wine.Rd:\\concept{discrim}"      "man/Wolves.Rd:\\concept{candisc}"   
+# [11] "man/Wolves.Rd:\\concept{discrim}"    "man/cereal.Rd:\\concept{MMRA}"      
+# [13] "man/cereal.Rd:\\concept{cancor}"     "man/painters2.Rd:\\concept{MANOVA}" 
+# [15] "man/painters2.Rd:\\concept{candisc}" "man/painters2.Rd:\\concept{discrim}"
 
 
-dsets <- vcdExtra::datasets("candisc")[, c("Item", "dim", "Title")]
+# Source - https://stackoverflow.com/a/79827844
+# Posted by G. Grothendieck, modified by community. See post 'Timeline' for change history
+# Retrieved 2025-11-23, License - CC BY-SA 4.0
+
+
+concepts <- readLines(pipe("grep concept man/*.Rd")) %>%
+  grep("concept{", ., fixed = TRUE, value = TRUE) %>% 
+  read.table(text = ., sep = "{", comment.char = "}", 
+    col.names = c("dataset", "tags")) %>%
+  separate(dataset, c(NA, "dataset"), extra = "drop") %>%
+  summarize(tags = paste(tags, collapse = " "), .by = dataset) %>%
+  arrange(dataset)
+
+#     dataset                   tags
+# 1     Grass MANOVA candisc discrim
+# 2       HSB            MMRA cancor
+# 3   PsyAcad                 cancor
+# 4      Wine MANOVA candisc discrim
+# 5    Wolves        candisc discrim
+# 6    cereal            MMRA cancor
+# 7 painters2 MANOVA candisc discrim
+
+
+dsets <- vcdExtra::datasets("candisc")[, c("Item", "dim", "Title")]     
 rowcols <- as.data.frame(stringr::str_split_fixed(dsets$dim,"x", 2))
 colnames(rowcols) <- c("rows", "cols")
 
-dsets.table <- cbind("dataset" = dsets$Item, rowcols, "title" =dsets$Title)
-head(dsets.table)
+dsets <- cbind(dsets, rowcols) |>
+  rename(dataset = Item) |>
+  select(-dim) |>
+  relocate(c(rows, cols), .after=dataset) |>
+  left_join(concepts, by = "dataset") |>
+  print()
 
-write.csv(dsets.table, file = here::here("extra", "datasets.csv"))
+#     dataset rows cols                                           Title                   tags
+# 1     Grass   40    7 Yields from Nitrogen nutrition of grass species MANOVA candisc discrim
+# 2       HSB  600   15                     High School and Beyond Data            MMRA cancor
+# 3   PsyAcad  600    8 Psychological Measures and Academic Achievement                 cancor
+# 4      Wine  178   14 Chemical composition of three cultivars of wine MANOVA candisc discrim
+# 5    Wolves   25   12                                     Wolf skulls        candisc discrim
+# 6    cereal   77   16                        Breakfast Cereal Dataset            MMRA cancor
+# 7 painters2   54   10     Painters Data with Historical Art Variables MANOVA candisc discrim
+
+
+write.csv(dsets, 
+          file = here::here("extra", "datasets.csv"),
+          row.names = FALSE)
 
 # use DT to display
 
 library(here)
 library(glue)
 library(dplyr)
-dsets <- read.csv(here::here("extra", "datasets.csv"))
-dsets <- dsets[,-1]  # remove row number
 
 refurl <- "http://friendly.github.io/candisc/reference/"
 
