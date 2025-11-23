@@ -41,11 +41,10 @@ library(candisc)
 # candisc  <img src="man/figures/logo.png" align="right" height="160px" />
 **Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis**
 
-Version 1.1.0
+<!-- Version 1.1.0 -->
 
-<!-- when in Rmd format, can use
 Version `r getNamespaceVersion("candisc")`
--->
+
 
 ## Description 
 
@@ -93,6 +92,15 @@ and related methods.  Visualization of these results in canonical space
 are provided by the `plot.cancor()`,  `heplot.cancor()` 
 and `heplot3d.cancor()` methods.
 
+### Discriminant analysis
+
+Some of these visualization methods have now been extended to linear and quadratic discriminant analysis,
+using `MASS:lda()` or `MASS:qda()`.
+
+* Provides a simplified interface to prediction, in `predict_discrim()`.
+* A new plotting method, `plot_discrim()`, provides `ggplot2` plots of the classification regions and decision boundaries in data space and in discriminant space.
+* `cor_lda()` calculates correlations between the observed variables and the discriminant dimensions.
+
 ### Variable ordering
 
 The relations among response variables in linear models can also be
@@ -102,15 +110,6 @@ for *variables* in other multivariate data displays, such as heatmaps or "corrgr
 to make the
 displayed relationships more coherent.  The function `varOrder()`
 implements a collection of these methods.
-
-### Discriminant analysis
-
-Some of these visualization methods have now been extended to linear and quadratic discriminant analysis,
-using `MASS:lda()` or `MASS:qda()`.
-
-* Provides a simplified interface to prediction, in `predict_discrim()`.
-* A new plotting method, `plot_discrim()`, provides `ggplot2` plots of the classification regions and decision boundaries in data space and in discriminant space.
-* `cor_lda()` calculates correlations between the observed variables and the discriminant dimensions.
 
 
 ## Installation
@@ -137,8 +136,36 @@ painters.
 
   + [HE plot MANOVA Examples](https://friendly.github.io/heplots/articles/HE_manova.html)
   + [HE plot MMRA Examples](https://friendly.github.io/heplots/articles/HE_mmra.html)
+  * [Datasets in the heplots package](https://friendly.github.io/heplots/articles/datasets.html)
+
+
+## Datasets
+
+In addition to the datasets in the heplots package, `candisc` includes a few more related to the 
+statistical and graphical methods implemented here.
+The table below classifies these with
+**method tags**. Their names are linked to their documentation with graphical output on the
+`pkgdown` website, [<http://friendly.github.io/candisc>].
+
+```{r datasets, echo=FALSE}
+library(here)
+library(dplyr)
+library(tinytable)
+#dsets <- read.csv(here::here("extra", "datasets.csv"))
+dsets <- read.csv("https://raw.githubusercontent.com/friendly/candisc/master/extra/datasets.csv")
+
+# link dataset to pkgdown doc
+refurl <- "http://friendly.github.io/candisc/reference/"
+
+dsets <- dsets |>
+  mutate(dataset = glue::glue("[{dataset}]({refurl}{dataset}.html)")) 
+
+tinytable::tt(dsets)
+```
 
 ## Examples
+
+
 
 These examples will get you started.
 
