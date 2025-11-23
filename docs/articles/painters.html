@@ -66,7 +66,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Multivariate Visualization of Painters Style</h1>
 
       <p class="author">Michael Friendly</p>
-      <p class="date">2025-11-21</p>
+      <p class="date">2025-11-23</p>
 
       <small class="dont-index">Source: <a href="https://github.com/friendly/candisc/blob/HEAD/vignettes/painters.qmd" class="external-link"><code>vignettes/painters.qmd</code></a></small>
       <div class="d-none name"><code></code></div>
@@ -77,7 +77,7 @@
 
 
 
-    <p>Vignette built using <code>heplots</code>, version 1.7.8, <code>candisc</code>, version 1.1.0 and <code>ggplot2</code>, version 4.0.1.</p>
+    <p>Vignette built using <code>heplots</code>, version 1.8.0, <code>candisc</code>, version 1.1.0 and <code>ggplot2</code>, version 4.0.1.</p>
 <section class="level2"><h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>The <code>painters</code> dataset from the <code>MASS</code> package contains subjective assessments of 54 classical painters on four aesthetic qualities: Composition, Drawing, Colour, and Expression. These ratings, on a scale of 0-20, were made by the 18th century art critic Roger de Piles <span class="citation" data-cites="DePiles1743">(<a href="#ref-DePiles1743" role="doc-biblioref">1743</a>)</span>, a notable member of the French Academy of Painting and Sculpture. The ratings reflect his judgment of the “artistic merit” of these painters on each of these dimensions. His painters include the well-known Michelangelo, Tintoretto, Titian, Rembrandt, Rubens, Durer and others that art historians know well.</p>
@@ -92,519 +92,95 @@
 Table 1: Characteristics of painting schools
 </figcaption><div aria-describedby="tbl-schools-table-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="dbsxhkjcyp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#dbsxhkjcyp table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+<!-- preamble start -->
 
-#dbsxhkjcyp thead, #dbsxhkjcyp tbody, #dbsxhkjcyp tfoot, #dbsxhkjcyp tr, #dbsxhkjcyp td, #dbsxhkjcyp th {
-  border-style: none;
-}
+    <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script><script>
+      // Create table-specific functions using external factory
+      const tableFns_4frqe3ac4g6dvyqopqiz = TinyTable.createTableFunctions("tinytable_4frqe3ac4g6dvyqopqiz");
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '8', j: 1 }, { i: '8', j: 2 }, { i: '8', j: 3 } ], css_id: 'tinytable_css_fl8ypkpgvbvdy6hcq835',},
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 } ], css_id: 'tinytable_css_68azrln1l7etchwiwyfh',},
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_yktu2r8ijkaoa0vpt2sn',},
+          ];
 
-#dbsxhkjcyp p {
-  margin: 0;
-  padding: 0;
-}
-
-#dbsxhkjcyp .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: 100%;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#dbsxhkjcyp .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#dbsxhkjcyp .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#dbsxhkjcyp .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#dbsxhkjcyp .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#dbsxhkjcyp .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#dbsxhkjcyp .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#dbsxhkjcyp .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: bold;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#dbsxhkjcyp .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: bold;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#dbsxhkjcyp .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#dbsxhkjcyp .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#dbsxhkjcyp .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#dbsxhkjcyp .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#dbsxhkjcyp .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#dbsxhkjcyp .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#dbsxhkjcyp .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#dbsxhkjcyp .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#dbsxhkjcyp .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#dbsxhkjcyp .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dbsxhkjcyp .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#dbsxhkjcyp .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#dbsxhkjcyp .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#dbsxhkjcyp .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dbsxhkjcyp .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#dbsxhkjcyp .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#dbsxhkjcyp .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#dbsxhkjcyp .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dbsxhkjcyp .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#dbsxhkjcyp .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#dbsxhkjcyp .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#dbsxhkjcyp .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#dbsxhkjcyp .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#dbsxhkjcyp .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dbsxhkjcyp .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#dbsxhkjcyp .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dbsxhkjcyp .gt_left {
-  text-align: left;
-}
-
-#dbsxhkjcyp .gt_center {
-  text-align: center;
-}
-
-#dbsxhkjcyp .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#dbsxhkjcyp .gt_font_normal {
-  font-weight: normal;
-}
-
-#dbsxhkjcyp .gt_font_bold {
-  font-weight: bold;
-}
-
-#dbsxhkjcyp .gt_font_italic {
-  font-style: italic;
-}
-
-#dbsxhkjcyp .gt_super {
-  font-size: 65%;
-}
-
-#dbsxhkjcyp .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#dbsxhkjcyp .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#dbsxhkjcyp .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#dbsxhkjcyp .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#dbsxhkjcyp .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#dbsxhkjcyp .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#dbsxhkjcyp .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#dbsxhkjcyp .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#dbsxhkjcyp div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-<table class="table gt_table do-not-create-environment cell caption-top" data-quarto-postprocess="true" style="table-layout:fixed;width:100%;" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_heading header">
-<th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border">Chronological overview of painting schools</th>
-</tr>
-<tr class="gt_col_headings even">
-<th id="School" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">School</th>
-<th id="Period" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Period</th>
-<th id="Characteristics" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Characteristics</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="School">Renaissance</td>
-<td class="gt_row gt_right" headers="Period">1400-1520</td>
-<td class="gt_row gt_left" headers="Characteristics">Emphasis on naturalism, perspective, classical ideals; focus on balance, harmony, and proportion. Key figures: Leonardo, Michelangelo, Raphael.</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="School">Venetian</td>
-<td class="gt_row gt_right" headers="Period">1450-1600</td>
-<td class="gt_row gt_left" headers="Characteristics">Rich color and light effects (overlaps Renaissance/Mannerist periods); emphasis on sensuous surfaces, atmospheric effects. e.g.: Titian, Veronese, Tintoretto.</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="School">Lombard</td>
-<td class="gt_row gt_right" headers="Period">1490-1600</td>
-<td class="gt_row gt_left" headers="Characteristics">Northern Italian style; naturalism with dramatic chiaroscuro; influenced by both Renaissance ideals and Venetian colorism. e.g.: Albani, Caravaggio</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="School">16th C</td>
-<td class="gt_row gt_right" headers="Period">1500-1600</td>
-<td class="gt_row gt_left" headers="Characteristics">Late Renaissance through Mannerism; transition period showing diverse regional styles across Europe.</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="School">Mannerist</td>
-<td class="gt_row gt_right" headers="Period">1520-1600</td>
-<td class="gt_row gt_left" headers="Characteristics">Reaction to Renaissance harmony; elongated figures, complex compositions, artificial elegance, and emotional intensity. e.g.,: Parmigiano</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="School">Sciento</td>
-<td class="gt_row gt_right" headers="Period">1600-1700</td>
-<td class="gt_row gt_left" headers="Characteristics">Likely refers to 17th century Italian schools emphasizing dramatic realism and scientific observation of nature (possibly related to Caravaggio's influence).</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="School">17th C</td>
-<td class="gt_row gt_right" headers="Period">1600-1700</td>
-<td class="gt_row gt_left" headers="Characteristics">Baroque period; dramatic use of light and shadow, movement, emotional intensity, grandeur. Includes Caravaggism and various national Baroque styles.</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="School">French</td>
-<td class="gt_row gt_right" headers="Period">1600-1750</td>
-<td class="gt_row gt_left" headers="Characteristics">French Baroque and emerging Rococo; emphasis on classical restraint, academic standards, royal patronage. Poussin, Claude Lorrain, later Watteau.</td>
-</tr>
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  tableFns_4frqe3ac4g6dvyqopqiz.styleCell(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
+<style>
+    /* tinytable css entries after */
+    #tinytable_4frqe3ac4g6dvyqopqiz td.tinytable_css_fl8ypkpgvbvdy6hcq835, #tinytable_4frqe3ac4g6dvyqopqiz th.tinytable_css_fl8ypkpgvbvdy6hcq835 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: black; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_4frqe3ac4g6dvyqopqiz td.tinytable_css_68azrln1l7etchwiwyfh, #tinytable_4frqe3ac4g6dvyqopqiz th.tinytable_css_68azrln1l7etchwiwyfh { text-align: left }
+    #tinytable_4frqe3ac4g6dvyqopqiz td.tinytable_css_yktu2r8ijkaoa0vpt2sn, #tinytable_4frqe3ac4g6dvyqopqiz th.tinytable_css_yktu2r8ijkaoa0vpt2sn {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold; text-align: left }
+    </style>
+<div class="container">
+      <table class="table tinytable" id="tinytable_4frqe3ac4g6dvyqopqiz" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+<thead><tr>
+<th scope="col" data-row="0" data-col="1">School</th>
+                <th scope="col" data-row="0" data-col="2">Period</th>
+                <th scope="col" data-row="0" data-col="3">Characteristics</th>
+              </tr></thead>
+<tbody>
+<tr>
+<td data-row="1" data-col="1">Renaissance</td>
+                  <td data-row="1" data-col="2">1400-1520</td>
+                  <td data-row="1" data-col="3">Emphasis on naturalism, perspective, classical ideals; focus on balance, harmony, and proportion. Key figures: Leonardo, Michelangelo, Raphael.</td>
+                </tr>
+<tr>
+<td data-row="2" data-col="1">Venetian</td>
+                  <td data-row="2" data-col="2">1450-1600</td>
+                  <td data-row="2" data-col="3">Rich color and light effects (overlaps Renaissance/Mannerist periods); emphasis on sensuous surfaces, atmospheric effects. e.g.: Titian, Veronese, Tintoretto.</td>
+                </tr>
+<tr>
+<td data-row="3" data-col="1">Lombard</td>
+                  <td data-row="3" data-col="2">1490-1600</td>
+                  <td data-row="3" data-col="3">Northern Italian style; naturalism with dramatic chiaroscuro; influenced by both Renaissance ideals and Venetian colorism. e.g.: Albani, Caravaggio</td>
+                </tr>
+<tr>
+<td data-row="4" data-col="1">16th C</td>
+                  <td data-row="4" data-col="2">1500-1600</td>
+                  <td data-row="4" data-col="3">Late Renaissance through Mannerism; transition period showing diverse regional styles across Europe.</td>
+                </tr>
+<tr>
+<td data-row="5" data-col="1">Mannerist</td>
+                  <td data-row="5" data-col="2">1520-1600</td>
+                  <td data-row="5" data-col="3">Reaction to Renaissance harmony; elongated figures, complex compositions, artificial elegance, and emotional intensity. e.g.,: Parmigiano</td>
+                </tr>
+<tr>
+<td data-row="6" data-col="1">Sciento</td>
+                  <td data-row="6" data-col="2">1600-1700</td>
+                  <td data-row="6" data-col="3">Likely refers to 17th century Italian schools emphasizing dramatic realism and scientific observation of nature (possibly related to Caravaggio's influence).</td>
+                </tr>
+<tr>
+<td data-row="7" data-col="1">17th C</td>
+                  <td data-row="7" data-col="2">1600-1700</td>
+                  <td data-row="7" data-col="3">Baroque period; dramatic use of light and shadow, movement, emotional intensity, grandeur. Includes Caravaggism and various national Baroque styles.</td>
+                </tr>
+<tr>
+<td data-row="8" data-col="1">French</td>
+                  <td data-row="8" data-col="2">1600-1750</td>
+                  <td data-row="8" data-col="3">French Baroque and emerging Rococo; emphasis on classical restraint, academic standards, royal patronage. Poussin, Claude Lorrain, later Watteau.</td>
+                </tr>
 </tbody>
 </table>
 </div>
+<!-- hack to avoid NA insertion in last line -->
 </div>
 </div>
 </figure>
 </div>
 </div>
-<p>For example, for other analyses, the <code>School</code> variable could be made an ordered factor, or schools could be categorized into in broad periods (“Early”, “Transition”, “Baroque”), or by main emphasis (“Form”, “Color”, “Drama”)</p>
+<p>For example, for other analyses, the <code>School</code> variable could be made an ordered factor, or schools could be categorized into in broad periods (“Early”, “Transition”, “Baroque”), or by main emphasis (“Form”, “Color”, “Drama”). A dataset with these features is now available as <code><a href="../reference/painters2.html">candisc::painters2</a></code>.</p>
 </section><section class="level3"><h3 id="this-vignette">This vignette<a class="anchor" aria-label="anchor" href="#this-vignette"></a>
 </h3>
-<p>This vignette demonstrates the use of multivariate visualization methods of the <code>candisc</code> package, and its’ sister, <code>heplots</code>. The main goal is to illustrate how hypothesis-error (HE) plots, canonical discriminant analysis, and discriminant analysis plots help understand how the schools differ in their aesthetic characteristics. It shows that, while simple univariate and bivariate plots are often useful, dimension reduction methods can give a clearer view.</p>
+<p>This vignette demonstrates the use of multivariate visualization methods of the <code>candisc</code> package, and its’ mother package, <a href="https://friendly.github.io/heplots/" class="external-link"><code>heplots</code></a>. The main goal is to illustrate how hypothesis-error (HE) plots, canonical discriminant analysis, and discriminant analysis plots help understand how the schools differ in their aesthetic characteristics. It shows that, while simple univariate and bivariate plots are often useful, dimension reduction methods can give a clearer view.</p>
 <p>Let’s get started. Load packages, and the <code>painters</code> data.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="downlit sourceCode r">
