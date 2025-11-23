@@ -4,7 +4,25 @@ library(dplyr)
 library(here)
 
 
-concepts <- system2('grep  "concept{" man/*.Rd', stdout = TRUE)
+#concepts <- system2('grep  "concept{" man/*.Rd', stdout = TRUE)
+concepts <- system2(command = "grep", 
+                    args = c(shQuote("concept{"), "man/*.Rd"), 
+                    stdout = TRUE)
+concepts |>
+  str_replace("man/", "") |>
+  str_replace(".Rd", "") |>
+  str_replace("concept\\{", "")
+
+# Source - https://stackoverflow.com/a/79827659
+# Posted by user2554330
+# Retrieved 2025-11-22, License - CC BY-SA 4.0
+
+filename <- "man/painters2.Rd"
+rd <- tools::parse_Rd(filename)
+for (i in seq_along(rd))
+  if (attr(rd[[i]], "Rd_tag") == "\\concept")
+    print(filename, " has the concept ", rd[[i]])
+
 
 dsets <- vcdExtra::datasets("candisc")[, c("Item", "dim", "Title")]
 rowcols <- as.data.frame(stringr::str_split_fixed(dsets$dim,"x", 2))
