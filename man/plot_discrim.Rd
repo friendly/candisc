@@ -18,6 +18,9 @@ plot_discrim(
   ellipse.args = list(level = 0.68, linewidth = 1.2),
   labels = FALSE,
   labels.args = list(geom = "text", size = 5),
+  rev.axes = c(FALSE, FALSE),
+  xlim = NULL,
+  ylim = NULL,
   ...,
   other.levels
 )
@@ -26,7 +29,7 @@ plot_discrim(
 \item{model}{a discriminant analysis model object from \code{MASS::lda()} or \code{MASS::qda()}}
 
 \item{vars}{either a character vector of length 2 of the names of the \code{x} and \code{y} variables, or a formula of form \code{y ~ x}
-specifying the axes in the plot. To plot in discriminant space, use \code{LD2 ~ LD1}, \code{LD3 ~ LD2}, etc.}
+specifying the axes in the plot. Can include discriminant dimensions like \code{LD1}, \code{LD2}, etc.}
 
 \item{data}{data to use for visualization. Should contain all the data needed to use the \code{model} for prediction. The default is to use
 the data used to fit the \code{model}.}
@@ -59,17 +62,20 @@ Common arguments include \code{geom} (either \code{"text"} or \code{"label"}, de
 \code{nudge_x} and \code{nudge_y} (position offsets), and \code{alpha} (transparency for label backgrounds).
 Any valid argument to \code{geom_text()} or \code{geom_label()} can be used.}
 
+\item{rev.axes}{a logical vector of length 2 controlling axis reversal for discriminant dimensions.
+\code{rev.axes[1] = TRUE} reverses the horizontal (x) axis; \code{rev.axes[2] = TRUE} reverses the
+vertical (y) axis. Only applies when plotting discriminant dimensions (e.g., \code{LD2 ~ LD1}).
+Default: \code{c(FALSE, FALSE)}.}
+
+\item{xlim, ylim}{numeric vectors of length 2 giving the axis limits. If \code{NULL} (default), uses the
+range of the variable in the data.}
+
 \item{...}{further parameters passed to \code{predict()}}
 
 \item{other.levels}{a named list specifying the fixed values to use for variables in the model that are
 \strong{not} included in \code{vars} (the non-focal variables). These values are held constant across
 the prediction grid. If not specified, the function uses sensible defaults: means for
-quantitative variables, and the first level for factors or character variables. For example,
-if your model includes variables \code{Age}, \code{Gender}, and \code{Income}, but you're plotting
-\code{Sepal.Length ~ Sepal.Width}, you might specify
-\code{other.levels = list(Age = 30, Gender = "Female", Income = 50000)} to generate predictions
-at those fixed values for the non-focal variables. This parameter is ignored when plotting
-in discriminant space (i.e., when \code{vars} contains \code{LD1}, \code{LD2}, etc.).}
+quantitative variables, and the first level for factors or character variables.}
 }
 \description{
 Discriminant analysis can be more easily understood from plots of the data variables showing how observations are classified.
@@ -79,13 +85,9 @@ values to be visualized are discrete categories rather than quantitative.
 
 In the case of discriminant analysis, the predicted values are class membership,
 so this can be visualized by mapping the categorical predicted class to discrete colors used as the background for the plot, or
-plotting the \strong{contours} of predicted class membership as lines (for \code{\link[MASS:lda]{MASS::lda()}}) or quadratic curves (for \code{\link[MASS:qda]{MASS::qda()}}) in the plot.
+plotting the \strong{contours} of predicted class membership as lines (for \verb{[MASS::lda()]}) or qauadratic curves (for \verb{[MASS::qda()]}) in the plot.
 The predicted class of any observation in the space of the variables displayed can also be rendered as colored \strong{tiles} or \strong{points}
 in the background of the plot.
-
-\code{plot_discrim()} also allows you to visualize the classification in \strong{discriminant space}, of the weighted scores that best distinguish
-among the groups. When there are only two discriminant dimensions, this view captures all the information regarding group separation
-contained in all the predictors used in the \code{lda()} / \code{qda()} analysis. But, you can plot any pair of dimensions.
 }
 \details{
 Since \code{plot_discrim()} returns a \code{"ggplot"} object, you can easily customize colors and shapes by adding scale layers after
@@ -94,10 +96,9 @@ plots using \code{\link[ggplot2:theme]{ggplot2::theme()}} components.
 
 \strong{Customizing colors and shapes}
 \itemize{
-\item Use \code{\link[ggplot2:scale_manual]{ggplot2::scale_color_manual()}} \strong{and} \code{\link[ggplot2:scale_manual]{ggplot2::scale_fill_manual()}} to control the colors used when using \code{showgrid = "tile"}, because that maps
+\item Use \code{scale_color_manual()} \strong{and} \code{scale_fill_manual()} to control the colors used when using \code{showgrid = "tile"}, because that maps
 both \strong{both} \code{color} and \code{fill} to the group variable.
-\item Use \code{\link[ggplot2:scale_manual]{ggplot2::scale_shape_manual()}} to control the symbols used for \code{geom_points()}. Note that if there are more than 6 classes, you will need
-to use this, because \code{ggplot} only provides for 6 different shapes.
+\item Use \code{scale_shape_manual()} to control the symbols used for \code{geom_points()}
 }
 
 \strong{Customizing ellipses}
@@ -106,7 +107,7 @@ The \code{ellipse.args} parameter provides fine control over the appearance of d
 \itemize{
 \item \code{level}: the confidence level for the ellipse (default: 0.68)
 \item \code{linewidth}: thickness of the ellipse line (default: 1.2)
-\item \code{geom}: either \code{"path"} for unfilled ellipses (default) or \code{"polygon"} for filled ellipses. (\strong{NB}: at present, the \code{fill} aesthetic is not mapped to the class variable.)
+\item \code{geom}: either \code{"path"} for unfilled ellipses (default) or \code{"polygon"} for filled ellipses
 \item \code{alpha}: transparency when using \code{geom = "polygon"}
 }
 
@@ -128,17 +129,32 @@ See \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} and \code{\link[ggplot
 
 \strong{Plotting in discriminant space}
 
-When \code{vars} specifies \code{LD1} and/or \code{LD2} (e.g., \code{LD2 ~ LD1}), the function automatically:
+When \code{vars} specifies discriminant dimensions (e.g., \code{LD2 ~ LD1}), the function automatically:
 \enumerate{
 \item Calculates discriminant scores using \code{predict_discrim()}
-\item Creates a new LDA model in discriminant space
-\item Plots the observations and decision boundaries in that space
-\item Adds axis labels showing the percentage of between-group variance explained by each dimension
+\item Creates a new LDA model in the discriminant space
+\item Plots the observations and decision boundaries in this transformed space
 }
 
-This is useful for visualizing the discriminant analysis results in the space where
-groups are maximally separated. The axis labels automatically include the variance percentages,
-e.g., "Discriminant dimension 1 (86.5\%)".
+This is particularly useful for visualizing how well the discriminant dimensions separate the groups,
+since by construction the groups are maximally separated in discriminant space.
+
+\strong{Reversing discriminant axes}
+
+The orientation of discriminant axes (LD1, LD2, etc.) is arbitrary in the sense that multiplying
+any discriminant dimension by -1 does not change the discriminant solution or model fit. The \code{rev.axes}
+parameter allows you to reverse the direction of one or both axes when plotting in discriminant space.
+This can be useful for:
+\itemize{
+\item Aligning the discriminant plot with conventional interpretations (e.g., having "positive" on the right)
+\item Making the orientation consistent across different analyses or visualizations
+\item Improving the interpretability of the axes in relation to the original variables
+}
+
+The \code{rev.axes} parameter \strong{only affects plots of discriminant dimensions} (e.g., \code{LD2 ~ LD1}) and has no
+effect when plotting original observed variables. To reverse the horizontal axis (x-axis), set
+\code{rev.axes[1] = TRUE}; to reverse the vertical axis (y-axis), set \code{rev.axes[2] = TRUE}. Both axes
+can be reversed simultaneously with \code{rev.axes = c(TRUE, TRUE)}.
 }
 \examples{
 library(MASS)
@@ -163,6 +179,14 @@ plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
              ellipse = TRUE,
              ellipse.args = list(level = 0.95, linewidth = 2)) 
 
+# without contours
+# data ellipses
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+             contour = FALSE) 
+
+# specifying `vars` as character names for x, y
+plot_discrim(iris.lda, c("Petal.Width", "Petal.Length"))
+
 # Define custom colors and shapes, modify theme() and legend.position
 iris.colors <- c("red", "darkgreen", "blue")
 iris.pch <- 15:17
@@ -178,11 +202,7 @@ plot_discrim(iris.lda, Petal.Length ~ Petal.Width) +
 iris.qda <- qda(Species ~ ., iris)
 plot_discrim(iris.qda, Petal.Length ~ Petal.Width)
 
-# Add class labels at group means
-plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
-             labels = TRUE)
-
-# Add labels with custom styling
+# Add class labels, with custom styling
 plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
              labels = TRUE,
              labels.args = list(geom = "label", size = 6, fontface = "bold"))
@@ -192,10 +212,15 @@ plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
              labels = TRUE,
              labels.args = list(nudge_y = 0.1, size = 5))
 
-# Plot in discriminant space with automatic variance labels
-plot_discrim(iris.lda, LD2 ~ LD1, 
-             ellipse = TRUE,
-             labels = TRUE)
+# Plot in discriminant space
+plot_discrim(iris.lda, LD2 ~ LD1)
+
+# Reverse the horizontal axis in discriminant space
+plot_discrim(iris.lda, LD2 ~ LD1, rev.axes = c(TRUE, FALSE))
+
+# Control axis limits
+plot_discrim(iris.lda, LD2 ~ LD1,
+             xlim = c(-10, 10), ylim = c(-8, 8))
 
 
 }

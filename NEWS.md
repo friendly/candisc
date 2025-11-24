@@ -18,6 +18,9 @@ This is a major release, resolving some problems with `plot_discrim()` and addin
 * Started to add `testthat` to package checks
 * Added another vignette using the `MASS::painters` data
 * Added `painters2` dataset
+* Added `datasets.csv` file to allow use of `@concept` tags in pkgdown site
+* Added `rev.axes` to reverse axes in `plot_discrim()`, useful for plots in discrim space, where  orientation is arbitrary
+* Added `xlim`, `ylim` arguments to control axis limits; useful for plots in discrim space.
 
 ## Version 1.0.0
 
