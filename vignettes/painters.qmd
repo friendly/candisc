@@ -28,7 +28,7 @@ Vignette built using `heplots`, version `r packageDescription("heplots")[["Versi
 
 The `painters` dataset from the `MASS` package contains subjective assessments of 54 classical painters on four aesthetic qualities: Composition, Drawing, Colour, and Expression. These ratings, on a scale of 0-20, were made by the 18th century art critic Roger de Piles [-@DePiles1743], a notable member of the French Academy of Painting and Sculpture. The ratings reflect his judgment of the "artistic merit" of these painters on each of these dimensions.  His painters include the well-known Michelangelo, Tintoretto, Titian, Rembrandt, Rubens, Durer and others that art historians know well.
 
-The 54 painters are classified into eight schools: Renaissance (A), Mannerist (B), Seicento (C), Venetian (D), Lombard (E), Sixteenth Century (F), Seventeenth Century (G), and French (H). This data was first analysed by @Davenport1972. Jolliffe [-@Jolliffe1986] 
+The 54 painters are classified into eight schools: Renaissance (A), Mannerist (B), Sciento (C), Venetian (D), Lombard (E), Sixteenth Century (F), Seventeenth Century (G), and French (H). This data was first analysed by @Davenport1972. Jolliffe [-@Jolliffe1986] 
 used it to illustrate principal components analysis, and the data later featured in @VenablesRipley2002, who put it into the
 `MASS` package.
 
@@ -194,7 +194,7 @@ ggplot(painters,
 
 You can see, for example,  that the Venetian school and 17th C painters were rated highest on use of color.
 
-Simmilarly, here's a plot for Drawing and Expression:
+Similarly, here's a plot for Drawing and Expression:
 
 ```{r scatter2, fig.width=8, fig.height=6}
 ggplot(painters,
