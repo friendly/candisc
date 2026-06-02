@@ -1,3 +1,7 @@
+## Version 1.1.1
+
+* `heplot.cancor()` gains a `rev.axes` argument, similar to that in `heplot.candisc()`
+
 ## Version 1.1.0
 
 This is a major release, resolving some problems with `plot_discrim()` and adding considerable functionality

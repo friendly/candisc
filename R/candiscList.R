@@ -16,8 +16,7 @@
 #' computing canonical scores and vectors.
 #' 
 #' 
-#' @aliases candiscList candiscList.mlm plot.candiscList print.candiscList
-#'          summary.candiscList
+#' @aliases candiscList candiscList.mlm plot.candiscList print.candiscList summary.candiscList
 #' @param mod An mlm object, such as computed by lm() with a multivariate
 #'          response
 #' @param type type of test for the model `term`, one of: "II", "III",

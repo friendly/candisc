@@ -75,7 +75,7 @@ vecs <- matrix( runif(10, -1, 1), 5, 2)
 plot(bbox)
 arrows(0, 0, vecs[,1], vecs[,2], angle=10, col="red")
 (s <- vecscale(vecs))
-#> [1] 2.375523
+#> [1] 2.66564
 arrows(0, 0, s*vecs[,1], s*vecs[,2], angle=10)
 
 ```

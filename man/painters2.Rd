@@ -33,7 +33,7 @@ Venables, W. N. and Ripley, B. D. (2002) \emph{Modern Applied Statistics with S}
 Fourth edition. Springer.
 }
 \usage{
-painters2
+data(painters2)
 }
 \description{
 The original \code{\link[MASS]{painters}} dataset from the \pkg{MASS} package contains

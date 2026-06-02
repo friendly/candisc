@@ -83,6 +83,6 @@
 #' @aliases candisc-package
 #' @keywords package multivariate
 #' @importFrom graphics abline arrows boxplot layout lines par points polygon symbols text
-#' @importFrom stats aggregate complete.cases contrasts cor cov cov.wt formula lsfit model.frame
-#'         model.matrix model.response model.weights pf qchisq terms update var
+#' @importFrom stats aggregate complete.cases contrasts cor cov cov.wt formula lsfit
+#' @importFrom stats model.frame model.matrix model.response model.weights pf qchisq terms update var
 "_PACKAGE"

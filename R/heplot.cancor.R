@@ -74,6 +74,9 @@
 #' @param suffix Suffix for labels of canonical dimensions. If
 #'        `suffix=TRUE` the percent of hypothesis (H) variance accounted for by
 #'        each canonical dimension is added to the axis label.
+#' @param rev.axes Logical, a vector of `length(which)`. `TRUE` causes the
+#'        orientation of the canonical scores and structure coefficients to be
+#'        reversed along a given axis.
 #' @param terms Terms for the X variables to be plotted in canonical space. The
 #'        default, `terms=TRUE` or `terms="X"` plots H ellipses for all of
 #'       the X variables. `terms="Xcan"` plots H ellipses for all of the X
@@ -117,6 +120,12 @@
 #' 	prefix="Y canonical dimension"
 #' 	)
 #' 
+#' # reversing axes
+#' heplot(cc, rev.axes=c(TRUE, TRUE),
+#' 	var.cex=1.5, var.col="red", var.lwd=3,
+#' 	prefix="Y canonical dimension"
+#' 	)
+#'
 #' # 3D version
 #' \dontrun{
 #' heplot3d(cc, var.lwd=3, var.col="red")
@@ -133,6 +142,7 @@ heplot.cancor <- function (
 	var.lwd=par("lwd"),
 	var.cex=par("cex"),
 	var.xpd=TRUE,     # was: par("xpd"),
+	rev.axes=c(FALSE, FALSE),
 	prefix = "Ycan",  # prefix for labels of canonical dimensions
 	suffix = TRUE,   # add label suffix with can % ?
 	terms=TRUE,  # terms to be plotted in canonical space / TRUE=all
@@ -169,9 +179,12 @@ heplot.cancor <- function (
 			stop(paste(setdiff(terms, colnames(scores) ), "are not among the available variables"))
 		}
 
+  rev.axes <- rep(rev.axes, length.out=2)
+  if(isTRUE(rev.axes[1])) scores[, Ycan[which[1]]] <- -scores[, Ycan[which[1]]]
+  if(isTRUE(rev.axes[2])) scores[, Ycan[which[2]]] <- -scores[, Ycan[which[2]]]
+
 ##   Construct the model formula to fit mod$Yscores ~ Xscores in original lm()
 ##   using the mod$scores data.frame
-#browser()
   txt <- paste( "lm( cbind(",
               paste(Ycan, collapse = ","),
               ") ~ ",
@@ -190,6 +203,16 @@ heplot.cancor <- function (
 	struc <- mod$structure
   Xstructure <- struc$X.yscores[,which]
   Ystructure <- struc$Y.yscores[,which]
+
+  if(isTRUE(rev.axes[1])) {
+    Xstructure[, 1] <- -Xstructure[, 1]
+    Ystructure[, 1] <- -Ystructure[, 1]
+  }
+  if(isTRUE(rev.axes[2])) {
+    Xstructure[, 2] <- -Xstructure[, 2]
+    Ystructure[, 2] <- -Ystructure[, 2]
+  }
+
   vec <- rbind(
   	if ("Y" %in% var.vectors) Ystructure else NULL,
   	if ("X" %in% var.vectors) Xstructure else NULL)

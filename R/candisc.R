@@ -66,8 +66,7 @@
 #' canonical scores and a vector diagram showing the magnitudes of the
 #' structure coefficients.
 #' 
-#' @aliases candisc candisc.mlm coef.candisc plot.candisc print.candisc
-#'          summary.candisc
+#' @aliases candisc candisc.mlm coef.candisc plot.candisc print.candisc summary.candisc
 #' @param mod An mlm object, such as computed by `lm()` with a
 #'        multivariate response
 #' @param term the name of one term from `mod` for which the canonical

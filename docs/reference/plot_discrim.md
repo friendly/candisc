@@ -12,20 +12,10 @@ In the case of discriminant analysis, the predicted values are class
 membership, so this can be visualized by mapping the categorical
 predicted class to discrete colors used as the background for the plot,
 or plotting the **contours** of predicted class membership as lines (for
-[`MASS::lda()`](https://rdrr.io/pkg/MASS/man/lda.html)) or quadratic
-curves (for [`MASS::qda()`](https://rdrr.io/pkg/MASS/man/qda.html)) in
-the plot. The predicted class of any observation in the space of the
-variables displayed can also be rendered as colored **tiles** or
-**points** in the background of the plot.
-
-`plot_discrim()` also allows you to visualize the classification in
-**discriminant space**, of the weighted scores that best distinguish
-among the groups. When there are only two discriminant dimensions, this
-view captures all the information regarding group separation contained
-in all the predictors used in the
-[`lda()`](https://rdrr.io/pkg/MASS/man/lda.html) /
-[`qda()`](https://rdrr.io/pkg/MASS/man/qda.html) analysis. But, you can
-plot any pair of dimensions.
+`[MASS::lda()]`) or qauadratic curves (for `[MASS::qda()]`) in the plot.
+The predicted class of any observation in the space of the variables
+displayed can also be rendered as colored **tiles** or **points** in the
+background of the plot.
 
 ## Usage
 
@@ -44,6 +34,9 @@ plot_discrim(
   ellipse.args = list(level = 0.68, linewidth = 1.2),
   labels = FALSE,
   labels.args = list(geom = "text", size = 5),
+  rev.axes = c(FALSE, FALSE),
+  xlim = NULL,
+  ylim = NULL,
   ...,
   other.levels
 )
@@ -61,8 +54,7 @@ plot_discrim(
 
   either a character vector of length 2 of the names of the `x` and `y`
   variables, or a formula of form `y ~ x` specifying the axes in the
-  plot. To plot in discriminant space, use `LD2 ~ LD1`, `LD3 ~ LD2`,
-  etc.
+  plot. Can include discriminant dimensions like `LD1`, `LD2`, etc.
 
 - data:
 
@@ -138,6 +130,19 @@ plot_discrim(
   [`geom_label()`](https://ggplot2.tidyverse.org/reference/geom_text.html)
   can be used.
 
+- rev.axes:
+
+  a logical vector of length 2 controlling axis reversal for
+  discriminant dimensions. `rev.axes[1] = TRUE` reverses the
+  horizontal (x) axis; `rev.axes[2] = TRUE` reverses the vertical (y)
+  axis. Only applies when plotting discriminant dimensions (e.g.,
+  `LD2 ~ LD1`). Default: `c(FALSE, FALSE)`.
+
+- xlim, ylim:
+
+  numeric vectors of length 2 giving the axis limits. If `NULL`
+  (default), uses the range of the variable in the data.
+
 - ...:
 
   further parameters passed to
@@ -149,14 +154,7 @@ plot_discrim(
   model that are **not** included in `vars` (the non-focal variables).
   These values are held constant across the prediction grid. If not
   specified, the function uses sensible defaults: means for quantitative
-  variables, and the first level for factors or character variables. For
-  example, if your model includes variables `Age`, `Gender`, and
-  `Income`, but you're plotting `Sepal.Length ~ Sepal.Width`, you might
-  specify
-  `other.levels = list(Age = 30, Gender = "Female", Income = 50000)` to
-  generate predictions at those fixed values for the non-focal
-  variables. This parameter is ignored when plotting in discriminant
-  space (i.e., when `vars` contains `LD1`, `LD2`, etc.).
+  variables, and the first level for factors or character variables.
 
 ## Details
 
@@ -170,17 +168,15 @@ components.
 **Customizing colors and shapes**
 
 - Use
-  [`ggplot2::scale_color_manual()`](https://ggplot2.tidyverse.org/reference/scale_manual.html)
+  [`scale_color_manual()`](https://ggplot2.tidyverse.org/reference/scale_manual.html)
   **and**
-  [`ggplot2::scale_fill_manual()`](https://ggplot2.tidyverse.org/reference/scale_manual.html)
+  [`scale_fill_manual()`](https://ggplot2.tidyverse.org/reference/scale_manual.html)
   to control the colors used when using `showgrid = "tile"`, because
   that maps both **both** `color` and `fill` to the group variable.
 
 - Use
-  [`ggplot2::scale_shape_manual()`](https://ggplot2.tidyverse.org/reference/scale_manual.html)
-  to control the symbols used for `geom_points()`. Note that if there
-  are more than 6 classes, you will need to use this, because `ggplot`
-  only provides for 6 different shapes.
+  [`scale_shape_manual()`](https://ggplot2.tidyverse.org/reference/scale_manual.html)
+  to control the symbols used for `geom_points()`
 
 **Customizing ellipses**
 
@@ -192,8 +188,7 @@ of data ellipses. Common arguments include:
 - `linewidth`: thickness of the ellipse line (default: 1.2)
 
 - `geom`: either `"path"` for unfilled ellipses (default) or `"polygon"`
-  for filled ellipses. (**NB**: at present, the `fill` aesthetic is not
-  mapped to the class variable.)
+  for filled ellipses
 
 - `alpha`: transparency when using `geom = "polygon"`
 
@@ -227,23 +222,44 @@ for additional parameters.
 
 **Plotting in discriminant space**
 
-When `vars` specifies `LD1` and/or `LD2` (e.g., `LD2 ~ LD1`), the
+When `vars` specifies discriminant dimensions (e.g., `LD2 ~ LD1`), the
 function automatically:
 
 1.  Calculates discriminant scores using
     [`predict_discrim()`](https://friendly.github.io/candisc/reference/predict_discrim.md)
 
-2.  Creates a new LDA model in discriminant space
+2.  Creates a new LDA model in the discriminant space
 
-3.  Plots the observations and decision boundaries in that space
+3.  Plots the observations and decision boundaries in this transformed
+    space
 
-4.  Adds axis labels showing the percentage of between-group variance
-    explained by each dimension
+This is particularly useful for visualizing how well the discriminant
+dimensions separate the groups, since by construction the groups are
+maximally separated in discriminant space.
 
-This is useful for visualizing the discriminant analysis results in the
-space where groups are maximally separated. The axis labels
-automatically include the variance percentages, e.g., "Discriminant
-dimension 1 (86.5%)".
+**Reversing discriminant axes**
+
+The orientation of discriminant axes (LD1, LD2, etc.) is arbitrary in
+the sense that multiplying any discriminant dimension by -1 does not
+change the discriminant solution or model fit. The `rev.axes` parameter
+allows you to reverse the direction of one or both axes when plotting in
+discriminant space. This can be useful for:
+
+- Aligning the discriminant plot with conventional interpretations
+  (e.g., having "positive" on the right)
+
+- Making the orientation consistent across different analyses or
+  visualizations
+
+- Improving the interpretability of the axes in relation to the original
+  variables
+
+The `rev.axes` parameter **only affects plots of discriminant
+dimensions** (e.g., `LD2 ~ LD1`) and has no effect when plotting
+original observed variables. To reverse the horizontal axis (x-axis),
+set `rev.axes[1] = TRUE`; to reverse the vertical axis (y-axis), set
+`rev.axes[2] = TRUE`. Both axes can be reversed simultaneously with
+`rev.axes = c(TRUE, TRUE)`.
 
 ## References
 
@@ -291,6 +307,16 @@ plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
              ellipse.args = list(level = 0.95, linewidth = 2)) 
 
 
+# without contours
+# data ellipses
+plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
+             contour = FALSE) 
+
+
+# specifying `vars` as character names for x, y
+plot_discrim(iris.lda, c("Petal.Width", "Petal.Length"))
+
+
 # Define custom colors and shapes, modify theme() and legend.position
 iris.colors <- c("red", "darkgreen", "blue")
 iris.pch <- 15:17
@@ -308,12 +334,7 @@ iris.qda <- qda(Species ~ ., iris)
 plot_discrim(iris.qda, Petal.Length ~ Petal.Width)
 
 
-# Add class labels at group means
-plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
-             labels = TRUE)
-
-
-# Add labels with custom styling
+# Add class labels, with custom styling
 plot_discrim(iris.lda, Petal.Length ~ Petal.Width, 
              labels = TRUE,
              labels.args = list(geom = "label", size = 6, fontface = "bold"))
@@ -325,10 +346,17 @@ plot_discrim(iris.lda, Petal.Length ~ Petal.Width,
              labels.args = list(nudge_y = 0.1, size = 5))
 
 
-# Plot in discriminant space with automatic variance labels
-plot_discrim(iris.lda, LD2 ~ LD1, 
-             ellipse = TRUE,
-             labels = TRUE)
+# Plot in discriminant space
+plot_discrim(iris.lda, LD2 ~ LD1)
+
+
+# Reverse the horizontal axis in discriminant space
+plot_discrim(iris.lda, LD2 ~ LD1, rev.axes = c(TRUE, FALSE))
+
+
+# Control axis limits
+plot_discrim(iris.lda, LD2 ~ LD1,
+             xlim = c(-10, 10), ylim = c(-8, 8))
 
 
 ```

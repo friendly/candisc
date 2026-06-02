@@ -83,8 +83,7 @@
 #' eigenvalues of \eqn{E^{-1} H}, and so is equivalent to the MMRA analysis of
 #' `lm(Y ~ X)` statistically, but visualized here in canonical space.
 #' 
-#' @aliases cancor cancor.default cancor.formula print.cancor summary.cancor
-#'          coef.cancor scores scores.cancor
+#' @aliases cancor cancor.default cancor.formula print.cancor summary.cancor coef.cancor scores scores.cancor
 #' @param formula A two-sided formula of the form `cbind(y1, y2, y3, \dots) ~ x1 + x2 + x3 + \dots`
 #' @param data The data.frame within which the formula is evaluated
 #' @param subset an optional vector specifying a subset of observations to be

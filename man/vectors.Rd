@@ -53,8 +53,8 @@ None
 \description{
 Graphics utility functions to draw vectors from an origin to a collection of
 points (using \code{\link[graphics:arrows]{graphics::arrows()}} in 2D or
-\code{\link[rgl:primitives]{rgl::lines3d()}} in 3D) with labels for each (using \code{\link[graphics:text]{graphics::text()}}
-or \code{\link[rgl:texts]{rgl::texts3d()}}
+\code{\link[rgl:lines3d]{rgl::lines3d()}} in 3D) with labels for each (using \code{\link[graphics:text]{graphics::text()}}
+or \code{\link[rgl:texts3d]{rgl::texts3d()}}
 }
 \details{
 The graphical parameters \code{col}, \code{lty} and \code{lwd} can be

@@ -64,16 +64,6 @@ and
 [`heplot3d.cancor()`](https://friendly.github.io/candisc/reference/heplot.cancor.md)
 methods.
 
-### Variable ordering
-
-The relations among response variables in linear models can also be
-useful for “effect ordering” (Friendly & Kwan (2003)) for *variables* in
-other multivariate data displays, such as heatmaps or “corrgrams”
-(Friendly, 2002) of correlations. to make the displayed relationships
-more coherent. The function
-[`varOrder()`](https://friendly.github.io/candisc/reference/varOrder.md)
-implements a collection of these methods.
-
 ### Discriminant analysis
 
 Some of these visualization methods have now been extended to linear and
@@ -88,6 +78,16 @@ quadratic discriminant analysis, using `MASS:lda()` or `MASS:qda()`.
 - [`cor_lda()`](https://friendly.github.io/candisc/reference/cor_lda.md)
   calculates correlations between the observed variables and the
   discriminant dimensions.
+
+### Variable ordering
+
+The relations among response variables in linear models can also be
+useful for “effect ordering” (Friendly & Kwan (2003)) for *variables* in
+other multivariate data displays, such as heatmaps or “corrgrams”
+(Friendly, 2002) of correlations. to make the displayed relationships
+more coherent. The function
+[`varOrder()`](https://friendly.github.io/candisc/reference/varOrder.md)
+implements a collection of these methods.
 
 ## Installation
 
@@ -122,6 +122,26 @@ R-universe or this Github repo.
     Examples](https://friendly.github.io/heplots/articles/HE_manova.html)
   - [HE plot MMRA
     Examples](https://friendly.github.io/heplots/articles/HE_mmra.html)
+  - [Datasets in the heplots
+    package](https://friendly.github.io/heplots/articles/datasets.html)
+
+## Datasets
+
+In addition to the datasets in the heplots package, `candisc` includes a
+few more related to the statistical and graphical methods implemented
+here. The table below classifies these with **method tags**. Their names
+are linked to their documentation with graphical output on the `pkgdown`
+website, \[<http://friendly.github.io/candisc>\].
+
+| dataset | rows | cols | Title | tags |
+|----|----|----|----|----|
+| [Grass](http://friendly.github.io/candisc/reference/Grass.md) | 40 | 7 | Yields from Nitrogen nutrition of grass species | MANOVA candisc discrim |
+| [HSB](http://friendly.github.io/candisc/reference/HSB.md) | 600 | 15 | High School and Beyond Data | MMRA cancor |
+| [PsyAcad](http://friendly.github.io/candisc/reference/PsyAcad.md) | 600 | 8 | Psychological Measures and Academic Achievement | cancor |
+| [Wine](http://friendly.github.io/candisc/reference/Wine.md) | 178 | 14 | Chemical composition of three cultivars of wine | MANOVA candisc discrim |
+| [Wolves](http://friendly.github.io/candisc/reference/Wolves.md) | 25 | 12 | Wolf skulls | candisc discrim |
+| [cereal](http://friendly.github.io/candisc/reference/cereal.md) | 77 | 16 | Breakfast Cereal Dataset | MMRA cancor |
+| [painters2](http://friendly.github.io/candisc/reference/painters2.md) | 54 | 10 | Painters Data with Historical Art Variables | MANOVA candisc discrim |
 
 ## Examples
 

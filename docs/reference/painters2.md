@@ -115,18 +115,38 @@ De Piles, R. (1743). The Principles of Painting. London, n.p.
 
 ``` r
 data(painters2)
-#> Warning: data set 'painters2' not found
 
 # Compare original School with new Period grouping
 with(painters2, table(School, Period))
-#> Error: object 'painters2' not found
+#>              Period
+#> School        Early Transition Baroque
+#>   Renaissance    10          0       0
+#>   Mannerist       0          6       0
+#>   Sciento         0          0       6
+#>   Venetian       10          0       0
+#>   Lombard         7          0       0
+#>   16th C          0          4       0
+#>   17th C          0          0       7
+#>   French          0          0       4
 
 # Compare original School with new Period grouping
 with(painters2, table(School, Emphasis))
-#> Error: object 'painters2' not found
+#>              Emphasis
+#> School        Form Color Drama
+#>   Renaissance   10     0     0
+#>   Mannerist      6     0     0
+#>   Sciento        0     0     6
+#>   Venetian       0    10     0
+#>   Lombard        0     7     0
+#>   16th C         4     0     0
+#>   17th C         0     0     7
+#>   French         0     4     0
 
 # Summary of de Piles ratings by Period
 aggregate(cbind(Composition, Drawing, Colour, Expression) ~ Period,
           data = painters2, FUN = mean)
-#> Error in eval(m$data, parent.frame()): object 'painters2' not found
+#>       Period Composition  Drawing   Colour Expression
+#> 1      Early    10.74074 12.44444 12.37037   6.333333
+#> 2 Transition    10.20000 12.70000  8.20000   8.000000
+#> 3    Baroque    13.64706 12.35294 10.29412   9.588235
 ```

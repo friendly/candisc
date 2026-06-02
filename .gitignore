@@ -26,3 +26,4 @@ vignettes/*.pdf
 *.knit.md
 inst/doc
 CRAN-SUBMISSION 
+.positai

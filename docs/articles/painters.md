@@ -1,6 +1,6 @@
 # Multivariate Visualization of Painters Style
 
-Vignette built using `heplots`, version 1.7.8, `candisc`, version 1.1.0
+Vignette built using `heplots`, version 1.8.0, `candisc`, version 1.1.0
 and `ggplot2`, version 4.0.1.
 
 ## Introduction
@@ -16,13 +16,12 @@ painters include the well-known Michelangelo, Tintoretto, Titian,
 Rembrandt, Rubens, Durer and others that art historians know well.
 
 The 54 painters are classified into eight schools: Renaissance (A),
-Mannerist (B), Seicento (C), Venetian (D), Lombard (E), Sixteenth
-Century (F), Seventeenth Century (G), and French (H). This data was
-first analysed by Davenport & Studdert-Kennedy
-([1972](#ref-Davenport1972)). Jolliffe ([1986](#ref-Jolliffe1986)) used
-it to illustrate principal components analysis, and the data later
-featured in Venables & Ripley ([2002](#ref-VenablesRipley2002)), who put
-it into the `MASS` package.
+Mannerist (B), Sciento (C), Venetian (D), Lombard (E), Sixteenth Century
+(F), Seventeenth Century (G), and French (H). This data was first
+analysed by Davenport & Studdert-Kennedy ([1972](#ref-Davenport1972)).
+Jolliffe ([1986](#ref-Jolliffe1986)) used it to illustrate principal
+components analysis, and the data later featured in Venables & Ripley
+([2002](#ref-VenablesRipley2002)), who put it into the `MASS` package.
 
 ### Painters schools: Going further
 
@@ -33,9 +32,8 @@ But, for the record, it is possible to go further, by placing these
 schools in approximate chronological order and describing some of their
 characteristics, as shown in [Table 1](#tbl-schools-table).
 
-| Chronological overview of painting schools |  |  |
-|----|----|----|
 | School | Period | Characteristics |
+|----|----|----|
 | Renaissance | 1400-1520 | Emphasis on naturalism, perspective, classical ideals; focus on balance, harmony, and proportion. Key figures: Leonardo, Michelangelo, Raphael. |
 | Venetian | 1450-1600 | Rich color and light effects (overlaps Renaissance/Mannerist periods); emphasis on sensuous surfaces, atmospheric effects. e.g.: Titian, Veronese, Tintoretto. |
 | Lombard | 1490-1600 | Northern Italian style; naturalism with dramatic chiaroscuro; influenced by both Renaissance ideals and Venetian colorism. e.g.: Albani, Caravaggio |
@@ -50,13 +48,15 @@ Table 1: Characteristics of painting schools
 For example, for other analyses, the `School` variable could be made an
 ordered factor, or schools could be categorized into in broad periods
 (“Early”, “Transition”, “Baroque”), or by main emphasis (“Form”,
-“Color”, “Drama”)
+“Color”, “Drama”). A dataset with these features is now available as
+[`candisc::painters2`](https://friendly.github.io/candisc/reference/painters2.md).
 
 ### This vignette
 
 This vignette demonstrates the use of multivariate visualization methods
-of the `candisc` package, and its’ sister, `heplots`. The main goal is
-to illustrate how hypothesis-error (HE) plots, canonical discriminant
+of the `candisc` package, and its’ mother package,
+[`heplots`](https://friendly.github.io/heplots/). The main goal is to
+illustrate how hypothesis-error (HE) plots, canonical discriminant
 analysis, and discriminant analysis plots help understand how the
 schools differ in their aesthetic characteristics. It shows that, while
 simple univariate and bivariate plots are often useful, dimension
@@ -215,7 +215,7 @@ ggplot(painters,
 You can see, for example, that the Venetian school and 17th C painters
 were rated highest on use of color.
 
-Simmilarly, here’s a plot for Drawing and Expression:
+Similarly, here’s a plot for Drawing and Expression:
 
 ``` r
 ggplot(painters,

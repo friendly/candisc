@@ -1,10 +1,10 @@
-pandoc: '3.4'
+pandoc: 3.6.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   diabetes: diabetes.html
   painters: painters.html
-last_built: 2025-11-22T01:15Z
+last_built: 2025-11-24T19:40Z
 urls:
   reference: https://friendly.github.io/candisc/reference
   article: https://friendly.github.io/candisc/articles

@@ -56,7 +56,7 @@ and \code{alpha} (transparency for filled ellipses). Any valid argument to \code
 
 \item{labels}{logical; if \code{TRUE}, class labels are added to the plot at the group means (default: \code{FALSE}).}
 
-\item{labels.args}{a named list of arguments passed to \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} or \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}.
+\item{labels.args}{a named list of arguments passed to \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} or \code{\link[ggplot2:geom_label]{ggplot2::geom_label()}}.
 Common arguments include \code{geom} (either \code{"text"} or \code{"label"}, default: \code{"text"}),
 \code{size} (text size, default: 5), \code{fontface} (e.g., \code{"bold"} or \code{"italic"}),
 \code{nudge_x} and \code{nudge_y} (position offsets), and \code{alpha} (transparency for label backgrounds).
@@ -125,7 +125,7 @@ group means. Common arguments for \code{labels.args} include:
 \item \code{alpha}: transparency for label backgrounds when using \code{geom = "label"}
 }
 
-See \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} and \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}} for additional parameters.
+See \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} and \code{\link[ggplot2:geom_label]{ggplot2::geom_label()}} for additional parameters.
 
 \strong{Plotting in discriminant space}
 

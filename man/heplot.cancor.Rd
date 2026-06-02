@@ -15,6 +15,7 @@
   var.lwd = par("lwd"),
   var.cex = par("cex"),
   var.xpd = TRUE,
+  rev.axes = c(FALSE, FALSE),
   prefix = "Ycan",
   suffix = TRUE,
   terms = TRUE,
@@ -49,6 +50,10 @@ if these are plotted.}
 
 \item{var.xpd}{logical. Allow variable labels outside the plot box? Does not
 apply to 3D plots.}
+
+\item{rev.axes}{Logical, a vector of \code{length(which)}. \code{TRUE} causes the
+orientation of the canonical scores and structure coefficients to be
+reversed along a given axis.}
 
 \item{prefix}{Prefix for labels of the Y canonical dimensions.}
 
@@ -130,6 +135,12 @@ heplot(cc, scale=1.25, hypotheses=list("na+ns"=c("na", "ns")))
 # more options
 heplot(cc, hypotheses=list("All X"=colnames(X)),
 	fill=c(TRUE,FALSE), fill.alpha=0.2,
+	var.cex=1.5, var.col="red", var.lwd=3,
+	prefix="Y canonical dimension"
+	)
+
+# reversing axes
+heplot(cc, rev.axes=c(TRUE, TRUE),
 	var.cex=1.5, var.col="red", var.lwd=3,
 	prefix="Y canonical dimension"
 	)

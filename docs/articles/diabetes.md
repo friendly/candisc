@@ -1,6 +1,6 @@
 # Diabetes data: heplots and candisc examples
 
-Vignette built using `heplots`, version 1.7.8, `candisc`, version 1.1.0
+Vignette built using `heplots`, version 1.8.0, `candisc`, version 1.1.0
 and `car`, version 3.1-3.
 
 ## Background
@@ -280,7 +280,7 @@ dimensions.
 The relationship of the response variables to the canonical dimensions
 is shown by vectors (similar to a biplot). Each vector is defined by the
 correlations (structure coefficients) it has with the canonical
-dimensions.[¹](#fn1)
+dimensions.[^1]
 
 ``` r
 plot(diab.can, ellipse=TRUE, var.lwd=2)
@@ -451,8 +451,6 @@ Reaven, G. M. & Miller, R. G. (1979). An Attempt to Define the Nature of
 Chemical Diabetes Using a Multidimensional Analysis *Diabetologia*,
 **16**, 17-24.
 
-------------------------------------------------------------------------
-
-1.  The structure coefficients determine only the angle of the vector
+[^1]: The structure coefficients determine only the angle of the vector
     with respect to the coordinate axes. The vectors are all multiplied
     by a scale factor, chosen so the vectors nearly fill the plot frame.

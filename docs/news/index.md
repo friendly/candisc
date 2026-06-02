@@ -34,6 +34,13 @@ and adding considerable functionality
 - Added another vignette using the
   [`MASS::painters`](https://rdrr.io/pkg/MASS/man/painters.html) data
 - Added `painters2` dataset
+- Added `datasets.csv` file to allow use of `@concept` tags in pkgdown
+  site
+- Added `rev.axes` to reverse axes in
+  [`plot_discrim()`](https://friendly.github.io/candisc/reference/plot_discrim.md),
+  useful for plots in discrim space, where orientation is arbitrary
+- Added `xlim`, `ylim` arguments to control axis limits; useful for
+  plots in discrim space.
 
 ## Version 1.0.0
 
