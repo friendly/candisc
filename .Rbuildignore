@@ -17,7 +17,7 @@ NAMESPACE-old
 ^CRAN-SUBMISSION$
 data-raw/
 extra/
-vitnettes/.quarto
+^vignettes/\.quarto
 ^\.positai$
 ^\.claude$
 ^dev/

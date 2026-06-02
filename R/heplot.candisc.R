@@ -271,21 +271,26 @@ heplot3d.candisc <- function (
 	var.col="blue",
 	var.lwd=par("lwd"),
 	var.cex=rgl::par3d("cex"),
+	rev.axes=c(FALSE, FALSE, FALSE),
 	prefix = "Can",  # prefix for labels of canonical dimensions
 	suffix = FALSE,   # add label suffix with can % ?
 	terms=mod$term,  # terms to be plotted in canonical space / TRUE=all
 	...         # extra args passed to heplot3d
 	) {
 
-#	factors <- mod$factors                  # factor variable(s) from candisc
+	factors <- mod$factors                  # factor variable(s) from candisc
+	nf <- ncol(factors)
 	term <- mod$term                        # term for which candisc was done
 	lm.terms <- mod$terms                   # terms in original lm
-#	canvar <- paste('Can', which, sep="")   # names of canonical variables to plot
 	# maybe the canlab labels are too long for the plot?
 	if (is.logical(suffix) & suffix)
 		suffix <- paste( " (", round(mod$pct[which],1), "%)", sep="" ) else suffix <- NULL
 	canlab <- paste(prefix, which, suffix, sep="")
 	scores <- mod$scores
+  rev.axes <- rep(rev.axes, length.out=3)
+  if(isTRUE(rev.axes[1])) scores[, nf+which[1]] <- -scores[, nf+which[1]]
+  if(isTRUE(rev.axes[2])) scores[, nf+which[2]] <- -scores[, nf+which[2]]
+  if(isTRUE(rev.axes[3])) scores[, nf+which[3]] <- -scores[, nf+which[3]]
 	# fit can.mod for the canonical scores
   txt <- paste( "lm( cbind(",
               paste("Can",1:mod$rank,sep="", collapse = ","),
@@ -302,6 +307,9 @@ heplot3d.candisc <- function (
   		xlab=canlab[1], ylab=canlab[2], zlab=canlab[3], ...)
 
   structure <- mod$structure[,which]
+  if(isTRUE(rev.axes[1])) structure[, 1] <- -structure[, 1]
+  if(isTRUE(rev.axes[2])) structure[, 2] <- -structure[, 2]
+  if(isTRUE(rev.axes[3])) structure[, 3] <- -structure[, 3]
 	maxrms <- function(x) { max(sqrt(apply(x^2, 1, sum))) }
 	if (missing(scale)) {
 		vecmax <- maxrms(structure)
@@ -315,9 +323,9 @@ heplot3d.candisc <- function (
 		cat("Vector scale factor set to ", scale, "\n")
 #	  browser()
 	}
-  cs <- scale * mod$structure
+  cs <- scale * structure
   #  can this be simplified?
-  for(i in 1:nrow(mod$structure)) {
+  for(i in 1:nrow(structure)) {
   	rgl::lines3d( c(0, cs[i,1]),
   	              c(0, cs[i,2]),
   	              c(0, cs[i,3]), col=var.col, lwd=var.lwd)
