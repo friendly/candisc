@@ -93,7 +93,8 @@ NULL
 #' \item{`ss`}{Standardized social science (civics) score: a numeric vector} 
 #' }
 #' @references High School and Beyond data files:
-#' <http://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/7896>
+#' <https://www.datalumos.org/datalumos/project/235431/>
+#' 
 #' @source Tatsuoka, M. M. (1988).  Multivariate Analysis: Techniques for
 #' Educational and Psychological Research (2nd ed.). New York: Macmillan,
 #' Appendix F, 430-442.

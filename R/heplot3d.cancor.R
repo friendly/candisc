@@ -11,6 +11,7 @@ heplot3d.cancor <- function (
 	var.lwd=par("lwd"),
 	var.cex=par("cex"),
 	var.xpd=NA,       # not used
+	rev.axes=c(FALSE, FALSE, FALSE),
 	prefix = "Ycan",  # prefix for labels of canonical dimensions
 	suffix = FALSE,   # add label suffix with can % ?
 	terms=TRUE,  # terms to be plotted in canonical space / TRUE=all
@@ -48,9 +49,13 @@ heplot3d.cancor <- function (
 			stop(paste(setdiff(terms, colnames(scores) ), "are not among the available variables"))
 		}
 
+  rev.axes <- rep(rev.axes, length.out=3)
+  if(isTRUE(rev.axes[1])) scores[, Ycan[which[1]]] <- -scores[, Ycan[which[1]]]
+  if(isTRUE(rev.axes[2])) scores[, Ycan[which[2]]] <- -scores[, Ycan[which[2]]]
+  if(isTRUE(rev.axes[3])) scores[, Ycan[which[3]]] <- -scores[, Ycan[which[3]]]
+
 ##   Construct the model formula to fit mod$Yscores ~ Xscores in original lm()
 ##   using the mod$scores data.frame
-#browser()
   txt <- paste( "lm( cbind(",
               paste(Ycan, collapse = ","),
               ") ~ ",
@@ -70,6 +75,18 @@ heplot3d.cancor <- function (
   Xstructure <- struc$X.yscores[,which]
   Ystructure <- struc$Y.yscores[,which]
 
+  if(isTRUE(rev.axes[1])) {
+    Xstructure[, 1] <- -Xstructure[, 1]
+    Ystructure[, 1] <- -Ystructure[, 1]
+  }
+  if(isTRUE(rev.axes[2])) {
+    Xstructure[, 2] <- -Xstructure[, 2]
+    Ystructure[, 2] <- -Ystructure[, 2]
+  }
+  if(isTRUE(rev.axes[3])) {
+    Xstructure[, 3] <- -Xstructure[, 3]
+    Ystructure[, 3] <- -Ystructure[, 3]
+  }
 
 # TODO: calculate scale factor(s)
   structure <- Ystructure
