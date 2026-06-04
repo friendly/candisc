@@ -71,7 +71,7 @@ hsb.can
 }
 \references{
 High School and Beyond data files:
-\url{http://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/7896}
+\url{https://www.datalumos.org/datalumos/project/235431/}
 }
 \concept{MMRA}
 \concept{cancor}

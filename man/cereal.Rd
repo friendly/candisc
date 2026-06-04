@@ -94,14 +94,11 @@ ggplot(data = cereal,
 
 }
 \references{
-Jean Dos Santos, Breakfast Cereals: Data Analysis and Clustering, (Kaggle link doesn't work)
-Does a bunch of data cleaning
-and exploratory data analysis in R.
+Jean Dos Santos, Breakfast Cereals: Data Analysis and Clustering.
+Does a bunch of data cleaning and exploratory data analysis in R.
 }
 \seealso{
 \link[MASS:UScereal]{MASS::UScereal} has a similar dataset with fewer observations and variables, but with the variables normalized to a portion of one US cup.
-
-\url{https://www.kaggle.com/datasets/crawford/80-cereals} Essentially the same dataset
 }
 \concept{MMRA}
 \concept{cancor}

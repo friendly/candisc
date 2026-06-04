@@ -7,41 +7,23 @@ There were no ERRORs, WARNINGs or NOTES
 
 ## reverse dependencies
 
-> devtools::revdep()
-> revdep()
-[1] "Guerry"               "heplots"              "KnowBR"               "MorphoTools2"        
-[5] "MultivariateAnalysis" "SurveyCC"
+`revdepcheck::revdep_check()` failed to run due to a bug in one of its
+dependencies (`mime` not exported by `namespace:gmailr`).
 
+`devtools::revdep()` lists 6 packages, but Guerry, heplots, and KnowBR only
+list candisc in `Suggests` and are not affected by changes to the package API.
+The 3 packages that `Depend` on or `Import` candisc are:
+MorphoTools2, MultivariateAnalysis, SurveyCC.
 
-## revdepcheck results
-
-> revdepcheck::revdep_check(num_workers = 4)
-
-We checked 6 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
-
- * We saw 0 new problems
- * We failed to check 0 packages
+These were checked manually using `rcmdcheck` and no new problems were found.
 
 ## Comments
 
-## Version 1.1.0
+## Version 1.1.1
 
-This is a major release, resolving some problems with `plot_discrim()` and adding considerable functionality
+This is a minor release, making heplots more flexible
 
-* Fixed buglet in `plot_discrim()` where the variables in a formula needed to be reversed.
-* `plot_discrim()` now gets the `data` from the object, if not supplied.
-* Added `tile.alpha` arg to `plot_discim()`; document how to customize colors, shapes, ...
-* `plot_discrim()` gains an `ellipse` argument to draw data ellipses for the groups.
-* Added `ellipse.args` to control stat_ellipse() parameters
-* Added `labels` and `labels.args` for class labels at group means
-* Flesh out package description in README.
-* Default for `posterior` in `predict_discrim()` becomes `FALSE`, as rarely needed
-* `plot_discrim()` now allows plotting the results in discriminant space, e.g., `LD2 ~ LD1`
-* It also generates nice labels for the discriminant dimensions
-* Added `scores.lda()` to extract discriminant scores
-* Fixed problems in reflect()
-* Added examples to README
-* Started to add `testthat` to package checks
-* Added another vignette using the `MASS::painters` data
-* Added `painters2` dataset
+* `heplot.cancor()` gains a `rev.axes` argument, similar to that in `heplot.candisc()`
+* `rev.axes` also added to `heplot3d*()` functions
+* Added `confusion()` to calculate confusion matrices for LDA/QDA
 

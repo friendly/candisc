@@ -1,5 +1,7 @@
 ## Version 1.1.1
 
+This is a minor release, making heplots more flexible
+
 * `heplot.cancor()` gains a `rev.axes` argument, similar to that in `heplot.candisc()`
 * `rev.axes` also added to `heplot3d*()` functions
 * Added `confusion()` to calculate confusion matrices for LDA/QDA
