@@ -1,7 +1,7 @@
 # Diabetes data: heplots and candisc examples
 
-Vignette built using `heplots`, version 1.8.0, `candisc`, version 1.1.0
-and `car`, version 3.1-3.
+Vignette built using `heplots`, version 1.8.1, `candisc`, version 1.1.1
+and `car`, version 3.1-5.
 
 ## Background
 
@@ -155,10 +155,10 @@ and informative display of how the groups differ in the components
 diab.boxm <- boxM(Diabetes[,2:5], Diabetes$group)
 diab.boxm
 ## 
-##  Box's M-test for Homogeneity of Covariance Matrices
+##  Box's M-test for Homogeneity of Covariance Matrices 
 ## 
-## data:  Diabetes[, 2:5]
-## Chi-Sq (approx.) = 383, df = 20, p-value <2e-16
+## data:  Diabetes[, 2:5] by Diabetes$group 
+## Chi-Sq (approx.) = 382.8, df = 20, p-value = <2e-16
 
 op <- par(mar=c(4,6,1,1)+.5)
 plot(diab.boxm, cex.lab=1.5)

@@ -3,7 +3,7 @@
 **Visualizing Generalized Canonical Discriminant and Canonical
 Correlation Analysis**
 
-Version 1.1.0
+Version 1.1.1
 
 ## Description
 

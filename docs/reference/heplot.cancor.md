@@ -33,6 +33,7 @@ heplot(
   var.lwd = par("lwd"),
   var.cex = par("cex"),
   var.xpd = TRUE,
+  rev.axes = c(FALSE, FALSE),
   prefix = "Ycan",
   suffix = TRUE,
   terms = TRUE,
@@ -88,6 +89,12 @@ heplot(
 
   logical. Allow variable labels outside the plot box? Does not apply to
   3D plots.
+
+- rev.axes:
+
+  Logical, a vector of `length(which)`. `TRUE` causes the orientation of
+  the canonical scores and structure coefficients to be reversed along a
+  given axis.
 
 - prefix:
 
@@ -189,6 +196,14 @@ heplot(cc, hypotheses=list("All X"=colnames(X)),
   )
 
 #> Vector scale factor set to  2 
+
+# reversing axes
+heplot(cc, rev.axes=c(TRUE, TRUE),
+  var.cex=1.5, var.col="red", var.lwd=3,
+  prefix="Y canonical dimension"
+  )
+
+#> Vector scale factor set to  1 
 
 # 3D version
 if (FALSE) { # \dontrun{

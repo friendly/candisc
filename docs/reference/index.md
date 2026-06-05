@@ -69,6 +69,9 @@ Discriminant analysis
 - [`scores(`*`<lda>`*`)`](https://friendly.github.io/candisc/reference/scores.lda.md)
   : Extract Observation Discriminant Scores for Linear Discriminant
   Analysis
+- [`confusion()`](https://friendly.github.io/candisc/reference/confusion.md)
+  [`print(`*`<confusion>`*`)`](https://friendly.github.io/candisc/reference/confusion.md)
+  : Confusion matrix for LDA / QDA
 
 ## 🧩 Utilities
 

@@ -89,7 +89,7 @@ http://www.gseis.ucla.edu/courses/data/hbs6.dta
 ## References
 
 High School and Beyond data files:
-<http://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/7896>
+<https://www.datalumos.org/datalumos/project/235431/>
 
 ## Examples
 

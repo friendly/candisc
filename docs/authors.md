@@ -12,15 +12,15 @@
 Source:
 [`inst/CITATION`](https://github.com/friendly/candisc/blob/HEAD/inst/CITATION)
 
-Friendly M, Fox J (2025). *candisc: Visualizing Generalized Canonical
+Friendly M, Fox J (2026). *candisc: Visualizing Generalized Canonical
 Discriminant and Canonical Correlation Analysis*. R package version
-1.1.0, <https://CRAN.R-project.org/package=heplots>.
+1.1.1, <https://CRAN.R-project.org/package=heplots>.
 
     @Manual{,
       title = {{candisc}: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis},
       author = {Michael Friendly and John Fox},
-      year = {2025},
-      note = {R package version 1.1.0},
+      year = {2026},
+      note = {R package version 1.1.1},
       url = {https://CRAN.R-project.org/package=heplots},
     }
 

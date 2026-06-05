@@ -5,9 +5,10 @@ variables and the discriminant dimension scores from a linear
 discriminant analysis provided by
 [`MASS::lda()`](https://rdrr.io/pkg/MASS/man/lda.html). These more
 directly assess the direction and strength of the relations between the
-two sets than do the `scaling` weights returned by `lda()`. They are
-useful for plotting the discriminant scores, showing the contributions
-of the variables by vectors.
+two sets than do the `scaling` weights returned by
+[`lda()`](https://rdrr.io/pkg/MASS/man/lda.html). They are useful for
+plotting the discriminant scores, showing the contributions of the
+variables by vectors.
 
 ## Usage
 
@@ -70,11 +71,6 @@ Michael Friendly
 ``` r
 library(candisc)
 library(MASS)   # for lda()
-#> 
-#> Attaching package: 'MASS'
-#> The following object is masked from 'package:dplyr':
-#> 
-#>     select
 
 iris.lda <- lda(Species ~ ., iris)
 cor_lda(iris.lda)

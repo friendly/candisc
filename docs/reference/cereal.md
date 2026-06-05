@@ -139,18 +139,14 @@ The abbreviations for manufacturer, `mfr`, stand for:
 
 ## References
 
-Jean Dos Santos, Breakfast Cereals: Data Analysis and Clustering,
-(Kaggle link doesn't work) Does a bunch of data cleaning and exploratory
-data analysis in R.
+Jean Dos Santos, Breakfast Cereals: Data Analysis and Clustering. Does a
+bunch of data cleaning and exploratory data analysis in R.
 
 ## See also
 
 [MASS::UScereal](https://rdrr.io/pkg/MASS/man/UScereal.html) has a
 similar dataset with fewer observations and variables, but with the
 variables normalized to a portion of one US cup.
-
-<https://www.kaggle.com/datasets/crawford/80-cereals> Essentially the
-same dataset
 
 ## Examples
 
@@ -202,7 +198,7 @@ cereal <- cereal |>
 
 # density plot of ratings
 library(ggplot2)
-#> Warning: package 'ggplot2' was built under R version 4.5.2
+#> Warning: package 'ggplot2' was built under R version 4.5.3
 ggplot(data = cereal,
        aes(x = rating, fill = mfr_name, color = mfr_name)) +
   geom_density(alpha = 0.1) +

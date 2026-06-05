@@ -1,7 +1,7 @@
 # Multivariate Visualization of Painters Style
 
-Vignette built using `heplots`, version 1.8.0, `candisc`, version 1.1.0
-and `ggplot2`, version 4.0.1.
+Vignette built using `heplots`, version 1.8.1, `candisc`, version 1.1.1
+and `ggplot2`, version 4.0.3.
 
 ## Introduction
 

@@ -45,6 +45,7 @@ reference:
       - plot_discrim
       - cor_lda
       - scores.lda
+      - confusion
 
   - title: 🧩 Utilities
     desc: Utility functions for graphics

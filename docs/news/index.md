@@ -1,6 +1,22 @@
 # Changelog
 
+## Version 1.1.1
+
+CRAN release: 2026-06-05
+
+This is a minor release, making heplots more flexible
+
+- [`heplot.cancor()`](https://friendly.github.io/candisc/reference/heplot.cancor.md)
+  gains a `rev.axes` argument, similar to that in
+  [`heplot.candisc()`](https://friendly.github.io/candisc/reference/heplot.candisc.md)
+- `rev.axes` also added to `heplot3d*()` functions
+- Added
+  [`confusion()`](https://friendly.github.io/candisc/reference/confusion.md)
+  to calculate confusion matrices for LDA/QDA
+
 ## Version 1.1.0
+
+CRAN release: 2025-11-25
 
 This is a major release, resolving some problems with
 [`plot_discrim()`](https://friendly.github.io/candisc/reference/plot_discrim.md)
