@@ -47,7 +47,7 @@
 #' X <- as.matrix(Rohwer[,6:10])  # the PA tests
 #' Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
 #' Rohwer.can <- cancor(X, Y, set.names=c("PA", "Ability"))
-#' coef(Rohwer)
+#' coef(Rohwer.can)
 #' Rohwer.can |> reflect() |> coef()
 #'
 #' 
