@@ -27,3 +27,5 @@ vignettes/*.pdf
 inst/doc
 CRAN-SUBMISSION 
 .positai
+# MacOS Files
+.DS_Store
