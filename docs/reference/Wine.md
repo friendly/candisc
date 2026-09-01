@@ -88,6 +88,7 @@ In R, a comparable data set is contained in the ggbiplot package.
 ## Examples
 
 ``` r
+
 data(Wine)
 str(Wine)
 #> 'data.frame':    178 obs. of  14 variables:

@@ -155,6 +155,7 @@ feed this to
 to get the canonical discriminant equivalent.
 
 ``` r
+
 iris.mod <- lm(cbind(Petal.Length, Sepal.Length, Petal.Width, Sepal.Width) ~ Species, data=iris)
 car::Anova(iris.mod)
 #> 
@@ -195,6 +196,7 @@ observations on the canonical dimensions
 ([`scores()`](https://friendly.github.io/candisc/reference/cancor.md)).
 
 ``` r
+
 # get coefficients
 coef(iris.can)
 #>                    Can1        Can2
@@ -214,6 +216,7 @@ Correlations between the observed variables and the canonical dimensions
 are given by the `$structure` component of the object.
 
 ``` r
+
 iris.can$structure
 #>                    Can1        Can2
 #> Petal.Length  0.9849513 -0.04603709
@@ -233,6 +236,7 @@ their structure correlations with the canonical dimension.
 The following plot illustrates some of the options.
 
 ``` r
+
 #-- assign colors and symbols corresponding to species
 iris.colors <- c("red", "darkgreen", "blue")
 iris.pch <- 15:17
@@ -252,6 +256,7 @@ scores by a **H** ellipse showing variation of the means and an **E**
 ellipse reflecting the pooled within-group variation.
 
 ``` r
+
 heplot(
   iris.can,
   fill = TRUE, fill.alpha = 0.1,

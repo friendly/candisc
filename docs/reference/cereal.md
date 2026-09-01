@@ -198,7 +198,6 @@ cereal <- cereal |>
 
 # density plot of ratings
 library(ggplot2)
-#> Warning: package 'ggplot2' was built under R version 4.5.3
 ggplot(data = cereal,
        aes(x = rating, fill = mfr_name, color = mfr_name)) +
   geom_density(alpha = 0.1) +

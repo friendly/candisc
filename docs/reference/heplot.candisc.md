@@ -159,6 +159,7 @@ Michael Friendly and John Fox
 ## Examples
 
 ``` r
+
 ## Pottery data, from car package
 data(Pottery, package = "carData")
 pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data=Pottery)

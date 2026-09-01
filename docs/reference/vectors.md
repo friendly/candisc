@@ -109,6 +109,7 @@ Michael Friendly
 ## Examples
 
 ``` r
+
 set.seed(1234)
 plot(c(-3, 3), c(-3,3), type="n",
      xlab = "X", ylab = "Y")

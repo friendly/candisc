@@ -31,6 +31,7 @@ Michael Friendly
 ## Examples
 
 ``` r
+
 factors <- expand.grid(A=factor(1:3),B=factor(1:2),C=factor(1:2))
 n <- nrow(factors)
 responses <-data.frame(Y1=10+round(10*rnorm(n)),Y2=10+round(10*rnorm(n)))

@@ -66,7 +66,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Multivariate Visualization of Painters Style</h1>
 
       <p class="author">Michael Friendly</p>
-      <p class="date">2026-06-05</p>
+      <p class="date">2026-08-31</p>
 
       <small class="dont-index">Source: <a href="https://github.com/friendly/candisc/blob/HEAD/vignettes/painters.qmd" class="external-link"><code>vignettes/painters.qmd</code></a></small>
       <div class="d-none name"><code></code></div>
@@ -77,7 +77,7 @@
 
 
 
-    <p>Vignette built using <code>heplots</code>, version 1.8.1, <code>candisc</code>, version 1.1.1 and <code>ggplot2</code>, version 4.0.3.</p>
+    <p>Vignette built using <code>heplots</code>, version 1.8.4, <code>candisc</code>, version 1.1.1 and <code>ggplot2</code>, version 4.0.3.</p>
 <section class="level2"><h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>The <code>painters</code> dataset from the <code>MASS</code> package contains subjective assessments of 54 classical painters on four aesthetic qualities: Composition, Drawing, Colour, and Expression. These ratings, on a scale of 0-20, were made by the 18th century art critic Roger de Piles <span class="citation" data-cites="DePiles1743">(<a href="#ref-DePiles1743" role="doc-biblioref">1743</a>)</span>, a notable member of the French Academy of Painting and Sculpture. The ratings reflect his judgment of the “artistic merit” of these painters on each of these dimensions. His painters include the well-known Michelangelo, Tintoretto, Titian, Rembrandt, Rubens, Durer and others that art historians know well.</p>
@@ -96,32 +96,32 @@ Table 1: Characteristics of painting schools
 
     <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script><script>
       // Create table-specific functions using external factory
-      const tableFns_3yankb7jqq81i1b92252 = TinyTable.createTableFunctions("tinytable_3yankb7jqq81i1b92252");
+      const tableFns_kssctnrqcuqbi6can6ws = TinyTable.createTableFunctions("tinytable_kssctnrqcuqbi6can6ws");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '8', j: 1 }, { i: '8', j: 2 }, { i: '8', j: 3 } ], css_id: 'tinytable_css_60ra6zspxy3w8r2obszc',},
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 } ], css_id: 'tinytable_css_i6c8b3tv7dpa6rnlrdv5',},
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_2qypcca4pk3hhxny4xe2',},
+          { positions: [ { i: '8', j: 1 }, { i: '8', j: 2 }, { i: '8', j: 3 } ], css_id: 'tinytable_css_xh1ydocojtu8tdksd1zf',},
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 } ], css_id: 'tinytable_css_huvlpwggrkuqqepuao6q',},
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_ioyzu6ebdaq2zv4y9c88',},
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_3yankb7jqq81i1b92252.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_kssctnrqcuqbi6can6ws.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
     </script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
 <style>
     /* tinytable css entries after */
-    #tinytable_3yankb7jqq81i1b92252 td.tinytable_css_60ra6zspxy3w8r2obszc, #tinytable_3yankb7jqq81i1b92252 th.tinytable_css_60ra6zspxy3w8r2obszc {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_3yankb7jqq81i1b92252 td.tinytable_css_i6c8b3tv7dpa6rnlrdv5, #tinytable_3yankb7jqq81i1b92252 th.tinytable_css_i6c8b3tv7dpa6rnlrdv5 { text-align: left }
-    #tinytable_3yankb7jqq81i1b92252 td.tinytable_css_2qypcca4pk3hhxny4xe2, #tinytable_3yankb7jqq81i1b92252 th.tinytable_css_2qypcca4pk3hhxny4xe2 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold; text-align: left }
+    #tinytable_kssctnrqcuqbi6can6ws td.tinytable_css_xh1ydocojtu8tdksd1zf, #tinytable_kssctnrqcuqbi6can6ws th.tinytable_css_xh1ydocojtu8tdksd1zf {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_kssctnrqcuqbi6can6ws td.tinytable_css_huvlpwggrkuqqepuao6q, #tinytable_kssctnrqcuqbi6can6ws th.tinytable_css_huvlpwggrkuqqepuao6q { text-align: left }
+    #tinytable_kssctnrqcuqbi6can6ws td.tinytable_css_ioyzu6ebdaq2zv4y9c88, #tinytable_kssctnrqcuqbi6can6ws th.tinytable_css_ioyzu6ebdaq2zv4y9c88 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold; text-align: left }
     </style>
 <div class="container">
-      <table class="table tinytable" id="tinytable_3yankb7jqq81i1b92252" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table tinytable" id="tinytable_kssctnrqcuqbi6can6ws" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
 <thead><tr>
 <th scope="col" data-row="0" data-col="1">School</th>
                 <th scope="col" data-row="0" data-col="2">Period</th>
@@ -708,7 +708,7 @@ Venables, W. N., &amp; Ripley, B. D. (2002). <em>Modern applied statistics with 
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

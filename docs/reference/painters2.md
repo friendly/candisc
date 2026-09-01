@@ -15,7 +15,7 @@ chronological period, artistic emphasis, style, and treatment of light.
 ## Usage
 
 ``` r
-data(painters2)
+painters2
 ```
 
 ## Format

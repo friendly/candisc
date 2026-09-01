@@ -35,12 +35,14 @@ visualizing tests for equality of variance in MANOVA (Friendly & Sigal,
 Load the required packages and the data
 
 ``` r
+
 library(heplots)
 library(candisc)
 library(car)
 ```
 
 ``` r
+
 data(Diabetes, package="heplots")
 str(Diabetes)
 ## 'data.frame':    145 obs. of  6 variables:
@@ -79,6 +81,7 @@ covariance matrices in MANOVA designs. It produces a scatterplot matrix
 of these when the `variables` argument is of length \> 2.
 
 ``` r
+
 covEllipses(Diabetes[,2:5], Diabetes$group, 
      variables=1:3,
    fill=TRUE, fill.alpha = 0.2,
@@ -111,6 +114,7 @@ below (using
 [`car::scatterplot`](https://rdrr.io/pkg/car/man/scatterplot.html)).
 
 ``` r
+
 scatterplot( instest ~ glutest | group, data=Diabetes, 
    pch=c(16,15,17), 
    col=c("blue", "red", "darkgreen"),
@@ -134,6 +138,7 @@ R console, the plot can be zoomed and rotated manually or under `rgl`
 controls.
 
 ``` r
+
 scatter3d(sspg ~ glutest + instest | group, data=Diabetes, 
           surface=FALSE,    sphere.size=1.5, ellipsoid=TRUE,
           surface.col=c("blue", "red", "darkgreen"))
@@ -152,6 +157,7 @@ and informative display of how the groups differ in the components
 ($`log | S_i |`$) that go into Box’s M test.
 
 ``` r
+
 diab.boxm <- boxM(Diabetes[,2:5], Diabetes$group)
 diab.boxm
 ## 
@@ -178,6 +184,7 @@ The MANOVA shows a highly significant effect of `group` on the
 collection of response variables.
 
 ``` r
+
 diab.mlm <- lm(cbind(glufast, glutest, instest, sspg) ~ group, data=Diabetes)
 Anova(diab.mlm)
 ## 
@@ -204,6 +211,7 @@ line of equality. There are far too many points with large $`D^2`$
 values.
 
 ``` r
+
 cqplot(diab.mlm, id.n = 3)
 ```
 
@@ -222,6 +230,7 @@ shows that the means on both `glufast` and `glutest` are ordered
 `Normal < Chemical < Overt`.
 
 ``` r
+
 heplot(diab.mlm, fill=TRUE, fill.alpha=0.1)
 ```
 
@@ -232,6 +241,7 @@ all pairs of response variables. The pattern for `instest` seems to
 differ from the other variables.
 
 ``` r
+
 pairs(diab.mlm, fill=TRUE, fill.alpha=0.1)
 ```
 
@@ -251,6 +261,7 @@ canonical dimension. Both canonical dimensions are significant, by a
 likelihood ratio stepdown test.
 
 ``` r
+
 diab.can <- candisc(diab.mlm)
 diab.can
 ## 
@@ -283,6 +294,7 @@ correlations (structure coefficients) it has with the canonical
 dimensions.[^1]
 
 ``` r
+
 plot(diab.can, ellipse=TRUE, var.lwd=2)
 ```
 
@@ -310,6 +322,7 @@ relative to that of the $`E`$ ellipse is an indication of the magnitude
 of the multivariate effect for `group`.
 
 ``` r
+
 heplot(diab.can, fill=c(TRUE, FALSE), fill.alpha=0.1, var.lwd=2)
 ```
 
@@ -340,6 +353,7 @@ However, here, the prior probabilities are taken from the proportions of
 the groups in the data.
 
 ``` r
+
 library(MASS)
 diab.lda <- lda(group ~ glufast + glutest + instest + sspg, data = Diabetes)
 diab.lda
@@ -398,6 +412,7 @@ the latter, `glufast < 117` classifies an individual as chemical
 diabetic rather than overt diabetic.
 
 ``` r
+
 library(rpart)
 diab.part <- rpart(group ~ glufast + glutest + instest + sspg, data=Diabetes)
 diab.part
@@ -418,6 +433,7 @@ package. The numbers in the nodes give the proportions classified in
 each of the three groups.
 
 ``` r
+
 library(rpart.plot)
 rpart.plot(diab.part, box.palette=list("Blues", "Reds",  "Greens"))
 ```
@@ -430,6 +446,7 @@ How well does that do? We can examine a table of predicted group
 membership vs. actual and calculate the error rate. Not too bad!
 
 ``` r
+
 (class.pred <- table(predicted=predict(diab.part, type="class"), actual=Diabetes$group))
 ##                    actual
 ## predicted           Normal Chemical_Diabetic Overt_Diabetic
