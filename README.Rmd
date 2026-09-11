@@ -40,14 +40,13 @@ library(candisc)
 
 
 # candisc  <img src="man/figures/logo.png" align="right" height="160px" />
-**Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis**
 
-<!-- Version 1.1.0 -->
+## **Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis**
 
-Version `r getNamespaceVersion("candisc")`
+<!-- explicit version number now dynamic -->
+Version `r getNamespaceVersion("candisc")`; documentation built for `pkgdown` `r Sys.Date()`
 
-
-## Description 
+## 📝 Description
 
 This package includes functions for computing and visualizing 
 generalized canonical discriminant analyses 
@@ -113,7 +112,7 @@ displayed relationships more coherent.  The function `varOrder()`
 implements a collection of these methods.
 
 
-## Installation
+## 📂 Installation
 
 The current official release of the `candisc` package can be installed from CRAN. The most recent
 development version can be installed from R-universe or this Github repo.
@@ -125,7 +124,7 @@ development version can be installed from R-universe or this Github repo.
 | GitHub version      | `remotes::install_github("friendly/candisc")`                              |
 
 
-## Vignettes
+## 📖 Vignettes
 
 * A new vignette, `vignette("diabetes", package="candisc")`, illustrates some of the methods of this package, with a dataset
 on forms of diabetes.
@@ -140,7 +139,7 @@ painters.
   * [Datasets in the heplots package](https://friendly.github.io/heplots/articles/datasets.html)
 
 
-## Datasets
+## 🗃️ Datasets
 
 In addition to the datasets in the heplots package, `candisc` includes a few more related to the 
 statistical and graphical methods implemented here.
@@ -164,7 +163,7 @@ dsets <- dsets |>
 tinytable::tt(dsets)
 ```
 
-## Examples
+## 📊 Examples
 
 
 
@@ -242,7 +241,7 @@ heplot(
 
 
 
-## Citation
+## 🔖 Citation
 
 To cite package `candisc` in publications use:
 
@@ -254,7 +253,7 @@ For the theory on which these methods are based, also cite:
   Friendly, M. (2007). “HE plots for Multivariate General Linear Models.” _Journal of Computational and Graphical
   Statistics_, *16*(2), 421-444. <https://doi.org/10.1198/106186007X208407>.
 
-## References
+## 📚 References
 
 Friendly, M. (2002). Corrgrams: Exploratory displays for correlation matrices. _The American Statistician_, **56**(4), 316–324. <https://doi.org/10.1198/000313002533>
 
