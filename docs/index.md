@@ -1,11 +1,10 @@
 # candisc
 
-**Visualizing Generalized Canonical Discriminant and Canonical
-Correlation Analysis**
+## **Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis**
 
-Version 1.1.1
+Version 1.1.1; documentation built for `pkgdown` 2026-09-10
 
-## Description
+## 📝 Description
 
 This package includes functions for computing and visualizing
 generalized canonical discriminant analyses and canonical correlation
@@ -89,7 +88,7 @@ more coherent. The function
 [`varOrder()`](https://friendly.github.io/candisc/reference/varOrder.md)
 implements a collection of these methods.
 
-## Installation
+## 📂 Installation
 
 The current official release of the `candisc` package can be installed
 from CRAN. The most recent development version can be installed from
@@ -101,7 +100,7 @@ R-universe or this Github repo.
 | R-universe | `install.packages('candisc', repos = c('https://friendly.r-universe.dev')` |
 | GitHub version | `remotes::install_github("friendly/candisc")` |
 
-## Vignettes
+## 📖 Vignettes
 
 - A new vignette,
   [`vignette("diabetes", package="candisc")`](https://friendly.github.io/candisc/articles/diabetes.md),
@@ -125,7 +124,7 @@ R-universe or this Github repo.
   - [Datasets in the heplots
     package](https://friendly.github.io/heplots/articles/datasets.html)
 
-## Datasets
+## 🗃️ Datasets
 
 In addition to the datasets in the heplots package, `candisc` includes a
 few more related to the statistical and graphical methods implemented
@@ -143,7 +142,7 @@ website, \[<http://friendly.github.io/candisc>\].
 | [cereal](http://friendly.github.io/candisc/reference/cereal.md) | 77 | 16 | Breakfast Cereal Dataset | MMRA cancor |
 | [painters2](http://friendly.github.io/candisc/reference/painters2.md) | 54 | 10 | Painters Data with Historical Art Variables | MANOVA candisc discrim |
 
-## Examples
+## 📊 Examples
 
 These examples will get you started.
 
@@ -269,7 +268,7 @@ heplot(
 
 ![](reference/figures/README-iris-heplot-1.png)
 
-## Citation
+## 🔖 Citation
 
 To cite package `candisc` in publications use:
 
@@ -283,7 +282,7 @@ Friendly, M. (2007). “HE plots for Multivariate General Linear Models.”
 *Journal of Computational and Graphical Statistics*, *16*(2), 421-444.
 <https://doi.org/10.1198/106186007X208407>.
 
-## References
+## 📚 References
 
 Friendly, M. (2002). Corrgrams: Exploratory displays for correlation
 matrices. *The American Statistician*, **56**(4), 316–324.

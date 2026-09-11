@@ -1,6 +1,6 @@
 # Diabetes data: heplots and candisc examples
 
-Vignette built using `heplots`, version 1.8.1, `candisc`, version 1.1.1
+Vignette built using `heplots`, version 1.8.4, `candisc`, version 1.1.1
 and `car`, version 3.1-5.
 
 ## Background

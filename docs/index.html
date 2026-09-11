@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="favicon.ico">
 <link rel="manifest" href="site.webmanifest">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Roboto-0.4.10/font.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/Roboto-0.4.10/font.css" rel="stylesheet">
 <link href="deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
 <link href="deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -69,11 +69,15 @@
 <img src="logo.png" class="logo" alt=""><h1 id="candisc-">candisc <a class="anchor" aria-label="anchor" href="#candisc-"></a>
 </h1>
 </div>
-<p><strong>Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis</strong></p>
-<!-- Version 1.1.0 -->
-<p>Version 1.1.1</p>
 <div class="section level2">
-<h2 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
+<h2 id="visualizing-generalized-canonical-discriminant-and-canonical-correlation-analysis">
+<strong>Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis</strong><a class="anchor" aria-label="anchor" href="#visualizing-generalized-canonical-discriminant-and-canonical-correlation-analysis"></a>
+</h2>
+<!-- explicit version number now dynamic -->
+<p>Version 1.1.1; documentation built for <code>pkgdown</code> 2026-09-10</p>
+</div>
+<div class="section level2">
+<h2 id="pencil-description">📝 Description<a class="anchor" aria-label="anchor" href="#pencil-description"></a>
 </h2>
 <p>This package includes functions for computing and visualizing generalized canonical discriminant analyses and canonical correlation analysis for a multivariate linear model (MLM). The goal is to provide ways of visualizing such models in a low-dimensional space corresponding to dimensions (linear combinations of the response variables) of maximal relationship to the predictor variables.</p>
 <p>Traditional canonical discriminant analysis is restricted to a one-way MANOVA design and is equivalent to canonical correlation analysis between a set of quantitative response variables and a set of dummy variables coded from the factor variable. The <code>candisc</code> package generalizes this to multi-way MANOVA designs for all terms in a multivariate linear model (i.e., an <code>mlm</code> object), computing canonical scores and vectors for each term (giving a <code>"candiscList"</code> object).</p>
@@ -104,7 +108,7 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<h2 id="open_file_folder-installation">📂 Installation<a class="anchor" aria-label="anchor" href="#open_file_folder-installation"></a>
 </h2>
 <p>The current official release of the <code>candisc</code> package can be installed from CRAN. The most recent development version can be installed from R-universe or this Github repo.</p>
 <table class="table">
@@ -129,7 +133,7 @@
 </table>
 </div>
 <div class="section level2">
-<h2 id="vignettes">Vignettes<a class="anchor" aria-label="anchor" href="#vignettes"></a>
+<h2 id="open_book-vignettes">📖 Vignettes<a class="anchor" aria-label="anchor" href="#open_book-vignettes"></a>
 </h2>
 <ul>
 <li><p>A new vignette, <code><a href="articles/diabetes.html">vignette("diabetes", package="candisc")</a></code>, illustrates some of the methods of this package, with a dataset on forms of diabetes.</p></li>
@@ -145,7 +149,7 @@
 </ul>
 </div>
 <div class="section level2">
-<h2 id="datasets">Datasets<a class="anchor" aria-label="anchor" href="#datasets"></a>
+<h2 id="card_file_box-datasets">🗃️ Datasets<a class="anchor" aria-label="anchor" href="#card_file_box-datasets"></a>
 </h2>
 <p>In addition to the datasets in the heplots package, <code>candisc</code> includes a few more related to the statistical and graphical methods implemented here. The table below classifies these with <strong>method tags</strong>. Their names are linked to their documentation with graphical output on the <code>pkgdown</code> website, [<a href="http://friendly.github.io/candisc" class="external-link uri">http://friendly.github.io/candisc</a>].</p>
 <table class="table">
@@ -217,7 +221,7 @@
 </table>
 </div>
 <div class="section level2">
-<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+<h2 id="bar_chart-examples">📊 Examples<a class="anchor" aria-label="anchor" href="#bar_chart-examples"></a>
 </h2>
 <p>These examples will get you started.</p>
 <div class="section level3">
@@ -307,7 +311,7 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+<h2 id="bookmark-citation">🔖 Citation<a class="anchor" aria-label="anchor" href="#bookmark-citation"></a>
 </h2>
 <p>To cite package <code>candisc</code> in publications use:</p>
 <p>Friendly M., Fox J. (2025). candisc: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis_. R package version 1.0.0, <a href="https://CRAN.R-project.org/package=heplots" class="external-link uri">https://CRAN.R-project.org/package=heplots</a>.</p>
@@ -315,7 +319,7 @@
 <p>Friendly, M. (2007). “HE plots for Multivariate General Linear Models.” <em>Journal of Computational and Graphical Statistics</em>, <em>16</em>(2), 421-444. <a href="https://doi.org/10.1198/106186007X208407" class="external-link uri">https://doi.org/10.1198/106186007X208407</a>.</p>
 </div>
 <div class="section level2">
-<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+<h2 id="books-references">📚 References<a class="anchor" aria-label="anchor" href="#books-references"></a>
 </h2>
 <p>Friendly, M. (2002). Corrgrams: Exploratory displays for correlation matrices. <em>The American Statistician</em>, <strong>56</strong>(4), 316–324. <a href="https://doi.org/10.1198/000313002533" class="external-link uri">https://doi.org/10.1198/000313002533</a></p>
 <p>Friendly, M., &amp; Kwan, E. (2003). Effect Ordering for Data Displays. <em>Computational Statistics and Data Analysis</em>, <strong>43</strong>(4), 509–539. <a href="https://doi.org/10.1016/S0167-9473(02)00290-6" class="external-link uri">https://doi.org/10.1016/S0167-9473(02)00290-6</a></p>
