@@ -15,7 +15,7 @@ c(
                      family = "Fox", role="aut")),
     year     = year,
     note     = note,
-    url      = "https://CRAN.R-project.org/package=heplots"
+    url      = "https://CRAN.R-project.org/package=candisc"
   ),
 
   bibentry(

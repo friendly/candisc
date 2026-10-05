@@ -12,7 +12,7 @@
 # DONE: ✔️ Added `rev.axes` parameter for reversing discriminant axes
 # DONE: ✔️ Added `xlim`, `ylim` arguments to control axis limits; useful for plots in discrim space.
 #
-# TOTO: ❌ Fix mapping for stat_ellipse() when specifying `geom = "polygon"`
+# TODO: ❌ Fix mapping for stat_ellipse() when specifying `geom = "polygon"`
 # TODO: Create vignette detailing how to use more generally with ggplot
 
 #' Discriminant Analysis Decision Plot using ggplot.
@@ -26,7 +26,7 @@
 #' 
 #' In the case of discriminant analysis, the predicted values are class membership,
 #' so this can be visualized by mapping the categorical predicted class to discrete colors used as the background for the plot, or
-#' plotting the **contours** of predicted class membership as lines (for `[MASS::lda()]`) or qauadratic curves (for `[MASS::qda()]`) in the plot.
+#' plotting the **contours** of predicted class membership as lines (for `[MASS::lda()]`) or quadratic curves (for `[MASS::qda()]`) in the plot.
 #' The predicted class of any observation in the space of the variables displayed can also be rendered as colored **tiles** or **points**
 #' in the background of the plot.
 #' 
