@@ -174,7 +174,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 data(Rohwer, package="heplots")
 X <- as.matrix(Rohwer[,6:10])
 Y <- as.matrix(Rohwer[,3:5])

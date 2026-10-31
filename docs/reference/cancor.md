@@ -391,7 +391,6 @@ Michael Friendly
 ## Examples
 
 ``` r
-
 data(Rohwer, package="heplots")
 X <- as.matrix(Rohwer[,6:10])  # the PA tests
 Y <- as.matrix(Rohwer[,3:5])   # the aptitude/ability variables
@@ -402,7 +401,6 @@ M <- cor(cbind(X,Y))
 corrplot(M, method="ellipse", order="hclust", addrect=2, addCoef.col="black")
 }
 #> Loading required package: corrplot
-#> Warning: package 'corrplot' was built under R version 4.5.3
 #> corrplot 0.95 loaded
 
 

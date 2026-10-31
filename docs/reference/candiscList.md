@@ -103,7 +103,6 @@ Michael Friendly and John Fox
 ## Examples
 
 ``` r
-
 grass.mod <- lm(cbind(N1,N9,N27,N81,N243) ~ Block + Species, data=Grass)
 
 grass.canL <-candiscList(grass.mod)

@@ -254,7 +254,9 @@ An object of class `candisc` with the following components:
 - means :
 
   A data.frame containing the class means for the levels of the
-  factor(s) in the term
+  factor(s) in the term, or `NULL` if the term involves a matrix
+  predictor, such as `splines::ns(x, 3)` or `poly(x, 2)`, which doesn't
+  define groups
 
 - factors :
 
@@ -377,7 +379,6 @@ Michael Friendly and John Fox
 ## Examples
 
 ``` r
-
 grass.mod <- lm(cbind(N1,N9,N27,N81,N243) ~ Block + Species, data=Grass)
 car::Anova(grass.mod, test="Wilks")
 #> 

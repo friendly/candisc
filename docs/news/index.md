@@ -1,5 +1,24 @@
 # Changelog
 
+## Version 1.1.2
+
+This is a bug-fix release, for models with a matrix predictor, such as
+`splines::ns(x, 3)` or `poly(x, 2)`
+
+- [`candisc()`](https://friendly.github.io/candisc/reference/candisc.md)
+  and
+  [`candiscList()`](https://friendly.github.io/candisc/reference/candiscList.md)
+  gave an error for such a term, because it doesn’t define groups. The
+  `means` component is now `NULL` for these terms.
+- [`summary.candisc()`](https://friendly.github.io/candisc/reference/candisc.md)
+  skips the class means, and
+  [`plot.candisc()`](https://friendly.github.io/candisc/reference/candisc.md)
+  draws only the scores and variable vectors, when a term has no
+  `means`. There is no 1D plot for these terms, just a message.
+- [`plot.candiscList()`](https://friendly.github.io/candisc/reference/candiscList.md):
+  the `term` argument now finds terms whose names contain spaces, such
+  as `"ns(x, 3)"`
+
 ## Version 1.1.1
 
 CRAN release: 2026-06-05

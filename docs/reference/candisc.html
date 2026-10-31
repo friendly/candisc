@@ -15,7 +15,7 @@ term, controlling for other model terms."><meta property="og:image" content="htt
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -296,7 +296,8 @@ canonical dimension.</p></dd>
 
 <dt>means </dt>
 <dd><p>A data.frame containing the class means for the levels of the
-factor(s) in the term</p></dd>
+factor(s) in the term, or <code>NULL</code> if the term involves a matrix predictor,
+such as <code>splines::ns(x, 3)</code> or <code>poly(x, 2)</code>, which doesn't define groups</p></dd>
 
 <dt>factors </dt>
 <dd><p>A data frame containing the levels of the factor(s) in the <code>term</code></p></dd>

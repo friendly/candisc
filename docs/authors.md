@@ -14,27 +14,27 @@ Source:
 
 Friendly M, Fox J (2026). *candisc: Visualizing Generalized Canonical
 Discriminant and Canonical Correlation Analysis*. R package version
-1.1.1, <https://CRAN.R-project.org/package=heplots>.
+1.1.2, <https://CRAN.R-project.org/package=candisc>.
 
     @Manual{,
       title = {{candisc}: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis},
       author = {Michael Friendly and John Fox},
       year = {2026},
-      note = {R package version 1.1.1},
-      url = {https://CRAN.R-project.org/package=heplots},
+      note = {R package version 1.1.2},
+      url = {https://CRAN.R-project.org/package=candisc},
     }
 
-Friendly M (2007). “HE plots for Multivariate General Linear Models.”
-*Journal of Computational and Graphical Statistics*, **16**(2), 421-444.
+Friendly M (2007). “HE Plots for Multivariate Linear Models.” *Journal
+of Computational and Graphical Statistics*, **16**(2), 421–444.
 [doi:10.1198/106186007X208407](https://doi.org/10.1198/106186007X208407).
 
     @Article{,
-      title = {HE plots for Multivariate General Linear Models},
+      title = {HE Plots for Multivariate Linear Models},
       author = {Michael Friendly},
       journal = {Journal of Computational and Graphical Statistics},
       year = {2007},
       volume = {16},
       number = {2},
-      pages = {421-444},
+      pages = {421--444},
       doi = {10.1198/106186007X208407},
     }

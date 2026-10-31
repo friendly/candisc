@@ -94,11 +94,11 @@ The current official release of the `candisc` package can be installed
 from CRAN. The most recent development version can be installed from
 R-universe or this Github repo.
 
-|  |  |
-|----|----|
-| CRAN version | `install.packages("candisc")` |
-| R-universe | `install.packages('candisc', repos = c('https://friendly.r-universe.dev')` |
-| GitHub version | `remotes::install_github("friendly/candisc")` |
+|                |                                                                            |
+|----------------|----------------------------------------------------------------------------|
+| CRAN version   | `install.packages("candisc")`                                              |
+| R-universe     | `install.packages('candisc', repos = c('https://friendly.r-universe.dev')` |
+| GitHub version | `remotes::install_github("friendly/candisc")`                              |
 
 ## 📖 Vignettes
 
@@ -132,15 +132,15 @@ here. The table below classifies these with **method tags**. Their names
 are linked to their documentation with graphical output on the `pkgdown`
 website, \[<http://friendly.github.io/candisc>\].
 
-| dataset | rows | cols | Title | tags |
-|----|----|----|----|----|
-| [Grass](http://friendly.github.io/candisc/reference/Grass.md) | 40 | 7 | Yields from Nitrogen nutrition of grass species | MANOVA candisc discrim |
-| [HSB](http://friendly.github.io/candisc/reference/HSB.md) | 600 | 15 | High School and Beyond Data | MMRA cancor |
-| [PsyAcad](http://friendly.github.io/candisc/reference/PsyAcad.md) | 600 | 8 | Psychological Measures and Academic Achievement | cancor |
-| [Wine](http://friendly.github.io/candisc/reference/Wine.md) | 178 | 14 | Chemical composition of three cultivars of wine | MANOVA candisc discrim |
-| [Wolves](http://friendly.github.io/candisc/reference/Wolves.md) | 25 | 12 | Wolf skulls | candisc discrim |
-| [cereal](http://friendly.github.io/candisc/reference/cereal.md) | 77 | 16 | Breakfast Cereal Dataset | MMRA cancor |
-| [painters2](http://friendly.github.io/candisc/reference/painters2.md) | 54 | 10 | Painters Data with Historical Art Variables | MANOVA candisc discrim |
+| dataset                                                               | rows | cols | Title                                           | tags                   |
+|-----------------------------------------------------------------------|------|------|-------------------------------------------------|------------------------|
+| [Grass](http://friendly.github.io/candisc/reference/Grass.md)         | 40   | 7    | Yields from Nitrogen nutrition of grass species | MANOVA candisc discrim |
+| [HSB](http://friendly.github.io/candisc/reference/HSB.md)             | 600  | 15   | High School and Beyond Data                     | MMRA cancor            |
+| [PsyAcad](http://friendly.github.io/candisc/reference/PsyAcad.md)     | 600  | 8    | Psychological Measures and Academic Achievement | cancor                 |
+| [Wine](http://friendly.github.io/candisc/reference/Wine.md)           | 178  | 14   | Chemical composition of three cultivars of wine | MANOVA candisc discrim |
+| [Wolves](http://friendly.github.io/candisc/reference/Wolves.md)       | 25   | 12   | Wolf skulls                                     | candisc discrim        |
+| [cereal](http://friendly.github.io/candisc/reference/cereal.md)       | 77   | 16   | Breakfast Cereal Dataset                        | MMRA cancor            |
+| [painters2](http://friendly.github.io/candisc/reference/painters2.md) | 54   | 10   | Painters Data with Historical Art Variables     | MANOVA candisc discrim |
 
 ## 📊 Examples
 
@@ -154,7 +154,6 @@ feed this to
 to get the canonical discriminant equivalent.
 
 ``` r
-
 iris.mod <- lm(cbind(Petal.Length, Sepal.Length, Petal.Width, Sepal.Width) ~ Species, data=iris)
 car::Anova(iris.mod)
 #> 
@@ -195,7 +194,6 @@ observations on the canonical dimensions
 ([`scores()`](https://friendly.github.io/candisc/reference/cancor.md)).
 
 ``` r
-
 # get coefficients
 coef(iris.can)
 #>                    Can1        Can2
@@ -215,7 +213,6 @@ Correlations between the observed variables and the canonical dimensions
 are given by the `$structure` component of the object.
 
 ``` r
-
 iris.can$structure
 #>                    Can1        Can2
 #> Petal.Length  0.9849513 -0.04603709
@@ -235,7 +232,6 @@ their structure correlations with the canonical dimension.
 The following plot illustrates some of the options.
 
 ``` r
-
 #-- assign colors and symbols corresponding to species
 iris.colors <- c("red", "darkgreen", "blue")
 iris.pch <- 15:17
@@ -255,7 +251,6 @@ scores by a **H** ellipse showing variation of the means and an **E**
 ellipse reflecting the pooled within-group variation.
 
 ``` r
-
 heplot(
   iris.can,
   fill = TRUE, fill.alpha = 0.1,
@@ -274,12 +269,12 @@ To cite package `candisc` in publications use:
 
 Friendly M., Fox J. (2025). candisc: Visualizing Generalized Canonical
 Discriminant and Canonical Correlation Analysis\_. R package version
-1.0.0, <https://CRAN.R-project.org/package=heplots>.
+1.0.0, <https://CRAN.R-project.org/package=candisc>.
 
 For the theory on which these methods are based, also cite:
 
-Friendly, M. (2007). “HE plots for Multivariate General Linear Models.”
-*Journal of Computational and Graphical Statistics*, *16*(2), 421-444.
+Friendly, M. (2007). “HE Plots for Multivariate Linear Models.” *Journal
+of Computational and Graphical Statistics*, *16*(2), 421-444.
 <https://doi.org/10.1198/106186007X208407>.
 
 ## 📚 References

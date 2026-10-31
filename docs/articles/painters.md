@@ -1,6 +1,6 @@
 # Multivariate Visualization of Painters Style
 
-Vignette built using `heplots`, version 1.8.4, `candisc`, version 1.1.1
+Vignette built using `heplots`, version 1.8.6, `candisc`, version 1.1.2
 and `ggplot2`, version 4.0.3.
 
 ## Introduction
@@ -32,16 +32,16 @@ But, for the record, it is possible to go further, by placing these
 schools in approximate chronological order and describing some of their
 characteristics, as shown in [Table 1](#tbl-schools-table).
 
-| School | Period | Characteristics |
-|----|----|----|
-| Renaissance | 1400-1520 | Emphasis on naturalism, perspective, classical ideals; focus on balance, harmony, and proportion. Key figures: Leonardo, Michelangelo, Raphael. |
-| Venetian | 1450-1600 | Rich color and light effects (overlaps Renaissance/Mannerist periods); emphasis on sensuous surfaces, atmospheric effects. e.g.: Titian, Veronese, Tintoretto. |
-| Lombard | 1490-1600 | Northern Italian style; naturalism with dramatic chiaroscuro; influenced by both Renaissance ideals and Venetian colorism. e.g.: Albani, Caravaggio |
-| 16th C | 1500-1600 | Late Renaissance through Mannerism; transition period showing diverse regional styles across Europe. |
-| Mannerist | 1520-1600 | Reaction to Renaissance harmony; elongated figures, complex compositions, artificial elegance, and emotional intensity. e.g.,: Parmigiano |
-| Sciento | 1600-1700 | Likely refers to 17th century Italian schools emphasizing dramatic realism and scientific observation of nature (possibly related to Caravaggio's influence). |
-| 17th C | 1600-1700 | Baroque period; dramatic use of light and shadow, movement, emotional intensity, grandeur. Includes Caravaggism and various national Baroque styles. |
-| French | 1600-1750 | French Baroque and emerging Rococo; emphasis on classical restraint, academic standards, royal patronage. Poussin, Claude Lorrain, later Watteau. |
+| School      | Period    | Characteristics                                                                                                                                                |
+|-------------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Renaissance | 1400-1520 | Emphasis on naturalism, perspective, classical ideals; focus on balance, harmony, and proportion. Key figures: Leonardo, Michelangelo, Raphael.                |
+| Venetian    | 1450-1600 | Rich color and light effects (overlaps Renaissance/Mannerist periods); emphasis on sensuous surfaces, atmospheric effects. e.g.: Titian, Veronese, Tintoretto. |
+| Lombard     | 1490-1600 | Northern Italian style; naturalism with dramatic chiaroscuro; influenced by both Renaissance ideals and Venetian colorism. e.g.: Albani, Caravaggio            |
+| 16th C      | 1500-1600 | Late Renaissance through Mannerism; transition period showing diverse regional styles across Europe.                                                           |
+| Mannerist   | 1520-1600 | Reaction to Renaissance harmony; elongated figures, complex compositions, artificial elegance, and emotional intensity. e.g.,: Parmigiano                      |
+| Sciento     | 1600-1700 | Likely refers to 17th century Italian schools emphasizing dramatic realism and scientific observation of nature (possibly related to Caravaggio's influence).  |
+| 17th C      | 1600-1700 | Baroque period; dramatic use of light and shadow, movement, emotional intensity, grandeur. Includes Caravaggism and various national Baroque styles.           |
+| French      | 1600-1750 | French Baroque and emerging Rococo; emphasis on classical restraint, academic standards, royal patronage. Poussin, Claude Lorrain, later Watteau.              |
 
 Table 1: Characteristics of painting schools
 
@@ -65,7 +65,6 @@ reduction methods can give a clearer view.
 Let’s get started. Load packages, and the `painters` data.
 
 ``` r
-
 library(MASS)
 library(heplots)
 library(candisc)
@@ -91,7 +90,6 @@ We begin by using longer, more descriptive labels to identify the
 schools, making the plots easier to interpret.
 
 ``` r
-
 school <- c("Renaissance", "Mannerist", "Seiento", "Venetian",
             "Lombard", "16th C", "17th C", "French")
 levels(painters$School) <- school
@@ -109,13 +107,12 @@ head(painters)
 
 The distribution of painters across schools is unbalanced, with some
 schools having many more representatives than others. In particular, the
-small $`n = 4`$ for 16th C and French schools affect some multivariate
+small $n = 4$ for 16th C and French schools affect some multivariate
 methods (e.g., Box’s M test for equality,
 [`heplots::boxM()`](https://friendly.github.io/heplots/reference/boxM.html))
 which rely on estimating the within-group covariance matrices.
 
 ``` r
-
 table(painters$School)
 ## 
 ## Renaissance   Mannerist     Seiento    Venetian     Lombard      16th C 
@@ -133,7 +130,6 @@ First, set up colors and other graphic attributes to be consistent
 across plots. I chose the `RColorBrewer` discrete palette, `Dark2`.
 
 ``` r
-
 options(
   ggplot2.discrete.colour = function() scale_colour_brewer(palette = "Dark2"),
   ggplot2.discrete.fill = function() scale_fill_brewer(palette = "Dark2")
@@ -150,7 +146,6 @@ legends where possible, because the space they take reduces resolution
 for the data.
 
 ``` r
-
 ggplot(data = painters, aes(x = School, y = Colour, fill = School)) +
   geom_boxplot() +
   labs(title = "Colour Scores Distribution by Painting School",
@@ -169,7 +164,6 @@ you need to reshape the data to long format. Here, I create violin plots
 overlaid with individual points.
 
 ``` r
-
 painters_long <- painters |>
   tidyr::pivot_longer(cols = c(Composition, Drawing, Colour, Expression),
                       names_to = "Metric", values_to = "Score")
@@ -200,7 +194,6 @@ Data ellipses and labels for the schools at their group mean help to
 make such plots more understandable.
 
 ``` r
-
 means <- painters |>
   group_by(School) |>
   summarise(across(Composition:Expression, mean))
@@ -225,7 +218,6 @@ were rated highest on use of color.
 Similarly, here’s a plot for Drawing and Expression:
 
 ``` r
-
 ggplot(painters,
        aes(Drawing, Expression,
            color = School, shape = School)) +
@@ -252,7 +244,6 @@ The model treats School as the predictor and the four aesthetic scores
 as a multivariate response.
 
 ``` r
-
 painters.mod <- lm(cbind(Composition, Drawing, Colour, Expression) ~ School, 
                    data = painters)
 car::Anova(painters.mod)
@@ -269,7 +260,6 @@ With `School` as an unordered factor, the intercept represents
 their difference from Renaissance.
 
 ``` r
-
 coef(painters.mod)
 ##                 Composition Drawing Colour Expression
 ## (Intercept)          10.400 14.7000  9.000    8.20000
@@ -290,7 +280,6 @@ This looks OK, because all the painters are well within the confidence
 bounds.
 
 ``` r
-
 cqplot(painters.mod, id.n = 3)
 ```
 
@@ -309,7 +298,6 @@ By default, the
 shows the first two variables (Composition and Drawing).
 
 ``` r
-
 heplot(painters.mod,
        fill = TRUE, fill.alpha = c(0.1, 0.05),
        cex.lab = 1.25)
@@ -325,7 +313,6 @@ We can also examine other pairs of variables, such as `Colour` and
 `Expression`.
 
 ``` r
-
 heplot(painters.mod,
        variables = 3:4,
        fill = TRUE, fill.alpha = c(0.1, 0.05),
@@ -347,7 +334,6 @@ variables, we create a matrix of pairwise HE plots, provided by the
 method.
 
 ``` r
-
 pairs(painters.mod)
 ```
 
@@ -364,7 +350,6 @@ the original variables that maximize between-group variation relative to
 within-group variation.
 
 ``` r
-
 painters.can <- candisc(painters.mod)
 painters.can
 ## 
@@ -403,7 +388,6 @@ components proportional to the correlations of the observed aesthetic
 variables with the canonical scores.
 
 ``` r
-
 heplot(painters.can,
        fill = TRUE, fill.alpha = c(0.1, 0.05),
        var.lwd = 2, var.cex = 1.4,
@@ -422,7 +406,6 @@ schools. We can visualize all three dimensions simultaneously using a 3D
 HE plot. This plot is not yet rendered in the vignette.
 
 ``` r
-
 if(requireNamespace("rgl")) {
   heplot3d(painters.can, col = c("pink", "brown"))
 }
@@ -439,7 +422,6 @@ But the
 provides something similar, and the dimensions are essentially the same.
 
 ``` r
-
 painters.lda <- lda(School ~ .,
                     data = painters)
 painters.lda
@@ -486,7 +468,6 @@ observations in the space defined by the discriminant dimensions (LD1,
 LD2, etc.). Here we plot the first two discriminant dimensions:
 
 ``` r
-
 plot_discrim(painters.lda, LD2 ~ LD1,
              labels = TRUE,
              labels.args = list(geom = "label")) +
@@ -501,7 +482,6 @@ We can also examine other pairs of discriminant dimensions, such as LD1
 and LD3:
 
 ``` r
-
 plot_discrim(painters.lda, LD3 ~ LD1,
              labels = TRUE,
              labels.args = list(geom = "label")) +
@@ -519,7 +499,6 @@ columns of
 [`cor_lda()`](https://friendly.github.io/candisc/reference/cor_lda.md)
 
 ``` r
-
 cor_lda(painters.lda)
 ##                 LD1     LD2      LD3    LD4
 ## Composition -0.1824  0.2287 -0.90850 0.2984

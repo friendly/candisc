@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,6 +36,17 @@
       <small>Source: <a href="https://github.com/friendly/candisc/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.2" id="version-112">Version 1.1.2<a class="anchor" aria-label="anchor" href="#version-112"></a></h2>
+<p>This is a bug-fix release, for models with a matrix predictor, such as <code>splines::ns(x, 3)</code> or <code>poly(x, 2)</code></p>
+<ul><li>
+<code><a href="../reference/candisc.html">candisc()</a></code> and <code><a href="../reference/candiscList.html">candiscList()</a></code> gave an error for such a term, because it doesn’t define groups. The <code>means</code> component is now <code>NULL</code> for these terms.</li>
+<li>
+<code><a href="../reference/candisc.html">summary.candisc()</a></code> skips the class means, and <code><a href="../reference/candisc.html">plot.candisc()</a></code> draws only the scores and variable vectors, when a term has no <code>means</code>. There is no 1D plot for these terms, just a message.</li>
+<li>
+<code><a href="../reference/candiscList.html">plot.candiscList()</a></code>: the <code>term</code> argument now finds terms whose names contain spaces, such as <code>"ns(x, 3)"</code>
+</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.1" id="version-111">Version 1.1.1<a class="anchor" aria-label="anchor" href="#version-111"></a></h2><p class="text-muted">CRAN release: 2026-06-05</p>
 <p>This is a minor release, making heplots more flexible</p>
@@ -238,13 +249,13 @@
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5-15" id="version-05-15-2009-6-12">Version 0.5-15 (2009-6-12)<a class="anchor" aria-label="anchor" href="#version-05-15-2009-6-12"></a></h2><p class="text-muted">CRAN release: 2009-06-14</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>o  Added titles<span class="fl">.1</span>d argument to plot.candisc to allow customized titles <span class="cf">for</span> <span class="dv">1</span>D plots</span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>o  Added titles<span class="fl">.1</span>d argument to plot.candisc to allow customized titles <span class="cf">for</span> 1D plots</span>
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>   (wish of Manuel Sp?nola)</span></code></pre></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5-13" id="version-05-13-2008-12-16">Version 0.5-13 (2008-12-16)<a class="anchor" aria-label="anchor" href="#version-05-13-2008-12-16"></a></h2><p class="text-muted">CRAN release: 2009-02-02</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>o  Added Wolves data, with examples <span class="cf">for</span> <span class="dv">2</span><span class="sc">-</span>way design.</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>o  Improved plot <span class="cf">for</span> <span class="dv">1</span>D case.</span></code></pre></div>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>o  Improved plot <span class="cf">for</span> 1D case.</span></code></pre></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5-11" id="version-05-11-2008-11-12">Version 0.5-11 (2008-11-12)<a class="anchor" aria-label="anchor" href="#version-05-11-2008-11-12"></a></h2>
@@ -256,7 +267,7 @@
 <h2 class="pkg-version" data-toc-text="0.5-10" id="version-05-10-2008-11-5">Version 0.5-10 (2008-11-5)<a class="anchor" aria-label="anchor" href="#version-05-10-2008-11-5"></a></h2><p class="text-muted">CRAN release: 2008-11-09</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>o  improved documentation</span>
 <span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>o  added var.lwd to heplot3d.candisc</span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>o  changed rgl.<span class="sc">*</span> to <span class="sc">*</span><span class="dv">3</span>d functions to avoid rgl problems</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>o  changed rgl.<span class="sc">*</span> to <span class="sc">*</span>3d functions to avoid rgl problems</span>
 <span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>o  added suffix<span class="ot">=</span> to heplot.candisc and heplot3d.candisc</span>
 <span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>o  added graphics<span class="ot">=</span><span class="cn">TRUE</span> to menus <span class="cf">in</span> <span class="sc">*</span>.candiscList functions</span>
 <span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>o  added suffix<span class="ot">=</span> to plot.candisc</span></code></pre></div>

@@ -52,9 +52,7 @@ the overall rates of correct and incorrect prediction.
 ## Examples
 
 ``` r
-
 library(MASS)
-#> Warning: package 'MASS' was built under R version 4.5.3
 #> 
 #> Attaching package: 'MASS'
 #> The following object is masked from 'package:dplyr':

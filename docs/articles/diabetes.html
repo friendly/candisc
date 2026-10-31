@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@
                         <h4 data-toc-skip class="author">Michael
 Friendly</h4>
             
-            <h4 data-toc-skip class="date">2026-09-10</h4>
+            <h4 data-toc-skip class="date">2026-10-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/friendly/candisc/blob/HEAD/vignettes/diabetes.Rmd" class="external-link"><code>vignettes/diabetes.Rmd</code></a></small>
       <div class="d-none name"><code>diabetes.Rmd</code></div>
@@ -76,8 +76,8 @@ Friendly</h4>
 
     
     
-<p>Vignette built using <code>heplots</code>, version 1.8.4,
-<code>candisc</code>, version 1.1.1 and <code>car</code>, version
+<p>Vignette built using <code>heplots</code>, version 1.8.6,
+<code>candisc</code>, version 1.1.2 and <code>car</code>, version
 3.1-5.</p>
 <div class="section level2">
 <h2 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
@@ -213,7 +213,7 @@ data ellipsoids</div>
 covariance matrices. The <code>plot</code> method for the result gives a
 convenient and informative display of how the groups differ in the
 components
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false" form="prefix">|</mo><msub><mi>S</mi><mi>i</mi></msub><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">log | S_i |</annotation></semantics></math>)
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>o</mi><mi>g</mi><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>S</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">|</mo></mrow></mrow><annotation encoding="application/x-tex">log | S_i |</annotation></semantics></math>)
 that go into Box’s M test.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">diab.boxm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://friendly.github.io/heplots/reference/boxM.html" class="external-link">boxM</a></span><span class="op">(</span><span class="va">Diabetes</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, <span class="va">Diabetes</span><span class="op">$</span><span class="va">group</span><span class="op">)</span></span>
