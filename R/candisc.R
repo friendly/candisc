@@ -142,8 +142,9 @@
 #' \item{pct }{A vector containing the percentages of the `canrsq` of their total.}
 #' \item{ndim }{Number of canonical dimensions stored in the `means`,
 #'      `structure` and `coeffs.*` components} 
-#' \item{means }{A data.frame containing the class means for the levels of the 
-#'      factor(s) in the term}
+#' \item{means }{A data.frame containing the class means for the levels of the
+#'      factor(s) in the term, or `NULL` if the term involves a matrix predictor,
+#'      such as `splines::ns(x, 3)` or `poly(x, 2)`, which doesn't define groups}
 #' \item{factors }{A data frame containing the levels of the factor(s) in the `term`} 
 #' \item{term }{name of the `term`} 
 #' \item{terms }{A character vector containing the names of the terms in the
@@ -267,9 +268,14 @@ candisc.mlm <- function(mod,
   factors <- data[factor.names]
 
   # Canonical means for levels of the factor(s)
-  means <- aggregate(scores, factors, mean)
-  rownames(means) <- do.call(paste, c(means[factor.names], sep = ":"))
-  means <- means[, -(1:length(factor.names))]
+  # A matrix predictor, like ns(x, 3) or poly(x, 2), doesn't define groups, so there are no means
+  if (any(sapply(factors, is.matrix))) {
+    means <- NULL
+  } else {
+    means <- aggregate(scores, factors, mean)
+    rownames(means) <- do.call(paste, c(means[factor.names], sep = ":"))
+    means <- means[, -(1:length(factor.names))]
+  }
 
   # These are what SAS calls total canonical structure coefficients
   # and what I plot as vectors in my canplot macro
@@ -402,7 +408,7 @@ summary.candisc <- function(object, means = TRUE, scores = FALSE,
     }
   }
 
-  if (means) {
+  if (means && !is.null(object$means)) {
     cat("\nClass means:\n\n")
     if (ndim < 2) {
       print(object$means, digits = digits)

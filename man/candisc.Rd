@@ -163,7 +163,8 @@ An object of class \code{candisc} with the following components:
 \item{ndim }{Number of canonical dimensions stored in the \code{means},
 \code{structure} and \verb{coeffs.*} components}
 \item{means }{A data.frame containing the class means for the levels of the
-factor(s) in the term}
+factor(s) in the term, or \code{NULL} if the term involves a matrix predictor,
+such as \code{splines::ns(x, 3)} or \code{poly(x, 2)}, which doesn't define groups}
 \item{factors }{A data frame containing the levels of the factor(s) in the \code{term}}
 \item{term }{name of the \code{term}}
 \item{terms }{A character vector containing the names of the terms in the

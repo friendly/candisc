@@ -55,7 +55,14 @@ plot.candisc <- function (
 	factors <- x$factors
 	rev.axes <- rep(rev.axes, length.out=2)
 
-	nlev <- if(length(dim(x$means))>1) nrow(x$means) else length(x$means)     # number of groups
+	# a term with a matrix predictor, like ns(x, 3), has no groups: only scores & vectors can be shown
+	has.means <- !is.null(x$means)
+	if (!has.means && (x$ndim < 2 || length(which)==1)) {
+		message("No 1D plot for term ", term, ", which doesn't define groups")
+		return(invisible())
+	}
+
+	nlev <- if(!has.means) 1 else if(length(dim(x$means))>1) nrow(x$means) else length(x$means)     # number of groups
 	if (missing(col)) col <- rep(palette()[-1], length.out=nlev)
 	fill.col <- heplots::trans.colors(col, fill.alpha)
 	if (missing(pch)) pch <- rep(1:18, length.out=nlev)
@@ -123,29 +130,32 @@ plot.candisc <- function (
 		suffix <- paste( " (", round(x$pct[which],1), "%)", sep="" ) else suffix <- NULL
 	canlab <- paste(prefix, which, suffix, sep="")
 	
-	nlev <- nrow(x$means)                 # number of groups
+	if (has.means) nlev <- nrow(x$means)                 # number of groups
 	# TODO: can we be more clever about assigning default col & pch by taking the
 	# structure of x$factors into account?
 	if (missing(col)) col <- rep(palette(), length.out=nlev)
 
 	scores <- x$scores[,canvar]
-	means <- x$means[,which]
-	labels <- rownames(x$means) 
+	if (has.means) {
+		means <- x$means[,which]
+		labels <- rownames(x$means)
+	}
 	structure <- x$structure[,which]
-	
+
 	if(isTRUE(rev.axes[1])) {
 	  scores[, 1] <- -scores[, 1]
-	  means[, 1] <- -means[, 1]
+	  if (has.means) means[, 1] <- -means[, 1]
 	  structure[, 1] <- -structure[, 1]
 	}
 	if(isTRUE(rev.axes[2])) {
 	  scores[, 2] <- -scores[, 2]
-	  means[, 2] <- -means[, 2]
+	  if (has.means) means[, 2] <- -means[, 2]
 	  structure[, 2] <- -structure[, 2]
 	}
-	
+
 	# use asp=1 to make the plot equally scaled
-	Ind <- if(length(factors)==1) 
+	Ind <- if(!has.means) rep(1, nrow(scores))
+	    else if(length(factors)==1)
 	    match(x$scores[,term], levels(x$scores[,term]))
 	      else dataIndex(x$scores, term)
 	plot(scores, asp=asp, 
@@ -154,7 +164,7 @@ plot.candisc <- function (
 	abline(h=0, v=0, 
 	       lty=2, col="grey")
 	
-  if(ellipse) {
+  if(ellipse && has.means) {
     fill.col <- heplots::trans.colors(col, fill.alpha)
     radius <- sqrt(qchisq(ellipse.prob, df = 2))
     angles <- (0:60)*2*pi/60
@@ -173,12 +183,14 @@ plot.candisc <- function (
 
   }
 
-	points(means[,1], means[,2], col=col, pch="+", cex=2)
-	pos <- ifelse(means[,2]>0, 3, 1)
-	text(means[,1], means[,2], 
-	     col = col,
-	     labels=labels, pos=pos)
-	
+	if (has.means) {
+		points(means[,1], means[,2], col=col, pch="+", cex=2)
+		pos <- ifelse(means[,2]>0, 3, 1)
+		text(means[,1], means[,2],
+		     col = col,
+		     labels=labels, pos=pos)
+	}
+
 	# plot variable vectors
 	# DONE: replaced previous scaling with vecscale()
 #	maxrms <- function(x) { max(sqrt(apply(x^2, 1, sum))) }
@@ -204,7 +216,7 @@ plot.candisc <- function (
 	}
 	
 	# plot confidence circles for canonical means
-	if ( conf>0 ) {
+	if ( conf>0 && has.means ) {
 		n <- as.vector(table(factors))
 		radii <- sqrt(qchisq(conf, 2) / n)
 		symbols(means, circles=radii, inches=FALSE, add=TRUE, fg=col)

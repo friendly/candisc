@@ -108,7 +108,7 @@ summary.candiscList <- function(object, ...){
 #' @export
 plot.candiscList <- function(x, term, ask=interactive(), graphics = TRUE, ...) {
     if (!missing(term)){
-        if (is.character(term)) term <- gsub(" ", "", term)
+        if (is.character(term)) term <- match(gsub(" ", "", term), gsub(" ", "", names(x)))
         plot(x[[term]], ...)
         return(invisible())
         }
