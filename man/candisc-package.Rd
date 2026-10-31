@@ -54,7 +54,7 @@ The organization of functions in this package and the \pkg{heplots} package
 may change in a later version.
 }
 \references{
-Friendly, M. (2007).  HE plots for Multivariate General Linear Models.
+Friendly, M. (2007).  HE Plots for Multivariate Linear Models.
 \emph{Journal of Computational and Graphical Statistics},
 \strong{16}(2) 421--444.  \url{http://datavis.ca/papers/jcgs-heplots.pdf},
 \doi{10.1198/106186007X208407}.

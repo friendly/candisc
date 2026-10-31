@@ -267,11 +267,11 @@ To cite package `candisc` in publications use:
 
 Friendly M., Fox J. (2025). candisc: Visualizing Generalized Canonical
 Discriminant and Canonical Correlation Analysis\_. R package version
-1.0.0, <https://CRAN.R-project.org/package=heplots>.
+1.0.0, <https://CRAN.R-project.org/package=candisc>.
 
 For the theory on which these methods are based, also cite:
 
-Friendly, M. (2007). “HE plots for Multivariate General Linear Models.”
+Friendly, M. (2007). “HE Plots for Multivariate Linear Models.”
 *Journal of Computational and Graphical Statistics*, *16*(2), 421-444.
 <https://doi.org/10.1198/106186007X208407>.
 

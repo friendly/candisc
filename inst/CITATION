@@ -15,19 +15,19 @@ c(
                      family = "Fox", role="aut")),
     year     = year,
     note     = note,
-    url      = "https://CRAN.R-project.org/package=heplots"
+    url      = "https://CRAN.R-project.org/package=candisc"
   ),
 
   bibentry(
     bibtype  = "Article",
-    title    = "HE plots for Multivariate General Linear Models",
+    title    = "HE Plots for Multivariate Linear Models",
     author   = person(given = "Michael", 
                      family = "Friendly"),
     journal  = "Journal of Computational and Graphical Statistics",
     year     = 2007,
     volume   = 16,
     number   = 2,
-    pages    = "421-444",
+    pages    = "421--444",
     doi      = "10.1198/106186007X208407"
   )
 )
