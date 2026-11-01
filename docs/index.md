@@ -2,7 +2,7 @@
 
 ## **Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis**
 
-Version 1.1.1; documentation built for `pkgdown` 2026-09-10
+Version 1.1.2; documentation built for `pkgdown` 2026-11-01
 
 ## 📝 Description
 
