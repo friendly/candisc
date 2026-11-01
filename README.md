@@ -1,6 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file and knit again -->
-
 <!-- badges: start -->
 
 [![Lifecycle:
@@ -19,7 +18,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 
 <!-- explicit version number now dynamic -->
 
-Version 1.1.1; documentation built for `pkgdown` 2026-09-10
+Version 1.1.2; documentation built for `pkgdown` 2026-11-01
 
 ## 📝 Description
 
@@ -98,11 +97,11 @@ The current official release of the `candisc` package can be installed
 from CRAN. The most recent development version can be installed from
 R-universe or this Github repo.
 
-|  |  |
-|----|----|
-| CRAN version | `install.packages("candisc")` |
-| R-universe | `install.packages('candisc', repos = c('https://friendly.r-universe.dev')` |
-| GitHub version | `remotes::install_github("friendly/candisc")` |
+|                |                                                                            |
+|----------------|----------------------------------------------------------------------------|
+| CRAN version   | `install.packages("candisc")`                                              |
+| R-universe     | `install.packages('candisc', repos = c('https://friendly.r-universe.dev')` |
+| GitHub version | `remotes::install_github("friendly/candisc")`                              |
 
 ## 📖 Vignettes
 
@@ -134,15 +133,15 @@ here. The table below classifies these with **method tags**. Their names
 are linked to their documentation with graphical output on the `pkgdown`
 website, \[<http://friendly.github.io/candisc>\].
 
-| dataset | rows | cols | Title | tags |
-|----|----|----|----|----|
-| [Grass](http://friendly.github.io/candisc/reference/Grass.html) | 40 | 7 | Yields from Nitrogen nutrition of grass species | MANOVA candisc discrim |
-| [HSB](http://friendly.github.io/candisc/reference/HSB.html) | 600 | 15 | High School and Beyond Data | MMRA cancor |
-| [PsyAcad](http://friendly.github.io/candisc/reference/PsyAcad.html) | 600 | 8 | Psychological Measures and Academic Achievement | cancor |
-| [Wine](http://friendly.github.io/candisc/reference/Wine.html) | 178 | 14 | Chemical composition of three cultivars of wine | MANOVA candisc discrim |
-| [Wolves](http://friendly.github.io/candisc/reference/Wolves.html) | 25 | 12 | Wolf skulls | candisc discrim |
-| [cereal](http://friendly.github.io/candisc/reference/cereal.html) | 77 | 16 | Breakfast Cereal Dataset | MMRA cancor |
-| [painters2](http://friendly.github.io/candisc/reference/painters2.html) | 54 | 10 | Painters Data with Historical Art Variables | MANOVA candisc discrim |
+| dataset                                                                 | rows | cols | Title                                           | tags                   |
+|-------------------------------------------------------------------------|------|------|-------------------------------------------------|------------------------|
+| [Grass](http://friendly.github.io/candisc/reference/Grass.html)         | 40   | 7    | Yields from Nitrogen nutrition of grass species | MANOVA candisc discrim |
+| [HSB](http://friendly.github.io/candisc/reference/HSB.html)             | 600  | 15   | High School and Beyond Data                     | MMRA cancor            |
+| [PsyAcad](http://friendly.github.io/candisc/reference/PsyAcad.html)     | 600  | 8    | Psychological Measures and Academic Achievement | cancor                 |
+| [Wine](http://friendly.github.io/candisc/reference/Wine.html)           | 178  | 14   | Chemical composition of three cultivars of wine | MANOVA candisc discrim |
+| [Wolves](http://friendly.github.io/candisc/reference/Wolves.html)       | 25   | 12   | Wolf skulls                                     | candisc discrim        |
+| [cereal](http://friendly.github.io/candisc/reference/cereal.html)       | 77   | 16   | Breakfast Cereal Dataset                        | MMRA cancor            |
+| [painters2](http://friendly.github.io/candisc/reference/painters2.html) | 54   | 10   | Painters Data with Historical Art Variables     | MANOVA candisc discrim |
 
 ## 📊 Examples
 
@@ -271,8 +270,8 @@ Discriminant and Canonical Correlation Analysis\_. R package version
 
 For the theory on which these methods are based, also cite:
 
-Friendly, M. (2007). “HE Plots for Multivariate Linear Models.”
-*Journal of Computational and Graphical Statistics*, *16*(2), 421-444.
+Friendly, M. (2007). “HE Plots for Multivariate Linear Models.” *Journal
+of Computational and Graphical Statistics*, *16*(2), 421-444.
 <https://doi.org/10.1198/106186007X208407>.
 
 ## 📚 References
