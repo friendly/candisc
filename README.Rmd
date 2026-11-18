@@ -145,7 +145,7 @@ In addition to the datasets in the heplots package, `candisc` includes a few mor
 statistical and graphical methods implemented here.
 The table below classifies these with
 **method tags**. Their names are linked to their documentation with graphical output on the
-`pkgdown` website, [<http://friendly.github.io/candisc>].
+`pkgdown` website, [<https://friendly.github.io/candisc/>].
 
 ```{r datasets, echo=FALSE}
 library(here)
@@ -155,7 +155,7 @@ library(tinytable)
 dsets <- read.csv("https://raw.githubusercontent.com/friendly/candisc/master/extra/datasets.csv")
 
 # link dataset to pkgdown doc
-refurl <- "http://friendly.github.io/candisc/reference/"
+refurl <- "https://friendly.github.io/candisc/reference/"
 
 dsets <- dsets |>
   mutate(dataset = glue::glue("[{dataset}]({refurl}{dataset}.html)")) 

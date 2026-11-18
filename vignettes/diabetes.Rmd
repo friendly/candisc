@@ -30,7 +30,7 @@ The `Diabetes` data set is contained in the `heplots` package.  This vignette us
 is problematic because some assumptions are violated.  We treat this as a learning opportunity, because it allows us
 to illustrate several diagnostic plots.
 Some of the content here serves as an additional example for a recent paper on visualizing tests for equality of variance in
-MANOVA (Friendly & Sigal, 2017).
+MANOVA (Friendly & Sigal, 2018).
 
 ### Setting up
 Load the required packages and the data
@@ -317,8 +317,8 @@ Not too bad!
 
 ## References
 
-Friendly, M. & Sigal, M. (2017) Visualizing Tests of Equality of Covariance Matrices.
-Submitted for publication. \url{http://datavis.ca/papers/}
+Friendly, M. & Sigal, M. (2018) Visualizing Tests for Equality of Covariance Matrices.
+*The American Statistician*, **72**(4). <https://doi.org/10.1080/00031305.2018.1497537>
 
 Reaven, G. M. & Miller, R. G. (1979).
 An Attempt to Define the Nature of Chemical Diabetes Using a Multidimensional Analysis 

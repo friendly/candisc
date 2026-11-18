@@ -5,6 +5,7 @@ This is a bug-fix release, for models with a matrix predictor, such as `splines:
 * `candisc()` and `candiscList()` gave an error for such a term, because it doesn't define groups. The `means` component is now `NULL` for these terms.
 * `summary.candisc()` skips the class means, and `plot.candisc()` draws only the scores and variable vectors, when a term has no `means`. There is no 1D plot for these terms, just a message.
 * `plot.candiscList()`: the `term` argument now finds terms whose names contain spaces, such as `"ns(x, 3)"`
+* Replaced links to `datavis.ca`, which is offline, with DOIs; updated the Friendly & Sigal reference in the `diabetes` vignette to its published version.
 
 ## Version 1.1.1
 

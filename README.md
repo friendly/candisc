@@ -131,17 +131,17 @@ In addition to the datasets in the heplots package, `candisc` includes a
 few more related to the statistical and graphical methods implemented
 here. The table below classifies these with **method tags**. Their names
 are linked to their documentation with graphical output on the `pkgdown`
-website, \[<http://friendly.github.io/candisc>\].
+website, \[<https://friendly.github.io/candisc/>\].
 
 | dataset                                                                 | rows | cols | Title                                           | tags                   |
 |-------------------------------------------------------------------------|------|------|-------------------------------------------------|------------------------|
-| [Grass](http://friendly.github.io/candisc/reference/Grass.html)         | 40   | 7    | Yields from Nitrogen nutrition of grass species | MANOVA candisc discrim |
-| [HSB](http://friendly.github.io/candisc/reference/HSB.html)             | 600  | 15   | High School and Beyond Data                     | MMRA cancor            |
-| [PsyAcad](http://friendly.github.io/candisc/reference/PsyAcad.html)     | 600  | 8    | Psychological Measures and Academic Achievement | cancor                 |
-| [Wine](http://friendly.github.io/candisc/reference/Wine.html)           | 178  | 14   | Chemical composition of three cultivars of wine | MANOVA candisc discrim |
-| [Wolves](http://friendly.github.io/candisc/reference/Wolves.html)       | 25   | 12   | Wolf skulls                                     | candisc discrim        |
-| [cereal](http://friendly.github.io/candisc/reference/cereal.html)       | 77   | 16   | Breakfast Cereal Dataset                        | MMRA cancor            |
-| [painters2](http://friendly.github.io/candisc/reference/painters2.html) | 54   | 10   | Painters Data with Historical Art Variables     | MANOVA candisc discrim |
+| [Grass](https://friendly.github.io/candisc/reference/Grass.html)         | 40   | 7    | Yields from Nitrogen nutrition of grass species | MANOVA candisc discrim |
+| [HSB](https://friendly.github.io/candisc/reference/HSB.html)             | 600  | 15   | High School and Beyond Data                     | MMRA cancor            |
+| [PsyAcad](https://friendly.github.io/candisc/reference/PsyAcad.html)     | 600  | 8    | Psychological Measures and Academic Achievement | cancor                 |
+| [Wine](https://friendly.github.io/candisc/reference/Wine.html)           | 178  | 14   | Chemical composition of three cultivars of wine | MANOVA candisc discrim |
+| [Wolves](https://friendly.github.io/candisc/reference/Wolves.html)       | 25   | 12   | Wolf skulls                                     | candisc discrim        |
+| [cereal](https://friendly.github.io/candisc/reference/cereal.html)       | 77   | 16   | Breakfast Cereal Dataset                        | MMRA cancor            |
+| [painters2](https://friendly.github.io/candisc/reference/painters2.html) | 54   | 10   | Painters Data with Historical Art Variables     | MANOVA candisc discrim |
 
 ## 📊 Examples
 

@@ -56,7 +56,7 @@ may change in a later version.
 \references{
 Friendly, M. (2007).  HE Plots for Multivariate Linear Models.
 \emph{Journal of Computational and Graphical Statistics},
-\strong{16}(2) 421--444.  \url{http://datavis.ca/papers/jcgs-heplots.pdf},
+\strong{16}(2) 421--444.
 \doi{10.1198/106186007X208407}.
 
 Friendly, M. & Kwan, E. (2003). Effect Ordering for Data Displays,
