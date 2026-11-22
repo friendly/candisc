@@ -12,6 +12,9 @@
 #'   frequencies of actual vs. predicted class with attributes `accuracy`
 #'   and `error` giving the overall rates of correct and incorrect prediction.
 #' @seealso [MASS::lda()], [MASS::qda()]
+#' 
+#' @importFrom insight get_response
+#' 
 #' @export
 #'
 #' @examples
