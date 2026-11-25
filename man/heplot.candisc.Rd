@@ -19,6 +19,7 @@
   prefix = "Can",
   suffix = TRUE,
   terms = mod$term,
+  factor.means = mod$term,
   ...
 )
 }
@@ -68,8 +69,14 @@ plotted in canonical space.  The default is the one term for which the
 canonical scores were computed.  If \code{terms=TRUE}, all terms are
 plotted.}
 
+\item{factor.means}{Logical, or the name(s) of factors in the original \code{mlm} whose group
+means are plotted in canonical space. The default is the term for which the canonical
+scores were computed. Use \code{factor.means = FALSE} to omit the means, e.g., to label them yourself.}
+
 \item{\dots}{Arguments to be passed down to \code{\link[heplots]{heplot}} or
-\code{\link[heplots]{heplot3d}}}
+\code{\link[heplots]{heplot3d}}. For \code{heplot()}, these include \code{means.pos} (heplots >= 1.8.7),
+the positions of the labels for the group means: e.g., \code{means.pos = c(AshleyRails = 1)} puts
+that label below its mean, when two labels overlap.}
 }
 \value{
 \code{heplot.candisc} returns invisibly an object of class
@@ -106,6 +113,8 @@ pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data=Pottery)
 pottery.can <-candisc(pottery.mod)
 
 heplot(pottery.can, var.lwd=3)
+# the labels for IsleThorns and AshleyRails overlap: move one below its mean
+heplot(pottery.can, var.lwd=3, means.pos = c(AshleyRails = 1))
 if(requireNamespace("rgl")){
 heplot3d(pottery.can, var.lwd=3, scale=10, zlim=c(-3,3), wire=FALSE)
 }

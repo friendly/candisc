@@ -85,8 +85,13 @@
 #' plotted in canonical space.  The default is the one term for which the
 #' canonical scores were computed.  If `terms=TRUE`, all terms are
 #' plotted.
+#' @param factor.means Logical, or the name(s) of factors in the original `mlm` whose group
+#' means are plotted in canonical space. The default is the term for which the canonical
+#' scores were computed. Use `factor.means = FALSE` to omit the means, e.g., to label them yourself.
 #' @param \dots Arguments to be passed down to \code{\link[heplots]{heplot}} or
-#' \code{\link[heplots]{heplot3d}}
+#' \code{\link[heplots]{heplot3d}}. For `heplot()`, these include `means.pos` (heplots >= 1.8.7),
+#' the positions of the labels for the group means: e.g., `means.pos = c(AshleyRails = 1)` puts
+#' that label below its mean, when two labels overlap.
 #' @return `heplot.candisc` returns invisibly an object of class
 #' `"heplot"`, with coordinates for the various hypothesis ellipses and
 #' the error ellipse, and the limits of the horizontal and vertical axes.
@@ -118,6 +123,8 @@
 #' pottery.can <-candisc(pottery.mod)
 #' 
 #' heplot(pottery.can, var.lwd=3)
+#' # the labels for IsleThorns and AshleyRails overlap: move one below its mean
+#' heplot(pottery.can, var.lwd=3, means.pos = c(AshleyRails = 1))
 #' if(requireNamespace("rgl")){
 #' heplot3d(pottery.can, var.lwd=3, scale=10, zlim=c(-3,3), wire=FALSE)
 #' }
@@ -175,6 +182,7 @@ heplot.candisc <- function (
 	prefix = "Can",  # prefix for labels of canonical dimensions
 	suffix = TRUE,   # add label suffix with can % ?
 	terms=mod$term,  # terms to be plotted in canonical space / TRUE=all
+	factor.means=mod$term,  # factor(s) whose means are plotted, or TRUE/FALSE
 	...              # extra args passed to heplot
 	) {
 
@@ -231,7 +239,7 @@ heplot.candisc <- function (
 #	else terms <- mod$term
 	
   ellipses <- heplot(can.mod, terms=terms, 
-  		factor.means=term,
+  		factor.means=factor.means,
   		xlab=canlab[1], ylab=canlab[2],  asp=asp, ...)
   abline(h=0, v=0, col="gray")
   
@@ -275,6 +283,7 @@ heplot3d.candisc <- function (
 	prefix = "Can",  # prefix for labels of canonical dimensions
 	suffix = FALSE,   # add label suffix with can % ?
 	terms=mod$term,  # terms to be plotted in canonical space / TRUE=all
+	factor.means=mod$term,  # factor(s) whose means are plotted, or TRUE/FALSE
 	...         # extra args passed to heplot3d
 	) {
 
@@ -303,7 +312,7 @@ heplot3d.candisc <- function (
 	}
 
   ellipses <-heplot3d(can.mod, terms=terms,
-  		factor.means=term,
+  		factor.means=factor.means,
   		xlab=canlab[1], ylab=canlab[2], zlab=canlab[3], ...)
 
   structure <- mod$structure[,which]

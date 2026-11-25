@@ -1,3 +1,11 @@
+## Version 1.1.3
+
+* `heplot.candisc()`: the labels for group means can overlap when means are close in canonical
+  space (e.g., IsleThorns and AshleyRails for `Pottery`). Use `means.pos`, passed on to `heplot()`,
+  to move them, e.g., `means.pos = c(AshleyRails = 1)`. This needs heplots (>= 1.8.7).
+* `heplot.candisc()` and `heplot3d.candisc()` gain a `factor.means` argument, so the group means
+  can be omitted (`factor.means = FALSE`); previously they were always plotted.
+
 ## Version 1.1.2
 
 This is a bug-fix release, for models with a matrix predictor, such as `splines::ns(x, 3)` or `poly(x, 2)`
