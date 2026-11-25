@@ -140,6 +140,7 @@ Michael Friendly
 ## Examples
 
 ``` r
+
 data(Wine, package="candisc")
 Wine.mod <- lm(as.matrix(Wine[, -1]) ~ Cultivar, data=Wine)
 Wine.can <- candisc(Wine.mod)

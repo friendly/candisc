@@ -13,9 +13,9 @@
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.10/font.css" rel="stylesheet">
-<link href="../deps/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<link href="../deps/Roboto_Slab-0.4.10/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.5.0/font.css" rel="stylesheet">
+<link href="../deps/JetBrains_Mono-0.5.0/font.css" rel="stylesheet">
+<link href="../deps/Roboto_Slab-0.5.0/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="painters_files/libs/quarto-html/popper.min.js"></script><script src="painters_files/libs/quarto-html/tippy.umd.min.js"></script><link href="painters_files/libs/quarto-html/tippy.css" rel="stylesheet">
@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">candisc</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Multivariate Visualization of Painters Style</h1>
 
       <p class="author">Michael Friendly</p>
-      <p class="date">2026-11-01</p>
+      <p class="date">2026-11-24</p>
 
       <small class="dont-index">Source: <a href="https://github.com/friendly/candisc/blob/HEAD/vignettes/painters.qmd" class="external-link"><code>vignettes/painters.qmd</code></a></small>
       <div class="d-none name"><code></code></div>
@@ -77,7 +77,7 @@
 
 
 
-    <p>Vignette built using <code>heplots</code>, version 1.8.6, <code>candisc</code>, version 1.1.2 and <code>ggplot2</code>, version 4.0.3.</p>
+    <p>Vignette built using <code>heplots</code>, version 1.8.7, <code>candisc</code>, version 1.1.3 and <code>ggplot2</code>, version 4.0.4.</p>
 <section class="level2"><h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>The <code>painters</code> dataset from the <code>MASS</code> package contains subjective assessments of 54 classical painters on four aesthetic qualities: Composition, Drawing, Colour, and Expression. These ratings, on a scale of 0-20, were made by the 18th century art critic Roger de Piles <span class="citation" data-cites="DePiles1743">(<a href="#ref-DePiles1743" role="doc-biblioref">1743</a>)</span>, a notable member of the French Academy of Painting and Sculpture. The ratings reflect his judgment of the “artistic merit” of these painters on each of these dimensions. His painters include the well-known Michelangelo, Tintoretto, Titian, Rembrandt, Rubens, Durer and others that art historians know well.</p>
@@ -94,32 +94,32 @@ Table 1: Characteristics of painting schools
 <div class="cell-output-display">
 <script src="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.js"></script><script>
       // Create table-specific functions using external factory
-      const tableFns_08qnms5wead04pozc2kn = TinyTable.createTableFunctions("tinytable_08qnms5wead04pozc2kn");
+      const tableFns_k81zl4ud3gce9iujn441 = TinyTable.createTableFunctions("tinytable_k81zl4ud3gce9iujn441");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '8', j: 1 }, { i: '8', j: 2 }, { i: '8', j: 3 } ], css_id: 'tinytable_css_40f3vgra61dvgho51o3v',},
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 } ], css_id: 'tinytable_css_1mhmlb2q7liub4wj9hz6',},
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_sdvkjt6sp4e3t1fyaabb',},
+          { positions: [ { i: '8', j: 1 }, { i: '8', j: 2 }, { i: '8', j: 3 } ], css_id: 'tinytable_css_qpz52dkpqkay5n5rxhi7',},
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '7', j: 1 }, { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '7', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 }, { i: '7', j: 3 } ], css_id: 'tinytable_css_n5bhu5d5f78va3af2525',},
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_16334rn62rmzs7o6pskf',},
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_08qnms5wead04pozc2kn.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_k81zl4ud3gce9iujn441.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
     </script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
 <style>
     /* tinytable css entries after */
-    #tinytable_08qnms5wead04pozc2kn td.tinytable_css_40f3vgra61dvgho51o3v, #tinytable_08qnms5wead04pozc2kn th.tinytable_css_40f3vgra61dvgho51o3v {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
-    #tinytable_08qnms5wead04pozc2kn td.tinytable_css_1mhmlb2q7liub4wj9hz6, #tinytable_08qnms5wead04pozc2kn th.tinytable_css_1mhmlb2q7liub4wj9hz6 { text-align: left }
-    #tinytable_08qnms5wead04pozc2kn td.tinytable_css_sdvkjt6sp4e3t1fyaabb, #tinytable_08qnms5wead04pozc2kn th.tinytable_css_sdvkjt6sp4e3t1fyaabb {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold; text-align: left }
+    #tinytable_k81zl4ud3gce9iujn441 td.tinytable_css_qpz52dkpqkay5n5rxhi7, #tinytable_k81zl4ud3gce9iujn441 th.tinytable_css_qpz52dkpqkay5n5rxhi7 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.08em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; text-align: left }
+    #tinytable_k81zl4ud3gce9iujn441 td.tinytable_css_n5bhu5d5f78va3af2525, #tinytable_k81zl4ud3gce9iujn441 th.tinytable_css_n5bhu5d5f78va3af2525 { text-align: left }
+    #tinytable_k81zl4ud3gce9iujn441 td.tinytable_css_16334rn62rmzs7o6pskf, #tinytable_k81zl4ud3gce9iujn441 th.tinytable_css_16334rn62rmzs7o6pskf {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: var(--tt-line-color); --line-color-left: var(--tt-line-color); --line-color-right: var(--tt-line-color); --line-color-top: var(--tt-line-color); --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.08em; --line-type-bottom: solid; --line-type-left: solid; --line-type-right: solid; --line-type-top: solid; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold; text-align: left }
     </style>
 <div class="container">
-      <table class="table tinytable" id="tinytable_08qnms5wead04pozc2kn" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table tinytable" id="tinytable_k81zl4ud3gce9iujn441" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
 <thead><tr>
 <th scope="col" data-row="0" data-col="1">School</th>
                 <th scope="col" data-row="0" data-col="2">Period</th>

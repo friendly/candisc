@@ -59,6 +59,7 @@ exemplar.
 ## Examples
 
 ``` r
+
 str(Grass)
 #> 'data.frame':    40 obs. of  7 variables:
 #>  $ Species: Factor w/ 8 levels "B.media","D.glomerata",..: 7 7 7 7 7 2 2 2 2 2 ...

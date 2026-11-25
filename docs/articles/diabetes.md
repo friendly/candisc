@@ -1,6 +1,6 @@
 # Diabetes data: heplots and candisc examples
 
-Vignette built using `heplots`, version 1.8.6, `candisc`, version 1.1.2
+Vignette built using `heplots`, version 1.8.7, `candisc`, version 1.1.3
 and `car`, version 3.1-5.
 
 ## Background
@@ -28,19 +28,21 @@ assumptions are violated. We treat this as a learning opportunity,
 because it allows us to illustrate several diagnostic plots. Some of the
 content here serves as an additional example for a recent paper on
 visualizing tests for equality of variance in MANOVA (Friendly & Sigal,
-2017).
+2020).
 
 ### Setting up
 
 Load the required packages and the data
 
 ``` r
+
 library(heplots)
 library(candisc)
 library(car)
 ```
 
 ``` r
+
 data(Diabetes, package="heplots")
 str(Diabetes)
 ## 'data.frame':    145 obs. of  6 variables:
@@ -79,6 +81,7 @@ covariance matrices in MANOVA designs. It produces a scatterplot matrix
 of these when the `variables` argument is of length \> 2.
 
 ``` r
+
 covEllipses(Diabetes[,2:5], Diabetes$group, 
      variables=1:3,
    fill=TRUE, fill.alpha = 0.2,
@@ -111,6 +114,7 @@ below (using
 [`car::scatterplot`](https://rdrr.io/pkg/car/man/scatterplot.html)).
 
 ``` r
+
 scatterplot( instest ~ glutest | group, data=Diabetes, 
    pch=c(16,15,17), 
    col=c("blue", "red", "darkgreen"),
@@ -134,6 +138,7 @@ R console, the plot can be zoomed and rotated manually or under `rgl`
 controls.
 
 ``` r
+
 scatter3d(sspg ~ glutest + instest | group, data=Diabetes, 
           surface=FALSE,    sphere.size=1.5, ellipsoid=TRUE,
           surface.col=c("blue", "red", "darkgreen"))
@@ -149,9 +154,10 @@ ellipsoids](diabetes-rgl.png)
 Box’s M test confirms that there is substantial heterogeneity of
 covariance matrices. The `plot` method for the result gives a convenient
 and informative display of how the groups differ in the components
-($log\left| S_{i} \right|$) that go into Box’s M test.
+($`log | S_i |`$) that go into Box’s M test.
 
 ``` r
+
 diab.boxm <- boxM(Diabetes[,2:5], Diabetes$group)
 diab.boxm
 ## 
@@ -178,6 +184,7 @@ The MANOVA shows a highly significant effect of `group` on the
 collection of response variables.
 
 ``` r
+
 diab.mlm <- lm(cbind(glufast, glutest, instest, sspg) ~ group, data=Diabetes)
 Anova(diab.mlm)
 ## 
@@ -192,18 +199,19 @@ Anova(diab.mlm)
 
 Another assumption of MANOVA is that the residuals have a multivariate
 normal distribution. This can be assessed visually with a Chi-square QQ
-plot. This plots squared Mahalanobis distances ($D^{2}$) of the
-residuals vs. corresponding quantiles of the $\chi^{2}$ distribution
-with $p$ degrees of freedom. The `cqplot` function in the `heplots`
+plot. This plots squared Mahalanobis distances ($`D^2`$) of the
+residuals vs. corresponding quantiles of the $`\chi^2`$ distribution
+with $`p`$ degrees of freedom. The `cqplot` function in the `heplots`
 package is designed to do this from a fitted MLM object. A confidence
 envelope makes it easy to see when the departure is large enough to
 cause concern.
 
 It can be seen here that the points differ substantially from the red
-line of equality. There are far too many points with large $D^{2}$
+line of equality. There are far too many points with large $`D^2`$
 values.
 
 ``` r
+
 cqplot(diab.mlm, id.n = 3)
 ```
 
@@ -211,17 +219,18 @@ cqplot(diab.mlm, id.n = 3)
 
 ## HE plots
 
-An HE plot shows the $H$ ellipse for differences among means together
-with the $E$ ellipse for error. In the default scaling, such plots have
-the visual property that a given effect in the MLM is significant (by
-Roy’s maximum root test) *iff* the $H$ ellipse projects **anywhere**
-outside the $E$ ellipse.
+An HE plot shows the $`H`$ ellipse for differences among means together
+with the $`E`$ ellipse for error. In the default scaling, such plots
+have the visual property that a given effect in the MLM is significant
+(by Roy’s maximum root test) *iff* the $`H`$ ellipse projects
+**anywhere** outside the $`E`$ ellipse.
 
 By default, the first two response variables are plotted. The result
 shows that the means on both `glufast` and `glutest` are ordered
 `Normal < Chemical < Overt`.
 
 ``` r
+
 heplot(diab.mlm, fill=TRUE, fill.alpha=0.1)
 ```
 
@@ -232,6 +241,7 @@ all pairs of response variables. The pattern for `instest` seems to
 differ from the other variables.
 
 ``` r
+
 pairs(diab.mlm, fill=TRUE, fill.alpha=0.1)
 ```
 
@@ -244,13 +254,14 @@ space of linear combinations of the responses that accounts for the
 greatest proportion of the between-group variance relative to
 within-group variance.
 
-In this case, with $g = 3$ groups, this space is two-dimensional, so all
+In this case, with $`g=3`$ groups, this space is two-dimensional, so all
 differences can be seen in a 2D plot. From the output below, nearly 90%
 of between-group mean differences are accounted for by the first
 canonical dimension. Both canonical dimensions are significant, by a
 likelihood ratio stepdown test.
 
 ``` r
+
 diab.can <- candisc(diab.mlm)
 diab.can
 ## 
@@ -280,9 +291,10 @@ dimensions.
 The relationship of the response variables to the canonical dimensions
 is shown by vectors (similar to a biplot). Each vector is defined by the
 correlations (structure coefficients) it has with the canonical
-dimensions.[¹](#fn1)
+dimensions.[^1]
 
 ``` r
+
 plot(diab.can, ellipse=TRUE, var.lwd=2)
 ```
 
@@ -305,11 +317,12 @@ In this plot it can be seen that:
 
 The `heplot` method for `candisc` objects gives an HE plot summary of
 the canonical discriminant analysis. The variable vectors are the same
-as in the canonical structure plot. The size of the $H$ ellipse relative
-to that of the $E$ ellipse is an indication of the magnitude of the
-multivariate effect for `group`.
+as in the canonical structure plot. The size of the $`H`$ ellipse
+relative to that of the $`E`$ ellipse is an indication of the magnitude
+of the multivariate effect for `group`.
 
 ``` r
+
 heplot(diab.can, fill=c(TRUE, FALSE), fill.alpha=0.1, var.lwd=2)
 ```
 
@@ -340,6 +353,7 @@ However, here, the prior probabilities are taken from the proportions of
 the groups in the data.
 
 ``` r
+
 library(MASS)
 diab.lda <- lda(group ~ glufast + glutest + instest + sspg, data = Diabetes)
 diab.lda
@@ -398,6 +412,7 @@ the latter, `glufast < 117` classifies an individual as chemical
 diabetic rather than overt diabetic.
 
 ``` r
+
 library(rpart)
 diab.part <- rpart(group ~ glufast + glutest + instest + sspg, data=Diabetes)
 diab.part
@@ -418,6 +433,7 @@ package. The numbers in the nodes give the proportions classified in
 each of the three groups.
 
 ``` r
+
 library(rpart.plot)
 rpart.plot(diab.part, box.palette=list("Blues", "Reds",  "Greens"))
 ```
@@ -430,6 +446,7 @@ How well does that do? We can examine a table of predicted group
 membership vs. actual and calculate the error rate. Not too bad!
 
 ``` r
+
 (class.pred <- table(predicted=predict(diab.part, type="class"), actual=Diabetes$group))
 ##                    actual
 ## predicted           Normal Chemical_Diabetic Overt_Diabetic
@@ -444,15 +461,14 @@ membership vs. actual and calculate the error rate. Not too bad!
 
 ## References
 
-Friendly, M. & Sigal, M. (2017) Visualizing Tests of Equality of
-Covariance Matrices. Submitted for publication.
+Friendly, M. & Sigal, M. (2020) Visualizing Tests for Equality of
+Covariance Matrices. *The American Statistician*, **74**(2), 144–155.
+<https://doi.org/10.1080/00031305.2018.1497537>
 
 Reaven, G. M. & Miller, R. G. (1979). An Attempt to Define the Nature of
 Chemical Diabetes Using a Multidimensional Analysis *Diabetologia*,
 **16**, 17-24.
 
-------------------------------------------------------------------------
-
-1.  The structure coefficients determine only the angle of the vector
+[^1]: The structure coefficients determine only the angle of the vector
     with respect to the coordinate axes. The vectors are all multiplied
     by a scale factor, chosen so the vectors nearly fill the plot frame.

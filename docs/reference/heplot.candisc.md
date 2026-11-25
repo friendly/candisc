@@ -24,6 +24,7 @@ heplot(
   prefix = "Can",
   suffix = TRUE,
   terms = mod$term,
+  factor.means = mod$term,
   ...
 )
 ```
@@ -100,12 +101,24 @@ heplot(
   canonical space. The default is the one term for which the canonical
   scores were computed. If `terms=TRUE`, all terms are plotted.
 
+- factor.means:
+
+  Logical, or the name(s) of factors in the original `mlm` whose group
+  means are plotted in canonical space. The default is the term for
+  which the canonical scores were computed. Use `factor.means = FALSE`
+  to omit the means, e.g., to label them yourself.
+
 - ...:
 
   Arguments to be passed down to
   [`heplot`](https://friendly.github.io/heplots/reference/heplot.html)
   or
-  [`heplot3d`](https://friendly.github.io/heplots/reference/heplot3d.html)
+  [`heplot3d`](https://friendly.github.io/heplots/reference/heplot3d.html).
+  For
+  [`heplot()`](https://friendly.github.io/heplots/reference/heplot.html),
+  these include `means.pos` (heplots \>= 1.8.7), the positions of the
+  labels for the group means: e.g., `means.pos = c(AshleyRails = 1)`
+  puts that label below its mean, when two labels overlap.
 
 ## Value
 
@@ -140,7 +153,6 @@ Statistical Software*, 17(6), 1-42. %
 
 Friendly, M. (2007). HE Plots for Multivariate Linear Models. *Journal
 of Computational and Graphical Statistics*, **16**(2) 421–444.
-<http://datavis.ca/papers/jcgs-heplots.pdf>,
 [doi:10.1198/106186007X208407](https://doi.org/10.1198/106186007X208407)
 .
 
@@ -159,12 +171,17 @@ Michael Friendly and John Fox
 ## Examples
 
 ``` r
+
 ## Pottery data, from car package
 data(Pottery, package = "carData")
 pottery.mod <- lm(cbind(Al, Fe, Mg, Ca, Na) ~ Site, data=Pottery)
 pottery.can <-candisc(pottery.mod)
 
 heplot(pottery.can, var.lwd=3)
+
+#> Vector scale factor set to  14.83312 
+# the labels for IsleThorns and AshleyRails overlap: move one below its mean
+heplot(pottery.can, var.lwd=3, means.pos = c(AshleyRails = 1))
 
 #> Vector scale factor set to  14.83312 
 if(requireNamespace("rgl")){

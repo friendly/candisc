@@ -53,7 +53,6 @@ Statistical Software*, 17(6), 1-42. <https://www.jstatsoft.org/v17/i06/>
 
 Friendly, M. (2007). HE Plots for Multivariate Linear Models. *Journal
 of Computational and Graphical Statistics*, **16**(2) 421–444.
-<http://datavis.ca/papers/jcgs-heplots.pdf>,
 [doi:10.1198/106186007X208407](https://doi.org/10.1198/106186007X208407)
 .
 

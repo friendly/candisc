@@ -62,6 +62,7 @@ Michael Friendly
 ## Examples
 
 ``` r
+
 bbox <- matrix(c(-3, 3, -2, 2), 2, 2)
 colnames(bbox) <- c("x","y")
 rownames(bbox) <- c("min", "max")

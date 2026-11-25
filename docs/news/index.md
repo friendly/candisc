@@ -1,5 +1,20 @@
 # Changelog
 
+## Version 1.1.3
+
+- [`heplot.candisc()`](https://friendly.github.io/candisc/reference/heplot.candisc.md):
+  the labels for group means can overlap when means are close in
+  canonical space (e.g., IsleThorns and AshleyRails for `Pottery`). Use
+  `means.pos`, passed on to
+  [`heplot()`](https://friendly.github.io/heplots/reference/heplot.html),
+  to move them, e.g., `means.pos = c(AshleyRails = 1)`. This needs
+  heplots (\>= 1.8.7).
+- [`heplot.candisc()`](https://friendly.github.io/candisc/reference/heplot.candisc.md)
+  and
+  [`heplot3d.candisc()`](https://friendly.github.io/candisc/reference/heplot.candisc.md)
+  gain a `factor.means` argument, so the group means can be omitted
+  (`factor.means = FALSE`); previously they were always plotted.
+
 ## Version 1.1.2
 
 This is a bug-fix release, for models with a matrix predictor, such as
@@ -18,6 +33,9 @@ This is a bug-fix release, for models with a matrix predictor, such as
 - [`plot.candiscList()`](https://friendly.github.io/candisc/reference/candiscList.md):
   the `term` argument now finds terms whose names contain spaces, such
   as `"ns(x, 3)"`
+- Replaced links to `datavis.ca`, which is offline, with DOIs; updated
+  the Friendly & Sigal reference in the `diabetes` vignette to its
+  published version.
 
 ## Version 1.1.1
 

@@ -94,6 +94,7 @@ High School and Beyond data files:
 ## Examples
 
 ``` r
+
 str(HSB)
 #> 'data.frame':    600 obs. of  15 variables:
 #>  $ id     : num  55 114 490 44 26 510 133 213 548 309 ...

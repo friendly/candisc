@@ -14,13 +14,13 @@ Source:
 
 Friendly M, Fox J (2026). *candisc: Visualizing Generalized Canonical
 Discriminant and Canonical Correlation Analysis*. R package version
-1.1.2, <https://CRAN.R-project.org/package=candisc>.
+1.1.3, <https://CRAN.R-project.org/package=candisc>.
 
     @Manual{,
       title = {{candisc}: Visualizing Generalized Canonical Discriminant and Canonical Correlation Analysis},
       author = {Michael Friendly and John Fox},
       year = {2026},
-      note = {R package version 1.1.2},
+      note = {R package version 1.1.3},
       url = {https://CRAN.R-project.org/package=candisc},
     }
 
