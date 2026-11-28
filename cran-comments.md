@@ -1,29 +1,35 @@
 ## Test environments
-* local Windows 11, 4.5.2 (2025-10-31 ucrt)
-* winbuilder: R Under development (unstable) (2026-06-03 r90099 ucrt)
+* local Windows 11 x64, R 4.6.2 (ucrt)
+* win-builder: R Under development (unstable) (PENDING)
 
 ## R CMD check results
-There were no ERRORs, WARNINGs or NOTES 
+0 errors | 0 warnings | 0 notes, locally (`--as-cran`) and on win-builder (R-devel) (PENDING)
 
-## reverse dependencies
+## Version 1.1.3
 
-`revdepcheck::revdep_check()` failed to run due to a bug in one of its
-dependencies (`mime` not exported by `namespace:gmailr`).
+This release combines 1.1.2 (not submitted) and 1.1.3; CRAN has 1.1.1.
 
-`devtools::revdep()` lists 6 packages, but Guerry, heplots, and KnowBR only
-list candisc in `Suggests` and are not affected by changes to the package API.
-The 3 packages that `Depend` on or `Import` candisc are:
-MorphoTools2, MultivariateAnalysis, SurveyCC.
+* Bug fixes (1.1.2): `candisc()` and `candiscList()` gave an error for a term with a
+  matrix predictor, such as `splines::ns(x, 3)` or `poly(x, 2)`. `summary.candisc()` and
+  `plot.candisc()` now handle such terms, and `plot.candiscList()` finds terms whose names
+  contain spaces.
+* `heplot.candisc()`: the labels for group means can be moved with `means.pos`, passed on
+  to `heplots::heplot()`, when two labels overlap. This requires heplots (>= 1.8.7), now
+  on CRAN, so `Depends:` is raised to `heplots (>= 1.8.7)`.
+* `heplot.candisc()` and `heplot3d.candisc()` gain a `factor.means` argument, so the
+  group means can be omitted.
+* Links to `datavis.ca`, which is offline, were replaced with DOIs.
 
-These were checked manually using `rcmdcheck` and no new problems were found.
+## Reverse dependencies
 
-## Comments
+We checked 6 reverse dependencies (Guerry, heplots, KnowBR, MorphoTools2,
+MultivariateAnalysis, SurveyCC) with `revdepcheck`, comparing R CMD check results across
+the CRAN (1.1.1) and dev (1.1.3) versions of this package.
 
-## Version 1.1.1
+* We saw 0 new problems
+* We failed to check 0 packages
 
-This is a minor release, making heplots more flexible
-
-* `heplot.cancor()` gains a `rev.axes` argument, similar to that in `heplot.candisc()`
-* `rev.axes` also added to `heplot3d*()` functions
-* Added `confusion()` to calculate confusion matrices for LDA/QDA
-
+Two packages, `Guerry` and `heplots` (both of which I maintain), show a vignette ERROR
+with both the CRAN and dev versions of candisc: a vignette refers to an image by a path
+into the package source (`here::here("man", "figures", ...)`), which isn't found when the
+vignette code is run in the revdep check. This is unrelated to candisc.
