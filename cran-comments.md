@@ -1,9 +1,9 @@
 ## Test environments
 * local Windows 11 x64, R 4.6.2 (ucrt)
-* win-builder: R Under development (unstable) (PENDING)
+* win-builder: R Under development (unstable) (2026-11-17 r90926 ucrt), Windows Server 2022 x64
 
 ## R CMD check results
-0 errors | 0 warnings | 0 notes, locally (`--as-cran`) and on win-builder (R-devel) (PENDING)
+0 errors | 0 warnings | 0 notes, locally (`--as-cran`) and on win-builder (R-devel)
 
 ## Version 1.1.3
 
